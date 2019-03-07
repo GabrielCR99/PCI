@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">PCI</string>
+    <string name="vem_pci">Virtual Exchange Machine</string>
+    <string name="virtual_exc">Virtual Exchange Machine </string>
+    <string name="password_forgot">Esqueceu a senha?</string>
+    <string name="sign_in">Entrar</string>
+    <string name="sign_up_id">Não tem uma conta?</string>
+    <string name="policy_privacy">Política de privacidade</string>
+    <string name="password">Senha</string>
+    <string name="email">Email</string>
+    <string name="complete_name">Nome completo</string>
+    <string name="sign_up_button">Registrar</string>
+    <string name="sign_in_text">Já possui conta? Entre</string>
+    <string name="confirm_password">Confirmar senha</string>
 </resources>
