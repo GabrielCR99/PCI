@@ -22,6 +22,7 @@
         android:layout_width="0dp"
         android:layout_height="71dp"
         android:layout_marginTop="206dp"
+        android:textColorHint="@android:color/background_light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,6 +34,7 @@
             android:layout_height="58dp"
             android:hint="@string/complete_name"
             android:inputType="text"
+            android:textColor="#FFFF"
             android:textStyle="bold" />
 
     </android.support.design.widget.TextInputLayout>
@@ -42,6 +44,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="26dp"
+        android:textColorHint="@android:color/background_light"
         app:layout_constraintBottom_toTopOf="@+id/layout_password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -60,12 +63,16 @@
     <android.support.design.widget.TextInputLayout
         android:id="@+id/layout_password"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="52dp"
         android:layout_marginBottom="33dp"
+        android:textColorHint="@android:color/background_light"
         app:layout_constraintBottom_toTopOf="@+id/layout_confirm_password"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layout_email">
+        app:layout_constraintTop_toBottomOf="@+id/layout_email"
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="@android:color/background_light">
 
         <EditText
             android:id="@+id/password"
@@ -82,24 +89,28 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="47dp"
+        android:textColorHint="@android:color/background_light"
         app:layout_constraintBottom_toTopOf="@+id/button2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layout_password">
+        app:layout_constraintTop_toBottomOf="@+id/layout_password"
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="@android:color/background_light">
 
         <EditText
             android:id="@+id/confirm_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/confirm_password"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:textStyle="bold" />
 
     </android.support.design.widget.TextInputLayout>
 
     <Button
         android:id="@+id/button2"
         android:layout_width="290dp"
-        android:layout_height="0dp"
+        android:layout_height="45dp"
         android:layout_marginBottom="155dp"
         android:background="#2C3E50"
         android:text="@string/sign_up_button"
@@ -115,7 +126,7 @@
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="8dp"
         android:text="@string/sign_in_text"
         android:textColor="@android:color/background_light"
         android:textStyle="bold"
@@ -128,7 +139,7 @@
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="64dp"
+        android:layout_marginBottom="48dp"
         android:text="@string/policy_privacy"
         android:textColor="@android:color/background_light"
         android:textStyle="bold"
