@@ -35,7 +35,8 @@
             android:hint="@string/complete_name"
             android:inputType="text"
             android:textColor="#FFFF"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:autofillHints="Nome Completo"/>
 
     </android.support.design.widget.TextInputLayout>
 
@@ -90,7 +91,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="47dp"
         android:textColorHint="@android:color/background_light"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintBottom_toTopOf="@+id/sign_up_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layout_password"
@@ -108,7 +109,7 @@
     </android.support.design.widget.TextInputLayout>
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/sign_up_button"
         android:layout_width="290dp"
         android:layout_height="45dp"
         android:layout_marginBottom="155dp"
@@ -123,7 +124,7 @@
         app:layout_constraintTop_toBottomOf="@+id/layout_confirm_password" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/sign_in_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -133,7 +134,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.772"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2" />
+        app:layout_constraintTop_toBottomOf="@+id/sign_up_button" />
 
     <TextView
         android:id="@+id/textView6"

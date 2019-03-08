@@ -23,5 +23,9 @@
 
     <string name="auth_failed">Autenticação inválida</string>
 
+    <string name="error_password_different"> Senha diferente</string>
+
+    <string name="error_name_empty"> Nome obrigatório</string>
+
 
 </resources>

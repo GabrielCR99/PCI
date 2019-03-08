@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -26,6 +27,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class SignInActivity extends BaseActivity {
+
+
 
     private static final String TAG = "SignInActivity";
 
@@ -124,14 +127,12 @@ public class SignInActivity extends BaseActivity {
     @OnClick(R.id.go_to_sign_up_text)
     public void goToSignUpOnClick(View view) {
         Log.v(TAG, "goToSignUpOnClick execute");
-        Intent intent = new Intent(SignInActivity.this, SignUpActivity.class);
-        startActivity(intent);
+        startActivity(new Intent(SignInActivity.this, SignUpActivity.class));
     }
 
     @OnClick(R.id.password_forgot)
     public void sendPasswordResetEmail(View view){
 
-        Intent intent = new Intent(SignInActivity.this, ResetPasswordActivity.class);
-        startActivity(intent);
+        startActivity(new Intent(SignInActivity.this, ResetPasswordActivity.class));
     }
 }
