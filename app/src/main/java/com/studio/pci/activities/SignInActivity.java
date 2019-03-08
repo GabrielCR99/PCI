@@ -29,39 +29,30 @@ public class SignInActivity extends BaseActivity {
 
     private static final String TAG = "SignInActivity";
 
-
-    @BindView(R.id.email)
+    @BindView(R.id.email_field)
     EditText emailField;
-
-    @BindView(R.id.layout_email)
-    TextInputLayout emailLayout;
-
-    @BindView(R.id.layout_password)
-    TextInputLayout passwordLayout;
 
     @BindView(R.id.password_field)
     EditText passwordField;
 
-    @BindView(R.id.password_forgot)
-    TextView esqueceuSenha;
+    @BindView(R.id.emailInputLayout)
+    TextInputLayout emailLayout;
 
-    @BindView(R.id.go_to_sign_up_text)
-    TextView naoTemConta;
+    @BindView(R.id.passwordInputLayout)
+    TextInputLayout passwordLayout;
 
-    private FirebaseAuth firebaseAuth;
+    private FirebaseAuth auth;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
         ButterKnife.bind(this);
 
-        firebaseAuth = FirebaseAuth.getInstance();
-
-
+        auth = FirebaseAuth.getInstance();
     }
 
-    private boolean validateFields(String email, String password) {
+    private boolean validateForm(String email, String password) {
 
         boolean resultValidate = true;
 
@@ -91,24 +82,26 @@ public class SignInActivity extends BaseActivity {
             passwordLayout.setError(getString(R.string.error_password_invalid));
             resultValidate = false;
         }
+
         return resultValidate;
     }
 
+
     private void signIn(String email, String password) {
 
-        if (!validateFields(email, password)) {
+        if (!validateForm(email, password)) {
             Log.v(TAG, "validateForm error");
             return;
         }
 
         showProgressDialog();
 
-        firebaseAuth.signInWithEmailAndPassword(email, password)
+        auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            FirebaseUser user = firebaseAuth.getCurrentUser();
+                            FirebaseUser user = auth.getCurrentUser();
                             Intent intent = new Intent(SignInActivity.this, MainActivity.class);
                             startActivity(intent);
                             finish();
@@ -129,8 +122,7 @@ public class SignInActivity extends BaseActivity {
     }
 
     @OnClick(R.id.go_to_sign_up_text)
-    public void signUpOnClickText(View view) {
-
+    public void goToSignUpOnClick(View view) {
         Log.v(TAG, "goToSignUpOnClick execute");
         Intent intent = new Intent(SignInActivity.this, SignUpActivity.class);
         startActivity(intent);
@@ -139,17 +131,7 @@ public class SignInActivity extends BaseActivity {
     @OnClick(R.id.password_forgot)
     public void sendPasswordResetEmail(View view){
 
-        FirebaseAuth auth = FirebaseAuth.getInstance();
-        String emailAddress = "gabriel.roveri7@gmail.com";
-
-        auth.sendPasswordResetEmail(emailAddress)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            Log.d(TAG, "Email sent.");
-                        }
-                    }
-                });
+        Intent intent = new Intent(SignInActivity.this, ResetPasswordActivity.class);
+        startActivity(intent);
     }
 }
