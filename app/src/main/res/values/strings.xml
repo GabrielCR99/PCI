@@ -12,4 +12,11 @@
     <string name="sign_up_button">Registrar</string>
     <string name="sign_in_text">Já possui conta? Entre</string>
     <string name="confirm_password">Confirmar senha</string>
+    <array name="genres">
+        <item>Testing</item>
+        <item>Computing</item>
+        <item>Searches</item>
+        <item>Enviroment</item>
+        <item>Potato</item>
+    </array>
 </resources>
