@@ -15,6 +15,7 @@ import java.util.List;
 public class UniversityDAO {
 
     private final List<University> universities = new ArrayList<>();
+    //private final University university = new University();
 
     public void create(University university){
         DatabaseReference dbUniversities = FirebaseDatabase.getInstance().getReference("universities");
@@ -27,31 +28,32 @@ public class UniversityDAO {
         dbUniversities.setValue(university);
     }
 
-    public University findById(String id){
-        final String idUniversity = id;
-        final University university = new University();
+    /*public University findById(final String id){
         DatabaseReference dbUniversities = FirebaseDatabase.getInstance().getReference("universities");
         dbUniversities.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot ds: dataSnapshot.getChildren()){
-                    university.setId(ds.child(idUniversity).getValue(University.class).getId());
-                    university.setName(ds.child(idUniversity).getValue(University.class).getName());
-                    university.setCountry(ds.child(idUniversity).getValue(University.class).getCountry());
-                    university.setState(ds.child(idUniversity).getValue(University.class).getState());
-                    university.setDepartment(ds.child(idUniversity).getValue(University.class).getDepartment());
-                    university.setEnable(ds.child(idUniversity).getValue(University.class).isEnable());
-                    university.setPicture(ds.child(idUniversity).getValue(University.class).getPicture());
+                    University test = ds.child(id).getValue(University.class);
+                    try{
+                        university.setId(test.getId());
+                        university.setName(test.getName());
+                        university.setCountry(test.getCountry());
+                        university.setState(test.getState());
+                        university.setDepartment(test.getDepartment());
+                        university.setPicture(test.getPicture());
+                        university.setEnable(test.isEnable());
+                    }catch (Exception e){
+                        Log.w("PCI",e);
+                    }
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         });
         return university;
-    }
+    }*/
 
     public List<University> findAll(){
         DatabaseReference dbUniversities = FirebaseDatabase.getInstance().getReference("universities");
@@ -59,8 +61,8 @@ public class UniversityDAO {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 universities.clear();
-                for(DataSnapshot artistSnapshot: dataSnapshot.getChildren()){
-                    University university = artistSnapshot.getValue(University.class);
+                for(DataSnapshot ds: dataSnapshot.getChildren()){
+                    University university = ds.getValue(University.class);
                     universities.add(university);
                 }
             }
