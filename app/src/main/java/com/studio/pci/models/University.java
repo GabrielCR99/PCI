@@ -4,6 +4,7 @@ import java.util.Objects;
 
 public class University {
 
+
     private String id;
     private String name;
     private String country;
