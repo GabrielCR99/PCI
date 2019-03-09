@@ -27,5 +27,8 @@
 
     <string name="error_name_empty"> Nome obrigatório</string>
 
+    <string name="logout"> Sair</string>
+    <string name="privacy_policy">Políticas de privacidade</string>
+
 
 </resources>

@@ -21,7 +21,7 @@
         android:id="@+id/layout_name"
         android:layout_width="0dp"
         android:layout_height="71dp"
-        android:layout_marginTop="206dp"
+        android:layout_marginTop="168dp"
         android:textColorHint="@android:color/background_light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -32,11 +32,11 @@
             android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="58dp"
+            android:autofillHints="Nome Completo"
             android:hint="@string/complete_name"
             android:inputType="text"
             android:textColor="#FFFF"
-            android:textStyle="bold"
-            android:autofillHints="Nome Completo"/>
+            android:textStyle="bold" />
 
     </android.support.design.widget.TextInputLayout>
 
@@ -112,12 +112,11 @@
         android:id="@+id/sign_up_button"
         android:layout_width="290dp"
         android:layout_height="45dp"
-        android:layout_marginBottom="155dp"
+        android:layout_marginTop="96dp"
         android:background="#2C3E50"
         android:text="@string/sign_up_button"
         android:textColor="@android:color/background_light"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
@@ -140,11 +139,18 @@
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="48dp"
+        android:layout_marginBottom="16dp"
         android:text="@string/policy_privacy"
         android:textColor="@android:color/background_light"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="match_parent"
+        android:layout_height="33dp"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="489dp" />
 </android.support.constraint.ConstraintLayout>

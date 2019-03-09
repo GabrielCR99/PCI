@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -15,6 +17,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.studio.pci.R;
 import com.studio.pci.utils.FormHelper;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -48,6 +52,9 @@ public class SignUpActivity extends BaseActivity{
     @BindView(R.id.layout_confirm_password)
     TextInputLayout confirmPasswordLayout;
 
+    @BindView(R.id.spinner)
+    Spinner spinner;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +62,13 @@ public class SignUpActivity extends BaseActivity{
         ButterKnife.bind(this);
 
         firebaseAuth = FirebaseAuth.getInstance();
+
+        ArrayList<String> strings = new ArrayList<>();
+        strings.add("Item 1");
+        strings.add("Item 2");
+
+        ArrayAdapter<String> stringArrayAdapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, strings);
+        spinner.setAdapter(stringArrayAdapter);
     }
 
     private boolean validateForm(String name, String email, String password, String confirmPassword) {
