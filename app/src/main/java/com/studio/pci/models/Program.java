@@ -1,16 +1,18 @@
-package com.studio.pci.Models;
+package com.studio.pci.models;
 
 import java.util.Objects;
 
 public class Program {
 
-    private int id;
+    private String id;
     private String name;
     private String description;
     private String type;
     private boolean enable;
 
-    public Program(int id, String name, String description, String type, boolean enable) {
+    public Program(){}
+
+    public Program(String id, String name, String description, String type, boolean enable) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -30,11 +32,11 @@ public class Program {
                 Objects.equals(type, program.type);
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

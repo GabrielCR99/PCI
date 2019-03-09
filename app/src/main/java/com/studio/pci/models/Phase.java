@@ -1,19 +1,21 @@
-package com.studio.pci.Models;
+package com.studio.pci.models;
 
 import java.util.Date;
 import java.util.Objects;
 
 public class Phase {
 
-    private int id;
-    private int idProject;
+    private String id;
+    private String idProject;
     private String title;
     private String description;
     private Date startDate;
     private Date endDate;
     private boolean enable;
 
-    public Phase(int id, int idProject, String title, String description, Date startDate, Date endDate, boolean enable) {
+    public Phase(){}
+
+    public Phase(String id, String idProject, String title, String description, Date startDate, Date endDate, boolean enable) {
         this.id = id;
         this.idProject = idProject;
         this.title = title;
@@ -43,19 +45,19 @@ public class Phase {
         return Objects.hash(id, idProject, title, description, startDate, endDate, enable);
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public int getIdProject() {
+    public String getIdProject() {
         return idProject;
     }
 
-    public void setIdProject(int idProject) {
+    public void setIdProject(String idProject) {
         this.idProject = idProject;
     }
 

@@ -1,11 +1,11 @@
-package com.studio.pci.Models;
+package com.studio.pci.models;
 
 import java.util.Date;
 import java.util.Objects;
 
 public class Student {
 
-    private int id;
+    private String id;
     private String name;
     private String email;
     private String gender;
@@ -13,7 +13,9 @@ public class Student {
     private String picture;
     private boolean enable;
 
-    public Student(int id, String name, String email, String gender, Date birthDate, String picture, boolean enable) {
+    public Student(){}
+
+    public Student(String id, String name, String email, String gender, Date birthDate, String picture, boolean enable) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -43,11 +45,11 @@ public class Student {
         return Objects.hash(id, name, email, gender, birthDate, picture, enable);
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

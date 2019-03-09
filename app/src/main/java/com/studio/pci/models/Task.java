@@ -1,12 +1,12 @@
-package com.studio.pci.Models;
+package com.studio.pci.models;
 
 import java.util.Date;
 import java.util.Objects;
 
 public class Task {
 
-    private int id;
-    private int idPhase;
+    private String id;
+    private String idPhase;
     private String title;
     private String description;
     private Date startDate;
@@ -14,7 +14,9 @@ public class Task {
     private boolean done;
     private boolean enable;
 
-    public Task(int id, int idPhase, String title, String description, Date startDate, Date endDate, boolean done, boolean enable) {
+    public Task(){}
+
+    public Task(String id, String idPhase, String title, String description, Date startDate, Date endDate, boolean done, boolean enable) {
         this.id = id;
         this.idPhase = idPhase;
         this.title = title;
@@ -46,19 +48,19 @@ public class Task {
         return Objects.hash(id, idPhase, title, description, startDate, endDate, done, enable);
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public int getIdPhase() {
+    public String getIdPhase() {
         return idPhase;
     }
 
-    public void setIdPhase(int idPhase) {
+    public void setIdPhase(String idPhase) {
         this.idPhase = idPhase;
     }
 

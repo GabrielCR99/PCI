@@ -1,11 +1,11 @@
-package com.studio.pci.Models;
+package com.studio.pci.models;
 
 import java.util.Date;
 import java.util.Objects;
 
 public class Project {
 
-    private int id;
+    private String id;
     private String title;
     private String description;
     private Date startDate;
@@ -31,7 +31,9 @@ public class Project {
         return Objects.hash(getId(), getTitle(), getDescription(), startDate, getEndDate(), isEnable());
     }
 
-    public Project(int id, String title, String description, Date startDate, Date endDate, boolean enable) {
+    public Project(){}
+
+    public Project(String id, String title, String description, Date startDate, Date endDate, boolean enable) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -40,11 +42,11 @@ public class Project {
         this.enable = enable;
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 

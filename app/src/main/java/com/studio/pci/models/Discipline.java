@@ -1,15 +1,17 @@
-package com.studio.pci.Models;
+package com.studio.pci.models;
 
 import java.util.Objects;
 
 public class Discipline {
 
-    private int id;
+    private String id;
     private String name;
     private String description;
     private boolean enable;
 
-    public Discipline(int id, String name, String description, boolean enable) {
+    public Discipline(){}
+
+    public Discipline(String id, String name, String description, boolean enable) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -32,11 +34,11 @@ public class Discipline {
         return Objects.hash(id, name, description, enable);
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

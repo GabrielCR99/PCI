@@ -1,14 +1,16 @@
-package com.studio.pci.Models;
+package com.studio.pci.models;
 
 import java.util.Objects;
 
 public class Skill {
 
-    private int id;
+    private String id;
     private String name;
     private boolean enable;
 
-    public Skill(int id, String name, boolean enable) {
+    public Skill(){}
+
+    public Skill(String id, String name, boolean enable) {
         this.id = id;
         this.name = name;
         this.enable = enable;
@@ -30,11 +32,11 @@ public class Skill {
         return Objects.hash(id, name, enable);
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

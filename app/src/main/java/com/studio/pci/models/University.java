@@ -1,10 +1,10 @@
-package com.studio.pci.Models;
+package com.studio.pci.models;
 
 import java.util.Objects;
 
 public class University {
 
-    private int id;
+    private String id;
     private String name;
     private String country;
     private String state;
@@ -12,7 +12,9 @@ public class University {
     private String picture;
     private boolean enable;
 
-    public University(int id, String name, String country, String state, String department, String picture, boolean enable) {
+    public University(){}
+
+    public University(String id, String name, String country, String state, String department, String picture, boolean enable) {
         this.id = id;
         this.name = name;
         this.country = country;
@@ -42,11 +44,11 @@ public class University {
         return Objects.hash(id, name, country, state, department, picture, enable);
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

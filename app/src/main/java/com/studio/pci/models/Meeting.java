@@ -1,12 +1,12 @@
-package com.studio.pci.Models;
+package com.studio.pci.models;
 
 import java.util.Date;
 import java.util.Objects;
 
 public class Meeting {
 
-    private int id;
-    private int idProject;
+    private String id;
+    private String idProject;
     private String name;
     private Date startDate;
     private Date time;
@@ -33,7 +33,9 @@ public class Meeting {
         return Objects.hash(getId(), getIdProject(), getName(), getStartDate(), getTime(), getDuration(), isEnable());
     }
 
-    public Meeting(int idProject, String name, Date startDate, Date time, Date duration, boolean enable) {
+    public Meeting(){}
+
+    public Meeting(String idProject, String name, Date startDate, Date time, Date duration, boolean enable) {
         this.idProject = idProject;
         this.name = name;
         this.startDate = startDate;
@@ -42,19 +44,19 @@ public class Meeting {
         this.enable = enable;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public int getIdProject() {
+    public String getIdProject() {
         return idProject;
     }
 
-    public void setIdProject(int idProject) {
+    public void setIdProject(String idProject) {
         this.idProject = idProject;
     }
 

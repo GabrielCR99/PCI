@@ -1,15 +1,17 @@
-package com.studio.pci.Models;
+package com.studio.pci.models;
 
 import java.util.Objects;
 
 public class Group {
 
-    private int id;
-    private int idTask;
+    private String id;
+    private String idTask;
     private String name;
     private boolean enable;
 
-    public Group(int id, int idTask, String name, boolean enable) {
+    public Group(){}
+
+    public Group(String id, String idTask, String name, boolean enable) {
         this.id = id;
         this.idTask = idTask;
         this.name = name;
@@ -33,19 +35,19 @@ public class Group {
         return Objects.hash(id, idTask, name, enable);
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public int getIdTask() {
+    public String getIdTask() {
         return idTask;
     }
 
-    public void setIdTask(int idTask) {
+    public void setIdTask(String idTask) {
         this.idTask = idTask;
     }
 
