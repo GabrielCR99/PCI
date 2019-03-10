@@ -1,9 +1,10 @@
 package com.studio.pci.models;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
-public class Professor {
+public class Professor implements Serializable {
 
     private String id;
     private String name;

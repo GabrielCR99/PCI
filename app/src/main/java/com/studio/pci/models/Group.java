@@ -1,8 +1,9 @@
 package com.studio.pci.models;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Group {
+public class Group implements Serializable {
 
     private String id;
     private String idTask;

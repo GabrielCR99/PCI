@@ -3,8 +3,11 @@ package com.studio.pci;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.studio.pci.models.Student;
 import com.studio.pci.models.University;
+import com.studio.pci.providers.StudentDAO;
 import com.studio.pci.providers.UniversityDAO;
 
 public class MainActivity extends AppCompatActivity {
@@ -27,9 +30,7 @@ public class MainActivity extends AppCompatActivity {
         universityDAO.create(university);*/
 
         //DELETE UNIVERSITY
-        /*University university = new University();
-        UniversityDAO universityDAO = new UniversityDAO();
-        university.setId(id da universidade);
-        universityDAO.delete(university);*/
+        /*UniversityDAO universityDAO = new UniversityDAO();
+        universityDAO.delete(ID DA UNIVERSIDADE);*/
     }
 }
