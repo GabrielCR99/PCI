@@ -1,5 +1,4 @@
-# PCI
-Projeto Colaborativo Internacional
+﻿#Projeto Colaborativo Internacional
 
 <<<<<<< HEAD
 Os alunos da Fatec Americana, Gabriel Roveri e Paulo Vinicius Pachiani de Mello, sob a orientação do professor Kléber Andrade, estão desenvolvendo

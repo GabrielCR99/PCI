@@ -1,4 +1,4 @@
-<resources>
+﻿<resources>
     <string name="app_name">PCI</string>
     <string name="vem_pci">Virtual Exchange Machine</string>
     <string name="virtual_exc">Virtual Exchange Machine </string>
@@ -12,11 +12,22 @@
     <string name="sign_up_button">Registrar</string>
     <string name="sign_in_text">Já possui conta? Entre</string>
     <string name="confirm_password">Confirmar senha</string>
-    <array name="genres">
-        <item>Testing</item>
-        <item>Computing</item>
-        <item>Searches</item>
-        <item>Enviroment</item>
-        <item>Potato</item>
-    </array>
+    <string name="no_account">Não tem uma conta?</string>
+    <string name="error_email_empty">Email é obrigatório</string>
+    <string name="error_email_invalid">Entre com um email válido</string>
+    <string name="error_password_invalid">A senha deve conter pelo menos 6 caracteres</string>
+    <string name="error_password_empty">Senha obrigatória</string>
+
+    <string name="loading">Carregando...</string>
+
+    <string name="auth_failed">Autenticação inválida</string>
+
+    <string name="error_password_different"> Senha diferente</string>
+
+    <string name="error_name_empty"> Nome obrigatório</string>
+
+    <string name="logout"> Sair</string>
+    <string name="privacy_policy">Políticas de privacidade</string>
+
+
 </resources>

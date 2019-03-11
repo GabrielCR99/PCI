@@ -23,14 +23,6 @@
           }
         },
         {
-          "client_id": "610913910052-s8drulvog92fk8vbmeif7qor242i2u13.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.studio.pci",
-            "certificate_hash": "74236e4cf11f30c17ddcfc7656c41f2d5a1f8a0e"
-          }
-        },
-        {
           "client_id": "610913910052-nq9put976h9nshqlde7qujog1jvpm0rs.apps.googleusercontent.com",
           "client_type": 3
         }
