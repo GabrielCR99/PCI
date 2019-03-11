@@ -1,6 +1,6 @@
-<resources>
+﻿<resources>
     <string name="app_name">PCI</string>
-    <string name="vem_pci">Virtual Exchange Machine</string>
+    <string name="vem_pci">virtual exchange machine</string>
     <string name="virtual_exc">Virtual Exchange Machine </string>
     <string name="password_forgot">Esqueceu a senha?</string>
     <string name="sign_in">Entrar</string>
@@ -13,7 +13,6 @@
     <string name="sign_in_text">Já possui conta? Entre</string>
     <string name="confirm_password">Confirmar senha</string>
     <string name="no_account">Não tem uma conta?</string>
-
     <string name="error_email_empty">Email é obrigatório</string>
     <string name="error_email_invalid">Entre com um email válido</string>
     <string name="error_password_invalid">A senha deve conter pelo menos 6 caracteres</string>
