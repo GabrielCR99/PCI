@@ -1,9 +1,17 @@
 package com.studio.pci.models;
 
+<<<<<<< HEAD
 import java.util.Date;
 import java.util.Objects;
 
 public class Meeting {
+=======
+import java.io.Serializable;
+import java.util.Date;
+import java.util.Objects;
+
+public class Meeting implements Serializable {
+>>>>>>> Paulo
 
     private String id;
     private String idProject;

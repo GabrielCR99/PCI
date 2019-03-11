@@ -1,9 +1,17 @@
 package com.studio.pci.models;
 
+<<<<<<< HEAD
 import java.util.Date;
 import java.util.Objects;
 
 public class Professor {
+=======
+import java.io.Serializable;
+import java.util.Date;
+import java.util.Objects;
+
+public class Professor implements Serializable {
+>>>>>>> Paulo
 
     private String id;
     private String name;

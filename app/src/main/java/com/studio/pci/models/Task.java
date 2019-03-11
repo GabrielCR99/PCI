@@ -1,5 +1,6 @@
 package com.studio.pci.models;
 
+<<<<<<< HEAD
 import java.util.Date;
 import java.util.Objects;
 
@@ -7,6 +8,16 @@ public class Task {
 
     private String id;
     private int idPhase;
+=======
+import java.io.Serializable;
+import java.util.Date;
+import java.util.Objects;
+
+public class Task implements Serializable {
+
+    private String id;
+    private String idPhase;
+>>>>>>> Paulo
     private String title;
     private String description;
     private Date startDate;
@@ -19,6 +30,7 @@ public class Task {
 
 
     public Task(String id, int idPhase, String title, String description, Date startDate, Date endDate, boolean done, boolean enable) {
+    public Task(String id, String idPhase, String title, String description, Date startDate, Date endDate, boolean done, boolean enable) {
         this.id = id;
         this.idPhase = idPhase;
         this.title = title;
@@ -58,11 +70,19 @@ public class Task {
         this.id = id;
     }
 
+<<<<<<< HEAD
     public int getIdPhase() {
         return idPhase;
     }
 
     public void setIdPhase(int idPhase) {
+=======
+    public String getIdPhase() {
+        return idPhase;
+    }
+
+    public void setIdPhase(String idPhase) {
+>>>>>>> Paulo
         this.idPhase = idPhase;
     }
 
