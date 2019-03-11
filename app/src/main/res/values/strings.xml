@@ -1,6 +1,6 @@
 ﻿<resources>
     <string name="app_name">PCI</string>
-    <string name="vem_pci">Virtual Exchange Machine</string>
+    <string name="vem_pci">virtual exchange machine</string>
     <string name="virtual_exc">Virtual Exchange Machine </string>
     <string name="password_forgot">Esqueceu a senha?</string>
     <string name="sign_in">Entrar</string>
