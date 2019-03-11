@@ -25,12 +25,17 @@ public class Task implements Serializable {
     private boolean done;
     private boolean enable;
 
+<<<<<<< HEAD
 
     public Task(){}
 
 
     public Task(String id, int idPhase, String title, String description, Date startDate, Date endDate, boolean done, boolean enable) {
+=======
+    public Task(){}
+
     public Task(String id, String idPhase, String title, String description, Date startDate, Date endDate, boolean done, boolean enable) {
+>>>>>>> Paulo
         this.id = id;
         this.idPhase = idPhase;
         this.title = title;
