@@ -15,21 +15,29 @@ import java.util.List;
 
 public class AbstractDAO<T extends Serializable> implements GenericDAO<T>{
 
+    private T t=null;
     private List<T> tList;
     private DatabaseReference db;
-    private Class currentClass;
+    private Class<T> currentClass;
 
     public AbstractDAO(String tableReference){
-        this.currentClass = (Class) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+        this.currentClass = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
         tList = new ArrayList<>();
         db = FirebaseDatabase.getInstance().getReference(tableReference);
     }
 
     @Override
     public T findById(String id) {
-        /* TODO Search on the Internet for Firebase Realtime Database findById */
-
-        return null;
+        db.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                t = dataSnapshot.getValue(currentClass);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+        return t;
     }
 
     @Override
@@ -39,7 +47,7 @@ public class AbstractDAO<T extends Serializable> implements GenericDAO<T>{
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 tList.clear();
                 for(DataSnapshot ds: dataSnapshot.getChildren()){
-                    T t =  (T) ds.getValue(currentClass);
+                    T t = ds.getValue(currentClass);
                     tList.add(t);
                 }
             }
@@ -51,8 +59,7 @@ public class AbstractDAO<T extends Serializable> implements GenericDAO<T>{
     }
 
     @Override
-    public void create(T entity) {
-        String id = db.push().getKey();
+    public void create(String id,T entity) {
         db.child(id).setValue(entity);
     }
 
@@ -65,4 +72,10 @@ public class AbstractDAO<T extends Serializable> implements GenericDAO<T>{
     public void delete(String id) {
         db.child(id).removeValue();
     }
+
+    @Override
+    public String newKey() {
+        return db.push().getKey();
+    }
+
 }

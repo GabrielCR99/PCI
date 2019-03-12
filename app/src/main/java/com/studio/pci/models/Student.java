@@ -7,10 +7,12 @@ public class Student implements Serializable {
 
     private String uid;
     private String name;
-    private String email;
     private String gender;
     private Date birthDate;
     private String picture;
+    private String email;
+    private String facebookUrl;
+    private String skypeUrl;
     private boolean enable;
 
     public Student(){}
@@ -91,6 +93,22 @@ public class Student implements Serializable {
 
     public void setPicture(String picture) {
         this.picture = picture;
+    }
+
+    public String getFacebookUrl() {
+        return facebookUrl;
+    }
+
+    public void setFacebookUrl(String facebookUrl) {
+        this.facebookUrl = facebookUrl;
+    }
+
+    public String getSkypeUrl() {
+        return skypeUrl;
+    }
+
+    public void setSkypeUrl(String skypeUrl) {
+        this.skypeUrl = skypeUrl;
     }
 
     public boolean isEnable() {

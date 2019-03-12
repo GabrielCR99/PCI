@@ -17,15 +17,10 @@
     <string name="error_email_invalid">Entre com um email válido</string>
     <string name="error_password_invalid">A senha deve conter pelo menos 6 caracteres</string>
     <string name="error_password_empty">Senha obrigatória</string>
-
     <string name="loading">Carregando...</string>
-
     <string name="auth_failed">Autenticação inválida</string>
-
     <string name="error_password_different"> Senha diferente</string>
-
     <string name="error_name_empty"> Nome obrigatório</string>
-
     <string name="logout"> Sair</string>
     <string name="privacy_policy">Políticas de privacidade</string>
     <string name="reset_password_tv">Para a recuperação de sua senha, favor preencher o campo com o E-mail. Enviaremos sua senha através deste.</string>
@@ -35,7 +30,11 @@
     <string name="date">Data de nascimento</string>
     <string name="open_drawer">Open</string>
     <string name="close_drawer">Close</string>
-
+    <string name="gender">Gênero</string>
+    <string name="birthDate">Data de Nascimento</string>
+    <string name="edit">Editar</string>
+    <string name="facebook">Facebook</string>
+    <string name="skype">Skype</string>
 
     <string-array name="array_spinner">
         <item> Estudante</item>

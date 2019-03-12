@@ -7,11 +7,13 @@ public class Professor implements Serializable {
 
     private String uid;
     private String name;
-    private String email;
     private String gender;
     private Date birthDate;
     private String picture;
     private String degree;
+    private String email;
+    private String facebookUrl;
+    private String skypeUrl;
     private boolean enable;
 
     @Override
@@ -102,6 +104,22 @@ public class Professor implements Serializable {
 
     public void setDegree(String degree) {
         this.degree = degree;
+    }
+
+    public String getFacebookUrl() {
+        return facebookUrl;
+    }
+
+    public void setFacebookUrl(String facebookUrl) {
+        this.facebookUrl = facebookUrl;
+    }
+
+    public String getSkypeUrl() {
+        return skypeUrl;
+    }
+
+    public void setSkypeUrl(String skypeUrl) {
+        this.skypeUrl = skypeUrl;
     }
 
     public boolean isEnable() {
