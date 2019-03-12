@@ -16,6 +16,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.studio.pci.R;
+import com.studio.pci.models.Professor;
+import com.studio.pci.models.Student;
+import com.studio.pci.providers.ProfessorDAO;
+import com.studio.pci.providers.StudentDAO;
 import com.studio.pci.utils.FormHelper;
 
 import java.util.ArrayList;
@@ -115,13 +119,31 @@ public class SignUpActivity extends BaseActivity{
         }
 
         showProgressDialog();
-        Toast.makeText(this, "Conta criada com sucesso!", Toast.LENGTH_SHORT).show();
         firebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+                            String id = firebaseUser.getUid();
+                            String type = spinner.getSelectedItem().toString();
+                            if(type.equals(getString(R.string.student))){
+                                Student student = new Student();
+                                student.setId(id);
+                                student.setName(nameField.getText().toString());
+                                student.setEmail(emailField.getText().toString());
+                                student.setEnable(true);
+                                StudentDAO studentDAO = new StudentDAO();
+                                studentDAO.create(id,student);
+                            }else{
+                                Professor professor = new Professor();
+                                professor.setId(id);
+                                professor.setName(nameField.getText().toString());
+                                professor.setEmail(emailField.getText().toString());
+                                professor.setEnable(true);
+                                ProfessorDAO professorDAO = new ProfessorDAO();
+                                professorDAO.create(id,professor);
+                            }
                             hideProgressDialog();
                         } else {
                             showToast(getString(R.string.auth_failed));
@@ -135,10 +157,6 @@ public class SignUpActivity extends BaseActivity{
     public void signInOnClick(View view) {
         String email = emailField.getText().toString();
         String password = passwordField.getText().toString();
-
-        System.out.println(email);
-        System.out.println(password);
-
         createAccount(email, password);
     }
 
