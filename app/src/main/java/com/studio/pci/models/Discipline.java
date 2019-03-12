@@ -1,26 +1,15 @@
 package com.studio.pci.models;
-
-<<<<<<< HEAD
-import java.util.Objects;
-
-public class Discipline {
-=======
 import java.io.Serializable;
 import java.util.Objects;
 
 public class Discipline implements Serializable {
->>>>>>> Paulo
 
     private String id;
     private String name;
     private String description;
     private boolean enable;
 
-<<<<<<< HEAD
     public  Discipline(){}
-=======
-    public Discipline(){}
->>>>>>> Paulo
 
     public Discipline(String id, String name, String description, boolean enable) {
         this.id = id;

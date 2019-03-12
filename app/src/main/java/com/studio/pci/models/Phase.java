@@ -1,14 +1,4 @@
 package com.studio.pci.models;
-
-<<<<<<< HEAD
-import java.util.Date;
-import java.util.Objects;
-
-public class Phase {
-
-    private String id;
-    private int idProject;
-=======
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
@@ -17,7 +7,6 @@ public class Phase implements Serializable {
 
     private String id;
     private String idProject;
->>>>>>> Paulo
     private String title;
     private String description;
     private Date startDate;
@@ -26,11 +15,7 @@ public class Phase implements Serializable {
 
     public Phase(){}
 
-<<<<<<< HEAD
-    public Phase(String id, int idProject, String title, String description, Date startDate, Date endDate, boolean enable) {
-=======
     public Phase(String id, String idProject, String title, String description, Date startDate, Date endDate, boolean enable) {
->>>>>>> Paulo
         this.id = id;
         this.idProject = idProject;
         this.title = title;
@@ -67,20 +52,11 @@ public class Phase implements Serializable {
     public void setId(String id) {
         this.id = id;
     }
-
-<<<<<<< HEAD
-    public int getIdProject() {
-        return idProject;
-    }
-
-    public void setIdProject(int idProject) {
-=======
     public String getIdProject() {
         return idProject;
     }
 
     public void setIdProject(String idProject) {
->>>>>>> Paulo
         this.idProject = idProject;
     }
 

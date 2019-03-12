@@ -1,19 +1,11 @@
 package com.studio.pci.models;
-
-<<<<<<< HEAD
-import java.util.Date;
-import java.util.Objects;
-
-public class Professor {
-=======
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
 public class Professor implements Serializable {
->>>>>>> Paulo
 
-    private String id;
+    private String uid;
     private String name;
     private String email;
     private String gender;
@@ -27,7 +19,7 @@ public class Professor implements Serializable {
         if (this == o) return true;
         if (!(o instanceof Professor)) return false;
         Professor professor = (Professor) o;
-        return getId() == professor.getId() &&
+        return getUid().equals(professor.getUid()) &&
                 isEnable() == professor.isEnable() &&
                 Objects.equals(getName(), professor.getName()) &&
                 Objects.equals(getEmail(), professor.getEmail()) &&
@@ -40,13 +32,13 @@ public class Professor implements Serializable {
     @Override
     public int hashCode() {
 
-        return Objects.hash(getId(), getName(), getEmail(), getGender(), getBirthDate(), getPicture(), getDegree(), isEnable());
+        return Objects.hash(getUid(), getName(), getEmail(), getGender(), getBirthDate(), getPicture(), getDegree(), isEnable());
     }
 
     public Professor(){}
 
     public Professor(String id, String name, String email, String gender, Date birthDate, String picture, String degree, boolean enable) {
-        this.id = id;
+        this.uid = id;
         this.name = name;
         this.email = email;
         this.gender = gender;
@@ -56,12 +48,12 @@ public class Professor implements Serializable {
         this.enable = enable;
     }
 
-    public String getId() {
-        return id;
+    public String getUid() {
+        return uid;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
     public String getName() {

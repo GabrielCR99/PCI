@@ -28,7 +28,6 @@ public class AbstractDAO<T extends Serializable> implements GenericDAO<T>{
     @Override
     public T findById(String id) {
         /* TODO Search on the Internet for Firebase Realtime Database findById */
-
         return null;
     }
 
@@ -53,6 +52,7 @@ public class AbstractDAO<T extends Serializable> implements GenericDAO<T>{
     @Override
     public void create(T entity) {
         String id = db.push().getKey();
+
         db.child(id).setValue(entity);
     }
 

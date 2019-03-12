@@ -1,17 +1,9 @@
 package com.studio.pci.models;
-
-<<<<<<< HEAD
-import java.util.Date;
-import java.util.Objects;
-
-public class Project {
-=======
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
 public class Project implements Serializable {
->>>>>>> Paulo
 
     private String id;
     private String title;
@@ -39,11 +31,8 @@ public class Project implements Serializable {
         return Objects.hash(getId(), getTitle(), getDescription(), startDate, getEndDate(), isEnable());
     }
 
-<<<<<<< HEAD
-=======
     public Project(){}
 
->>>>>>> Paulo
     public Project(String id, String title, String description, Date startDate, Date endDate, boolean enable) {
         this.id = id;
         this.title = title;
@@ -53,11 +42,6 @@ public class Project implements Serializable {
         this.enable = enable;
     }
 
-<<<<<<< HEAD
-    public Project(){}
-
-=======
->>>>>>> Paulo
     public String getId() {
         return id;
     }
@@ -66,7 +50,6 @@ public class Project implements Serializable {
         this.id = id;
     }
 
-<<<<<<< HEAD
     public Date getStartDate() {
         return startDate;
     }
@@ -75,8 +58,6 @@ public class Project implements Serializable {
         this.startDate = startDate;
     }
 
-=======
->>>>>>> Paulo
     public String getTitle() {
         return title;
     }
