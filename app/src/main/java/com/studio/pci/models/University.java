@@ -1,17 +1,8 @@
 package com.studio.pci.models;
-
-<<<<<<< HEAD
-import java.util.Objects;
-
-public class University {
-=======
-
 import java.io.Serializable;
 import java.util.Objects;
 
 public class University implements Serializable {
-
->>>>>>> Paulo
 
     private String id;
     private String name;
@@ -21,13 +12,7 @@ public class University implements Serializable {
     private String picture;
     private boolean enable;
 
-<<<<<<< HEAD
-    public University(){
-
-    }
-=======
     public University(){}
->>>>>>> Paulo
 
     public University(String id, String name, String country, String state, String department, String picture, boolean enable) {
         this.id = id;

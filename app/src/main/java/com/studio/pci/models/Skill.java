@@ -1,15 +1,8 @@
 package com.studio.pci.models;
-
-<<<<<<< HEAD
-import java.util.Objects;
-
-public class Skill {
-=======
 import java.io.Serializable;
 import java.util.Objects;
 
 public class Skill implements Serializable {
->>>>>>> Paulo
 
     private String id;
     private String name;

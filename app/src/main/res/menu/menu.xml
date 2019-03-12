@@ -1,41 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-    <menu xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        tools:showIn="nagivation_view">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="nagivation_view">
 
-        <group android:checkableBehavior="single">
-            <item
-                android:id="@+id/menu_profile"
-                android:title="Perfil" />
-            <item
-                android:id="@+id/menu_project"
-                android:title="Projetos" />
-            <item
-                android:id="@+id/menu_meeting"
-                android:title="Meeting" />
-            <item
-                android:id="@+id/menu_students"
-                android:title="Alunos" />
-            <item
-                android:id="@+id/menu_professors"
-                android:title="Professores" />
-            <item
-                android:id="@+id/menu_universities"
-                android:title="Universidades" />
-        </group>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/menu_profile"
+            android:icon="@drawable/ic_account_circle_black_24dp"
+            android:title="Perfil" />
+        <item
+            android:id="@+id/menu_project"
+            android:icon="@drawable/ic_assignment_black_24dp"
+            android:title="Projetos" />
 
-        <group>
-            <item
-                android:id="@+id/menu_logout"
-                android:title="@string/logout" />
+        <item
+            android:id="@+id/menu_students"
+            android:icon="@drawable/baseline_people_outline_black_24"
+            android:title="Alunos" />
+        <item
+            android:id="@+id/menu_professors"
+            android:icon="@drawable/outline_library_books_black_24"
+            android:title="Professores" />
+        <item
+            android:id="@+id/menu_universities"
+            android:icon="@drawable/ic_account_balance_black_24dp"
+            android:title="Universidades" />
+    </group>
 
-            <item
-                android:id="@+id/menu_privacy_policy"
-                android:title="@string/privacy_policy">
-            </item>
-        </group>
+    <group>
+        <item
+            android:id="@+id/menu_logout"
+            android:title="@string/logout" />
+
+        <item
+            android:id="@+id/menu_privacy_policy"
+            android:title="@string/privacy_policy"></item>
+    </group>
 
 
-
-    </menu>
+</menu>

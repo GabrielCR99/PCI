@@ -19,6 +19,7 @@ import com.studio.pci.R;
 import com.studio.pci.utils.FormHelper;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -52,7 +53,7 @@ public class SignUpActivity extends BaseActivity{
     @BindView(R.id.layout_confirm_password)
     TextInputLayout confirmPasswordLayout;
 
-    @BindView(R.id.spinner)
+    @BindView(R.id.spinner_sign_up)
     Spinner spinner;
 
     @Override
@@ -63,12 +64,8 @@ public class SignUpActivity extends BaseActivity{
 
         firebaseAuth = FirebaseAuth.getInstance();
 
-        ArrayList<String> strings = new ArrayList<>();
-        strings.add("Item 1");
-        strings.add("Item 2");
 
-        ArrayAdapter<String> stringArrayAdapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, strings);
-        spinner.setAdapter(stringArrayAdapter);
+
     }
 
     private boolean validateForm(String name, String email, String password, String confirmPassword) {
@@ -118,7 +115,7 @@ public class SignUpActivity extends BaseActivity{
         }
 
         showProgressDialog();
-
+        Toast.makeText(this, "Conta criada com sucesso!", Toast.LENGTH_SHORT).show();
         firebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -139,10 +136,10 @@ public class SignUpActivity extends BaseActivity{
         String email = emailField.getText().toString();
         String password = passwordField.getText().toString();
 
-        Toast.makeText(this, "Usuário criado com sucesso!", Toast.LENGTH_SHORT).show();
+        System.out.println(email);
+        System.out.println(password);
 
         createAccount(email, password);
-        startActivity(new Intent(SignUpActivity.this, SignInActivity.class));
     }
 
     @OnClick(R.id.sign_in_text)

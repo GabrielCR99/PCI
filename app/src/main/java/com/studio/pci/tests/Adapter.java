@@ -8,8 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.example.paulo.vem.R;
-import com.example.paulo.vem.models.University;
+import com.studio.pci.R;
+import com.studio.pci.models.University;
 
 import java.util.List;
 
