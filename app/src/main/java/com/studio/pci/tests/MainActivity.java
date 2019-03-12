@@ -9,9 +9,9 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 
-import com.example.paulo.vem.R;
-import com.example.paulo.vem.dao.UniversityDAO;
-import com.example.paulo.vem.models.University;
+import com.studio.pci.R;
+import com.studio.pci.dao.UniversityDAO;
+import com.studio.pci.models.University;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;

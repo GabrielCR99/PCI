@@ -1,6 +1,6 @@
 ﻿<resources>
     <string name="app_name">PCI</string>
-    <string name="vem_pci">virtual exchange machine</string>
+    <string name="vem_pci">Virtual Exchange Machine</string>
     <string name="virtual_exc">Virtual Exchange Machine </string>
     <string name="password_forgot">Esqueceu a senha?</string>
     <string name="sign_in">Entrar</string>
@@ -28,6 +28,26 @@
 
     <string name="logout"> Sair</string>
     <string name="privacy_policy">Políticas de privacidade</string>
+    <string name="reset_password_tv">Para a recuperação de sua senha, favor preencher o campo com o E-mail. Enviaremos sua senha através deste.</string>
+    <string name="reset_password_send">Enviar</string>
+    <string name="choose_type">Eu sou</string>
+    <string name="gender">Gênero</string>
+    <string name="date">Data de nascimento</string>
+    <string name="open_drawer">Open</string>
+    <string name="close_drawer">Close</string>
 
+
+    <string-array name="array_spinner">
+        <item> Estudante</item>
+        <item> Professor</item>
+
+    </string-array>
+
+    <string-array name="array_gender">
+        <item> Masculino</item>
+        <item> Feminino</item>
+        <item> Outro</item>
+
+    </string-array>
 
 </resources>

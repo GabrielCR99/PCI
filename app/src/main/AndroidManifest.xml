@@ -10,9 +10,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".fragments.ProjetosFinalizadosFragment"></activity>
-        <activity android:name=".fragments.ProjetosEmAndamentoFragment" />
-        <activity android:name=".activities.Home" />
         <activity
             android:name=".activities.SplashActivity"
             android:theme="@style/AppTheme.FullScreen">
