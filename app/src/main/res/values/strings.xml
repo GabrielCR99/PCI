@@ -28,6 +28,11 @@
 
     <string name="logout"> Sair</string>
     <string name="privacy_policy">Políticas de privacidade</string>
+    <string name="gender">Gênero</string>
+    <string name="birthDate">Data de Nascimento</string>
+    <string name="edit">Editar</string>
+    <string name="facebook">Facebook</string>
+    <string name="skype">Skype</string>
 
 
 </resources>
