@@ -14,20 +14,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
-        /*University university = new University();
-        UniversityDAO universityDAO = new UniversityDAO();
-        String id = universityDAO.newKey();
-        university.setId(id);
-        university.setName("Universidade de Piracicaba");
-        university.setState("São Paulo");
-        university.setDepartment("Desenvolvimento");
-        university.setEnable(true);
-        university.setCountry("Brazil");
-        university.setPicture("teste1.png");
-        universityDAO.create(id,university);*/
-
     }
 }
