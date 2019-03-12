@@ -5,7 +5,7 @@ import java.util.Objects;
 
 public class Professor implements Serializable {
 
-    private String uid;
+    private String id;
     private String name;
     private String email;
     private String gender;
@@ -19,7 +19,7 @@ public class Professor implements Serializable {
         if (this == o) return true;
         if (!(o instanceof Professor)) return false;
         Professor professor = (Professor) o;
-        return getUid().equals(professor.getUid()) &&
+        return getId() == professor.getId() &&
                 isEnable() == professor.isEnable() &&
                 Objects.equals(getName(), professor.getName()) &&
                 Objects.equals(getEmail(), professor.getEmail()) &&
@@ -32,13 +32,13 @@ public class Professor implements Serializable {
     @Override
     public int hashCode() {
 
-        return Objects.hash(getUid(), getName(), getEmail(), getGender(), getBirthDate(), getPicture(), getDegree(), isEnable());
+        return Objects.hash(getId(), getName(), getEmail(), getGender(), getBirthDate(), getPicture(), getDegree(), isEnable());
     }
 
     public Professor(){}
 
     public Professor(String id, String name, String email, String gender, Date birthDate, String picture, String degree, boolean enable) {
-        this.uid = id;
+        this.id = id;
         this.name = name;
         this.email = email;
         this.gender = gender;
@@ -48,12 +48,12 @@ public class Professor implements Serializable {
         this.enable = enable;
     }
 
-    public String getUid() {
-        return uid;
+    public String getId() {
+        return id;
     }
 
-    public void setUid(String uid) {
-        this.uid = uid;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {

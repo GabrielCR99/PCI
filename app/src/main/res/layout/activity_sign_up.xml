@@ -147,10 +147,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="match_parent"
-        android:layout_height="33dp"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="489dp" />
 </android.support.constraint.ConstraintLayout>

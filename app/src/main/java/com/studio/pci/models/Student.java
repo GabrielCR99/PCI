@@ -5,7 +5,7 @@ import java.util.Objects;
 
 public class Student implements Serializable {
 
-    private String uid;
+    private String id;
     private String name;
     private String email;
     private String gender;
@@ -16,7 +16,7 @@ public class Student implements Serializable {
     public Student(){}
 
     public Student(String id, String name, String email, String gender, Date birthDate, String picture, boolean enable) {
-        this.uid = id;
+        this.id = id;
         this.name = name;
         this.email = email;
         this.gender = gender;
@@ -30,7 +30,7 @@ public class Student implements Serializable {
         if (this == o) return true;
         if (!(o instanceof Student)) return false;
         Student student = (Student) o;
-        return uid.equals(student.uid) &&
+        return id == student.id &&
                 enable == student.enable &&
                 Objects.equals(name, student.name) &&
                 Objects.equals(email, student.email) &&
@@ -42,15 +42,15 @@ public class Student implements Serializable {
     @Override
     public int hashCode() {
 
-        return Objects.hash(uid, name, email, gender, birthDate, picture, enable);
+        return Objects.hash(id, name, email, gender, birthDate, picture, enable);
     }
 
     public String getId() {
-        return uid;
+        return id;
     }
 
     public void setId(String id) {
-        this.uid = id;
+        this.id = id;
     }
 
     public String getName() {

@@ -9,10 +9,11 @@ public interface GenericDAO<T extends Serializable> {
 
     List<T> findAll();
 
-    void create(T entity);
+    void create(String id,T entity);
 
     void update(String id,T entity);
 
     void delete(String id);
 
+    String newKey();
 }
