@@ -31,7 +31,8 @@
     <group>
         <item
             android:id="@+id/menu_logout"
-            android:title="@string/logout" />
+            android:title="@string/logout"
+            android:icon="@drawable/ic_exit_to_app_black_24dp"/>
 
         <item
             android:id="@+id/menu_privacy_policy"
