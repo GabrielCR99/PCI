@@ -1,17 +1,13 @@
 package com.studio.pci.activities;
 
 import android.content.Intent;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -20,15 +16,11 @@ import com.google.firebase.auth.FirebaseUser;
 import com.studio.pci.R;
 import com.studio.pci.utils.FormHelper;
 
-import java.text.Normalizer;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class SignInActivity extends BaseActivity {
-
-
 
     private static final String TAG = "SignInActivity";
 
@@ -131,7 +123,7 @@ public class SignInActivity extends BaseActivity {
     }
 
     @OnClick(R.id.password_forgot)
-    public void sendPasswordResetEmail(View view){
+    public void sendPasswordResetEmail(View view) {
 
         startActivity(new Intent(SignInActivity.this, ResetPasswordActivity.class));
     }

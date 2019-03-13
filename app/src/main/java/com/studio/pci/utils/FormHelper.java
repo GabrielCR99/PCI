@@ -18,7 +18,7 @@ public class FormHelper {
     }
 
     public static boolean isPasswordValid(String password) {
-        return password.length() >= 9;
+        return password.length() >= 6;
     }
 
     public static boolean isEmpty(String text) {

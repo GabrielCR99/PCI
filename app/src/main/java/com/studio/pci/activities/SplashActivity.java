@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.studio.pci.R;
@@ -40,11 +39,11 @@ public class SplashActivity extends BaseActivity implements Runnable {
 
     @Override
     public void run() {
-        /*if (currentUser != null) {
+        if (currentUser != null) {
             Intent intent = new Intent(SplashActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
-        } else*/ {
+        } else {
             Intent intent = new Intent(SplashActivity.this, SignInActivity.class);
             startActivity(intent);
             finish();

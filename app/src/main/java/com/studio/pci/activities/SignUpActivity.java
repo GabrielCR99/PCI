@@ -1,11 +1,9 @@
 package com.studio.pci.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -18,14 +16,11 @@ import com.google.firebase.auth.FirebaseUser;
 import com.studio.pci.R;
 import com.studio.pci.utils.FormHelper;
 
-import java.util.ArrayList;
-import java.util.Date;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class SignUpActivity extends BaseActivity{
+public class SignUpActivity extends BaseActivity {
 
     private FirebaseAuth firebaseAuth;
 
@@ -63,9 +58,6 @@ public class SignUpActivity extends BaseActivity{
         ButterKnife.bind(this);
 
         firebaseAuth = FirebaseAuth.getInstance();
-
-
-
     }
 
     private boolean validateForm(String name, String email, String password, String confirmPassword) {
@@ -92,18 +84,18 @@ public class SignUpActivity extends BaseActivity{
 
         if (FormHelper.isEmpty(password)) {
             passwordLayout.setError(getString(R.string.error_password_empty));
-            resultValidate =  false;
+            resultValidate = false;
         } else if (!FormHelper.isPasswordValid(password)) {
             passwordLayout.setError(getString(R.string.error_password_invalid));
-            resultValidate =  false;
+            resultValidate = false;
         }
 
         if (FormHelper.isEmpty(confirmPassword)) {
             confirmPasswordLayout.setError(getString(R.string.error_password_empty));
-            resultValidate =  false;
-        } else if (!password.equals(confirmPassword)){
+            resultValidate = false;
+        } else if (!password.equals(confirmPassword)) {
             confirmPasswordLayout.setError(getString(R.string.error_password_different));
-            resultValidate =  false;
+            resultValidate = false;
         }
 
         return resultValidate;
@@ -143,9 +135,8 @@ public class SignUpActivity extends BaseActivity{
     }
 
     @OnClick(R.id.sign_in_text)
-    public void goToSignIn(View view){
+    public void goToSignIn(View view) {
         finish();
-
     }
 
 
