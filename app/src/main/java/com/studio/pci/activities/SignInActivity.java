@@ -1,17 +1,13 @@
 package com.studio.pci.activities;
 
 import android.content.Intent;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -19,8 +15,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.studio.pci.R;
 import com.studio.pci.utils.FormHelper;
-
-import java.text.Normalizer;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -45,14 +39,15 @@ public class SignInActivity extends BaseActivity {
     TextInputLayout passwordLayout;
 
     private FirebaseAuth auth;
+    private FirebaseUser firebaseUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
         ButterKnife.bind(this);
-
         auth = FirebaseAuth.getInstance();
+        firebaseUser = auth.getCurrentUser();
     }
 
     private boolean validateForm(String email, String password) {
@@ -91,29 +86,24 @@ public class SignInActivity extends BaseActivity {
 
 
     private void signIn(String email, String password) {
-
         if (!validateForm(email, password)) {
             Log.v(TAG, "validateForm error");
             return;
         }
-
         showProgressDialog();
-
         auth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            FirebaseUser user = auth.getCurrentUser();
-                            Intent intent = new Intent(SignInActivity.this, MainActivity.class);
-                            startActivity(intent);
-                            finish();
-                        } else {
-                            hideProgressDialog();
-                            showToast(getString(R.string.auth_failed));
-                        }
-                    }
-                });
+        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    finish();
+                    startActivity(new Intent(SignInActivity.this, MainActivity.class));
+                } else {
+                    hideProgressDialog();
+                    showToast(getString(R.string.auth_failed));
+                }
+            }
+        });
     }
 
     @OnClick(R.id.sign_in_button)

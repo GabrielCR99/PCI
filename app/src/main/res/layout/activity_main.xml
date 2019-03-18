@@ -32,6 +32,7 @@
             app:tabMode="fixed"
             app:tabTextColor="@color/colorWhite" />
 
+
     </LinearLayout>
 
     <android.support.design.widget.NavigationView
@@ -41,5 +42,6 @@
         android:layout_gravity="start"
         app:headerLayout="@layout/nav_header"
         app:menu="@menu/menu" />
+
 
 </android.support.v4.widget.DrawerLayout>

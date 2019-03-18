@@ -15,11 +15,15 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.studio.pci.R;
 import com.studio.pci.models.Professor;
 import com.studio.pci.models.Student;
+import com.studio.pci.models.User;
 import com.studio.pci.providers.ProfessorDAO;
 import com.studio.pci.providers.StudentDAO;
+import com.studio.pci.providers.UserDAO;
 import com.studio.pci.utils.FormHelper;
 
 import java.util.ArrayList;
@@ -32,6 +36,7 @@ import butterknife.OnClick;
 public class SignUpActivity extends BaseActivity{
 
     private FirebaseAuth firebaseAuth;
+    private DatabaseReference db;
 
     @BindView(R.id.name)
     EditText nameField;
@@ -65,11 +70,7 @@ public class SignUpActivity extends BaseActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         ButterKnife.bind(this);
-
         firebaseAuth = FirebaseAuth.getInstance();
-
-
-
     }
 
     private boolean validateForm(String name, String email, String password, String confirmPassword) {
@@ -127,6 +128,9 @@ public class SignUpActivity extends BaseActivity{
                             FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
                             String id = firebaseUser.getUid();
                             String type = spinner.getSelectedItem().toString();
+                            User user = new User(id,type);
+                            UserDAO userDAO = new UserDAO();
+                            userDAO.create(id,user);
                             if(type.equals(getString(R.string.student))){
                                 Student student = new Student();
                                 student.setId(id);
