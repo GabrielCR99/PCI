@@ -5,7 +5,7 @@ import java.util.Objects;
 
 public class Professor implements Serializable {
 
-    private String uid;
+    private String id;
     private String name;
     private String gender;
     private Date birthDate;
@@ -14,6 +14,7 @@ public class Professor implements Serializable {
     private String email;
     private String facebookUrl;
     private String skypeUrl;
+    private String bio;
     private boolean enable;
 
     @Override
@@ -21,41 +22,46 @@ public class Professor implements Serializable {
         if (this == o) return true;
         if (!(o instanceof Professor)) return false;
         Professor professor = (Professor) o;
-        return getUid().equals(professor.getUid()) &&
-                isEnable() == professor.isEnable() &&
+        return isEnable() == professor.isEnable() &&
+                Objects.equals(getId(), professor.getId()) &&
                 Objects.equals(getName(), professor.getName()) &&
-                Objects.equals(getEmail(), professor.getEmail()) &&
                 Objects.equals(getGender(), professor.getGender()) &&
                 Objects.equals(getBirthDate(), professor.getBirthDate()) &&
                 Objects.equals(getPicture(), professor.getPicture()) &&
-                Objects.equals(getDegree(), professor.getDegree());
+                Objects.equals(getDegree(), professor.getDegree()) &&
+                Objects.equals(getEmail(), professor.getEmail()) &&
+                Objects.equals(getFacebookUrl(), professor.getFacebookUrl()) &&
+                Objects.equals(getSkypeUrl(), professor.getSkypeUrl()) &&
+                Objects.equals(bio, professor.bio);
     }
 
     @Override
     public int hashCode() {
-
-        return Objects.hash(getUid(), getName(), getEmail(), getGender(), getBirthDate(), getPicture(), getDegree(), isEnable());
+        return Objects.hash(getId(), getName(), getGender(), getBirthDate(), getPicture(), getDegree(), getEmail(), getFacebookUrl(), getSkypeUrl(), bio, isEnable());
     }
 
     public Professor(){}
 
-    public Professor(String id, String name, String email, String gender, Date birthDate, String picture, String degree, boolean enable) {
-        this.uid = id;
+    public Professor(String id, String name, String gender, Date birthDate, String picture, String degree, String email, String facebookUrl, String skypeUrl, String bio, boolean enable) {
+        this.id = id;
         this.name = name;
-        this.email = email;
         this.gender = gender;
         this.birthDate = birthDate;
         this.picture = picture;
         this.degree = degree;
+        this.email = email;
+        this.facebookUrl = facebookUrl;
+        this.skypeUrl = skypeUrl;
+        this.bio = bio;
         this.enable = enable;
     }
 
-    public String getUid() {
-        return uid;
+    public String getId() {
+        return id;
     }
 
-    public void setUid(String uid) {
-        this.uid = uid;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -104,6 +110,14 @@ public class Professor implements Serializable {
 
     public void setDegree(String degree) {
         this.degree = degree;
+    }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
     }
 
     public String getFacebookUrl() {
