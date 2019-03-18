@@ -26,7 +26,6 @@
     <string name="reset_password_tv">Para a recuperação de sua senha, favor preencher o campo com o E-mail. Enviaremos sua senha através deste.</string>
     <string name="reset_password_send">Enviar</string>
     <string name="choose_type">Eu sou</string>
-    <string name="gender">Gênero</string>
     <string name="date">Data de nascimento</string>
     <string name="open_drawer">Open</string>
     <string name="close_drawer">Close</string>
@@ -34,13 +33,13 @@
     <string name="edit">Editar</string>
     <string name="facebook">Facebook</string>
     <string name="skype">Skype</string>
-
+    <string name="student">Estudante</string>
+    <string name="professor">Professor</string>
+    <string name="gender">Gênero</string>
     <string-array name="array_spinner">
-        <item> Estudante</item>
-        <item> Professor</item>
-
+        <item>Estudante</item>
+        <item>Professor</item>
     </string-array>
-
     <string-array name="array_gender">
         <item> Masculino</item>
         <item> Feminino</item>
