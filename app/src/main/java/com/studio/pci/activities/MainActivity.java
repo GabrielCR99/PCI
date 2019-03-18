@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -14,6 +13,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,8 +31,7 @@ import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    @BindView(R.id.tab_layout_main)
-    TabLayout tabLayout;
+
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -43,8 +42,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @BindView(R.id.nav_view)
     NavigationView navigationView;
 
-    @BindView(R.id.projects_view_pager)
-    ViewPager viewPager;
+
 
     private FirebaseAuth firebaseAuth;
 
@@ -86,13 +84,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(new Intent(this, SignInActivity.class));
                 break;
             case R.id.menu_project:
-                ViewPageAdapter viewPagerAdapter = new ViewPageAdapter(getSupportFragmentManager());
-                viewPagerAdapter.addFragment(new ProjetosEmAndamentoFragment(), "Projetos em andamento");
-                viewPagerAdapter.addFragment(new ProjetosFinalizadosFragment(), "Projetos finalizados");
-
-                viewPager.setAdapter(viewPagerAdapter);
-                tabLayout.setupWithViewPager(viewPager);
-                drawerLayout.closeDrawers();
+                startActivity(new Intent(this, FragmentActivity.class));
                 break;
         }
         return false;

@@ -14,13 +14,13 @@ public class ProjetosEmAndamentoFragment extends Fragment {
 
     private View view;
 
-    public ProjetosEmAndamentoFragment()
-    {
+    public ProjetosEmAndamentoFragment() {
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_projetos, container, false);
+
     }
 }

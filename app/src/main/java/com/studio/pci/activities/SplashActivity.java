@@ -33,7 +33,7 @@ public class SplashActivity extends BaseActivity implements Runnable {
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+         currentUser = mAuth.getCurrentUser();
 
     }
 

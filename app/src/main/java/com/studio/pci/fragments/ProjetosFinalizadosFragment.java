@@ -14,14 +14,13 @@ public class ProjetosFinalizadosFragment extends Fragment {
 
     private View view;
 
-    public ProjetosFinalizadosFragment()
-    {
+    public ProjetosFinalizadosFragment() {
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_projetos_finalizados, container, false);
-        return view;
+        return inflater.inflate(R.layout.fragment_projetos_finalizados, container, false);
+
     }
 }

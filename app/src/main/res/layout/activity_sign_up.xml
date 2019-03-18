@@ -136,7 +136,7 @@
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="70dp"
         android:text="@string/policy_privacy"
         android:textAlignment="center"
         android:textColor="@android:color/background_light"
