@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity  {
 
     FirebaseUser currentUser;
     DatabaseReference databaseUsers;
-    String TAG = "users";
     String type;
     User user;
 
@@ -57,7 +56,7 @@ public class MainActivity extends AppCompatActivity  {
     }
 
     private void getUserType() {
-        databaseUsers = FirebaseDatabase.getInstance().getReference(TAG);
+        databaseUsers = FirebaseDatabase.getInstance().getReference("users");
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
         user = new User();
         databaseUsers.child(currentUser.getUid()).addValueEventListener(new ValueEventListener() {
