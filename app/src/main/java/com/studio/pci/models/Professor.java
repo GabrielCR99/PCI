@@ -8,7 +8,7 @@ public class Professor implements Serializable {
     private String id;
     private String name;
     private String gender;
-    private Date birthDate;
+    private String birthDate;
     private String picture;
     private String degree;
     private String email;
@@ -40,9 +40,21 @@ public class Professor implements Serializable {
         return Objects.hash(getId(), getName(), getGender(), getBirthDate(), getPicture(), getDegree(), getEmail(), getFacebookUrl(), getSkypeUrl(), bio, isEnable());
     }
 
-    public Professor(){}
+    public Professor(){
+        this.id = "";
+        this.name = "";
+        this.gender = "";
+        this.birthDate = "";
+        this.picture = "";
+        this.degree = "";
+        this.email = "";
+        this.facebookUrl = "";
+        this.skypeUrl = "";
+        this.bio = "";
+        this.enable = true;
+    }
 
-    public Professor(String id, String name, String gender, Date birthDate, String picture, String degree, String email, String facebookUrl, String skypeUrl, String bio, boolean enable) {
+    public Professor(String id, String name, String gender, String birthDate, String picture, String degree, String email, String facebookUrl, String skypeUrl, String bio, boolean enable) {
         this.id = id;
         this.name = name;
         this.gender = gender;
@@ -88,11 +100,11 @@ public class Professor implements Serializable {
         this.gender = gender;
     }
 
-    public Date getBirthDate() {
+    public String getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(String birthDate) {
         this.birthDate = birthDate;
     }
 

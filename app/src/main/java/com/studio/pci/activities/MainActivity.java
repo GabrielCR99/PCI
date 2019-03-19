@@ -1,9 +1,11 @@
 package com.studio.pci.activities;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -22,19 +24,15 @@ import com.studio.pci.fragments.ProjetosEmAndamentoFragment;
 import com.studio.pci.fragments.ProjetosFinalizadosFragment;
 import android.util.Log;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.studio.pci.R;
 import com.studio.pci.models.User;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -51,11 +49,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
 
-    private FirebaseAuth firebaseAuth;
-    FirebaseUser currentUser;
-    DatabaseReference databaseUsers;
-    String type;
-    User user;
+    private int type;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,8 +66,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void getUserType() {
-        databaseUsers = FirebaseDatabase.getInstance().getReference("users");
-        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference databaseUsers = FirebaseDatabase.getInstance().getReference("users");
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         user = new User();
         databaseUsers.child(currentUser.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
@@ -80,9 +75,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 if(dataSnapshot.exists()){
                     user = dataSnapshot.getValue(User.class);
                     if(user.getType().equals(getString(R.string.student))){
-                        type = "Estudante";
+                        type = 1;
                     }else{
-                        type = "Professor";
+                        type = 2;
                     }
                 }else{
                     Log.v("GetUserError","Null User");
@@ -117,6 +112,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.menu_project:
                 startActivity(new Intent(this, FragmentActivity.class));
+                break;
+            case R.id.menu_profile:
+                Intent intent;
+                switch (type){
+                    case 1:
+                        intent = new Intent(MainActivity.this,StudentActivity.class);
+                        break;
+                    case 2:
+                        intent = new Intent(MainActivity.this,ProfessorActivity.class);
+                        break;
+                    default:
+                        intent = new Intent(MainActivity.this,MainActivity.class);
+                        break;
+                }
+                intent.putExtra("UID",user.getUid());
+                finish();
+                startActivity(intent);
                 break;
         }
         return false;

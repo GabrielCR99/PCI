@@ -8,16 +8,24 @@ public class Student implements Serializable {
     private String uid;
     private String name;
     private String gender;
-    private Date birthDate;
+    private String birthDate;
     private String picture;
     private String email;
     private String facebookUrl;
     private String skypeUrl;
     private boolean enable;
 
-    public Student(){}
+    public Student(){
+        this.uid = "";
+        this.name = "";
+        this.email = "";
+        this.gender = "";
+        this.birthDate = "";
+        this.picture = "";
+        this.enable = true;
+    }
 
-    public Student(String id, String name, String email, String gender, Date birthDate, String picture, boolean enable) {
+    public Student(String id, String name, String email, String gender, String birthDate, String picture, boolean enable) {
         this.uid = id;
         this.name = name;
         this.email = email;
@@ -79,11 +87,11 @@ public class Student implements Serializable {
         this.gender = gender;
     }
 
-    public Date getBirthDate() {
+    public String getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(String birthDate) {
         this.birthDate = birthDate;
     }
 
