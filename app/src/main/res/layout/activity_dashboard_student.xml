@@ -67,7 +67,8 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/student_birthDate"/>
+                    android:id="@+id/student_birthDate"
+                    android:layout_marginBottom="25sp"/>
 
                 <TextView
                     android:layout_width="match_parent"
