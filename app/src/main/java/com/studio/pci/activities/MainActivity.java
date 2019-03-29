@@ -36,8 +36,6 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-
-
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
@@ -47,48 +45,46 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @BindView(R.id.nav_view)
     NavigationView navigationView;
 
-
-
     private int type;
-    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
         setSupportActionBar(toolbar);
         navigationView.setNavigationItemSelectedListener(this);
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_drawer, R.string.close_drawer);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         getUserType();
     }
 
     private void getUserType() {
-        DatabaseReference databaseUsers = FirebaseDatabase.getInstance().getReference("users");
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        user = new User();
-        databaseUsers.child(currentUser.getUid()).addValueEventListener(new ValueEventListener() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        final DatabaseReference databaseUsers = FirebaseDatabase.getInstance().getReference("users");
+        databaseUsers.child(user.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
-                    user = dataSnapshot.getValue(User.class);
-                    if(user.getType().equals(getString(R.string.student))){
-                        type = 1;
-                    }else{
-                        type = 2;
-                    }
+                User currentUser = dataSnapshot.getValue(User.class);
+                Log.v("USER_FIREBASE", currentUser.getType());
+                if(currentUser.getType().equals(getString(R.string.student))){
+                    type = 1;
                 }else{
-                    Log.v("GetUserError","Null User");
+                    type = 2;
                 }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.v("RetrieveDataError",databaseError.getMessage());
+                Log.v("USER_FIREBASE", "onCancelled, Error="+databaseError.getMessage());
             }
         });
-
     }
 
 
@@ -113,6 +109,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.menu_project:
                 startActivity(new Intent(this, FragmentActivity.class));
                 break;
+            case R.id.menu_students:
+                startActivity(new Intent(this, ViewStudentsActivity.class));
+                break;
             case R.id.menu_profile:
                 Intent intent;
                 switch (type){
@@ -126,7 +125,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         intent = new Intent(MainActivity.this,MainActivity.class);
                         break;
                 }
-                intent.putExtra("UID",user.getUid());
                 finish();
                 startActivity(intent);
                 break;

@@ -1,11 +1,13 @@
 package com.studio.pci.models;
+import com.studio.pci.R;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
 public class Student implements Serializable {
 
-    private String uid;
+    private String id;
     private String name;
     private String gender;
     private String birthDate;
@@ -16,51 +18,38 @@ public class Student implements Serializable {
     private boolean enable;
 
     public Student(){
-        this.uid = "";
-        this.name = "";
-        this.email = "";
-        this.gender = "";
-        this.birthDate = "";
-        this.picture = "";
-        this.enable = true;
     }
 
-    public Student(String id, String name, String email, String gender, String birthDate, String picture, boolean enable) {
-        this.uid = id;
+    public Student(String id, String name, String gender, String birthDate, String picture, String email, String facebookUrl, String skypeUrl, boolean enable) {
+        this.id = id;
         this.name = name;
-        this.email = email;
         this.gender = gender;
         this.birthDate = birthDate;
         this.picture = picture;
+        this.email = email;
+        this.facebookUrl = facebookUrl;
+        this.skypeUrl = skypeUrl;
         this.enable = enable;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Student)) return false;
-        Student student = (Student) o;
-        return uid.equals(student.uid) &&
-                enable == student.enable &&
-                Objects.equals(name, student.name) &&
-                Objects.equals(email, student.email) &&
-                Objects.equals(gender, student.gender) &&
-                Objects.equals(birthDate, student.birthDate) &&
-                Objects.equals(picture, student.picture);
-    }
-
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(uid, name, email, gender, birthDate, picture, enable);
+    public Student(String id, String name, String email, boolean enable) {
+        this.id = id;
+        this.name = name;
+        gender = "";
+        birthDate = "";
+        picture = "";
+        this.email = email;
+        facebookUrl = "";
+        skypeUrl = "";
+        this.enable = enable;
     }
 
     public String getId() {
-        return uid;
+        return id;
     }
 
     public void setId(String id) {
-        this.uid = id;
+        this.id = id;
     }
 
     public String getName() {
@@ -125,5 +114,20 @@ public class Student implements Serializable {
 
     public void setEnable(boolean enable) {
         this.enable = enable;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", gender='" + gender + '\'' +
+                ", birthDate='" + birthDate + '\'' +
+                ", picture='" + picture + '\'' +
+                ", email='" + email + '\'' +
+                ", facebookUrl='" + facebookUrl + '\'' +
+                ", skypeUrl='" + skypeUrl + '\'' +
+                ", enable=" + enable +
+                '}';
     }
 }

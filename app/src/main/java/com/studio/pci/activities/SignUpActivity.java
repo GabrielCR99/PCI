@@ -116,40 +116,32 @@ public class SignUpActivity extends BaseActivity {
 
         showProgressDialog();
         firebaseAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-                            String id = firebaseUser.getUid();
-                            String type = spinner.getSelectedItem().toString();
-                            User user = new User(id,type);
-                            UserDAO userDAO = new UserDAO();
-                            userDAO.create(id,user);
-                            if(type.equals(getString(R.string.student))){
-                                Student student = new Student();
-                                student.setId(id);
-                                student.setName(nameField.getText().toString());
-                                student.setEmail(emailField.getText().toString());
-                                student.setEnable(true);
-                                StudentDAO studentDAO = new StudentDAO();
-                                studentDAO.create(id,student);
-                            }else{
-                                Professor professor = new Professor();
-                                professor.setId(id);
-                                professor.setName(nameField.getText().toString());
-                                professor.setEmail(emailField.getText().toString());
-                                professor.setEnable(true);
-                                ProfessorDAO professorDAO = new ProfessorDAO();
-                                professorDAO.create(id,professor);
-                            }
-                            hideProgressDialog();
-                        } else {
-                            showToast(getString(R.string.auth_failed));
-                            hideProgressDialog();
-                        }
+            .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+                    String id = firebaseUser.getUid();
+                    String type = spinner.getSelectedItem().toString();
+                    User user = new User(id,type);
+                    UserDAO userDAO = new UserDAO();
+                    userDAO.create(id,user);
+                    if(type.equals(getString(R.string.student))){
+                        Student student = new Student(id,nameField.getText().toString(),emailField.getText().toString(),true);
+                        StudentDAO studentDAO = new StudentDAO();
+                        studentDAO.create(id,student);
+                    }else{
+                        Professor professor = new Professor(id,nameField.getText().toString(),emailField.getText().toString(),true);
+                        ProfessorDAO professorDAO = new ProfessorDAO();
+                        professorDAO.create(id,professor);
                     }
-                });
+                    hideProgressDialog();
+                } else {
+                    showToast(getString(R.string.auth_failed));
+                    hideProgressDialog();
+                }
+                }
+            });
     }
 
     @OnClick(R.id.sign_up_button)
@@ -163,6 +155,4 @@ public class SignUpActivity extends BaseActivity {
     public void goToSignIn(View view) {
         finish();
     }
-
-
 }

@@ -17,6 +17,19 @@ public class Professor implements Serializable {
     private String bio;
     private boolean enable;
 
+    public Professor(String id, String name, String email, boolean enable) {
+        this.id = id;
+        this.name = name;
+        gender = "";
+        birthDate = "";
+        picture = "";
+        degree = "";
+        this.email = email;
+        facebookUrl = "";
+        skypeUrl = "";
+        this.enable = enable;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -41,17 +54,6 @@ public class Professor implements Serializable {
     }
 
     public Professor(){
-        this.id = "";
-        this.name = "";
-        this.gender = "";
-        this.birthDate = "";
-        this.picture = "";
-        this.degree = "";
-        this.email = "";
-        this.facebookUrl = "";
-        this.skypeUrl = "";
-        this.bio = "";
-        this.enable = true;
     }
 
     public Professor(String id, String name, String gender, String birthDate, String picture, String degree, String email, String facebookUrl, String skypeUrl, String bio, boolean enable) {

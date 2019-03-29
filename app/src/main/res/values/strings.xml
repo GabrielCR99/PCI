@@ -36,6 +36,8 @@
     <string name="student">Estudante</string>
     <string name="professor">Professor</string>
     <string name="gender">Gênero</string>
+    <string name="null_info">Não informado</string>
+    <string name="degree">Degree</string>
     <string-array name="array_spinner">
         <item>Estudante</item>
         <item>Professor</item>

@@ -25,6 +25,7 @@
         <activity android:name="com.studio.pci.activities.SignUpActivity" />
         <activity android:name=".activities.ProfessorActivity" />
         <activity android:name=".activities.StudentActivity" />
+        <activity android:name=".activities.ViewStudentsActivity" />
     </application>
 
 </manifest>

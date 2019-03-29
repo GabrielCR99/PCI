@@ -1,13 +1,16 @@
 package com.studio.pci.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -18,60 +21,76 @@ import com.google.firebase.database.ValueEventListener;
 import com.studio.pci.R;
 import com.studio.pci.models.Student;
 
+import org.w3c.dom.Text;
+
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class StudentActivity extends AppCompatActivity {
 
+    private DatabaseReference databaseReference;
+    private String userID;
+
     @BindView(R.id.student_name)
-    TextView nameTextView;
+    TextView name;
 
     @BindView(R.id.student_gender)
-    TextView genderTextView;
+    TextView gender;
 
     @BindView(R.id.student_birthDate)
-    TextView birthTextView;
+    TextView birthDate;
 
     @BindView(R.id.student_email)
-    TextView emailTextView;
+    TextView email;
 
     @BindView(R.id.student_facebook)
-    TextView faceTextView;
+    TextView facebook;
 
     @BindView(R.id.student_skype)
-    TextView skypeTextView;
-
-    private DatabaseReference databaseStudents;
-    private Student student;
+    TextView skype;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard_student);
+        ButterKnife.bind(this);
+
+        databaseReference = FirebaseDatabase.getInstance().getReference("students");
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        userID = user.getUid();
+
         getInfo();
     }
 
     private void getInfo() {
-        databaseStudents = FirebaseDatabase.getInstance().getReference("students");
-        student = new Student();
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        databaseStudents.child(currentUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference.child(userID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-               if(dataSnapshot.exists()){
-                   student = dataSnapshot.getValue(Student.class);
-                   nameTextView.setText(student.getName());
-                   genderTextView.setText(student.getGender());
-                   birthTextView.setText(student.getBirthDate());
-                   emailTextView.setText(student.getEmail());
-                   faceTextView.setText(student.getFacebookUrl());
-                   skypeTextView.setText(student.getSkypeUrl());
-               }else{
-                   Log.v("FetchStudentError","Couldn't fetch student data");
-               }
+                if(dataSnapshot.exists()){
+                    Student student = dataSnapshot.getValue(Student.class);
+                    Log.v("USER_FIREBASE_UID", student.getId());
+                    if(!student.getName().isEmpty()) name.setText(student.getName());
+                    else name.setText(getString(R.string.null_info));
+
+                    if(!student.getGender().isEmpty()) gender.setText(student.getGender());
+                    else gender.setText(getString(R.string.null_info));
+
+                    if(!student.getBirthDate().isEmpty()) birthDate.setText(student.getBirthDate());
+                    else birthDate.setText(getString(R.string.null_info));
+
+                    if(!student.getEmail().isEmpty()) email.setText(student.getEmail());
+                    else email.setText(getString(R.string.null_info));
+
+                    if(!student.getFacebookUrl().isEmpty()) facebook.setText(student.getFacebookUrl());
+                    else facebook.setText(getString(R.string.null_info));
+
+                    if(!student.getSkypeUrl().isEmpty()) skype.setText(student.getSkypeUrl());
+                    else skype.setText(getString(R.string.null_info));
+                }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.v("FetchStudentError",databaseError.getMessage());
+                Log.v("USER_FIREBASE", databaseError.getMessage());
             }
         });
     }

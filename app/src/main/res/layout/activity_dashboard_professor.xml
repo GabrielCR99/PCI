@@ -26,11 +26,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -40,7 +35,8 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/complete_name"/>
+                    android:text="@string/complete_name"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -51,18 +47,8 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Grau"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/professor_degree"
-                    android:layout_marginBottom="25sp"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/gender"/>
+                    android:text="@string/gender"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -73,17 +59,32 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/date"/>
+                    android:text="@string/birthDate"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/professor_birthDate"/>
+                    android:id="@+id/professor_birthDate"
+                    android:layout_marginBottom="25sp"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/email"/>
+                    android:text="@string/degree"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/professor_degree"
+                    android:layout_marginBottom="25sp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/email"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -94,7 +95,8 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/facebook"/>
+                    android:text="@string/facebook"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -105,7 +107,8 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/skype"/>
+                    android:text="@string/skype"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -113,14 +116,22 @@
                     android:id="@+id/professor_skype"
                     android:layout_marginBottom="25sp"/>
 
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="20sp"
+                    android:orientation="vertical">
+
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/edit_profile"
+                    android:id="@+id/professor_edit"
                     android:background="#2C3E50"
                     android:text="@string/edit"
                     android:textColor="#FFFF"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:layout_marginBottom="25sp"/>
 
             </LinearLayout>
 

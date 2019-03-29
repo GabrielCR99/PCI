@@ -28,41 +28,40 @@ public class AbstractDAO<T extends Serializable> implements GenericDAO<T>{
         db = FirebaseDatabase.getInstance().getReference(tableReference);
     }
 
-    private final ValueEventListener findById = new ValueEventListener() {
-        @Override
-        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-            t = dataSnapshot.getValue(currentClass);
-        }
-        @Override
-        public void onCancelled(@NonNull DatabaseError databaseError) {
-            Log.v("FindById DatabaseError",databaseError.getMessage());
-        }
-    };
-
-    private final ValueEventListener findAll = new ValueEventListener() {
-        @Override
-        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-            tList.clear();
-            for(DataSnapshot ds: dataSnapshot.getChildren()){
-                T t = ds.getValue(currentClass);
-                tList.add(t);
-            }
-        }
-        @Override
-        public void onCancelled(@NonNull DatabaseError databaseError) {
-            Log.v("FindAll DatabaseError",databaseError.getMessage());
-        }
-    };
-
     @Override
-    public T findById(final String id) {
-        db.child(id).addListenerForSingleValueEvent(findById);
+    public T findById(String id) {
+        db.child(id).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                t = dataSnapshot.getValue(currentClass);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.v("RetrieveData: "+currentClass.toString(),databaseError.getMessage());
+            }
+        });
         return t;
     }
 
     @Override
     public List<T> findAll() {
-        db.addValueEventListener(findAll);
+        Log.v("STUDENTS_FIREBASE","findAll : "+db.getRef());
+        Log.v("STUDENTS_FIREBASE","Current Class : "+currentClass);
+        db.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                tList.clear();
+                Log.v("STUDENTS_FIREBASE","onDataChange");
+                for(DataSnapshot ds : dataSnapshot.getChildren()){
+                    t = ds.getValue(currentClass);
+                    tList.add(t);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.v("RetrieveData: "+currentClass.toString(),databaseError.getMessage());
+            }
+        });
         return tList;
     }
 

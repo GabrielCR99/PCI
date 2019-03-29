@@ -15,24 +15,5 @@
         android:layout_height="64dp"
         android:src="@drawable/ic_account_circle_black_24dp" />
 
-    <TextView
-        android:id="@+id/nav_header_name"
-        style="@style/TextAppearance.AppCompat.Body1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="16dp"
-        android:text="Nome do usuário"
-        android:textColor="@android:color/white"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/nav_header_email"
-        style="@style/TextAppearance.AppCompat.Body1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="16dp"
-        android:text="Email"
-        android:textColor="@android:color/white"
-        android:textStyle="bold" />
 
 </LinearLayout>
