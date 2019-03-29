@@ -1,5 +1,6 @@
 package com.studio.pci.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
@@ -102,19 +103,23 @@ public class SignUpActivity extends BaseActivity {
     }
 
     private void createAccount(final String email, String password) {
-        if (!validateForm(nameField.getText().toString(), email, password, confirmPasswordField.getText().toString())) {
+        if (!validateForm(nameField.getText().toString(), email, password,
+                confirmPasswordField.getText().toString())) {
             return;
         }
 
         showProgressDialog();
-        Toast.makeText(this, "Conta criada com sucesso!", Toast.LENGTH_SHORT).show();
         firebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+                        // caso usuário consiga registrar
                         if (task.isSuccessful()) {
                             FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
                             hideProgressDialog();
+                            Toast.makeText(getApplicationContext(), "Conta criada com sucesso!", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(getApplicationContext(), SignInActivity.class));
+
                         } else {
                             showToast(getString(R.string.auth_failed));
                             hideProgressDialog();

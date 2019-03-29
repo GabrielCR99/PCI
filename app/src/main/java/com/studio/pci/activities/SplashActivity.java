@@ -22,8 +22,6 @@ public class SplashActivity extends BaseActivity implements Runnable {
         setContentView(R.layout.activity_splash);
 
         mAuth = FirebaseAuth.getInstance();
-        mAuth.signOut();
-
 
         Handler handle = new Handler();
         handle.postDelayed(this, DELAY_MILLIS);
