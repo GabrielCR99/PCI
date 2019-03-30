@@ -11,9 +11,21 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/nav_header_imageView"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:src="@drawable/ic_account_circle_black_24dp" />
+        android:layout_width="110sp"
+        android:layout_height="110sp"
+        android:src="@drawable/ic_account_circle_black_24dp"
+        android:layout_gravity="center"/>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/nav_name"
+        android:text="@string/app_name"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/nav_type"
+        android:text="@string/app_name"/>
 
 </LinearLayout>

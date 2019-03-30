@@ -30,9 +30,6 @@ public class ResetPasswordActivity extends AppCompatActivity {
     TextInputLayout resetPasswordInputLayout;
 
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
