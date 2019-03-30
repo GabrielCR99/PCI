@@ -13,7 +13,15 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.studio.pci.R;
+import com.studio.pci.models.Professor;
+import com.studio.pci.models.Student;
+import com.studio.pci.models.User;
 import com.studio.pci.utils.FormHelper;
 
 import butterknife.BindView;
@@ -38,6 +46,7 @@ public class SignInActivity extends BaseActivity {
 
     private FirebaseAuth auth;
     private FirebaseUser firebaseUser;
+    private int type=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +54,6 @@ public class SignInActivity extends BaseActivity {
         setContentView(R.layout.activity_sign_in);
         ButterKnife.bind(this);
         auth = FirebaseAuth.getInstance();
-        firebaseUser = auth.getCurrentUser();
     }
 
     private boolean validateForm(String email, String password) {
@@ -94,8 +102,7 @@ public class SignInActivity extends BaseActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    finish();
-                    startActivity(new Intent(SignInActivity.this, MainActivity.class));
+                    startMain();
                 } else {
                     hideProgressDialog();
                     showToast(getString(R.string.auth_failed));
@@ -103,6 +110,34 @@ public class SignInActivity extends BaseActivity {
             }
         });
     }
+
+    private void startMain() {
+        firebaseUser = auth.getCurrentUser();
+        DatabaseReference db = FirebaseDatabase.getInstance().getReference();
+        db.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                User user = dataSnapshot.child("users").child(firebaseUser.getUid()).getValue(User.class);
+                Intent intent = new Intent(SignInActivity.this,MainActivity.class);
+                if(user.getType().equals(getString(R.string.student))){
+                    type = 1;
+                    Student student = dataSnapshot.child("students").child(firebaseUser.getUid()).getValue(Student.class);
+                    intent.putExtra("USERNAME",student.getName());
+                }else{
+                    type = 2;
+                    Professor professor = dataSnapshot.child("professors").child(firebaseUser.getUid()).getValue(Professor.class);
+                    intent.putExtra("USERNAME",professor.getName());
+                }
+                intent.putExtra("USERTYPE",type);
+                startActivity(intent);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.e("FIREBASE_ERROR","onCancelled Error = "+databaseError.getMessage());
+            }
+        });
+    }
+
 
     @OnClick(R.id.sign_in_button)
     public void signInOnClick(View view) {
