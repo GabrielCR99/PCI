@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/nav_header"
     android:layout_width="match_parent"
@@ -13,7 +13,29 @@
         android:id="@+id/nav_header_imageView"
         android:layout_width="64dp"
         android:layout_height="64dp"
-        android:src="@drawable/ic_account_circle_black_24dp" />
+        android:src="@drawable/ic_account_circle_black_24dp"
+        android:layout_marginLeft="95dp"/>
 
+    <TextView
+        android:id="@+id/nav_header_name"
+        style="@style/TextAppearance.AppCompat.Body1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="16dp"
+        android:text="Nome do usuário"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:textAlignment="center"/>
+
+    <TextView
+        android:id="@+id/nav_header_email"
+        style="@style/TextAppearance.AppCompat.Body1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="16dp"
+        android:text="Email"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:textAlignment="center"/>
 
 </LinearLayout>

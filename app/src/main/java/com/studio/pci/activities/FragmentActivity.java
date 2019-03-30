@@ -1,5 +1,6 @@
 package com.studio.pci.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.studio.pci.R;
 import com.studio.pci.adapters.ViewPageAdapter;
 import com.studio.pci.fragments.ProjetosEmAndamentoFragment;
@@ -47,8 +49,8 @@ public class FragmentActivity extends AppCompatActivity implements NavigationVie
         navigationView.setNavigationItemSelectedListener(this);
 
         ViewPageAdapter viewPagerAdapter = new ViewPageAdapter(getSupportFragmentManager());
-        viewPagerAdapter.addFragment(new ProjetosEmAndamentoFragment(), "Projetos em andamento");
-        viewPagerAdapter.addFragment(new ProjetosFinalizadosFragment(), "Projetos finalizados");
+        viewPagerAdapter.addFragment(new ProjetosEmAndamentoFragment(), "Em andamento");
+        viewPagerAdapter.addFragment(new ProjetosFinalizadosFragment(), "Finalizados");
 
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
                 R.string.open_drawer, R.string.close_drawer);
@@ -63,6 +65,16 @@ public class FragmentActivity extends AppCompatActivity implements NavigationVie
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case R.id.menu_logout:
+                FirebaseAuth.getInstance().signOut();
+                finish();
+                startActivity(new Intent(this, SignInActivity.class));
+                break;
+            case R.id.menu_project:
+                startActivity(new Intent(this, FragmentActivity.class));
+                break;
+        }
         return false;
     }
 }

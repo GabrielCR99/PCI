@@ -28,45 +28,81 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_margin="20sp"
                 android:orientation="vertical">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/complete_name"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_assignment_black_24dp"
+                        android:paddingRight="10dp"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/complete_name"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/professor_name"
-                    android:layout_marginBottom="25sp"/>
+                    android:layout_marginBottom="25sp"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/gender"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+                    android:text="Grau"
+                    android:textSize="14sp"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/professor_gender"
                     android:layout_marginBottom="25sp"/>
+                    android:id="@+id/professor_degree"
+                    android:layout_marginBottom="25sp"
+                    android:textStyle="bold"/>
 
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/birthDate"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_info_outline_black_24dp"
+                        android:paddingRight="10dp"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Sobre"/>
+
+                </LinearLayout>
+
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/professor_birthDate"
                     android:layout_marginBottom="25sp"/>
+                    android:id="@+id/professor_about"
+                    android:layout_marginBottom="25sp"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -79,6 +115,9 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/professor_degree"
                     android:layout_marginBottom="25sp"/>
+                    android:id="@+id/professor_birthDate"
+                    android:layout_marginBottom="25dp"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -90,13 +129,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/professor_email"
-                    android:layout_marginBottom="25sp"/>
+                    android:layout_marginBottom="25sp"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/facebook"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+                    android:text="Redes Sociais"/>
+
 
                 <TextView
                     android:layout_width="match_parent"
@@ -110,11 +152,16 @@
                     android:text="@string/skype"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
 
+                    android:layout_marginBottom="25sp"
+                    android:textStyle="bold"/>
+
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/professor_skype"
-                    android:layout_marginBottom="25sp"/>
+                    android:layout_marginBottom="25sp"
+                    android:textStyle="bold"/>
 
 
                 <LinearLayout

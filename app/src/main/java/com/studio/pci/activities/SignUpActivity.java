@@ -1,5 +1,6 @@
-package com.studio.pci.activities;
+﻿package com.studio.pci.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
@@ -110,7 +111,8 @@ public class SignUpActivity extends BaseActivity {
     }
 
     private void createAccount(final String email, String password) {
-        if (!validateForm(nameField.getText().toString(), email, password, confirmPasswordField.getText().toString())) {
+        if (!validateForm(nameField.getText().toString(), email, password,
+                confirmPasswordField.getText().toString())) {
             return;
         }
 
@@ -126,6 +128,9 @@ public class SignUpActivity extends BaseActivity {
                     User user = new User(id,type);
                     UserDAO userDAO = new UserDAO();
                     userDAO.create(id,user);
+		    hideProgressDialog();
+                    Toast.makeText(getApplicationContext(), "Conta criada com sucesso!", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(getApplicationContext(), SignInActivity.class));
                     if(type.equals(getString(R.string.student))){
                         Student student = new Student(id,nameField.getText().toString(),emailField.getText().toString(),true);
                         StudentDAO studentDAO = new StudentDAO();
@@ -142,7 +147,6 @@ public class SignUpActivity extends BaseActivity {
                 }
                 }
             });
-    }
 
     @OnClick(R.id.sign_up_button)
     public void signInOnClick(View view) {
