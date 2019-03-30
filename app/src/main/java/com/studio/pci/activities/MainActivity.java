@@ -108,9 +108,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 finish();
                 startActivity(new Intent(this, SignInActivity.class));
                 break;
-            case R.id.menu_project:
-                startActivity(new Intent(this, FragmentActivity.class));
-                break;
             case R.id.menu_students:
                 startActivity(new Intent(this, ViewStudentsActivity.class));
                 break;
