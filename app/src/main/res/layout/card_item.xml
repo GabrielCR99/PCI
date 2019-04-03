@@ -3,87 +3,44 @@
     android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    card_view:cardCornerRadius="5dp"
     card_view:cardElevation="4dp"
     card_view:cardUseCompatPadding="true"
-    android:backgroundTint="@color/colorPrimary">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+    android:backgroundTint="@color/colorPrimary"
+    android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="16dp"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content">
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.75"
-                android:paddingLeft="16dp"
-                android:orientation="vertical">
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:src="@mipmap/ic_launcher_round"
+                android:id="@+id/card_img" />
 
-                <TextView
-                    android:id="@+id/name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="12sp" />
+        </LinearLayout>
 
-                <TextView
-                    android:id="@+id/description"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="8dp"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="70sp"
+            android:layout_marginEnd="30sp"
+            android:orientation="vertical"
+            android:layout_marginTop="7sp">
 
             <TextView
-                android:id="@+id/date"
-                android:gravity="top|end"
-                android:layout_weight="0.25"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:paddingRight="16dp"
-                android:textSize="12sp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <LinearLayout
+                android:id="@+id/card_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_weight="0.5"/>
 
-                <Button
-                    android:id="@+id/delete_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:theme="@style/Widget.AppCompat.Button.Borderless.Colored"
-                    android:text="Visualizar"
-                    android:layout_marginStart="220dp"/>
-
-                <Button
-                    android:id="@+id/edit_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:theme="@style/Widget.AppCompat.Button.Borderless.Colored"
-                    android:text="Editar" />
-
-            </LinearLayout>
+            <TextView
+                android:id="@+id/card_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"/>
 
         </LinearLayout>
-
-    </LinearLayout>
-
 
 </android.support.v7.widget.CardView>
 

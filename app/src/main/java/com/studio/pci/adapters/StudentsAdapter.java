@@ -1,13 +1,16 @@
 package com.studio.pci.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.studio.pci.R;
+import com.studio.pci.activities.StudentActivity;
 import com.studio.pci.models.Student;
 import com.studio.pci.utils.StudentsViewHolder;
 
@@ -26,16 +29,21 @@ public class StudentsAdapter extends RecyclerView.Adapter<StudentsViewHolder> {
     @NonNull
     @Override
     public StudentsViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View itemView = LayoutInflater.from(context).inflate(R.layout.card_generic, viewGroup, false);
+        View itemView = LayoutInflater.from(context).inflate(R.layout.card_item, viewGroup, false);
         return new StudentsViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull StudentsViewHolder studentsViewHolder, int i) {
-        Student student = students.get(i);
+    public void onBindViewHolder(@NonNull final StudentsViewHolder studentsViewHolder, int i) {
+        final Student student = students.get(i);
         studentsViewHolder.getNameTextView().setText(student.getName());
-        studentsViewHolder.getTypeTextView().setText(student.getEmail());
-        studentsViewHolder.getInfoTextView().setText(student.getId());
+        studentsViewHolder.getInfoTextView().setText(student.getEmail());
+        studentsViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context,"TESTANDO : "+studentsViewHolder.getAdapterPosition(),Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     @Override

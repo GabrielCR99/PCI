@@ -19,18 +19,20 @@ public class AbstractDAO<T extends Serializable> implements GenericDAO<T>{
     private T t;
     private List<T> tList;
     private DatabaseReference db;
+    private String reference;
     private Class<T> currentClass;
 
     public AbstractDAO(String tableReference){
         ParameterizedType parameterizedType = (ParameterizedType) getClass().getGenericSuperclass();
         this.currentClass = (Class<T>) parameterizedType.getActualTypeArguments()[0];
         tList = new ArrayList<>();
-        db = FirebaseDatabase.getInstance().getReference(tableReference);
+        db = FirebaseDatabase.getInstance().getReference();
+        reference = tableReference;
     }
 
     @Override
     public T findById(String id) {
-        db.child(id).addValueEventListener(new ValueEventListener() {
+        db.child(reference).child(id).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 t = dataSnapshot.getValue(currentClass);
@@ -47,7 +49,7 @@ public class AbstractDAO<T extends Serializable> implements GenericDAO<T>{
     public List<T> findAll() {
         Log.v("STUDENTS_FIREBASE","findAll : "+db.getRef());
         Log.v("STUDENTS_FIREBASE","Current Class : "+currentClass);
-        db.addValueEventListener(new ValueEventListener() {
+        db.child(reference).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 tList.clear();
@@ -67,17 +69,17 @@ public class AbstractDAO<T extends Serializable> implements GenericDAO<T>{
 
     @Override
     public void create(String id,T entity) {
-        db.child(id).setValue(entity);
+        db.child(reference).child(id).setValue(entity);
     }
 
     @Override
     public void update(String id,T entity) {
-        db.child(id).setValue(entity);
+        db.child(reference).child(id).setValue(entity);
     }
 
     @Override
     public void delete(String id) {
-        db.child(id).removeValue();
+        db.child(reference).child(id).removeValue();
     }
 
     @Override

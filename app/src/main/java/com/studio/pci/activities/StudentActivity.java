@@ -1,5 +1,6 @@
 package com.studio.pci.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -56,9 +57,9 @@ public class StudentActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         databaseReference = FirebaseDatabase.getInstance().getReference("students");
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        userID = user.getUid();
-
+        //FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        Intent intent = getIntent();
+        userID = intent.getStringExtra("UID");
         getInfo();
     }
 
@@ -68,7 +69,6 @@ public class StudentActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
                     Student student = dataSnapshot.getValue(Student.class);
-                    Log.v("USER_FIREBASE_UID", student.getId());
                     if(!student.getName().isEmpty()) name.setText(student.getName());
                     else name.setText(getString(R.string.null_info));
 

@@ -1,16 +1,12 @@
 package com.studio.pci.activities;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.AttributeSet;
 import android.util.Log;
-import android.view.View;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -48,8 +44,6 @@ public class ViewStudentsActivity extends AppCompatActivity {
     private void getRecyclerView() {
         RecyclerView.LayoutManager layout = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layout);
-        recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-
         adapter = new StudentsAdapter(students,this);
         recyclerView.setAdapter(adapter);
     }
@@ -64,6 +58,7 @@ public class ViewStudentsActivity extends AppCompatActivity {
                 for(DataSnapshot ds : dataSnapshot.getChildren()){
                     Student student = ds.getValue(Student.class);
                     students.add(student);
+                    adapter.notifyDataSetChanged();
                     Log.v("STUDENTS_FIREBASE",student.toString());
                 }
             }

@@ -129,6 +129,7 @@ public class SignInActivity extends BaseActivity {
                     intent.putExtra("USERNAME",professor.getName());
                 }
                 intent.putExtra("USERTYPE",type);
+                intent.putExtra("USERID",firebaseUser.getUid());
                 startActivity(intent);
             }
             @Override

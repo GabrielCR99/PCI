@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:textColorHint="@color/colorWhite"
-            android:layout_marginTop="150dp">
+            android:layout_marginTop="90dp">
 
             <EditText
                 android:id="@+id/email_field"
@@ -36,7 +36,6 @@
                 android:textColorHighlight="@color/colorWhite"
                 android:shadowColor="@color/colorWhite"
                 android:textColorLink="@color/colorWhite"/>
-
 
         </android.support.design.widget.TextInputLayout>
 
@@ -73,9 +72,7 @@
             android:textAlignment="textEnd"
             android:layout_gravity="end"/>
 
-
     </LinearLayout>
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -96,7 +93,7 @@
             android:id="@+id/go_to_sign_up_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="128dp"
+            android:layout_marginBottom="80dp"
             android:text="@string/no_account"
             android:textColor="@color/colorWhite"
             android:textStyle="bold"
@@ -113,7 +110,7 @@
         <TextView
             android:id="@+id/privacy"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:text="@string/policy_privacy"
             android:textColor="@color/colorWhite"
             android:textSize="14sp"
