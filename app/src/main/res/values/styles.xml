@@ -21,4 +21,32 @@
         <item name="android:windowFullscreen">true</item>
     </style>
 
+    <style name="textContentWhite">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">14sp</item>
+
+    </style>
+
+    <style name="textContentBlack">
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textAppearance">@style/Base.TextAppearance.AppCompat.Large</item>
+
+    </style>
+
+    <style name="buttonPattern">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:background">@color/buttonColor</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="inputLayout" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="boxBackgroundColor">#00000000</item>
+        <item name="android:textColorHint">@color/colorWhite</item>
+    </style>
+
 </resources>
