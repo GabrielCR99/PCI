@@ -9,7 +9,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme.NoActionBar"
+        android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
             android:name="com.studio.pci.activities.SplashActivity"
@@ -19,13 +19,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.studio.pci.activities.SignInActivity" />
-        <activity android:name="com.studio.pci.activities.MainActivity" />
-        <activity android:name="com.studio.pci.activities.ResetPasswordActivity" />
-        <activity android:name="com.studio.pci.activities.SignUpActivity" />
-        <activity android:name=".activities.ProfessorActivity" />
-        <activity android:name=".activities.StudentActivity" />
-        <activity android:name=".activities.ViewStudentsActivity" />
+        <activity android:name="com.studio.pci.activities.SignInActivity" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name="com.studio.pci.activities.SignUpActivity" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name="com.studio.pci.activities.ResetPasswordActivity" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name="com.studio.pci.activities.MainActivity" android:label="Home"/>
+        <activity android:name=".activities.ProfessorActivity" android:label="Professor" android:parentActivityName=".activities.MainActivity"/>
+        <activity android:name=".activities.StudentActivity" android:label="Student" />
+        <activity android:name=".activities.ViewStudentsActivity" android:label="Students"/>
     </application>
 
 </manifest>
