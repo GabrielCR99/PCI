@@ -1,4 +1,4 @@
-﻿package com.studio.pci.activities;
+package com.studio.pci.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,7 +15,6 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.studio.pci.R;
 import com.studio.pci.models.Professor;
 import com.studio.pci.models.Student;
@@ -115,48 +114,47 @@ public class SignUpActivity extends BaseActivity {
                 confirmPasswordField.getText().toString())) {
             return;
         }
-
         showProgressDialog();
         firebaseAuth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-                    String id = firebaseUser.getUid();
-                    String type = spinner.getSelectedItem().toString();
-                    User user = new User(id,type);
-                    UserDAO userDAO = new UserDAO();
-                    userDAO.create(id,user);
-		    hideProgressDialog();
-                    Toast.makeText(getApplicationContext(), "Conta criada com sucesso!", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(getApplicationContext(), SignInActivity.class));
-                    if(type.equals(getString(R.string.student))){
-                        Student student = new Student(id,nameField.getText().toString(),emailField.getText().toString(),true);
-                        StudentDAO studentDAO = new StudentDAO();
-                        studentDAO.create(id,student);
-                    }else{
-                        Professor professor = new Professor(id,nameField.getText().toString(),emailField.getText().toString(),true);
-                        ProfessorDAO professorDAO = new ProfessorDAO();
-                        professorDAO.create(id,professor);
+                    if (task.isSuccessful()) {
+                        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+                        String id = firebaseUser.getUid();
+                        String type = spinner.getSelectedItem().toString();
+                        User user = new User(id, type);
+                        UserDAO userDAO = new UserDAO();
+                        userDAO.create(id, user);
+                        hideProgressDialog();
+                        Toast.makeText(getApplicationContext(), "Conta criada com sucesso!", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(getApplicationContext(), SignInActivity.class));
+                        if (type.equals(getString(R.string.student))) {
+                            Student student = new Student(id, nameField.getText().toString(), emailField.getText().toString(), true);
+                            StudentDAO studentDAO = new StudentDAO();
+                            studentDAO.create(id, student);
+                        } else {
+                            Professor professor = new Professor(id, nameField.getText().toString(), emailField.getText().toString(), true);
+                            ProfessorDAO professorDAO = new ProfessorDAO();
+                            professorDAO.create(id, professor);
+                        }
+                        hideProgressDialog();
+                    } else {
+                        showToast(getString(R.string.auth_failed));
+                        hideProgressDialog();
                     }
-                    hideProgressDialog();
-                } else {
-                    showToast(getString(R.string.auth_failed));
-                    hideProgressDialog();
                 }
-                }
-            });
+            });}
 
-    @OnClick(R.id.sign_up_button)
-    public void signInOnClick(View view) {
-        String email = emailField.getText().toString();
-        String password = passwordField.getText().toString();
-        createAccount(email, password);
-    }
+        @OnClick(R.id.sign_up_button)
+        public void signInOnClick (View view){
+            String email = emailField.getText().toString();
+            String password = passwordField.getText().toString();
+            createAccount(email, password);
+        }
 
-    @OnClick(R.id.sign_in_text)
-    public void goToSignIn(View view) {
-        finish();
-    }
+        @OnClick(R.id.sign_in_text)
+        public void goToSignIn (View view){
+            finish();
+        }
 }
