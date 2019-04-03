@@ -34,13 +34,16 @@ public class StudentsAdapter extends RecyclerView.Adapter<StudentsViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final StudentsViewHolder studentsViewHolder, int i) {
+    public void onBindViewHolder(@NonNull final StudentsViewHolder studentsViewHolder, final int i) {
         final Student student = students.get(i);
         studentsViewHolder.getNameTextView().setText(student.getName());
         studentsViewHolder.getInfoTextView().setText(student.getEmail());
         studentsViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(context,StudentActivity.class);
+                intent.putExtra("UID",student.getId());
+                context.startActivity(intent);
                 Toast.makeText(context,"TESTANDO : "+studentsViewHolder.getAdapterPosition(),Toast.LENGTH_LONG).show();
             }
         });
