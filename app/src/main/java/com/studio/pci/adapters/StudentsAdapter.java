@@ -29,7 +29,7 @@ public class StudentsAdapter extends RecyclerView.Adapter<StudentsViewHolder> {
     @NonNull
     @Override
     public StudentsViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View itemView = LayoutInflater.from(context).inflate(R.layout.card_item, viewGroup, false);
+        View itemView = LayoutInflater.from(context).inflate(R.layout.card_student, viewGroup, false);
         return new StudentsViewHolder(itemView);
     }
 
@@ -44,7 +44,6 @@ public class StudentsAdapter extends RecyclerView.Adapter<StudentsViewHolder> {
                 Intent intent = new Intent(context,StudentActivity.class);
                 intent.putExtra("UID",student.getId());
                 context.startActivity(intent);
-                Toast.makeText(context,"TESTANDO : "+studentsViewHolder.getAdapterPosition(),Toast.LENGTH_LONG).show();
             }
         });
     }

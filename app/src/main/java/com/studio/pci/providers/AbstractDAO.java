@@ -14,57 +14,14 @@ import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AbstractDAO<T extends Serializable> implements GenericDAO<T>{
+public abstract class AbstractDAO<T extends Serializable> implements GenericDAO<T>{
 
-    private T t;
-    private List<T> tList;
     private DatabaseReference db;
     private String reference;
-    private Class<T> currentClass;
 
     public AbstractDAO(String tableReference){
-        ParameterizedType parameterizedType = (ParameterizedType) getClass().getGenericSuperclass();
-        this.currentClass = (Class<T>) parameterizedType.getActualTypeArguments()[0];
-        tList = new ArrayList<>();
         db = FirebaseDatabase.getInstance().getReference();
         reference = tableReference;
-    }
-
-    @Override
-    public T findById(String id) {
-        db.child(reference).child(id).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                t = dataSnapshot.getValue(currentClass);
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.v("RetrieveData: "+currentClass.toString(),databaseError.getMessage());
-            }
-        });
-        return t;
-    }
-
-    @Override
-    public List<T> findAll() {
-        Log.v("STUDENTS_FIREBASE","findAll : "+db.getRef());
-        Log.v("STUDENTS_FIREBASE","Current Class : "+currentClass);
-        db.child(reference).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                tList.clear();
-                Log.v("STUDENTS_FIREBASE","onDataChange");
-                for(DataSnapshot ds : dataSnapshot.getChildren()){
-                    t = ds.getValue(currentClass);
-                    tList.add(t);
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.v("RetrieveData: "+currentClass.toString(),databaseError.getMessage());
-            }
-        });
-        return tList;
     }
 
     @Override

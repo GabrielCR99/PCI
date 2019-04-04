@@ -8,6 +8,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -50,16 +52,18 @@ public class ViewStudentsActivity extends AppCompatActivity {
 
     private void getStudents() {
         students = new ArrayList<>();
+        final String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DatabaseReference db = FirebaseDatabase.getInstance().getReference("students");
         db.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 students.clear();
                 for(DataSnapshot ds : dataSnapshot.getChildren()){
-                    Student student = ds.getValue(Student.class);
-                    students.add(student);
-                    adapter.notifyDataSetChanged();
-                    Log.v("STUDENTS_FIREBASE",student.toString());
+                    if(!userID.equals(ds.getValue(Student.class).getId())){
+                        Student student = ds.getValue(Student.class);
+                        students.add(student);
+                        adapter.notifyDataSetChanged();
+                    }
                 }
             }
             @Override
