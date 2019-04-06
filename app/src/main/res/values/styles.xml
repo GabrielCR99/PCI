@@ -23,4 +23,9 @@
         <item name="android:windowFullscreen">true</item>
     </style>
 
+    <style name="AppCompatProgressBarStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/colorBlack</item>
+        <item name="android:textColorPrimary">@color/colorBlack</item>
+    </style>
+
 </resources>

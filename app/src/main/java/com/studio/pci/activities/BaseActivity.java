@@ -6,8 +6,6 @@ import android.support.annotation.VisibleForTesting;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.studio.pci.R;
@@ -19,7 +17,7 @@ public class BaseActivity extends AppCompatActivity {
 
     protected void showProgressDialog() {
         if (mProgressDialog == null) {
-            mProgressDialog = new ProgressDialog(this);
+            mProgressDialog = new ProgressDialog(this,R.style.AppCompatProgressBarStyle);
             mProgressDialog.setTitle(getString(R.string.wait));
             mProgressDialog.setMessage(getString(R.string.loading));
             mProgressDialog.setIndeterminate(true);

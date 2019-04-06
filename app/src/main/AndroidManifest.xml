@@ -27,6 +27,7 @@
         <activity android:name=".activities.StudentActivity" android:label="Student" />
         <activity android:name=".activities.ViewStudentsActivity" android:label="Students"/>
         <activity android:name=".activities.EditStudentActivity" android:label="Edit Student"/>
+        <activity android:name=".activities.BaseActivity" />
     </application>
 
 </manifest>
