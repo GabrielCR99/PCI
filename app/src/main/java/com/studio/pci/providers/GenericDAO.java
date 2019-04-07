@@ -5,10 +5,6 @@ import java.util.List;
 
 public interface GenericDAO<T extends Serializable> {
 
-    T findById(String id);
-
-    List<T> findAll();
-
     void create(String id,T entity);
 
     void update(String id,T entity);

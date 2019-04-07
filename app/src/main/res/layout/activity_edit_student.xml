@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200sp"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:background="@drawable/splash_color">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:id="@+id/student_photo"
+            android:src="@mipmap/ic_launcher_round"/>
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20sp"
+            android:orientation="vertical">
+
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/nameInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:textColorHint="@color/colorBlack">
+
+                <EditText
+                    android:id="@+id/student_name_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorBlack"
+                    android:hint="@string/complete_name"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/colorBlack"
+                    android:textColorHighlight="@color/colorBlack"
+                    android:shadowColor="@color/colorBlack"
+                    android:textColorLink="@color/colorBlack"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/gender"
+                android:textColor="@color/colorBlack"
+                android:textSize="18sp"/>
+
+            <Spinner
+                android:id="@+id/spinner_student_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/array_gender"
+                android:foregroundTint="@color/colorBlack"
+                android:backgroundTint="@color/colorWhite"
+                android:popupBackground="@color/colorWhite"
+                android:layout_marginBottom="16dp"/>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/birthDateInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:textColorHint="@color/colorBlack">
+
+                <EditText
+                    android:id="@+id/student_birthDate_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorBlack"
+                    android:hint="@string/birthDate"
+                    android:inputType="date"
+                    android:textColor="@color/colorBlack"
+                    android:textColorHighlight="@color/colorBlack"
+                    android:shadowColor="@color/colorBlack"
+                    android:textColorLink="@color/colorBlack"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/faceInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:textColorHint="@color/colorBlack">
+
+                <EditText
+                    android:id="@+id/student_face_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorBlack"
+                    android:hint="@string/facebook"
+                    android:inputType="textUri"
+                    android:textColor="@color/colorBlack"
+                    android:textColorHighlight="@color/colorBlack"
+                    android:shadowColor="@color/colorBlack"
+                    android:textColorLink="@color/colorBlack"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/skypeInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:textColorHint="@color/colorBlack">
+
+                <EditText
+                    android:id="@+id/student_skype_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorBlack"
+                    android:hint="@string/skype"
+                    android:inputType="textUri"
+                    android:textColor="@color/colorBlack"
+                    android:textColorHighlight="@color/colorBlack"
+                    android:shadowColor="@color/colorBlack"
+                    android:textColorLink="@color/colorBlack"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/student_edit_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#2C3E50"
+                    android:text="@string/save"
+                    android:textColor="@color/colorWhite"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="25sp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

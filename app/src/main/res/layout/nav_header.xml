@@ -2,19 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/nav_header"
     android:layout_width="match_parent"
-    android:layout_height="180dp"
+    android:layout_height="90dp"
     android:background="@drawable/splash_color"
     android:gravity="bottom"
     android:orientation="vertical"
     android:padding="16dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
-
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/nav_header_imageView"
-        android:layout_width="110sp"
-        android:layout_height="110sp"
-        android:src="@drawable/ic_account_circle_black_24dp"
-        android:layout_gravity="center"/>
 
     <TextView
         android:layout_width="match_parent"

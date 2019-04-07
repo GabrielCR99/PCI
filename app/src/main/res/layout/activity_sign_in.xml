@@ -21,7 +21,8 @@
             style="@style/inputLayout"
             android:layout_marginTop="150dp"
             android:layout_marginBottom="16dp"
-            android:textColorHint="@color/colorWhite">
+            android:textColorHint="@color/colorWhite"
+            android:layout_marginTop="90dp">
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/email_field"
@@ -30,7 +31,6 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/email"
                 android:inputType="textEmailAddress" />
-
 
         </android.support.design.widget.TextInputLayout>
 
@@ -62,9 +62,7 @@
             android:text="@string/password_forgot"
             android:textAlignment="textEnd" />
 
-
     </LinearLayout>
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -84,9 +82,13 @@
             style="@style/textContentWhite"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_marginBottom="100dp"
-            android:text="@string/no_account" />
+            android:layout_marginBottom="80dp"
+            android:text="@string/no_account"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            tools:text="@string/sign_up_id"
+            android:layout_marginTop="16dp"
+            android:textAlignment="center"/>
 
     </LinearLayout>
 

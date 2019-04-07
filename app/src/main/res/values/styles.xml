@@ -6,6 +6,8 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowTranslucentStatus">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -47,6 +49,11 @@
         <item name="android:layout_width">match_parent</item>
         <item name="boxBackgroundColor">#00000000</item>
         <item name="android:textColorHint">@color/colorWhite</item>
+    </style>
+
+    <style name="AppCompatProgressBarStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/colorBlack</item>
+        <item name="android:textColorPrimary">@color/colorBlack</item>
     </style>
 
 </resources>
