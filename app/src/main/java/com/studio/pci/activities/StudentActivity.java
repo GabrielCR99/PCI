@@ -28,13 +28,12 @@ import com.studio.pci.models.Student;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class StudentActivity extends AppCompatActivity {
-
-    private DatabaseReference databaseReference;
-    private String userID;
 
     @BindView(R.id.student_name)
     TextView name;
@@ -57,6 +56,11 @@ public class StudentActivity extends AppCompatActivity {
     @BindView(R.id.student_layout_button)
     LinearLayout linearLayout;
 
+    private ArrayList<String> info;
+    private FirebaseUser currentUser;
+    private DatabaseReference databaseReference;
+    private String userID;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,10 +68,11 @@ public class StudentActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         databaseReference = FirebaseDatabase.getInstance().getReference("students");
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
         Intent intent = getIntent();
         userID = intent.getStringExtra("UID");
+
         getInfo();
 
         if(currentUser.getUid().equals(userID)){
@@ -81,7 +86,7 @@ public class StudentActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(StudentActivity.this,EditStudentActivity.class);
-                intent.putExtra("UID",userID);
+                intent.putExtra("STUDENT_INFO",info);
                 startActivity(intent);
             }
         });
@@ -95,7 +100,7 @@ public class StudentActivity extends AppCompatActivity {
     }
 
     private void getInfo() {
-        databaseReference.child(userID).addValueEventListener(new ValueEventListener() {
+        databaseReference.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
@@ -117,6 +122,9 @@ public class StudentActivity extends AppCompatActivity {
 
                     if(!student.getSkypeUrl().isEmpty()) skype.setText(student.getSkypeUrl());
                     else skype.setText(getString(R.string.null_info));
+
+                    info = student.toArray();
+                    databaseReference.removeEventListener(this);
                 }
             }
             @Override

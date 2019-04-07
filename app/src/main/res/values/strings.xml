@@ -49,5 +49,7 @@
         <item> Feminino</item>
         <item> Outro</item>
     </string-array>
-
+    <string name="male">Masculino</string>
+    <string name="female">Feminino</string>
+    <string name="other">Outro</string>
 </resources>

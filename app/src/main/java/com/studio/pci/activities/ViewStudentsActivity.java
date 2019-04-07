@@ -30,6 +30,7 @@ public class ViewStudentsActivity extends AppCompatActivity {
 
     private List<Student> students;
     private StudentsAdapter adapter;
+    private DatabaseReference db;
 
     @BindView(R.id.recycler_students)
     RecyclerView recyclerView;
@@ -52,19 +53,21 @@ public class ViewStudentsActivity extends AppCompatActivity {
 
     private void getStudents() {
         students = new ArrayList<>();
+        db = FirebaseDatabase.getInstance().getReference("students");
         final String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        DatabaseReference db = FirebaseDatabase.getInstance().getReference("students");
         db.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 students.clear();
                 for(DataSnapshot ds : dataSnapshot.getChildren()){
-                    if(!userID.equals(ds.getValue(Student.class).getId())){
+                    if(!userID.equals(ds.getValue(Student.class).getId()) && ds.getValue(Student.class).isEnable()){
                         Student student = ds.getValue(Student.class);
                         students.add(student);
                         adapter.notifyDataSetChanged();
                     }
                 }
+                // TODO Remove EventListener so the activity cannot close when DataChange
+                db.removeEventListener(this);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {

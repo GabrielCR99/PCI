@@ -62,7 +62,7 @@
                 android:textSize="18sp"/>
 
             <Spinner
-                android:id="@+id/spinner_sign_up"
+                android:id="@+id/spinner_student_edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:entries="@array/array_gender"
@@ -85,27 +85,6 @@
                     android:backgroundTint="@color/colorBlack"
                     android:hint="@string/birthDate"
                     android:inputType="date"
-                    android:textColor="@color/colorBlack"
-                    android:textColorHighlight="@color/colorBlack"
-                    android:shadowColor="@color/colorBlack"
-                    android:textColorLink="@color/colorBlack"/>
-
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/emailInputLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:textColorHint="@color/colorBlack">
-
-                <EditText
-                    android:id="@+id/student_email_edit"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/colorBlack"
-                    android:hint="@string/email"
-                    android:inputType="textEmailAddress"
                     android:textColor="@color/colorBlack"
                     android:textColorHighlight="@color/colorBlack"
                     android:shadowColor="@color/colorBlack"
@@ -161,12 +140,12 @@
                 android:orientation="vertical">
 
                 <Button
-                    android:id="@+id/professor_edit"
+                    android:id="@+id/student_edit_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#2C3E50"
                     android:text="@string/save"
-                    android:textColor="#FFFF"
+                    android:textColor="@color/colorWhite"
                     android:textStyle="bold"
                     android:layout_marginBottom="25sp"/>
 
