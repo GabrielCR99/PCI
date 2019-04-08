@@ -91,5 +91,9 @@ public class EditStudentActivity extends AppCompatActivity {
         String skype = skypeEditText.getText().toString();
         Student student = new Student(info.get(0),name,gender,birthDate,info.get(4),info.get(5),facebook,skype,true);
         studentDAO.update(student.getId(),student);
+        Intent intent = new Intent(EditStudentActivity.this,StudentActivity.class);
+        intent.putExtra("UID",student.getId());
+        startActivity(intent);
+        finish();
     }
 }

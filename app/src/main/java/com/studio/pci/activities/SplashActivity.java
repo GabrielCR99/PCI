@@ -50,7 +50,7 @@ public class SplashActivity extends BaseActivity implements Runnable {
 
     private void startMain() {
         DatabaseReference db = FirebaseDatabase.getInstance().getReference();
-        db.addValueEventListener(new ValueEventListener() {
+        db.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.child("users").child(currentUser.getUid()).getValue(User.class);
