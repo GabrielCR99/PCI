@@ -1,5 +1,7 @@
 # International Collaborative Project (Android Application)
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/9dafa54db8b74ad787fca488a9304071)](https://app.codacy.com/app/kleberandrade/PCI?utm_source=github.com&utm_medium=referral&utm_content=GabrielCR99/PCI&utm_campaign=Badge_Grade_Dashboard)
+
 The students of Fatec Americana, Gabriel Roveri and Paulo Vinicius Pachiani de Mello, under the guidance of Professor Kléber Andrade, are developing a management application for an international project, given by Professor Osvaldo Succi.
 Frequent changes will occur throughout the project, as it is still in the testing phase.
 
