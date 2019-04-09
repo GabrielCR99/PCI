@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.studio.pci.R;
 import com.studio.pci.activities.StudentActivity;
@@ -29,7 +28,7 @@ public class StudentsAdapter extends RecyclerView.Adapter<StudentsViewHolder> {
     @NonNull
     @Override
     public StudentsViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View itemView = LayoutInflater.from(context).inflate(R.layout.card_student, viewGroup, false);
+        View itemView = LayoutInflater.from(context).inflate(R.layout.card_user, viewGroup, false);
         return new StudentsViewHolder(itemView);
     }
 

@@ -31,9 +31,11 @@
     <string name="close_drawer">Close</string>
     <string name="birthDate">Data de Nascimento</string>
     <string name="edit">Editar</string>
+    <string name="edit_profile">Editar Perfil</string>
     <string name="facebook">Facebook</string>
     <string name="skype">Skype</string>
     <string name="student">Estudante</string>
+    <string name="students">Estudantes</string>
     <string name="professor">Professor</string>
     <string name="gender">Gênero</string>
     <string name="null_info">Não informado</string>
@@ -52,4 +54,6 @@
     <string name="male">Masculino</string>
     <string name="female">Feminino</string>
     <string name="other">Outro</string>
+    <string name="reset_passwd">Reset Password</string>
+    <string name="home">Principal</string>
 </resources>

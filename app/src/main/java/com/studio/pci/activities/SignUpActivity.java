@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -14,7 +15,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
 import com.studio.pci.R;
 import com.studio.pci.models.Professor;
 import com.studio.pci.models.Student;
@@ -31,7 +31,6 @@ import butterknife.OnClick;
 public class SignUpActivity extends BaseActivity {
 
     private FirebaseAuth firebaseAuth;
-    private DatabaseReference db;
 
     @BindView(R.id.name)
     EditText nameField;

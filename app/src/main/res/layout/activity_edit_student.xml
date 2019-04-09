@@ -5,9 +5,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200sp"
+        android:layout_height="160sp"
         android:orientation="vertical"
         android:layout_gravity="center"
         android:background="@drawable/splash_color">
@@ -16,7 +20,7 @@
             android:layout_width="128dp"
             android:layout_height="128dp"
             android:layout_gravity="center"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="28dp"
             android:id="@+id/student_photo"
             android:src="@mipmap/ic_launcher_round"/>
 
@@ -44,13 +48,9 @@
                     android:id="@+id/student_name_edit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/colorBlack"
                     android:hint="@string/complete_name"
                     android:inputType="textPersonName"
-                    android:textColor="@color/colorBlack"
-                    android:textColorHighlight="@color/colorBlack"
-                    android:shadowColor="@color/colorBlack"
-                    android:textColorLink="@color/colorBlack"/>
+                    style="@style/editTextStyle"/>
 
             </android.support.design.widget.TextInputLayout>
 
@@ -67,8 +67,8 @@
                 android:layout_height="wrap_content"
                 android:entries="@array/array_gender"
                 android:foregroundTint="@color/colorBlack"
-                android:backgroundTint="@color/colorWhite"
-                android:popupBackground="@color/colorWhite"
+                android:backgroundTint="@color/colorAccent"
+                android:popupBackground="@color/colorAccent"
                 android:layout_marginBottom="16dp"/>
 
             <android.support.design.widget.TextInputLayout
@@ -82,13 +82,9 @@
                     android:id="@+id/student_birthDate_edit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/colorBlack"
                     android:hint="@string/birthDate"
                     android:inputType="date"
-                    android:textColor="@color/colorBlack"
-                    android:textColorHighlight="@color/colorBlack"
-                    android:shadowColor="@color/colorBlack"
-                    android:textColorLink="@color/colorBlack"/>
+                    style="@style/editTextStyle"/>
 
             </android.support.design.widget.TextInputLayout>
 
@@ -103,13 +99,9 @@
                     android:id="@+id/student_face_edit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/colorBlack"
                     android:hint="@string/facebook"
                     android:inputType="textUri"
-                    android:textColor="@color/colorBlack"
-                    android:textColorHighlight="@color/colorBlack"
-                    android:shadowColor="@color/colorBlack"
-                    android:textColorLink="@color/colorBlack"/>
+                    style="@style/editTextStyle"/>
 
             </android.support.design.widget.TextInputLayout>
 
@@ -124,19 +116,15 @@
                     android:id="@+id/student_skype_edit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/colorBlack"
                     android:hint="@string/skype"
                     android:inputType="textUri"
-                    android:textColor="@color/colorBlack"
-                    android:textColorHighlight="@color/colorBlack"
-                    android:shadowColor="@color/colorBlack"
-                    android:textColorLink="@color/colorBlack"/>
+                    style="@style/editTextStyle"/>
 
             </android.support.design.widget.TextInputLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="270dp"
                 android:orientation="vertical">
 
                 <Button
@@ -145,7 +133,7 @@
                     android:layout_height="wrap_content"
                     android:background="#2C3E50"
                     android:text="@string/save"
-                    android:textColor="@color/colorWhite"
+                    android:textColor="@color/colorAccent"
                     android:textStyle="bold"
                     android:layout_marginBottom="25sp"/>
 
