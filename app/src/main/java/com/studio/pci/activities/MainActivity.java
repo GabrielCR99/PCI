@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     NavigationView navigationView;
 
     private int type;
+    private String uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +68,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Intent intent = getIntent();
         type = intent.getIntExtra("USERTYPE",0);
         String name = intent.getStringExtra("USERNAME");
+        uid = intent.getStringExtra("USERID");
 
         setNavInfo(name,type);
     }
@@ -77,7 +79,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         TextView typeTextView = header.findViewById(R.id.nav_type);
         nameTextView.setText(name);
         if(type==1) typeTextView.setText(getString(R.string.student));
-        else typeTextView.setText(getString(R.string.professor));
+        else if(type==2) typeTextView.setText(getString(R.string.professor));
+        else typeTextView.setText("NULL USER");
     }
 
     @Override
@@ -99,25 +102,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.menu_project:
                 Intent intent = new Intent(this, FragmentActivity.class);
                 startActivity(intent);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 break;
 
             case R.id.menu_logout:
                 FirebaseAuth.getInstance().signOut();
+                Intent intent1 = new Intent(this, SignInActivity.class);
+                intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent1);
                 finish();
-                startActivity(new Intent(this, SignInActivity.class));
                 break;
             case R.id.menu_students:
                 startActivity(new Intent(this, ViewStudentsActivity.class));
                 break;
             case R.id.menu_profile:
+                Intent iProfile;
                 switch (type){
                     case 1:
-                        startActivity(new Intent(MainActivity.this,StudentActivity.class));
+                        iProfile = new Intent(MainActivity.this,StudentActivity.class);
+                        iProfile.putExtra("UID",uid);
+                        startActivity(iProfile);
                         break;
                     case 2:
-                        startActivity(new Intent(MainActivity.this,ProfessorActivity.class));
+                        iProfile = new Intent(MainActivity.this,Professor.class);
+                        iProfile.putExtra("UID",uid);
+                        startActivity(iProfile);
                         break;
                     default:
                         AlertDialog.Builder builder = new AlertDialog.Builder(this);

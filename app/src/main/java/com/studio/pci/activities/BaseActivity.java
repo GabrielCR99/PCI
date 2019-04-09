@@ -17,11 +17,11 @@ public class BaseActivity extends AppCompatActivity {
 
     protected void showProgressDialog() {
         if (mProgressDialog == null) {
-            mProgressDialog = new ProgressDialog(this);
+            mProgressDialog = new ProgressDialog(this,R.style.AppCompatProgressBarStyle);
+            mProgressDialog.setTitle(getString(R.string.wait));
             mProgressDialog.setMessage(getString(R.string.loading));
             mProgressDialog.setIndeterminate(true);
         }
-
         mProgressDialog.show();
     }
 

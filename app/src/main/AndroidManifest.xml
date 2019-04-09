@@ -26,8 +26,10 @@
         <activity android:name="com.studio.pci.activities.ResetPasswordActivity" android:theme="@style/AppTheme.NoActionBar" android:parentActivityName=".activities.SignInActivity"/>
         <activity android:name="com.studio.pci.activities.MainActivity" android:label="Home"/>
         <activity android:name=".activities.ProfessorActivity" android:label="Professor" android:parentActivityName=".activities.MainActivity"/>
-        <activity android:name=".activities.StudentActivity" android:label="Student" />
-        <activity android:name=".activities.ViewStudentsActivity" android:label="Students"/>
+        <activity android:name=".activities.StudentActivity" android:label="Student" android:parentActivityName=".activities.MainActivity"/>
+        <activity android:name=".activities.ViewStudentsActivity" android:label="Students" android:parentActivityName=".activities.MainActivity"/>
+        <activity android:name=".activities.EditStudentActivity" android:label="Edit Student" android:parentActivityName=".activities.StudentActivity"/>
+        <activity android:name=".activities.BaseActivity" />
     </application>
 
 </manifest>

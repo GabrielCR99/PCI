@@ -17,7 +17,8 @@
     <string name="error_email_invalid">Entre com um email válido</string>
     <string name="error_password_invalid">A senha deve conter pelo menos 6 caracteres</string>
     <string name="error_password_empty">Senha obrigatória</string>
-    <string name="loading">Carregando...</string>
+    <string name="loading">Carregando dados…</string>
+    <string name="wait">Aguarde</string>
     <string name="auth_failed">Autenticação inválida</string>
     <string name="error_password_different"> Senha diferente</string>
     <string name="error_name_empty"> Nome obrigatório</string>
@@ -26,7 +27,6 @@
     <string name="reset_password_tv">Para a recuperação de sua senha, favor preencher o campo com o E-mail. Enviaremos sua senha através deste.</string>
     <string name="reset_password_send">Enviar</string>
     <string name="choose_type">Eu sou</string>
-    <string name="date">Data de nascimento</string>
     <string name="open_drawer">Open</string>
     <string name="close_drawer">Close</string>
     <string name="birthDate">Data de Nascimento</string>
@@ -38,6 +38,8 @@
     <string name="gender">Gênero</string>
     <string name="null_info">Não informado</string>
     <string name="degree">Degree</string>
+    <string name="view">Visualizar</string>
+    <string name="save">Salvar</string>
     <string-array name="array_spinner">
         <item>Estudante</item>
         <item>Professor</item>
@@ -46,7 +48,8 @@
         <item> Masculino</item>
         <item> Feminino</item>
         <item> Outro</item>
-
     </string-array>
-
+    <string name="male">Masculino</string>
+    <string name="female">Feminino</string>
+    <string name="other">Outro</string>
 </resources>

@@ -114,7 +114,7 @@ public class SignInActivity extends BaseActivity {
     private void startMain() {
         firebaseUser = auth.getCurrentUser();
         DatabaseReference db = FirebaseDatabase.getInstance().getReference();
-        db.addValueEventListener(new ValueEventListener() {
+        db.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.child("users").child(firebaseUser.getUid()).getValue(User.class);
@@ -129,6 +129,7 @@ public class SignInActivity extends BaseActivity {
                     intent.putExtra("USERNAME",professor.getName());
                 }
                 intent.putExtra("USERTYPE",type);
+                intent.putExtra("USERID",firebaseUser.getUid());
                 startActivity(intent);
             }
             @Override
