@@ -56,4 +56,5 @@
     <string name="other">Outro</string>
     <string name="reset_passwd">Reset Password</string>
     <string name="home">Principal</string>
+    <string name="date_formatter">dd/MM/yyyy</string>
 </resources>

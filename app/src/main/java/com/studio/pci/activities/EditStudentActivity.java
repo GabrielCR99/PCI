@@ -13,9 +13,12 @@ import android.widget.Toast;
 import com.studio.pci.R;
 import com.studio.pci.models.Student;
 import com.studio.pci.providers.StudentDAO;
+import com.studio.pci.utils.DatePickerDialogHelper;
 import com.studio.pci.utils.FormHelper;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -62,6 +65,8 @@ public class EditStudentActivity extends AppCompatActivity {
         birthDateEditText.setText(info.get(3));
         faceEditText.setText(info.get(6));
         skypeEditText.setText(info.get(7));
+
+        DatePickerDialogHelper.setDatePickerDialog(birthDateEditText,this,new SimpleDateFormat(getString(R.string.date_formatter), new Locale("pt", "BR")));
     }
 
     private boolean validateForm(String name){
