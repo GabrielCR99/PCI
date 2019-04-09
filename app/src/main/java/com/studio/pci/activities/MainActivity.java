@@ -13,6 +13,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -75,12 +76,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void setNavInfo(String name, int type) {
         View header = navigationView.getHeaderView(0);
+        Menu menu = navigationView.getMenu();
         TextView nameTextView = header.findViewById(R.id.nav_name);
         TextView typeTextView = header.findViewById(R.id.nav_type);
         nameTextView.setText(name);
-        if(type==1) typeTextView.setText(getString(R.string.student));
-        else if(type==2) typeTextView.setText(getString(R.string.professor));
-        else typeTextView.setText("NULL USER");
+        if(type==1) {
+            typeTextView.setText(getString(R.string.student));
+            menu.getItem(2).setVisible(false);
+        }
+        else if(type==2) {
+            typeTextView.setText(getString(R.string.professor));
+            menu.getItem(3).setVisible(false);
+        }
+        else {
+            typeTextView.setText(getString(R.string.null_user));
+            header.setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override

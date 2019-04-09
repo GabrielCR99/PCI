@@ -57,4 +57,9 @@
     <string name="reset_passwd">Reset Password</string>
     <string name="home">Principal</string>
     <string name="date_formatter">dd/MM/yyyy</string>
+    <string name="null_user">Usuário Nulo</string>
+    <string name="profile">Perfil</string>
+    <string name="my_projects">Meus Projetos</string>
+    <string name="professors">Professores</string>
+    <string name="universities">Universidades</string>
 </resources>
