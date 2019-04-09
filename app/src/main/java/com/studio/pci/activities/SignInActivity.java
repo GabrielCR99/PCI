@@ -155,7 +155,6 @@ public class SignInActivity extends BaseActivity {
 
     @OnClick(R.id.password_forgot)
     public void sendPasswordResetEmail(View view) {
-
         startActivity(new Intent(SignInActivity.this, ResetPasswordActivity.class));
     }
 }

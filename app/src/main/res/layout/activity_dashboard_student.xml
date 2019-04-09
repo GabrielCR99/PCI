@@ -115,11 +115,9 @@
                     android:id="@+id/student_edit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#2C3E50"
                     android:text="@string/edit"
-                    android:textColor="#FFFF"
-                    android:textStyle="bold"
-                    android:layout_marginBottom="25sp"/>
+                    android:layout_marginBottom="25sp"
+                    style="@style/buttonPattern"/>
 
             </LinearLayout>
 

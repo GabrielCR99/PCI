@@ -46,7 +46,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">match_parent</item>
         <item name="boxBackgroundColor">#00000000</item>
-        <item name="android:textColorHint">@color/colorWhite</item>
+        <item name="android:textColorHint">@color/colorBlack</item>
     </style>
 
 </resources>

@@ -23,7 +23,7 @@
         </activity>
         <activity android:name="com.studio.pci.activities.SignInActivity" android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name="com.studio.pci.activities.SignUpActivity" android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name="com.studio.pci.activities.ResetPasswordActivity" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name="com.studio.pci.activities.ResetPasswordActivity" android:theme="@style/AppTheme.NoActionBar" android:parentActivityName=".activities.SignInActivity"/>
         <activity android:name="com.studio.pci.activities.MainActivity" android:label="Home"/>
         <activity android:name=".activities.ProfessorActivity" android:label="Professor" android:parentActivityName=".activities.MainActivity"/>
         <activity android:name=".activities.StudentActivity" android:label="Student" />
