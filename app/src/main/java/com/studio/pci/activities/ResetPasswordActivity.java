@@ -15,6 +15,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.studio.pci.R;
 
+import java.util.Objects;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -30,6 +32,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
     TextInputLayout resetPasswordInputLayout;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,35 +40,39 @@ public class ResetPasswordActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
 
-
         firebaseAuth = FirebaseAuth.getInstance();
 
     }
 
     @OnClick(R.id.send_reset_email)
-    public void sendEmailVerification(View view){
+    public void sendEmailVerification(View view) {
 
         String userEmail = resetPasswordEditText.getText().toString();
 
-        if (TextUtils.isEmpty(userEmail)){
+        if (TextUtils.isEmpty(userEmail)) {
             resetPasswordInputLayout.setError("Erro");
 
-        }
-        else {
+        } else {
             firebaseAuth.sendPasswordResetEmail(userEmail).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
-                    if (task.isSuccessful()){
+                    if (task.isSuccessful()) {
                         Toast.makeText(getApplicationContext(), "Email sent", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(ResetPasswordActivity.this, SignInActivity.class));
-                    }
-                    else {
-                        String message = task.getException().getMessage();
+                    } else {
+                        String message = Objects.requireNonNull(task.getException()).getMessage();
                         Toast.makeText(getApplicationContext(), "Error:" + message, Toast.LENGTH_SHORT).show();
                     }
                 }
             });
 
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        super.onBackPressed();
+
     }
 }

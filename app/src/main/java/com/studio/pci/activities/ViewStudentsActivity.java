@@ -9,7 +9,6 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -18,7 +17,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.studio.pci.R;
 import com.studio.pci.adapters.StudentsAdapter;
 import com.studio.pci.models.Student;
-import com.studio.pci.providers.StudentDAO;
 
 import java.util.ArrayList;
 import java.util.List;

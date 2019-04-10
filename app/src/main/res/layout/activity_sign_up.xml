@@ -99,10 +99,7 @@
                 style="@style/textContentBlack"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/colorWhite"
-                android:entries="@array/array_spinner"
-                android:foregroundTint="@color/colorWhite"
-                android:popupBackground="@color/colorWhite" />
+                android:entries="@array/array_spinner" />
 
         </LinearLayout>
 

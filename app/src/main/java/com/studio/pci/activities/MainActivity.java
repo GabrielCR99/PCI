@@ -5,8 +5,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.MenuCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
@@ -15,16 +13,11 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.studio.pci.R;
-import com.studio.pci.adapters.ViewPageAdapter;
-import com.studio.pci.fragments.ProjetosEmAndamentoFragment;
-import com.studio.pci.fragments.ProjetosFinalizadosFragment;
-import android.util.Log;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -80,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         nameTextView.setText(name);
         if(type==1) typeTextView.setText(getString(R.string.student));
         else if(type==2) typeTextView.setText(getString(R.string.professor));
-        else typeTextView.setText("NULL USER");
+        else typeTextView.setText(getString(R.string.null_user));
     }
 
     @Override

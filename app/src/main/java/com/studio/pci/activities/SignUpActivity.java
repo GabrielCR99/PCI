@@ -127,7 +127,7 @@ public class SignUpActivity extends BaseActivity {
                         UserDAO userDAO = new UserDAO();
                         userDAO.create(id, user);
                         hideProgressDialog();
-                        Toast.makeText(getApplicationContext(), "Conta criada com sucesso!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), getString(R.string.acc_success), Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(getApplicationContext(), SignInActivity.class));
                         if (type.equals(getString(R.string.student))) {
                             Student student = new Student(id, nameField.getText().toString(), emailField.getText().toString(), true);

@@ -2,7 +2,6 @@
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:showIn="nagivation_view">
 
     <group android:checkableBehavior="single"
@@ -10,24 +9,24 @@
         <item
             android:id="@+id/menu_profile"
             android:icon="@drawable/ic_account_circle_black_24dp"
-            android:title="Perfil" />
+            android:title="@string/profile_title" />
         <item
             android:id="@+id/menu_project"
             android:icon="@drawable/ic_assignment_black_24dp"
-            android:title="Projetos" />
+            android:title="@string/poject" />
 
         <item
             android:id="@+id/menu_students"
             android:icon="@drawable/baseline_people_outline_black_24"
-            android:title="Alunos" />
+            android:title="@string/student_menu" />
         <item
             android:id="@+id/menu_professors"
             android:icon="@drawable/outline_library_books_black_24"
-            android:title="Professores" />
+            android:title="@string/professor_title" />
         <item
             android:id="@+id/menu_universities"
             android:icon="@drawable/ic_account_balance_black_24dp"
-            android:title="Universidades" />
+            android:title="@string/university_title" />
     </group>
 
     <group android:id="@+id/grp2">

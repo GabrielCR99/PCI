@@ -52,4 +52,11 @@
     <string name="male">Masculino</string>
     <string name="female">Feminino</string>
     <string name="other">Outro</string>
+    <string name="poject">Projetos</string>
+    <string name="student_menu">Alunos</string>
+    <string name="university_title">Universidades</string>
+    <string name="professor_title">Professores</string>
+    <string name="profile_title">Perfil</string>
+    <string name="null_user">NULL USER</string>
+    <string name="acc_success">Conta criada com sucesso!</string>
 </resources>
