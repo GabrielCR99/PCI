@@ -8,8 +8,8 @@ public class Project implements Serializable {
     private String id;
     private String title;
     private String description;
-    private Date startDate;
-    private Date endDate;
+    private String startDate;
+    private String endDate;
     private boolean enable;
 
     @Override
@@ -17,7 +17,7 @@ public class Project implements Serializable {
         if (this == o) return true;
         if (!(o instanceof Project)) return false;
         Project project = (Project) o;
-        return getId() == project.getId() &&
+        return getId().equals(project.getId()) &&
                 isEnable() == project.isEnable() &&
                 Objects.equals(getTitle(), project.getTitle()) &&
                 Objects.equals(getDescription(), project.getDescription()) &&
@@ -33,7 +33,7 @@ public class Project implements Serializable {
 
     public Project(){}
 
-    public Project(String id, String title, String description, Date startDate, Date endDate, boolean enable) {
+    public Project(String id, String title, String description, String startDate, String endDate, boolean enable) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -50,11 +50,11 @@ public class Project implements Serializable {
         this.id = id;
     }
 
-    public Date getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
@@ -74,19 +74,11 @@ public class Project implements Serializable {
         this.description = description;
     }
 
-    public Date getStart_Date() {
-        return startDate;
-    }
-
-    public void setStart_Date(Date start_Date) {
-        this.startDate = start_Date;
-    }
-
-    public Date getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 

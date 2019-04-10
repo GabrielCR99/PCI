@@ -30,6 +30,7 @@
         <activity android:name=".activities.ViewStudentsActivity" android:label="@string/students" android:parentActivityName=".activities.MainActivity"/>
         <activity android:name=".activities.EditStudentActivity" android:label="@string/edit_profile" android:parentActivityName=".activities.StudentActivity"/>
         <activity android:name=".activities.BaseActivity" />
+        <activity android:name=".activities.FragmentActivity" />
     </application>
 
 </manifest>

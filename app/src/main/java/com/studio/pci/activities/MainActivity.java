@@ -3,10 +3,7 @@ package com.studio.pci.activities;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.MenuCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
@@ -16,26 +13,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.studio.pci.R;
-import com.studio.pci.adapters.ViewPageAdapter;
-import com.studio.pci.fragments.ProjetosEmAndamentoFragment;
-import com.studio.pci.fragments.ProjetosFinalizadosFragment;
-import android.util.Log;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.studio.pci.models.Professor;
-import com.studio.pci.models.Student;
-import com.studio.pci.models.User;
-import com.studio.pci.providers.StudentDAO;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

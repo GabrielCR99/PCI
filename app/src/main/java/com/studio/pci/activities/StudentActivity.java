@@ -50,7 +50,6 @@ public class StudentActivity extends AppCompatActivity {
     LinearLayout linearLayout;
 
     private ArrayList<String> info;
-    private FirebaseUser currentUser;
     private DatabaseReference databaseReference;
     private String userID;
 
@@ -61,7 +60,7 @@ public class StudentActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         databaseReference = FirebaseDatabase.getInstance().getReference("students");
-        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
         Intent intent = getIntent();
         userID = intent.getStringExtra("UID");
