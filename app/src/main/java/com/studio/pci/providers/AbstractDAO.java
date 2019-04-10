@@ -41,6 +41,6 @@ public abstract class AbstractDAO<T extends Serializable> implements GenericDAO<
 
     @Override
     public String newKey() {
-        return db.push().getKey();
+        return db.child(reference).push().getKey();
     }
 }

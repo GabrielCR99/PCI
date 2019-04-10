@@ -47,7 +47,7 @@ public class InProgressProjectFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_projetos_finalizados, container, false);
+        view = inflater.inflate(R.layout.fragment_projects_inprogress, container, false);
         setProjects();
         setRecyclerView();
         return view;
@@ -73,8 +73,10 @@ public class InProgressProjectFragment extends Fragment {
                 projects.clear();
                 for(DataSnapshot ds : dataSnapshot.getChildren()){
                     Project project = ds.getValue(Project.class);
-                    projects.add(project);
-                    adapter.notifyDataSetChanged();
+                    if(!project.isFinished()){
+                        projects.add(project);
+                        adapter.notifyDataSetChanged();
+                    }
                 }
             }
             @Override

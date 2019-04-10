@@ -10,36 +10,36 @@ public class Project implements Serializable {
     private String description;
     private String startDate;
     private String endDate;
+    private boolean finished;
     private boolean enable;
+
+    public Project(String id, String title, String description, String startDate, String endDate, boolean finished, boolean enable) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.finished = finished;
+        this.enable = enable;
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Project)) return false;
         Project project = (Project) o;
-        return getId().equals(project.getId()) &&
+        return isFinished() == project.isFinished() &&
                 isEnable() == project.isEnable() &&
+                Objects.equals(getId(), project.getId()) &&
                 Objects.equals(getTitle(), project.getTitle()) &&
                 Objects.equals(getDescription(), project.getDescription()) &&
-                Objects.equals(startDate, project.startDate) &&
+                Objects.equals(getStartDate(), project.getStartDate()) &&
                 Objects.equals(getEndDate(), project.getEndDate());
     }
 
     @Override
     public int hashCode() {
-
-        return Objects.hash(getId(), getTitle(), getDescription(), startDate, getEndDate(), isEnable());
-    }
-
-    public Project(){}
-
-    public Project(String id, String title, String description, String startDate, String endDate, boolean enable) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.enable = enable;
+        return Objects.hash(getId(), getTitle(), getDescription(), getStartDate(), getEndDate(), isFinished(), isEnable());
     }
 
     public String getId() {
@@ -88,5 +88,13 @@ public class Project implements Serializable {
 
     public void setEnable(boolean enable) {
         this.enable = enable;
+    }
+
+    public boolean isFinished() {
+        return finished;
+    }
+
+    public void setFinished(boolean finished) {
+        this.finished = finished;
     }
 }
