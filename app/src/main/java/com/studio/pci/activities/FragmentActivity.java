@@ -60,7 +60,6 @@ public class FragmentActivity extends AppCompatActivity implements NavigationVie
         tabLayout.setupWithViewPager(viewPager);
     }
 
-
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {

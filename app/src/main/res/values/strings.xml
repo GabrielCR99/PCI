@@ -66,4 +66,7 @@
     <string name="my_projects">Meus Projetos</string>
     <string name="professors">Professores</string>
     <string name="universities">Universidades</string>
+    <string name="description">Descrição</string>
+    <string name="phase_progress">Progresso das Fases</string>
+    <string name="status">Status</string>
 </resources>
