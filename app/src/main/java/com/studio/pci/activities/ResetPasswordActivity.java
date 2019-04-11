@@ -50,14 +50,14 @@ public class ResetPasswordActivity extends AppCompatActivity {
         String userEmail = resetPasswordEditText.getText().toString();
 
         if (TextUtils.isEmpty(userEmail)) {
-            resetPasswordInputLayout.setError("Erro");
+            resetPasswordInputLayout.setError(getString(R.string.reset_email_error));
 
         } else {
             firebaseAuth.sendPasswordResetEmail(userEmail).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful()) {
-                        Toast.makeText(getApplicationContext(), "Email sent", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), getString(R.string.email_sent), Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(ResetPasswordActivity.this, SignInActivity.class));
                     } else {
                         String message = Objects.requireNonNull(task.getException()).getMessage();
@@ -69,10 +69,5 @@ public class ResetPasswordActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public void onBackPressed() {
 
-        super.onBackPressed();
-
-    }
 }
