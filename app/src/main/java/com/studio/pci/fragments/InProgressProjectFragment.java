@@ -56,10 +56,10 @@ public class InProgressProjectFragment extends Fragment{
 
     private void setRecyclerView() {
         RecyclerView recyclerView = view.findViewById(R.id.recycler_projects);
+
         RecyclerView.LayoutManager layout = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layout);
         recyclerView.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.VERTICAL));
-
         adapter = new ProjectsAdapter(projects, context);
         recyclerView.setAdapter(adapter);
     }
@@ -79,7 +79,7 @@ public class InProgressProjectFragment extends Fragment{
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.v("PROJECTS_FIREBASE",databaseError.getMessage());
+                Log.v("PROJECTS_FIREBASE_ERROR",databaseError.getMessage());
             }
         });
     }

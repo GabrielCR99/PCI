@@ -31,6 +31,12 @@
 
     </style>
 
+    <style name="textContentWhiteLarge">
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAppearance">@style/Base.TextAppearance.AppCompat.Large</item>
+    </style>
+
     <style name="textContentBlack">
         <item name="android:textColor">@color/colorBlack</item>
         <item name="android:textStyle">bold</item>

@@ -7,16 +7,19 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.studio.pci.R;
 import com.studio.pci.activities.ProjectActivity;
 import com.studio.pci.models.Project;
-import com.studio.pci.utils.GenericViewHolder;
 
 import java.util.List;
 
-public class ProjectsAdapter extends RecyclerView.Adapter<GenericViewHolder> {
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.ProjectViewHolder> {
 
     private List<Project> projects;
     private Context context;
@@ -28,17 +31,17 @@ public class ProjectsAdapter extends RecyclerView.Adapter<GenericViewHolder> {
 
     @NonNull
     @Override
-    public GenericViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View itemView = LayoutInflater.from(context).inflate(R.layout.card_generic, viewGroup, false);
-        return new GenericViewHolder(itemView);
+    public ProjectViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        View itemView = LayoutInflater.from(context).inflate(R.layout.card_project, viewGroup, false);
+        return new ProjectViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull GenericViewHolder genericViewHolder, int i) {
+    public void onBindViewHolder(@NonNull ProjectsAdapter.ProjectViewHolder viewHolder, int i) {
         final Project project = projects.get(i);
-        genericViewHolder.getNameTextView().setText(project.getTitle());
-        genericViewHolder.getInfoTextView().setText(project.getEndDate());
-        genericViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+        viewHolder.nameTextView.setText(project.getTitle());
+        viewHolder.infoTextView.setText(project.getDescription());
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, ProjectActivity.class);
@@ -46,11 +49,24 @@ public class ProjectsAdapter extends RecyclerView.Adapter<GenericViewHolder> {
                 context.startActivity(intent);
             }
         });
-        Toast.makeText(context,"PROJETO ADICIONADO ADAPTER",Toast.LENGTH_LONG).show();
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return projects.size();
+    }
+
+    static class ProjectViewHolder extends RecyclerView.ViewHolder{
+
+        @BindView(R.id.card_title)
+        TextView nameTextView;
+
+        @BindView(R.id.card_desc)
+        TextView infoTextView;
+
+        ProjectViewHolder(@NonNull View itemView) {
+            super(itemView);
+            ButterKnife.bind(this, itemView);
+        }
     }
 }
