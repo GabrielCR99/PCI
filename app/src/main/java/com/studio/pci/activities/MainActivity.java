@@ -3,7 +3,6 @@ package com.studio.pci.activities;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -94,15 +93,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             case R.id.menu_project:
                 Intent intent = new Intent(this, FragmentActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 break;
 
             case R.id.menu_logout:
                 FirebaseAuth.getInstance().signOut();
-                Intent intent1 = new Intent(this, SignInActivity.class);
-                intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent1);
+                startActivity(new Intent(this, SignInActivity.class));
                 finish();
                 break;
             case R.id.menu_students:

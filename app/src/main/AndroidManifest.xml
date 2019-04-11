@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:ignore="GoogleAppIndexingWarning">
+        tools:ignore="GoogleAppIndexingWarning"
+        android:fullBackupContent="true">
         <activity
             android:name="com.studio.pci.activities.SplashActivity"
             android:theme="@style/AppTheme.FullScreen">
@@ -21,16 +22,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.studio.pci.activities.SignInActivity" android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name="com.studio.pci.activities.SignUpActivity" android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name="com.studio.pci.activities.ResetPasswordActivity" android:parentActivityName=".activities.SignInActivity"/>
+        <activity android:name="com.studio.pci.activities.SignInActivity" />
+        <activity android:name="com.studio.pci.activities.SignUpActivity"/>
+        <activity android:name="com.studio.pci.activities.ResetPasswordActivity" android:parentActivityName=".activities.MainActivity" android:label="Reset Password"/>
         <activity android:name="com.studio.pci.activities.MainActivity" android:label="Home"/>
         <activity android:name=".activities.ProfessorActivity" android:label="Professor" android:parentActivityName=".activities.MainActivity"/>
         <activity android:name=".activities.StudentActivity" android:label="Student" android:parentActivityName=".activities.MainActivity"/>
         <activity android:name=".activities.ViewStudentsActivity" android:label="Students" android:parentActivityName=".activities.MainActivity"/>
         <activity android:name=".activities.EditStudentActivity" android:label="Edit Student" android:parentActivityName=".activities.StudentActivity"/>
         <activity android:name=".activities.BaseActivity" />
-        <activity android:name=".activities.FragmentActivity" />
+        <activity android:name=".activities.FragmentActivity" android:parentActivityName=".activities.MainActivity" />
     </application>
 
 </manifest>

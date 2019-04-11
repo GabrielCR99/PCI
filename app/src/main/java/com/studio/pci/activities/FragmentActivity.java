@@ -48,8 +48,8 @@ public class FragmentActivity extends AppCompatActivity implements NavigationVie
         navigationView.setNavigationItemSelectedListener(this);
 
         ViewPageAdapter viewPagerAdapter = new ViewPageAdapter(getSupportFragmentManager());
-        viewPagerAdapter.addFragment(new ProjetosEmAndamentoFragment(), "Em andamento");
-        viewPagerAdapter.addFragment(new ProjetosFinalizadosFragment(), "Finalizados");
+        viewPagerAdapter.addFragment(new ProjetosEmAndamentoFragment(), getString(R.string.in_progress));
+        viewPagerAdapter.addFragment(new ProjetosFinalizadosFragment(), getString(R.string.finished));
 
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
                 R.string.open_drawer, R.string.close_drawer);
@@ -71,7 +71,10 @@ public class FragmentActivity extends AppCompatActivity implements NavigationVie
                 startActivity(new Intent(this, SignInActivity.class));
                 break;
             case R.id.menu_project:
-                startActivity(new Intent(this, FragmentActivity.class));
+                Intent intent = new Intent(this, FragmentActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
                 break;
         }
         return false;
