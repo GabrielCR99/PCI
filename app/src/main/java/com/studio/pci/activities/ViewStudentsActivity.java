@@ -28,7 +28,6 @@ public class ViewStudentsActivity extends AppCompatActivity {
 
     private List<Student> students;
     private StudentsAdapter adapter;
-    private DatabaseReference db;
 
     @BindView(R.id.recycler_students)
     RecyclerView recyclerView;
@@ -51,7 +50,7 @@ public class ViewStudentsActivity extends AppCompatActivity {
 
     private void getStudents() {
         students = new ArrayList<>();
-        db = FirebaseDatabase.getInstance().getReference("students");
+        DatabaseReference db = FirebaseDatabase.getInstance().getReference("students");
         final String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         db.addValueEventListener(new ValueEventListener() {
             @Override

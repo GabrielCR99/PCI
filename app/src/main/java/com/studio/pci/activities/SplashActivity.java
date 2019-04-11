@@ -65,6 +65,7 @@ public class SplashActivity extends BaseActivity implements Runnable {
                 intent.putExtra("USERTYPE",type);
                 intent.putExtra("USERID",currentUser.getUid());
                 startActivity(intent);
+                finish();
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {

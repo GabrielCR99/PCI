@@ -7,21 +7,22 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.studio.pci.R;
-import com.studio.pci.activities.StudentActivity;
-import com.studio.pci.models.Student;
+import com.studio.pci.activities.ProjectActivity;
+import com.studio.pci.models.Project;
 import com.studio.pci.utils.GenericViewHolder;
 
 import java.util.List;
 
-public class StudentsAdapter extends RecyclerView.Adapter<GenericViewHolder> {
+public class ProjectsAdapter extends RecyclerView.Adapter<GenericViewHolder> {
 
-    private List<Student> students;
+    private List<Project> projects;
     private Context context;
 
-    public StudentsAdapter(List<Student> students, Context context) {
-        this.students = students;
+    public ProjectsAdapter(List<Project> projects, Context context) {
+        this.projects = projects;
         this.context = context;
     }
 
@@ -33,22 +34,23 @@ public class StudentsAdapter extends RecyclerView.Adapter<GenericViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final GenericViewHolder genericViewHolder, final int i) {
-        final Student student = students.get(i);
-        genericViewHolder.getNameTextView().setText(student.getName());
-        genericViewHolder.getInfoTextView().setText(student.getEmail());
+    public void onBindViewHolder(@NonNull GenericViewHolder genericViewHolder, int i) {
+        final Project project = projects.get(i);
+        genericViewHolder.getNameTextView().setText(project.getTitle());
+        genericViewHolder.getInfoTextView().setText(project.getEndDate());
         genericViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context,StudentActivity.class);
-                intent.putExtra("UID",student.getId());
+                Intent intent = new Intent(context, ProjectActivity.class);
+                intent.putExtra("PROJECT_ID",project.getId());
                 context.startActivity(intent);
             }
         });
+        Toast.makeText(context,"PROJETO ADICIONADO ADAPTER",Toast.LENGTH_LONG).show();
     }
 
     @Override
     public int getItemCount() {
-        return students.size();
+        return 0;
     }
 }

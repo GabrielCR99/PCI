@@ -14,9 +14,9 @@ import android.view.MenuItem;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.studio.pci.R;
-import com.studio.pci.adapters.ViewPageAdapter;
-import com.studio.pci.fragments.ProjetosEmAndamentoFragment;
-import com.studio.pci.fragments.ProjetosFinalizadosFragment;
+import com.studio.pci.adapters.ViewPagerAdapter;
+import com.studio.pci.fragments.InProgressProjectFragment;
+import com.studio.pci.fragments.FinishedProjectFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -44,12 +44,11 @@ public class FragmentActivity extends AppCompatActivity implements NavigationVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fragments);
         ButterKnife.bind(this);
-        setSupportActionBar(toolbar);
         navigationView.setNavigationItemSelectedListener(this);
 
-        ViewPageAdapter viewPagerAdapter = new ViewPageAdapter(getSupportFragmentManager());
-        viewPagerAdapter.addFragment(new ProjetosEmAndamentoFragment(), "Em andamento");
-        viewPagerAdapter.addFragment(new ProjetosFinalizadosFragment(), "Finalizados");
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        viewPagerAdapter.addFragment(new InProgressProjectFragment(), "Em andamento");
+        viewPagerAdapter.addFragment(new FinishedProjectFragment(), "Finalizados");
 
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
                 R.string.open_drawer, R.string.close_drawer);

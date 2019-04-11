@@ -8,38 +8,63 @@ public class Project implements Serializable {
     private String id;
     private String title;
     private String description;
-    private Date startDate;
-    private Date endDate;
+    private String startDate;
+    private String endDate;
+    private boolean finished;
     private boolean enable;
+
+    public Project(){}
+
+    public Project(String id, String title, String description) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.startDate = "";
+        this.endDate = "";
+        this.finished = false;
+        this.enable = true;
+    }
+
+    public Project(String id, String title, String description, String startDate, String endDate, boolean finished, boolean enable) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.finished = finished;
+        this.enable = enable;
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Project)) return false;
         Project project = (Project) o;
-        return getId() == project.getId() &&
+        return isFinished() == project.isFinished() &&
                 isEnable() == project.isEnable() &&
+                Objects.equals(getId(), project.getId()) &&
                 Objects.equals(getTitle(), project.getTitle()) &&
                 Objects.equals(getDescription(), project.getDescription()) &&
-                Objects.equals(startDate, project.startDate) &&
+                Objects.equals(getStartDate(), project.getStartDate()) &&
                 Objects.equals(getEndDate(), project.getEndDate());
     }
 
     @Override
     public int hashCode() {
-
-        return Objects.hash(getId(), getTitle(), getDescription(), startDate, getEndDate(), isEnable());
+        return Objects.hash(getId(), getTitle(), getDescription(), getStartDate(), getEndDate(), isFinished(), isEnable());
     }
 
-    public Project(){}
-
-    public Project(String id, String title, String description, Date startDate, Date endDate, boolean enable) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.enable = enable;
+    @Override
+    public String toString() {
+        return "Project{" +
+                "id='" + id + '\'' +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", startDate='" + startDate + '\'' +
+                ", endDate='" + endDate + '\'' +
+                ", finished=" + finished +
+                ", enable=" + enable +
+                '}';
     }
 
     public String getId() {
@@ -50,11 +75,11 @@ public class Project implements Serializable {
         this.id = id;
     }
 
-    public Date getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
@@ -74,19 +99,11 @@ public class Project implements Serializable {
         this.description = description;
     }
 
-    public Date getStart_Date() {
-        return startDate;
-    }
-
-    public void setStart_Date(Date start_Date) {
-        this.startDate = start_Date;
-    }
-
-    public Date getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 
@@ -96,5 +113,13 @@ public class Project implements Serializable {
 
     public void setEnable(boolean enable) {
         this.enable = enable;
+    }
+
+    public boolean isFinished() {
+        return finished;
+    }
+
+    public void setFinished(boolean finished) {
+        this.finished = finished;
     }
 }

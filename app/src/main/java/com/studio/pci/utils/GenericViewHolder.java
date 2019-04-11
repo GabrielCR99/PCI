@@ -12,15 +12,13 @@ import com.studio.pci.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class StudentsViewHolder extends RecyclerView.ViewHolder{
+public class GenericViewHolder extends RecyclerView.ViewHolder{
 
     @BindView(R.id.card_name)
     TextView nameTextView;
 
     @BindView(R.id.card_info)
     TextView infoTextView;
-
-
 
     public TextView getNameTextView() {
         return nameTextView;
@@ -31,7 +29,7 @@ public class StudentsViewHolder extends RecyclerView.ViewHolder{
         return infoTextView;
     }
 
-    public StudentsViewHolder(@NonNull View itemView) {
+    public GenericViewHolder(@NonNull View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
     }

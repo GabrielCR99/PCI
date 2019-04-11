@@ -1,9 +1,8 @@
-package com.studio.pci.activities;
+﻿package com.studio.pci.activities;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -11,26 +10,25 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.studio.pci.R;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.studio.pci.models.Professor;
-import com.studio.pci.models.Student;
-import com.studio.pci.models.User;
-import com.studio.pci.providers.StudentDAO;
+import com.studio.pci.models.Project;
+import com.studio.pci.providers.ProjectDAO;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -68,12 +66,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void setNavInfo(String name, int type) {
         View header = navigationView.getHeaderView(0);
+        Menu menu = navigationView.getMenu();
         TextView nameTextView = header.findViewById(R.id.nav_name);
         TextView typeTextView = header.findViewById(R.id.nav_type);
         nameTextView.setText(name);
-        if(type==1) typeTextView.setText(getString(R.string.student));
-        else if(type==2) typeTextView.setText(getString(R.string.professor));
-        else typeTextView.setText(getString(R.string.null_user));
+        if(type==1) {
+            typeTextView.setText(getString(R.string.student));
+            menu.getItem(2).setVisible(false);
+        }
+        else if(type==2) {
+            typeTextView.setText(getString(R.string.professor));
+            menu.getItem(3).setVisible(false);
+        }
+        else {
+            typeTextView.setText(getString(R.string.null_user));
+            header.setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override

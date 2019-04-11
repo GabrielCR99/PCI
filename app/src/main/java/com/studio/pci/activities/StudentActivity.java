@@ -7,15 +7,10 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -25,8 +20,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.studio.pci.R;
 import com.studio.pci.models.Student;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -57,7 +50,6 @@ public class StudentActivity extends AppCompatActivity {
     LinearLayout linearLayout;
 
     private ArrayList<String> info;
-    private FirebaseUser currentUser;
     private DatabaseReference databaseReference;
     private String userID;
 
@@ -68,7 +60,7 @@ public class StudentActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         databaseReference = FirebaseDatabase.getInstance().getReference("students");
-        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
         Intent intent = getIntent();
         userID = intent.getStringExtra("UID");
@@ -95,7 +87,7 @@ public class StudentActivity extends AppCompatActivity {
         params.bottomMargin = 25;
         button.setLayoutParams(params);
         button.setBackground(getResources().getDrawable(R.color.colorButton));
-        button.setTextColor(getResources().getColor(R.color.colorWhite));
+        button.setTextColor(getResources().getColor(R.color.colorAccent));
         linearLayout.addView(button);
     }
 

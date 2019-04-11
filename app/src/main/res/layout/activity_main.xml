@@ -30,12 +30,7 @@
             android:elevation="0dp"
             app:tabGravity="fill"
             app:tabMode="fixed"
-            app:tabTextColor="@color/colorWhite" />
-
-        <android.support.v4.view.ViewPager
-            android:id="@+id/projects_view_pager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            app:tabTextColor="@color/colorAccent" />
 
     </LinearLayout>
 

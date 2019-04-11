@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.studio.pci">
 
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"> </uses-permission>
+    <uses-permission android:name="android.permission.INTERNET"> </uses-permission>
 
     <application
         android:allowBackup="true"
@@ -21,16 +21,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.studio.pci.activities.SignInActivity" android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name="com.studio.pci.activities.SignUpActivity" android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name="com.studio.pci.activities.ResetPasswordActivity" android:parentActivityName=".activities.SignInActivity"/>
-        <activity android:name="com.studio.pci.activities.MainActivity" android:label="Home"/>
-        <activity android:name=".activities.ProfessorActivity" android:label="Professor" android:parentActivityName=".activities.MainActivity"/>
-        <activity android:name=".activities.StudentActivity" android:label="Student" android:parentActivityName=".activities.MainActivity"/>
-        <activity android:name=".activities.ViewStudentsActivity" android:label="Students" android:parentActivityName=".activities.MainActivity"/>
-        <activity android:name=".activities.EditStudentActivity" android:label="Edit Student" android:parentActivityName=".activities.StudentActivity"/>
+        <activity android:name=".activities.SignInActivity" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".activities.SignUpActivity" android:label="@string/sign_up_button" android:parentActivityName=".activities.SignInActivity"/>
+        <activity android:name=".activities.ResetPasswordActivity" android:label="@string/reset_passwd" android:parentActivityName=".activities.MainActivity"/>
+        <activity android:name=".activities.MainActivity" android:label="@string/home" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".activities.ProfessorActivity" android:label="@string/professor" android:parentActivityName=".activities.MainActivity"/>
+        <activity android:name=".activities.StudentActivity" android:label="@string/student"/>
+        <activity android:name=".activities.ViewStudentsActivity" android:label="@string/students" android:parentActivityName=".activities.MainActivity"/>
+        <activity android:name=".activities.EditStudentActivity" android:label="@string/edit_profile" android:parentActivityName=".activities.StudentActivity"/>
         <activity android:name=".activities.BaseActivity" />
         <activity android:name=".activities.FragmentActivity" />
+        <activity android:name=".activities.ProjectActivity" />
     </application>
 
 </manifest>
