@@ -79,7 +79,7 @@ public class InProgressProjectFragment extends Fragment{
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.v("PROJECTS_FIREBASE",databaseError.getMessage());
+                Log.v("PROJECTS_FIREBASE_ERROR",databaseError.getMessage());
             }
         });
     }

@@ -1,5 +1,7 @@
 package com.studio.pci.models;
 import java.io.Serializable;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
 
@@ -10,6 +12,8 @@ public class Project implements Serializable {
     private String description;
     private String startDate;
     private String endDate;
+    private ArrayList<String> students;
+    private ArrayList<String> professors;
     private boolean finished;
     private boolean enable;
 
@@ -21,16 +25,32 @@ public class Project implements Serializable {
         this.description = description;
         this.startDate = "";
         this.endDate = "";
+        students = new ArrayList<>();
+        professors = new ArrayList<>();
         this.finished = false;
         this.enable = true;
     }
 
-    public Project(String id, String title, String description, String startDate, String endDate, boolean finished, boolean enable) {
+    public Project(String id, String title, String description, ArrayList<String> students, ArrayList<String> professors) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.startDate = "";
+        this.endDate = "";
+        this.students = students;
+        this.professors = professors;
+        this.finished = false;
+        this.enable = true;
+    }
+
+    public Project(String id, String title, String description, String startDate, String endDate, ArrayList<String> students, ArrayList<String> professors, boolean finished, boolean enable) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.students = students;
+        this.professors = professors;
         this.finished = finished;
         this.enable = enable;
     }
@@ -46,25 +66,14 @@ public class Project implements Serializable {
                 Objects.equals(getTitle(), project.getTitle()) &&
                 Objects.equals(getDescription(), project.getDescription()) &&
                 Objects.equals(getStartDate(), project.getStartDate()) &&
-                Objects.equals(getEndDate(), project.getEndDate());
+                Objects.equals(getEndDate(), project.getEndDate()) &&
+                Objects.equals(students, project.students) &&
+                Objects.equals(professors, project.professors);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getTitle(), getDescription(), getStartDate(), getEndDate(), isFinished(), isEnable());
-    }
-
-    @Override
-    public String toString() {
-        return "Project{" +
-                "id='" + id + '\'' +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", startDate='" + startDate + '\'' +
-                ", endDate='" + endDate + '\'' +
-                ", finished=" + finished +
-                ", enable=" + enable +
-                '}';
+        return Objects.hash(getId(), getTitle(), getDescription(), getStartDate(), getEndDate(), students, professors, isFinished(), isEnable());
     }
 
     public String getId() {
@@ -121,5 +130,21 @@ public class Project implements Serializable {
 
     public void setFinished(boolean finished) {
         this.finished = finished;
+    }
+
+    public ArrayList<String> getStudents() {
+        return students;
+    }
+
+    public void setStudents(ArrayList<String> students) {
+        this.students = students;
+    }
+
+    public ArrayList<String> getProfessors() {
+        return professors;
+    }
+
+    public void setProfessors(ArrayList<String> professors) {
+        this.professors = professors;
     }
 }
