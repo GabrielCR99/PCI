@@ -75,5 +75,4 @@
     <string name="phase_progress">Progresso das Fases</string>
     <string name="status">Status</string>
     <string name="finished">Finalizado</string>
-    <string name="in_progress">Em Andamento</string>
 </resources>

@@ -46,9 +46,9 @@ public class FragmentActivity extends AppCompatActivity implements NavigationVie
         ButterKnife.bind(this);
         navigationView.setNavigationItemSelectedListener(this);
 
-        ViewPageAdapter viewPagerAdapter = new ViewPageAdapter(getSupportFragmentManager());
-        viewPagerAdapter.addFragment(new ProjetosEmAndamentoFragment(), getString(R.string.in_progress));
-        viewPagerAdapter.addFragment(new ProjetosFinalizadosFragment(), getString(R.string.finished));
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        viewPagerAdapter.addFragment(new InProgressProjectFragment(), getString(R.string.projects_in_progress));
+        viewPagerAdapter.addFragment(new FinishedProjectFragment(), getString(R.string.finished));
 
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
                 R.string.open_drawer, R.string.close_drawer);
