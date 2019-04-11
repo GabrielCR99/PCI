@@ -20,20 +20,21 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.studio.pci.R;
+import com.studio.pci.activities.BaseActivity;
 import com.studio.pci.adapters.ProjectsAdapter;
 import com.studio.pci.models.Project;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class InProgressProjectFragment extends Fragment {
+public class InProgressProjectFragment extends Fragment{
 
     private View view;
     private List<Project> projects;
     private ProjectsAdapter adapter;
-    private DatabaseReference db;
     private Context context;
 
     public InProgressProjectFragment() {
@@ -46,7 +47,7 @@ public class InProgressProjectFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_projects_inprogress, container, false);
         setProjects();
         setRecyclerView();
@@ -55,7 +56,6 @@ public class InProgressProjectFragment extends Fragment {
 
     private void setRecyclerView() {
         RecyclerView recyclerView = view.findViewById(R.id.recycler_projects);
-
         RecyclerView.LayoutManager layout = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layout);
         recyclerView.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.VERTICAL));
@@ -66,17 +66,15 @@ public class InProgressProjectFragment extends Fragment {
 
     private void setProjects() {
         projects = new ArrayList<>();
-        db = FirebaseDatabase.getInstance().getReference("projects");
+        DatabaseReference db = FirebaseDatabase.getInstance().getReference("projects");
         db.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 projects.clear();
                 for(DataSnapshot ds : dataSnapshot.getChildren()){
                     Project project = ds.getValue(Project.class);
-                    if(!project.isFinished()){
                         projects.add(project);
                         adapter.notifyDataSetChanged();
-                    }
                 }
             }
             @Override

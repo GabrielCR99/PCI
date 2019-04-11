@@ -13,6 +13,18 @@ public class Project implements Serializable {
     private boolean finished;
     private boolean enable;
 
+    public Project(){}
+
+    public Project(String id, String title, String description) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.startDate = "";
+        this.endDate = "";
+        this.finished = false;
+        this.enable = true;
+    }
+
     public Project(String id, String title, String description, String startDate, String endDate, boolean finished, boolean enable) {
         this.id = id;
         this.title = title;
@@ -40,6 +52,19 @@ public class Project implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(getId(), getTitle(), getDescription(), getStartDate(), getEndDate(), isFinished(), isEnable());
+    }
+
+    @Override
+    public String toString() {
+        return "Project{" +
+                "id='" + id + '\'' +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", startDate='" + startDate + '\'' +
+                ", endDate='" + endDate + '\'' +
+                ", finished=" + finished +
+                ", enable=" + enable +
+                '}';
     }
 
     public String getId() {

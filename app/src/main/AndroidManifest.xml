@@ -31,6 +31,7 @@
         <activity android:name=".activities.EditStudentActivity" android:label="@string/edit_profile" android:parentActivityName=".activities.StudentActivity"/>
         <activity android:name=".activities.BaseActivity" />
         <activity android:name=".activities.FragmentActivity" />
+        <activity android:name=".activities.ProjectActivity" />
     </application>
 
 </manifest>
