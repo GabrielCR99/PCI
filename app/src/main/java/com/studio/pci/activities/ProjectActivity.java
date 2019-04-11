@@ -89,7 +89,7 @@ public class ProjectActivity extends AppCompatActivity {
                     Professor professor = dataSnapshot.child("professors").child(id).getValue(Professor.class);
                     professorList.add(professor);
                 }
-                
+
                 if(project.getTitle().isEmpty()) titleTextView.setText(getString(R.string.null_info));
                 else titleTextView.setText(project.getTitle());
 
