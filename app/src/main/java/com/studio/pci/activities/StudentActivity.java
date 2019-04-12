@@ -1,6 +1,10 @@
 package com.studio.pci.activities;
 
+import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
+import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -8,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -40,11 +45,11 @@ public class StudentActivity extends AppCompatActivity {
     @BindView(R.id.student_email)
     TextView email;
 
-    @BindView(R.id.student_facebook)
-    TextView facebook;
+    @BindView(R.id.student_face)
+    ImageButton facebook;
 
     @BindView(R.id.student_skype)
-    TextView skype;
+    ImageButton skype;
 
     @BindView(R.id.student_layout_button)
     LinearLayout linearLayout;
@@ -96,7 +101,7 @@ public class StudentActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
-                    Student student = dataSnapshot.getValue(Student.class);
+                    final Student student = dataSnapshot.getValue(Student.class);
                     if(!student.getName().isEmpty()) name.setText(student.getName());
                     else name.setText(getString(R.string.null_info));
 
@@ -109,11 +114,29 @@ public class StudentActivity extends AppCompatActivity {
                     if(!student.getEmail().isEmpty()) email.setText(student.getEmail());
                     else email.setText(getString(R.string.null_info));
 
-                    if(!student.getFacebookUrl().isEmpty()) facebook.setText(student.getFacebookUrl());
-                    else facebook.setText(getString(R.string.null_info));
+                    if(!student.getFacebookUrl().isEmpty()) {
+                        facebook.setEnabled(true);
+                        facebook.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent = getFBIntent(StudentActivity.this,student.getFacebookUrl());
+                                if(intent!=null) startActivity(intent);
+                            }
+                        });
+                    }
+                    else { facebook.setEnabled(false); }
 
-                    if(!student.getSkypeUrl().isEmpty()) skype.setText(student.getSkypeUrl());
-                    else skype.setText(getString(R.string.null_info));
+                    if(!student.getSkypeUrl().isEmpty()) {
+                        skype.setEnabled(true);
+                        skype.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent = getSkypeIntent(student.getSkypeUrl());
+                                startActivity(intent);
+                            }
+                        });
+                    }
+                    else skype.setEnabled(false);
 
                     info = student.toArray();
                     databaseReference.removeEventListener(this);
@@ -124,5 +147,31 @@ public class StudentActivity extends AppCompatActivity {
                 Log.v("USER_FIREBASE", databaseError.getMessage());
             }
         });
+    }
+
+
+    public Intent getFBIntent(Context context, String facebookId) {
+        try {
+            // Check if FB app is even installed
+            context.getPackageManager().getPackageInfo("com.facebook.katana", 0);
+
+            String facebookScheme = "fb://profile/" + facebookId;
+            return new Intent(Intent.ACTION_VIEW, Uri.parse(facebookScheme));
+        }
+        catch(Exception e) {
+            // Cache and Open a url in browser
+            String facebookProfileUri = "https://www.facebook.com/" + facebookId;
+            return new Intent(Intent.ACTION_VIEW, Uri.parse(facebookProfileUri));
+        }
+    }
+
+    public Intent getSkypeIntent(String skypeId) {
+        try {
+            String skypeScheme = "skype:" + skypeId;
+            return new Intent(Intent.ACTION_VIEW, Uri.parse(skypeScheme));
+        } catch (ActivityNotFoundException e) {
+            Log.e("SKYPE CALL", "Skype failed", e);
+            return null;
+        }
     }
 }

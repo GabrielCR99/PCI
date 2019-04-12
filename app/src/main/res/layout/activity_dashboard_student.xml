@@ -84,36 +84,38 @@
             android:layout_marginBottom="25sp"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/facebook" />
+            android:orientation="horizontal"
+            android:gravity="center">
 
-        <TextView
+            <ImageButton
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:src="@drawable/facebook_64"
+                android:layout_marginEnd="20sp"
+                android:id="@+id/student_face"
+                android:background="@color/colorWhite"
+                android:contentDescription="@string/facebook"/>
+
+            <ImageButton
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:src="@drawable/skype_64"
+                android:layout_marginStart="20sp"
+                android:id="@+id/student_skype"
+                android:background="@color/colorWhite"
+                android:contentDescription="@string/skype"/>
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/student_facebook"
-            android:layout_marginBottom="25sp"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/skype" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/student_skype"
-            android:layout_marginBottom="25sp"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="20sp"
-                android:orientation="vertical"
-                android:id="@+id/student_layout_button"/>
+            android:layout_height="match_parent"
+            android:layout_margin="20sp"
+            android:orientation="vertical"
+            android:id="@+id/student_layout_button"/>
 
         </LinearLayout>
 
