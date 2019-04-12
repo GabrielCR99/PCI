@@ -1,10 +1,14 @@
 package com.studio.pci.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -17,13 +21,12 @@ import com.google.firebase.database.ValueEventListener;
 import com.studio.pci.R;
 import com.studio.pci.models.Professor;
 
+import java.util.ArrayList;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class ProfessorActivity extends AppCompatActivity {
-
-    private DatabaseReference databaseReference;
-    private String userID;
 
     @BindView(R.id.professor_name)
     TextView name;
@@ -46,6 +49,12 @@ public class ProfessorActivity extends AppCompatActivity {
     @BindView(R.id.professor_skype)
     TextView skype;
 
+    @BindView(R.id.professor_layout_button)
+    LinearLayout linearLayout;
+
+    private ArrayList<String> info;
+    private DatabaseReference databaseReference;
+    private String userID;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,9 +64,34 @@ public class ProfessorActivity extends AppCompatActivity {
 
         databaseReference = FirebaseDatabase.getInstance().getReference("professors");
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        userID = user.getUid();
+
+        Intent intent = getIntent();
+        userID = intent.getStringExtra("UID");
 
         getInfo();
+
+        if(user.getUid().equals(userID)){
+            addButton();
+        }
+    }
+
+    private void addButton() {
+        Button button = new Button(this);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfessorActivity.this,EditProfessorActivity.class);
+                intent.putExtra(getString(R.string.student_info),info);
+                startActivity(intent);
+            }
+        });
+        button.setText(getString(R.string.edit));
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        params.bottomMargin = 25;
+        button.setLayoutParams(params);
+        button.setBackground(getResources().getDrawable(R.color.buttonColor));
+        button.setTextColor(getResources().getColor(R.color.colorWhite));
+        linearLayout.addView(button);
     }
 
     private void getInfo() {

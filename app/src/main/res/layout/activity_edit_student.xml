@@ -51,7 +51,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/complete_name"
                     android:inputType="textPersonName"
-                    style="@style/editTextStyle"/>
+                    style="@style/editTextStyleBlack"/>
 
             </android.support.design.widget.TextInputLayout>
 
@@ -85,7 +85,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/birthDate"
                     android:inputType="date"
-                    style="@style/editTextStyle"/>
+                    style="@style/editTextStyleBlack"/>
 
             </android.support.design.widget.TextInputLayout>
 
@@ -102,7 +102,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/facebook"
                     android:inputType="textUri"
-                    style="@style/editTextStyle"/>
+                    style="@style/editTextStyleBlack"/>
 
             </android.support.design.widget.TextInputLayout>
 
@@ -119,7 +119,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/skype"
                     android:inputType="textUri"
-                    style="@style/editTextStyle"/>
+                    style="@style/editTextStyleBlack"/>
 
             </android.support.design.widget.TextInputLayout>
 
@@ -134,8 +134,7 @@
                     android:layout_height="wrap_content"
                     android:background="#2C3E50"
                     android:text="@string/save"
-                    android:textColor="@color/colorAccent"
-                    android:textStyle="bold"
+                    style="@style/buttonPattern"
                     android:layout_marginBottom="25sp"/>
 
             </LinearLayout>

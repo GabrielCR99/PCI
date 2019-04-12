@@ -39,95 +39,93 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/complete_name"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+                android:text="@string/complete_name"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/professor_name"
-                android:layout_marginBottom="25sp"/>
+                android:layout_marginBottom="25sp"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/degree"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+                android:text="@string/degree"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/professor_degree"
-                android:layout_marginBottom="25sp"/>
+                android:layout_marginBottom="25sp"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/gender"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+                android:text="@string/gender" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/professor_gender"
-                android:layout_marginBottom="25sp"/>
+                android:layout_marginBottom="25sp"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/birthDate"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+                android:text="@string/birthDate"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/professor_birthDate"
-                android:layout_marginBottom="25sp"/>
+                android:layout_marginBottom="25sp"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/email"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+                android:text="@string/email"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/professor_email"
-                android:layout_marginBottom="25sp"/>
+                android:layout_marginBottom="25sp"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/facebook"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+                android:text="@string/facebook"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/professor_facebook"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
                 android:layout_marginBottom="25sp"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/skype"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+                android:text="@string/skype"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/professor_skype"
-                android:layout_marginBottom="25sp"/>
-
+                android:layout_marginBottom="25sp"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="20sp"
-                android:orientation="vertical">
-
-            </LinearLayout>
+                android:orientation="vertical"
+                android:id="@+id/professor_layout_button"/>
 
         </LinearLayout>
 

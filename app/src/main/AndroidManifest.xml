@@ -30,10 +30,11 @@
         <activity android:name=".activities.StudentActivity" android:label="@string/student" android:parentActivityName=".activities.MainActivity"/>
         <activity android:name=".activities.ViewStudentsActivity" android:label="@string/students" android:parentActivityName=".activities.MainActivity"/>
         <activity android:name=".activities.EditStudentActivity" android:label="@string/edit_profile" android:parentActivityName=".activities.StudentActivity"/>
-        <activity android:name=".activities.ProjectActivity" />
+        <activity android:name=".activities.ProjectActivity" android:label="@string/project"/>
 
         <activity android:name=".activities.BaseActivity" />
         <activity android:name=".activities.FragmentActivity" android:label="@string/my_projects" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".activities.EditProfessorActivity" />
     </application>
 
 </manifest>
