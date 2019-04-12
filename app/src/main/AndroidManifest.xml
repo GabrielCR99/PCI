@@ -27,7 +27,7 @@
         <activity android:name=".activities.ResetPasswordActivity" android:label="@string/reset_passwd" android:parentActivityName=".activities.MainActivity"/>
         <activity android:name=".activities.MainActivity" android:label="@string/home" android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".activities.ProfessorActivity" android:label="@string/professor" android:parentActivityName=".activities.MainActivity"/>
-        <activity android:name=".activities.StudentActivity" android:label="@string/student"/>
+        <activity android:name=".activities.StudentActivity" android:label="@string/student" android:parentActivityName=".activities.MainActivity"/>
         <activity android:name=".activities.ViewStudentsActivity" android:label="@string/students" android:parentActivityName=".activities.MainActivity"/>
         <activity android:name=".activities.EditStudentActivity" android:label="@string/edit_profile" android:parentActivityName=".activities.StudentActivity"/>
         <activity android:name=".activities.ProjectActivity" />
