@@ -78,7 +78,7 @@ public class StudentActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(StudentActivity.this,EditStudentActivity.class);
-                intent.putExtra("STUDENT_INFO",info);
+                intent.putExtra(getString(R.string.student_info),info);
                 startActivity(intent);
             }
         });
@@ -86,8 +86,8 @@ public class StudentActivity extends AppCompatActivity {
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         params.bottomMargin = 25;
         button.setLayoutParams(params);
-        button.setBackground(getResources().getDrawable(R.color.colorButton));
-        button.setTextColor(getResources().getColor(R.color.colorAccent));
+        button.setBackground(getResources().getDrawable(R.color.buttonColor));
+        button.setTextColor(getResources().getColor(R.color.colorWhite));
         linearLayout.addView(button);
     }
 

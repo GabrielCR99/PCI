@@ -72,4 +72,5 @@
     <string name="email_sent">Email enviado!</string>
     <string name="projects_in_progress">Projetos em andamento</string>
     <string name="finished_projects">Projetos finalizados</string>
+    <string name="student_info">STUDENT_INFO</string>
 </resources>

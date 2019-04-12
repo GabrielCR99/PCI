@@ -6,9 +6,6 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowTranslucentStatus">true</item>
-        <item name="colorControlNormal">@color/colorBlack</item>
-        <item name="colorControlActivated">@color/colorPrimary</item>
-        <item name="colorControlHighlight">@color/colorPrimary</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -28,7 +25,6 @@
         <item name="android:textColor">@color/colorAccent</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">14sp</item>
-
     </style>
 
     <style name="textContentBlack">
@@ -58,12 +54,14 @@
     </style>
 
     <style name="editTextStyle">
-        <item name="android:backgroundTint">@color/colorBlack</item>
-        <item name="android:textColor">@color/colorBlack</item>
-        <item name="android:textColorHighlight">@color/colorBlack</item>
-        <item name="android:shadowColor">@color/colorBlack</item>
-        <item name="android:textColorLink">@color/colorBlack</item>
-        <item name="android:textColorHint">@color/colorBlack</item>
+        <item name="android:backgroundTint">@color/colorWhite</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textColorHighlight">@color/colorWhite</item>
+        <item name="android:textColorLink">@color/colorWhite</item>
+    </style>
+
+    <style name="mySpinnerItemStyle" parent="@android:style/Widget.Holo.DropDownItem.Spinner">
+        <item name="android:textColor">@color/colorWhite</item>
     </style>
 
 </resources>

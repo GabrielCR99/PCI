@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.SignInActivity" android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".activities.SignUpActivity" android:label="@string/sign_up_button" android:parentActivityName=".activities.SignInActivity"/>
+        <activity android:name=".activities.SignUpActivity" android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".activities.ResetPasswordActivity" android:label="@string/reset_passwd" android:parentActivityName=".activities.MainActivity"/>
         <activity android:name=".activities.MainActivity" android:label="@string/home" android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".activities.ProfessorActivity" android:label="@string/professor" android:parentActivityName=".activities.MainActivity"/>
@@ -33,7 +33,7 @@
         <activity android:name=".activities.ProjectActivity" />
 
         <activity android:name=".activities.BaseActivity" />
-        <activity android:name=".activities.FragmentActivity" android:parentActivityName=".activities.MainActivity" android:label = "Fragment Activity" />
+        <activity android:name=".activities.FragmentActivity" android:label="@string/my_projects" android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>
