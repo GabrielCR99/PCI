@@ -75,4 +75,5 @@
     <string name="phase_progress">Progresso das Fases</string>
     <string name="status">Status</string>
     <string name="finished">Finalizado</string>
+    <string name="student_info">STUDENT_INFO</string>
 </resources>

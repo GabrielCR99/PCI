@@ -21,6 +21,7 @@ import com.studio.pci.models.User;
 public class SplashActivity extends BaseActivity implements Runnable {
 
     private static final int DELAY_MILLIS = 2000;
+    private static final String USER_NAME = "USERNAME";
     private FirebaseUser currentUser;
     private int type;
 
@@ -56,11 +57,11 @@ public class SplashActivity extends BaseActivity implements Runnable {
                 if(user.getType().equals(getString(R.string.student))){
                     type = 1;
                     Student student = dataSnapshot.child("students").child(currentUser.getUid()).getValue(Student.class);
-                    intent.putExtra("USERNAME",student.getName());
+                    intent.putExtra(USER_NAME,student.getName());
                 }else{
                     type = 2;
                     Professor professor = dataSnapshot.child("professors").child(currentUser.getUid()).getValue(Professor.class);
-                    intent.putExtra("USERNAME",professor.getName());
+                    intent.putExtra(USER_NAME,professor.getName());
                 }
                 intent.putExtra("USERTYPE",type);
                 intent.putExtra("USERID",currentUser.getUid());

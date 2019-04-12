@@ -28,7 +28,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/complete_name"
-                android:inputType="text" />
+                android:inputType="text"
+                android:backgroundTint="@color/colorWhite"/>
 
         </android.support.design.widget.TextInputLayout>
 
@@ -44,7 +45,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/email"
-                android:inputType="textEmailAddress" />
+                android:inputType="textEmailAddress"
+                android:backgroundTint="@color/colorWhite"/>
 
         </android.support.design.widget.TextInputLayout>
 
@@ -62,7 +64,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/password"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:backgroundTint="@color/colorWhite"/>
 
         </android.support.design.widget.TextInputLayout>
 
@@ -80,7 +83,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/confirm_password"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:backgroundTint="@color/colorWhite"/>
 
         </android.support.design.widget.TextInputLayout>
 
@@ -100,7 +104,6 @@
 
             <Spinner
                 android:id="@+id/spinner_sign_up"
-                style="@style/textContentBlack"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:entries="@array/array_spinner" />
