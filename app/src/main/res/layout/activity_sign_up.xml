@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/splash_color"
+    android:background="@color/appColor"
     android:gravity="center"
     android:orientation="vertical"
     android:padding="26dp"
@@ -19,72 +19,72 @@
         <android.support.design.widget.TextInputLayout
             android:id="@+id/layout_name"
             style="@style/inputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:textColorHint="@color/colorWhite">
+            android:textColorHint="@color/colorBlack">
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/name"
-                style="@style/textContentWhite"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/complete_name"
-                android:inputType="text"
-                android:backgroundTint="@color/colorWhite"/>
+                android:inputType="textPersonName" />
 
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/layout_email"
             style="@style/inputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:textColorHint="@color/colorWhite">
+            android:textColorHint="@color/colorBlack">
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/email"
-                style="@style/textContentWhite"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorBlack"
                 android:hint="@string/email"
-                android:inputType="textEmailAddress"
-                android:backgroundTint="@color/colorWhite"/>
+                android:inputType="textEmailAddress" />
 
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/layout_password"
             style="@style/inputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             app:passwordToggleEnabled="true"
-            app:passwordToggleTint="@color/colorWhite"
-            android:textColorHint="@color/colorWhite">
+            app:passwordToggleTint="@color/colorBlack">
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/password"
-                style="@style/textContentWhite"
+                style="@style/textContentBlack"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/password"
-                android:inputType="textPassword"
-                android:backgroundTint="@color/colorWhite"/>
+                android:inputType="textPassword" />
 
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/layout_confirm_password"
             style="@style/inputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             app:passwordToggleEnabled="true"
-            app:passwordToggleTint="@color/colorWhite"
-            android:textColorHint="@color/colorWhite">
+            app:passwordToggleTint="@color/colorBlack">
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/confirm_password"
-                style="@style/textContentWhite"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/confirm_password"
-                android:inputType="textPassword"
-                android:backgroundTint="@color/colorWhite"/>
+                android:inputType="textPassword" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -95,7 +95,7 @@
 
             <TextView
                 android:id="@+id/i_am"
-                style="@style/textContentWhite"
+                style="@style/textContentBlack"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:paddingStart="10dp"
@@ -116,20 +116,20 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="50dp">
+        android:layout_marginTop="50dp"
+        android:orientation="vertical">
 
         <Button
             android:id="@+id/sign_up_button"
             style="@style/buttonPattern"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/sign_up_button"
-            android:layout_marginBottom="10dp"/>
+            android:layout_marginBottom="10dp"
+            android:text="@string/sign_up_button" />
 
         <TextView
             android:id="@+id/sign_in_text"
-            style="@style/textContentWhite"
+            style="@style/textContentBlack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -146,7 +146,7 @@
 
         <TextView
             android:id="@+id/privacy"
-            style="@style/textContentWhite"
+            style="@style/textContentBlack"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/policy_privacy"
