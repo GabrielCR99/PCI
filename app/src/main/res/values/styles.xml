@@ -64,6 +64,7 @@
         <item name="android:textColor">@color/colorWhite</item>
         <item name="android:textColorHighlight">@color/colorWhite</item>
         <item name="android:textColorLink">@color/colorWhite</item>
+        <item name="android:textColorHint">@color/colorWhite</item>
     </style>
 
     <style name="editTextStyleBlack">
@@ -71,6 +72,8 @@
         <item name="android:textColor">@color/colorBlack</item>
         <item name="android:textColorHighlight">@color/colorBlack</item>
         <item name="android:textColorLink">@color/colorBlack</item>
+        <item name="android:textColorHint">@color/colorBlack</item>
+        <item name="android:colorAccent">@color/colorBlack</item>
     </style>
 
     <style name="mySpinnerItemStyle" parent="@android:style/Widget.Holo.DropDownItem.Spinner">
