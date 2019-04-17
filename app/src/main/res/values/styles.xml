@@ -22,13 +22,13 @@
     </style>
 
     <style name="textContentWhite">
-        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textColor">@color/colorWhite</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">14sp</item>
     </style>
 
     <style name="textContentWhiteLarge">
-        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textColor">@color/colorWhite</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textAppearance">@style/Base.TextAppearance.AppCompat.Large</item>
     </style>
@@ -64,6 +64,17 @@
         <item name="android:textColor">@color/colorWhite</item>
         <item name="android:textColorHighlight">@color/colorWhite</item>
         <item name="android:textColorLink">@color/colorWhite</item>
+    </style>
+
+    <style name="editTextStyleBlack">
+        <item name="android:backgroundTint">@color/colorBlack</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textColorHighlight">@color/colorBlack</item>
+        <item name="android:textColorLink">@color/colorBlack</item>
+    </style>
+
+    <style name="mySpinnerItemStyle" parent="@android:style/Widget.Holo.DropDownItem.Spinner">
+        <item name="android:textColor">@color/colorWhite</item>
     </style>
 
 </resources>

@@ -78,4 +78,7 @@
     <string name="student_info">STUDENT_INFO</string>
     <string name="start_time">start time</string>
     <string name="end_time">end time</string>
+    <string name="project">Projeto</string>
+    <string name="bio">Biografia</string>
+    <string name="professor_info">PROFESSOR_INFO</string>
 </resources>

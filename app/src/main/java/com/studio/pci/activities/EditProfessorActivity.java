@@ -2,18 +2,17 @@ package com.studio.pci.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.Spinner;
+
 import com.studio.pci.R;
-import com.studio.pci.models.Student;
-import com.studio.pci.providers.StudentDAO;
+import com.studio.pci.models.Professor;
+import com.studio.pci.providers.ProfessorDAO;
 import com.studio.pci.utils.DatePickerDialogHelper;
 import com.studio.pci.utils.FormHelper;
 
@@ -25,27 +24,33 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class EditStudentActivity extends AppCompatActivity {
+public class EditProfessorActivity extends AppCompatActivity {
 
-    @BindView(R.id.student_name_edit)
+    @BindView(R.id.professor_name_edit)
     EditText nameEditText;
 
     @BindView(R.id.nameInputLayout)
     TextInputLayout nameTextInputLayout;
 
-    @BindView(R.id.student_birthDate_edit)
+    @BindView(R.id.professor_birthDate_edit)
     EditText birthDateEditText;
 
-    @BindView(R.id.spinner_student_edit)
+    @BindView(R.id.spinner_professor_edit)
     Spinner genderSpinner;
 
-    @BindView(R.id.student_face_edit)
+    @BindView(R.id.professor_degree_edit)
+    EditText degreeEditText;
+
+    @BindView(R.id.professor_face_edit)
     EditText faceEditText;
 
-    @BindView(R.id.student_skype_edit)
+    @BindView(R.id.professor_skype_edit)
     EditText skypeEditText;
 
-    @BindView(R.id.student_edit_button)
+    @BindView(R.id.professor_bio_edit)
+    EditText bioEditText;
+
+    @BindView(R.id.professor_edit_button)
     Button confirmButton;
 
     private ArrayList<String> info;
@@ -53,19 +58,20 @@ public class EditStudentActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_student);
+        setContentView(R.layout.activity_edit_professor);
         ButterKnife.bind(this);
 
         Intent intent = getIntent();
-        info = intent.getStringArrayListExtra(getString(R.string.student_info));
+        info = intent.getStringArrayListExtra(getString(R.string.professor_info));
 
         nameEditText.setText(info.get(1));
         if(info.get(2).equals(getString(R.string.male))) genderSpinner.setSelection(0);
         else if(info.get(2).equals(getString(R.string.female))) genderSpinner.setSelection(1);
         else genderSpinner.setSelection(2);
         birthDateEditText.setText(info.get(3));
-        faceEditText.setText(info.get(6));
-        skypeEditText.setText(info.get(7));
+        degreeEditText.setText(info.get(5));
+        faceEditText.setText(info.get(7));
+        skypeEditText.setText(info.get(8));
 
         DatePickerDialogHelper.setDatePickerDialog(birthDateEditText,this,new SimpleDateFormat(getString(R.string.date_formatter), new Locale("pt", "BR")));
     }
@@ -80,7 +86,7 @@ public class EditStudentActivity extends AppCompatActivity {
         return validate;
     }
 
-    @OnClick(R.id.student_edit_button)
+    @OnClick(R.id.professor_edit_button)
     public void confirmButtonClick(){
         String name = nameEditText.getText().toString();
         if(validateForm(name)){
@@ -89,14 +95,16 @@ public class EditStudentActivity extends AppCompatActivity {
     }
 
     private void confirmEdit() {
-        StudentDAO studentDAO = new StudentDAO();
+        ProfessorDAO professorDAO = new ProfessorDAO();
         String name = nameEditText.getText().toString();
         String gender = genderSpinner.getSelectedItem().toString();
         String birthDate = birthDateEditText.getText().toString();
+        String degree = degreeEditText.getText().toString();
         String facebook = faceEditText.getText().toString();
         String skype = skypeEditText.getText().toString();
-        Student student = new Student(info.get(0),name,gender,birthDate,info.get(4),info.get(5),facebook,skype,true);
-        studentDAO.update(student.getId(),student);
+        String bio = bioEditText.getText().toString();
+        Professor professor = new Professor(info.get(0),name,gender,birthDate,info.get(4),degree,info.get(6),facebook,skype,bio,true);
+        professorDAO.update(professor.getId(),professor);
         onBackPressed();
         finish();
     }
