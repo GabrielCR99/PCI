@@ -99,28 +99,41 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/facebook"/>
+                android:text="@string/bio"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/professor_facebook"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                android:id="@+id/professor_bio"
                 android:layout_marginBottom="25sp"
-                android:linksClickable="true"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/skype"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/professor_skype"
-                android:layout_marginBottom="25sp"
-                android:linksClickable="true"
+                android:lines="3"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/professor_face"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@color/colorWhite"
+                    android:contentDescription="@string/facebook"
+                    android:src="@drawable/facebook_32" />
+
+                <ImageButton
+                    android:id="@+id/professor_skype"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginStart="20sp"
+                    android:background="@color/colorWhite"
+                    android:contentDescription="@string/skype"
+                    android:src="@drawable/skype_32" />
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"

@@ -1,5 +1,6 @@
 package com.studio.pci.models;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
 
@@ -17,7 +18,7 @@ public class Professor implements Serializable {
     private String bio;
     private boolean enable;
 
-    public Professor(String id, String name, String email, boolean enable) {
+    public Professor(String id, String name, String email,String bio, boolean enable) {
         this.id = id;
         this.name = name;
         gender = "";
@@ -27,6 +28,24 @@ public class Professor implements Serializable {
         this.email = email;
         facebookUrl = "";
         skypeUrl = "";
+        bio = "";
+        this.enable = enable;
+    }
+
+    public Professor(){
+    }
+
+    public Professor(String id, String name, String gender, String birthDate, String picture, String degree, String email, String facebookUrl, String skypeUrl, String bio, boolean enable) {
+        this.id = id;
+        this.name = name;
+        this.gender = gender;
+        this.birthDate = birthDate;
+        this.picture = picture;
+        this.degree = degree;
+        this.email = email;
+        this.facebookUrl = facebookUrl;
+        this.skypeUrl = skypeUrl;
+        this.bio = bio;
         this.enable = enable;
     }
 
@@ -53,21 +72,20 @@ public class Professor implements Serializable {
         return Objects.hash(getId(), getName(), getGender(), getBirthDate(), getPicture(), getDegree(), getEmail(), getFacebookUrl(), getSkypeUrl(), bio, isEnable());
     }
 
-    public Professor(){
-    }
-
-    public Professor(String id, String name, String gender, String birthDate, String picture, String degree, String email, String facebookUrl, String skypeUrl, String bio, boolean enable) {
-        this.id = id;
-        this.name = name;
-        this.gender = gender;
-        this.birthDate = birthDate;
-        this.picture = picture;
-        this.degree = degree;
-        this.email = email;
-        this.facebookUrl = facebookUrl;
-        this.skypeUrl = skypeUrl;
-        this.bio = bio;
-        this.enable = enable;
+    public ArrayList<String> toArray(){
+        ArrayList<String> professorInfo = new ArrayList<>();
+        professorInfo.add(id);
+        professorInfo.add(name);
+        professorInfo.add(gender);
+        professorInfo.add(birthDate);
+        professorInfo.add(picture);
+        professorInfo.add(degree);
+        professorInfo.add(email);
+        professorInfo.add(facebookUrl);
+        professorInfo.add(skypeUrl);
+        professorInfo.add(bio);
+        professorInfo.add(enable ? "true" : "false");
+        return professorInfo;
     }
 
     public String getId() {

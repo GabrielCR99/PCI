@@ -2,11 +2,14 @@ package com.studio.pci.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -56,7 +59,7 @@ public class EditStudentActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         Intent intent = getIntent();
-        info = intent.getStringArrayListExtra("STUDENT_INFO");
+        info = intent.getStringArrayListExtra(getString(R.string.student_info));
 
         nameEditText.setText(info.get(1));
         if(info.get(2).equals(getString(R.string.male))) genderSpinner.setSelection(0);

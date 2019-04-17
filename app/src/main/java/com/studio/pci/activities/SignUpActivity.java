@@ -132,7 +132,7 @@ public class SignUpActivity extends BaseActivity {
                             StudentDAO studentDAO = new StudentDAO();
                             studentDAO.create(id, student);
                         } else {
-                            Professor professor = new Professor(id, nameField.getText().toString(), emailField.getText().toString(), true);
+                            Professor professor = new Professor(id, nameField.getText().toString(), emailField.getText().toString(),"", true);
                             ProfessorDAO professorDAO = new ProfessorDAO();
                             professorDAO.create(id, professor);
                         }

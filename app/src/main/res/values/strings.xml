@@ -77,4 +77,6 @@
     <string name="finished">Finalizado</string>
     <string name="student_info">STUDENT_INFO</string>
     <string name="project">Projeto</string>
+    <string name="bio">Biografia</string>
+    <string name="professor_info">PROFESSOR_INFO</string>
 </resources>

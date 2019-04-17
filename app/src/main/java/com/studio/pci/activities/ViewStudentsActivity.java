@@ -63,7 +63,6 @@ public class ViewStudentsActivity extends AppCompatActivity {
                         adapter.notifyDataSetChanged();
                     }
                 }
-                // TODO Remove EventListener so the activity cannot close when DataChange
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
