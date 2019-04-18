@@ -12,18 +12,19 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="160sp"
+        android:layout_height="170dp"
         android:orientation="vertical"
         android:layout_gravity="center"
         android:background="@drawable/splash_color">
 
+
         <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/student_photo"
             android:layout_width="128dp"
             android:layout_height="128dp"
             android:layout_gravity="center"
             android:layout_marginTop="28dp"
-            android:id="@+id/student_photo"
-            android:src="@mipmap/ic_launcher_round"/>
+            android:src="@mipmap/ic_launcher_round" />
 
     </LinearLayout>
 
@@ -51,7 +52,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/complete_name"
-                    android:inputType="textPersonName"
+                    android:inputType="textCapWords"
                     style="@style/editTextStyleBlack"/>
 
             </android.support.design.widget.TextInputLayout>

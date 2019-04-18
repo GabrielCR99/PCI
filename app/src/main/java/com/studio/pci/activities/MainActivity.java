@@ -48,8 +48,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
 
-
-
         Intent intent = getIntent();
         type = intent.getIntExtra("USERTYPE",0);
         String name = intent.getStringExtra("USERNAME");
@@ -91,9 +89,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
 
             case R.id.menu_project:
+                onBackPressed();
                 Intent intent = new Intent(this, FragmentActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.putExtra("USERTYPE",type);
                 startActivity(intent);
                 break;
 
@@ -103,10 +101,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 finish();
                 break;
             case R.id.menu_students:
+                onBackPressed();
                 startActivity(new Intent(this, ViewStudentsActivity.class));
                 break;
             case R.id.menu_profile:
                 Intent iProfile;
+                onBackPressed();
                 switch (type){
                     case 1:
                         iProfile = new Intent(MainActivity.this,StudentActivity.class);
@@ -129,4 +129,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         return false;
     }
+
 }
