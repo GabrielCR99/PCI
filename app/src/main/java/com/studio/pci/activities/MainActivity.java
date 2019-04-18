@@ -126,6 +126,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         break;
                 }
                 break;
+
+            case R.id.menu_privacy_policy:
+                startActivity(new Intent(this, PrivacyPolicyActivity.class));
+                break;
         }
         return false;
     }

@@ -3,37 +3,67 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.studio.pci">
 
-    <uses-permission android:name="android.permission.INTERNET"> </uses-permission>
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
+        android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:ignore="GoogleAppIndexingWarning"
-        android:fullBackupContent="true">
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".activities.PrivacyPolicyActivity"
+            android:label="Privacy Policy">
+
+        </activity>
         <activity
-            android:name="com.studio.pci.activities.SplashActivity"
+            android:name=".activities.SplashActivity"
             android:theme="@style/AppTheme.FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.SignInActivity" android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".activities.SignUpActivity" android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".activities.ResetPasswordActivity" android:label="@string/reset_passwd" android:parentActivityName=".activities.MainActivity"/>
-        <activity android:name=".activities.MainActivity" android:label="@string/home" android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".activities.ProfessorActivity" android:label="@string/professor" android:parentActivityName=".activities.MainActivity"/>
-        <activity android:name=".activities.StudentActivity" android:label="@string/student" android:parentActivityName=".activities.MainActivity"/>
-        <activity android:name=".activities.ViewStudentsActivity" android:label="@string/students" android:parentActivityName=".activities.MainActivity"/>
-        <activity android:name=".activities.EditStudentActivity" android:label="@string/edit_profile" android:parentActivityName=".activities.StudentActivity"/>
+        <activity
+            android:name=".activities.SignInActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.SignUpActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.ResetPasswordActivity"
+            android:label="@string/reset_passwd"
+            android:parentActivityName=".activities.MainActivity" />
+        <activity
+            android:name=".activities.MainActivity"
+            android:label="@string/home"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.ProfessorActivity"
+            android:label="@string/professor"
+            android:parentActivityName=".activities.MainActivity" />
+        <activity
+            android:name=".activities.StudentActivity"
+            android:label="@string/student"
+            android:parentActivityName=".activities.MainActivity" />
+        <activity
+            android:name=".activities.ViewStudentsActivity"
+            android:label="@string/students"
+            android:parentActivityName=".activities.MainActivity" />
+        <activity
+            android:name=".activities.EditStudentActivity"
+            android:label="@string/edit_profile"
+            android:parentActivityName=".activities.StudentActivity" />
         <activity android:name=".activities.ProjectActivity" />
-
         <activity android:name=".activities.BaseActivity" />
-        <activity android:name=".activities.FragmentActivity" android:label="@string/my_projects" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".activities.FragmentActivity"
+            android:label="@string/my_projects"
+            android:theme="@style/AppTheme.NoActionBar" />
+
     </application>
 
 </manifest>
