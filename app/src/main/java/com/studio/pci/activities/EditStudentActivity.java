@@ -30,13 +30,17 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 import com.studio.pci.R;
 import com.studio.pci.models.Student;
 import com.studio.pci.models.Upload;
@@ -80,7 +84,7 @@ public class EditStudentActivity extends AppCompatActivity {
 
 
     @BindView(R.id.student_photo)
-    ImageView photo;
+    ImageView imageView;
 
     private DatabaseReference databaseReference;
     private StorageReference storageReference;
@@ -108,6 +112,24 @@ public class EditStudentActivity extends AppCompatActivity {
         skypeEditText.setText(info.get(7));
 
         DatePickerDialogHelper.setDatePickerDialog(birthDateEditText,this,new SimpleDateFormat(getString(R.string.date_formatter), new Locale("pt", "BR")));
+        setProfileImage();
+    }
+
+    private void setProfileImage() {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("profile_photo").child(info.get(0));
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()) {
+                    Upload upload = dataSnapshot.getValue(Upload.class);
+                    Picasso.get().load(upload.getPhoto()).placeholder(R.drawable.ic_launcher_background).into(imageView);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(EditStudentActivity.this,databaseError.getMessage(),Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     private boolean validateForm(String name){
@@ -145,10 +167,14 @@ public class EditStudentActivity extends AppCompatActivity {
             .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Upload upload = new Upload(taskSnapshot.getUploadSessionUri().toString());
-                    String uploadId = student.getId();
-                    databaseReference.child(uploadId).setValue(upload);
-                    finish();
+                    storage.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            Upload upload = new Upload(uri.toString());
+                            databaseReference.child(student.getId()).setValue(upload);
+                            finish();
+                        }
+                    });
                 }
             })
             .addOnFailureListener(new OnFailureListener() {

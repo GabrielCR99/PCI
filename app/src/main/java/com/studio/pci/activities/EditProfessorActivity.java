@@ -2,16 +2,26 @@ package com.studio.pci.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 import com.studio.pci.R;
 import com.studio.pci.models.Professor;
+import com.studio.pci.models.Upload;
 import com.studio.pci.providers.ProfessorDAO;
 import com.studio.pci.utils.DatePickerDialogHelper;
 import com.studio.pci.utils.FormHelper;
@@ -53,6 +63,9 @@ public class EditProfessorActivity extends AppCompatActivity {
     @BindView(R.id.professor_edit_button)
     Button confirmButton;
 
+    @BindView(R.id.professor_photo)
+    ImageView imageView;
+
     private ArrayList<String> info;
 
     @Override
@@ -74,6 +87,7 @@ public class EditProfessorActivity extends AppCompatActivity {
         skypeEditText.setText(info.get(8));
 
         DatePickerDialogHelper.setDatePickerDialog(birthDateEditText,this,new SimpleDateFormat(getString(R.string.date_formatter), new Locale("pt", "BR")));
+        setProfileImage();
     }
 
     private boolean validateForm(String name){
@@ -107,5 +121,22 @@ public class EditProfessorActivity extends AppCompatActivity {
         professorDAO.update(professor.getId(),professor);
         onBackPressed();
         finish();
+    }
+
+    private void setProfileImage() {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("profile_photo").child(info.get(0));
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()) {
+                    Upload upload = dataSnapshot.getValue(Upload.class);
+                    Picasso.get().load(upload.getPhoto()).placeholder(R.drawable.ic_launcher_background).into(imageView);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(EditProfessorActivity.this,databaseError.getMessage(),Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }

@@ -13,8 +13,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -23,8 +25,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 import com.studio.pci.R;
 import com.studio.pci.models.Student;
+import com.studio.pci.models.Upload;
 
 import java.util.ArrayList;
 
@@ -53,6 +57,9 @@ public class StudentActivity extends AppCompatActivity {
 
     @BindView(R.id.student_layout_button)
     LinearLayout linearLayout;
+
+    @BindView(R.id.student_photo)
+    ImageView imageView;
 
     private ArrayList<String> info;
     private DatabaseReference databaseReference;
@@ -96,8 +103,26 @@ public class StudentActivity extends AppCompatActivity {
         linearLayout.addView(button);
     }
 
+    private void setProfileImage() {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("profile_photo").child(userID);
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()) {
+                    Upload upload = dataSnapshot.getValue(Upload.class);
+                    Picasso.get().load(upload.getPhoto()).placeholder(R.drawable.ic_launcher_background).into(imageView);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(StudentActivity.this,databaseError.getMessage(),Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
     private void getInfo() {
-        databaseReference.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
+        setProfileImage();
+        databaseReference.child(userID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
@@ -139,7 +164,6 @@ public class StudentActivity extends AppCompatActivity {
                     else skype.setEnabled(false);
 
                     info = student.toArray();
-                    databaseReference.removeEventListener(this);
                 }
             }
             @Override
