@@ -54,15 +54,8 @@ public class SplashActivity extends BaseActivity implements Runnable {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.child("users").child(currentUser.getUid()).getValue(User.class);
                 Intent intent = new Intent(SplashActivity.this,MainActivity.class);
-                if(user.getType().equals(getString(R.string.student))){
-                    type = 1;
-                    Student student = dataSnapshot.child("students").child(currentUser.getUid()).getValue(Student.class);
-                    intent.putExtra(USER_NAME,student.getName());
-                }else{
-                    type = 2;
-                    Professor professor = dataSnapshot.child("professors").child(currentUser.getUid()).getValue(Professor.class);
-                    intent.putExtra(USER_NAME,professor.getName());
-                }
+                if(user.getType().equals(getString(R.string.student))) type = 1;
+                else type = 2;
                 intent.putExtra("USERTYPE",type);
                 intent.putExtra("USERID",currentUser.getUid());
                 startActivity(intent);

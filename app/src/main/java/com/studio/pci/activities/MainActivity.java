@@ -10,6 +10,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -63,10 +64,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         Intent intent = getIntent();
         type = intent.getIntExtra("USERTYPE",0);
-        String name = intent.getStringExtra("USERNAME");
         uid = intent.getStringExtra("USERID");
 
-        setNavInfo(name,type);
+        setNavInfo(type);
     }
 
     private void setProfileImage() {
@@ -86,12 +86,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
     }
 
-    private void setNavInfo(String name, int type) {
-        TextView nameTextView = header.findViewById(R.id.nav_name);
+    private void setNavInfo(int type) {
+        final TextView nameTextView = header.findViewById(R.id.nav_name);
         TextView typeTextView = header.findViewById(R.id.nav_type);
         imageView = header.findViewById(R.id.user_photo);
-        nameTextView.setText(name);
-        if(type==1) typeTextView.setText(getString(R.string.student));
+        if(type==1) {
+            typeTextView.setText(getString(R.string.student));
+            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("students");
+            reference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    nameTextView.setText(dataSnapshot.child(uid).child("name").getValue(String.class));
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    Log.v("NAME DATABASE ERROR",databaseError.getMessage());
+                }
+            });
+        }
         else if(type==2) typeTextView.setText(getString(R.string.professor));
         else typeTextView.setText(getString(R.string.null_user));
         setProfileImage();
