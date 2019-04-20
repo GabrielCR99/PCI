@@ -30,7 +30,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
-public class ProjectActivity extends AppCompatActivity {
+public class ProjectActivity extends NavigationActivity {
 
     @BindView(R.id.project_title)
     TextView titleTextView;
@@ -52,9 +52,11 @@ public class ProjectActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_project);
+        super.onCreate(savedInstanceState);
+
         ButterKnife.bind(this);
+
         Intent intent = getIntent();
         projectID = intent.getStringExtra("PROJECT_ID");
         setInfo();
@@ -91,6 +93,13 @@ public class ProjectActivity extends AppCompatActivity {
     @OnClick(R.id.students_project)
     public void goToStudents(){
         Intent intent = new Intent(ProjectActivity.this,ViewStudentsActivity.class);
+        intent.putExtra("PROJECT_ID",projectID);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.professors_project)
+    public void goToProfessors(){
+        Intent intent = new Intent(ProjectActivity.this,ViewProfessorsActivity.class);
         intent.putExtra("PROJECT_ID",projectID);
         startActivity(intent);
     }

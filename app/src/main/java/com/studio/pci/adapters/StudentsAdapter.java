@@ -52,7 +52,9 @@ public class StudentsAdapter extends RecyclerView.Adapter<StudentsAdapter.Studen
     public void onBindViewHolder(@NonNull final StudentViewHolder viewHolder, final int i) {
         Upload upload = uploads.get(i);
         final Student student = students.get(i);
-        viewHolder.nameTextView.setText(student.getName());
+        String[] name = student.getName().split(" ");
+        String first = name[0];
+        viewHolder.nameTextView.setText(first);
         if(!upload.getPhoto().equals("null")) Picasso.get().load(upload.getPhoto()).placeholder(R.drawable.ic_launcher_background).into(viewHolder.imageView);
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

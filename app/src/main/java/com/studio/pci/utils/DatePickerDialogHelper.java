@@ -9,9 +9,6 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
-import com.studio.pci.R;
-import com.studio.pci.activities.BaseActivity;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

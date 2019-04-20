@@ -13,20 +13,11 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-    <android.support.design.widget.TabLayout
-        android:id="@+id/tab_layout_main"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:elevation="0dp"
-        app:tabGravity="fill"
-        app:tabMode="fixed"
-        app:tabTextColor="@color/colorAccent" />
-
     <android.support.v7.widget.RecyclerView
+        android:paddingTop="30dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/recycler_students"
+        android:id="@+id/recycler_users_view"
         android:visibility="visible"/>
 
 </LinearLayout>

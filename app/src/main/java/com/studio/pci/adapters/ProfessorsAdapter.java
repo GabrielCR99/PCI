@@ -20,7 +20,9 @@ import com.squareup.picasso.Picasso;
 import com.studio.pci.R;
 import com.studio.pci.activities.MainActivity;
 import com.studio.pci.activities.ProfessorActivity;
+import com.studio.pci.activities.StudentActivity;
 import com.studio.pci.models.Professor;
+import com.studio.pci.models.Student;
 import com.studio.pci.models.Upload;
 
 import java.net.ServerSocket;
@@ -32,10 +34,12 @@ import butterknife.ButterKnife;
 public class ProfessorsAdapter extends RecyclerView.Adapter<ProfessorsAdapter.ProfessorViewHolder> {
 
     private List<Professor> professors;
+    private List<Upload> uploads;
     private Context context;
 
-    public ProfessorsAdapter(List<Professor> professors, Context context) {
+    public ProfessorsAdapter(List<Professor> professors,List<Upload> uploads, Context context) {
         this.professors = professors;
+        this.uploads = uploads;
         this.context = context;
     }
 
@@ -48,21 +52,18 @@ public class ProfessorsAdapter extends RecyclerView.Adapter<ProfessorsAdapter.Pr
 
     @Override
     public void onBindViewHolder(@NonNull final ProfessorViewHolder viewHolder, int i) {
+        Upload upload = uploads.get(i);
         final Professor professor = professors.get(i);
-        viewHolder.nameTextView.setText(professor.getName());
-
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("profile_photo").child(professor.getId());
-        reference.addValueEventListener(new ValueEventListener() {
+        String[] name = professor.getName().split(" ");
+        String first = name[0];
+        viewHolder.nameTextView.setText(first);
+        if(!upload.getPhoto().equals("null")) Picasso.get().load(upload.getPhoto()).placeholder(R.drawable.ic_launcher_background).into(viewHolder.imageView);
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()) {
-                    Upload upload = dataSnapshot.getValue(Upload.class);
-                    Picasso.get().load(upload.getPhoto()).placeholder(R.drawable.ic_launcher_background).into(viewHolder.imageView);
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.e("BIND INFO ERROR",databaseError.getMessage());
+            public void onClick(View v) {
+                Intent intent = new Intent(context, StudentActivity.class);
+                intent.putExtra("UID",professor.getId());
+                context.startActivity(intent);
             }
         });
 

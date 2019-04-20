@@ -173,7 +173,6 @@ public class StudentActivity extends AppCompatActivity {
         });
     }
 
-
     public Intent getFBIntent(Context context, String facebookId) {
         try {
             // Check if FB app is even installed

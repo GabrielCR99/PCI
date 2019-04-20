@@ -15,9 +15,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.studio.pci.R;
-import com.studio.pci.adapters.StudentsAdapter;
+import com.studio.pci.adapters.ProfessorsAdapter;
+import com.studio.pci.models.Professor;
 import com.studio.pci.models.Project;
-import com.studio.pci.models.Student;
 import com.studio.pci.models.Upload;
 
 import java.util.ArrayList;
@@ -26,12 +26,12 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ViewStudentsActivity extends AppCompatActivity {
+public class ViewProfessorsActivity extends AppCompatActivity {
 
     private String projectID;
-    private List<Student> students;
+    private List<Professor> professors;
     private List<Upload> uploads;
-    private StudentsAdapter adapter;
+    private ProfessorsAdapter adapter;
     private Project project;
 
     @BindView(R.id.recycler_users_view)
@@ -45,32 +45,26 @@ public class ViewStudentsActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         projectID = intent.getStringExtra("PROJECT_ID");
-        setStudents();
+        setProfessors();
         setRecyclerView();
     }
 
-    private void setRecyclerView() {
-        recyclerView.setLayoutManager(new GridLayoutManager(this,3));
-        adapter = new StudentsAdapter(students,uploads,this);
-        recyclerView.setAdapter(adapter);
-    }
-
-    private void setStudents() {
-        students = new ArrayList<>();
+    private void setProfessors() {
+        professors = new ArrayList<>();
         uploads = new ArrayList<>();
         DatabaseReference db = FirebaseDatabase.getInstance().getReference();
         db.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 project = dataSnapshot.child("projects").child(projectID).getValue(Project.class);
-                students.clear();
+                professors.clear();
                 uploads.clear();
-                for(String id : project.getStudents()){
-                    Student student = dataSnapshot.child("students").child(id).getValue(Student.class);
+                for(String id : project.getProfessors()){
+                    Professor professor = dataSnapshot.child("professors").child(id).getValue(Professor.class);
                     Upload upload;
                     if(dataSnapshot.child("profile_photo").child(id).exists()) upload = dataSnapshot.child("profile_photo").child(id).getValue(Upload.class);
                     else upload = new Upload("null");
-                    students.add(student);
+                    professors.add(professor);
                     uploads.add(upload);
                     adapter.notifyDataSetChanged();
                 }
@@ -82,8 +76,9 @@ public class ViewStudentsActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
+    private void setRecyclerView() {
+        recyclerView.setLayoutManager(new GridLayoutManager(this,3));
+        adapter = new ProfessorsAdapter(professors,uploads,this);
+        recyclerView.setAdapter(adapter);
     }
 }
