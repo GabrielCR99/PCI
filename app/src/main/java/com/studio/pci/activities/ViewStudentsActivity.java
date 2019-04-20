@@ -20,6 +20,7 @@ import com.studio.pci.R;
 import com.studio.pci.adapters.StudentsAdapter;
 import com.studio.pci.models.Project;
 import com.studio.pci.models.Student;
+import com.studio.pci.models.Upload;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +32,7 @@ public class ViewStudentsActivity extends AppCompatActivity {
 
     private String projectID;
     private List<Student> students;
+    private List<Upload> uploads;
     private StudentsAdapter adapter;
     private Project project;
 
@@ -51,25 +53,28 @@ public class ViewStudentsActivity extends AppCompatActivity {
 
     private void setRecyclerView() {
         recyclerView.setLayoutManager(new GridLayoutManager(this,3));
-        adapter = new StudentsAdapter(students,this);
+        adapter = new StudentsAdapter(students,uploads,this);
         recyclerView.setAdapter(adapter);
     }
 
     private void setStudents() {
         students = new ArrayList<>();
+        uploads = new ArrayList<>();
         DatabaseReference db = FirebaseDatabase.getInstance().getReference();
         db.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 project = dataSnapshot.child("projects").child(projectID).getValue(Project.class);
                 students.clear();
+                uploads.clear();
                 for(String id : project.getStudents()){
                     Student student = dataSnapshot.child("students").child(id).getValue(Student.class);
-                    Log.v("STUDENT_INFO",student.toString());
-                    if(student.isEnable()) {
-                        students.add(student);
-                        adapter.notifyDataSetChanged();
-                    }
+                    Upload upload;
+                    if(dataSnapshot.child("profile_photo").child(id).exists()) upload = dataSnapshot.child("profile_photo").child(id).getValue(Upload.class);
+                    else upload = new Upload("null");
+                    students.add(student);
+                    uploads.add(upload);
+                    adapter.notifyDataSetChanged();
                 }
             }
             @Override

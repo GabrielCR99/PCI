@@ -32,10 +32,12 @@ import butterknife.ButterKnife;
 public class StudentsAdapter extends RecyclerView.Adapter<StudentsAdapter.StudentViewHolder> {
 
     private List<Student> students;
+    private List<Upload> uploads;
     private Context context;
 
-    public StudentsAdapter(List<Student> students, Context context) {
+    public StudentsAdapter(List<Student> students, List<Upload> uploads,Context context) {
         this.students = students;
+        this.uploads = uploads;
         this.context = context;
     }
 
@@ -48,24 +50,10 @@ public class StudentsAdapter extends RecyclerView.Adapter<StudentsAdapter.Studen
 
     @Override
     public void onBindViewHolder(@NonNull final StudentViewHolder viewHolder, final int i) {
+        Upload upload = uploads.get(i);
         final Student student = students.get(i);
         viewHolder.nameTextView.setText(student.getName());
-
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("profile_photo").child(student.getId());
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()) {
-                    Upload upload = dataSnapshot.getValue(Upload.class);
-                    Picasso.get().load(upload.getPhoto()).placeholder(R.drawable.ic_launcher_background).into(viewHolder.imageView);
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.e("BIND_INFO_ERROR",databaseError.getMessage());
-            }
-        });
-
+        if(!upload.getPhoto().equals("null")) Picasso.get().load(upload.getPhoto()).placeholder(R.drawable.ic_launcher_background).into(viewHolder.imageView);
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -40,6 +40,7 @@ public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.Projec
     public void onBindViewHolder(@NonNull ProjectsAdapter.ProjectViewHolder viewHolder, int i) {
         final Project project = projects.get(i);
         viewHolder.nameTextView.setText(project.getTitle());
+        viewHolder.infoTextView.setText(project.getDescription());
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
