@@ -1,4 +1,4 @@
-package com.studio.pci.activities;
+package com.studio.pci.fragments;
 
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -7,9 +7,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -26,6 +28,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 import com.studio.pci.R;
+import com.studio.pci.activities.EditStudentActivity;
 import com.studio.pci.models.Professor;
 import com.studio.pci.models.Upload;
 
@@ -34,7 +37,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ProfessorActivity extends AppCompatActivity {
+public class ProfessorFragment extends Fragment {
 
     @BindView(R.id.professor_name)
     TextView name;
@@ -66,44 +69,38 @@ public class ProfessorActivity extends AppCompatActivity {
     @BindView(R.id.professor_photo)
     ImageView imageView;
 
+    @BindView(R.id.professor_edit_button)
+    Button button;
+
     private ArrayList<String> info;
     private DatabaseReference databaseReference;
     private String userID;
+    private View view;
+    private Context context;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_professor_dashboard);
-        ButterKnife.bind(this);
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        this.context = context;
+    }
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("professors");
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        view = inflater.inflate(R.layout.fragment_professor_dashboard,container,false);
+        ButterKnife.bind(this,view);
 
-        Intent intent = getIntent();
-        userID = intent.getStringExtra("UID");
+        databaseReference = FirebaseDatabase.getInstance().getReference("students");
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        Bundle arguments = getArguments();
+        userID = arguments.getString("USERID");
 
         getInfo();
 
-        if(user.getUid().equals(userID)) addButton();
-    }
+        if(!currentUser.getUid().equals(userID)) button.setVisibility(View.INVISIBLE);
 
-    private void addButton() {
-        Button button = new Button(this);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ProfessorActivity.this,EditProfessorActivity.class);
-                intent.putExtra(getString(R.string.professor_info),info);
-                startActivity(intent);
-            }
-        });
-        button.setText(getString(R.string.edit));
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        params.bottomMargin = 25;
-        button.setLayoutParams(params);
-        button.setBackground(getResources().getDrawable(R.color.buttonColor));
-        button.setTextColor(getResources().getColor(R.color.colorWhite));
-        linearLayout.addView(button);
+        return view;
     }
 
     private void setProfileImage() {
@@ -118,7 +115,7 @@ public class ProfessorActivity extends AppCompatActivity {
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(ProfessorActivity.this,databaseError.getMessage(),Toast.LENGTH_LONG).show();
+                Toast.makeText(context,databaseError.getMessage(),Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -130,7 +127,6 @@ public class ProfessorActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
                     final Professor professor = dataSnapshot.getValue(Professor.class);
-                    Log.v("USER_FIREBASE_UID", professor.getId());
                     if(!professor.getName().isEmpty()) name.setText(professor.getName());
                     else name.setText(getString(R.string.null_info));
 
@@ -154,7 +150,7 @@ public class ProfessorActivity extends AppCompatActivity {
                         facebook.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                Intent intent = getFBIntent(ProfessorActivity.this,professor.getFacebookUrl());
+                                Intent intent = getFBIntent(context,professor.getFacebookUrl());
                                 if(intent!=null) startActivity(intent);
                             }
                         });
@@ -174,6 +170,14 @@ public class ProfessorActivity extends AppCompatActivity {
                     else skype.setEnabled(false);
 
                     info = professor.toArray();
+                    button.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(context, EditStudentActivity.class);
+                            intent.putExtra(getString(R.string.professor_info),info);
+                            startActivity(intent);
+                        }
+                    });
                 }
             }
             @Override

@@ -143,6 +143,14 @@
                 android:orientation="vertical"
                 android:id="@+id/professor_layout_button"/>
 
+            <Button
+                android:id="@+id/professor_edit_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/edit"
+                style="@style/buttonPattern"
+                android:layout_marginBottom="25sp"/>
+
         </LinearLayout>
 
     </ScrollView>

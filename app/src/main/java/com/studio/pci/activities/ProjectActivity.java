@@ -30,7 +30,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
-public class ProjectActivity extends NavigationActivity {
+public class ProjectActivity extends AppCompatActivity {
 
     @BindView(R.id.project_title)
     TextView titleTextView;

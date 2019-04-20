@@ -1,5 +1,6 @@
-package com.studio.pci.activities;
+package com.studio.pci.fragments;
 
+import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
@@ -7,9 +8,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -26,7 +30,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 import com.studio.pci.R;
-import com.studio.pci.models.Professor;
+import com.studio.pci.activities.EditStudentActivity;
+import com.studio.pci.models.Student;
 import com.studio.pci.models.Upload;
 
 import java.util.ArrayList;
@@ -34,76 +39,60 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ProfessorActivity extends AppCompatActivity {
+public class StudentFragment extends Fragment {
 
-    @BindView(R.id.professor_name)
+    @BindView(R.id.student_name)
     TextView name;
 
-    @BindView(R.id.professor_gender)
+    @BindView(R.id.student_gender)
     TextView gender;
 
-    @BindView(R.id.professor_birthDate)
+    @BindView(R.id.student_birthDate)
     TextView birthDate;
 
-    @BindView(R.id.professor_email)
+    @BindView(R.id.student_email)
     TextView email;
 
-    @BindView(R.id.professor_degree)
-    TextView degree;
-
-    @BindView(R.id.professor_face)
+    @BindView(R.id.student_face)
     ImageButton facebook;
 
-    @BindView(R.id.professor_skype)
+    @BindView(R.id.student_skype)
     ImageButton skype;
 
-    @BindView(R.id.professor_bio)
-    TextView bio;
-
-    @BindView(R.id.professor_layout_button)
-    LinearLayout linearLayout;
-
-    @BindView(R.id.professor_photo)
+    @BindView(R.id.student_photo)
     ImageView imageView;
 
+    @BindView(R.id.student_edit_button)
+    Button button;
+
+    private View view;
     private ArrayList<String> info;
     private DatabaseReference databaseReference;
     private String userID;
+    private Context context;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_professor_dashboard);
-        ButterKnife.bind(this);
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        this.context = context;
+    }
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("professors");
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        view = inflater.inflate(R.layout.fragment_student_dashboard,container,false);
+        ButterKnife.bind(this,view);
 
-        Intent intent = getIntent();
-        userID = intent.getStringExtra("UID");
+        databaseReference = FirebaseDatabase.getInstance().getReference("students");
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        Bundle arguments = getArguments();
+        userID = arguments.getString("USERID");
 
         getInfo();
 
-        if(user.getUid().equals(userID)) addButton();
-    }
+        if(!currentUser.getUid().equals(userID)) button.setVisibility(View.INVISIBLE);
 
-    private void addButton() {
-        Button button = new Button(this);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ProfessorActivity.this,EditProfessorActivity.class);
-                intent.putExtra(getString(R.string.professor_info),info);
-                startActivity(intent);
-            }
-        });
-        button.setText(getString(R.string.edit));
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        params.bottomMargin = 25;
-        button.setLayoutParams(params);
-        button.setBackground(getResources().getDrawable(R.color.buttonColor));
-        button.setTextColor(getResources().getColor(R.color.colorWhite));
-        linearLayout.addView(button);
+        return view;
     }
 
     private void setProfileImage() {
@@ -118,7 +107,7 @@ public class ProfessorActivity extends AppCompatActivity {
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(ProfessorActivity.this,databaseError.getMessage(),Toast.LENGTH_LONG).show();
+               Log.e("ERROR_IMAGE",databaseError.getMessage());
             }
         });
     }
@@ -129,51 +118,52 @@ public class ProfessorActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
-                    final Professor professor = dataSnapshot.getValue(Professor.class);
-                    Log.v("USER_FIREBASE_UID", professor.getId());
-                    if(!professor.getName().isEmpty()) name.setText(professor.getName());
+                    final Student student = dataSnapshot.getValue(Student.class);
+                    if(!student.getName().isEmpty()) name.setText(student.getName());
                     else name.setText(getString(R.string.null_info));
 
-                    if(!professor.getGender().isEmpty()) gender.setText(professor.getGender());
+                    if(!student.getGender().isEmpty()) gender.setText(student.getGender());
                     else gender.setText(getString(R.string.null_info));
 
-                    if(!professor.getBirthDate().isEmpty()) birthDate.setText(professor.getBirthDate());
+                    if(!student.getBirthDate().isEmpty()) birthDate.setText(student.getBirthDate());
                     else birthDate.setText(getString(R.string.null_info));
 
-                    if(!professor.getEmail().isEmpty()) email.setText(professor.getEmail());
+                    if(!student.getEmail().isEmpty()) email.setText(student.getEmail());
                     else email.setText(getString(R.string.null_info));
 
-                    if(!professor.getDegree().isEmpty()) degree.setText(professor.getDegree());
-                    else degree.setText(getString(R.string.null_info));
-
-                    if(!professor.getBio().isEmpty()) bio.setText(professor.getBio());
-                    else bio.setText(getString(R.string.null_info));
-
-                    if(!professor.getFacebookUrl().isEmpty()) {
+                    if(!student.getFacebookUrl().isEmpty()) {
                         facebook.setEnabled(true);
                         facebook.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                Intent intent = getFBIntent(ProfessorActivity.this,professor.getFacebookUrl());
+                                Intent intent = getFBIntent(getContext(),student.getFacebookUrl());
                                 if(intent!=null) startActivity(intent);
                             }
                         });
                     }
                     else { facebook.setEnabled(false); }
 
-                    if(!professor.getSkypeUrl().isEmpty()) {
+                    if(!student.getSkypeUrl().isEmpty()) {
                         skype.setEnabled(true);
                         skype.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                Intent intent = getSkypeIntent(professor.getSkypeUrl());
-                                if(intent!=null) startActivity(intent);
+                                Intent intent = getSkypeIntent(student.getSkypeUrl());
+                                startActivity(intent);
                             }
                         });
                     }
                     else skype.setEnabled(false);
 
-                    info = professor.toArray();
+                    info = student.toArray();
+                    button.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(context,EditStudentActivity.class);
+                            intent.putExtra(getString(R.string.student_info),info);
+                            startActivity(intent);
+                        }
+                    });
                 }
             }
             @Override

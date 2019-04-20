@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.studio.pci">
 
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -18,12 +18,12 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".activities.NavigationActivity"
-            android:label="@string/title_activity_navigation"
+            android:name=".activities.MainActivity"
+            android:label="@string/home"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".activities.PrivacyPolicyActivity"
-            android:label="Privacy Policy"></activity>
+            android:label="Privacy Policy" />
         <activity
             android:name=".activities.SplashActivity"
             android:theme="@style/AppTheme.FullScreen">
@@ -44,49 +44,31 @@
             android:label="@string/reset_passwd"
             android:parentActivityName=".activities.SignInActivity" />
         <activity
-            android:name=".activities.MainActivity"
-            android:label="@string/home"
-            android:theme="@style/AppTheme.NoActionBar" />
-
-        <activity
             android:name=".activities.ProfessorActivity"
-            android:label="@string/professor"/>
-
+            android:label="@string/professor" />
         <activity
             android:name=".activities.StudentActivity"
             android:label="@string/student" />
-
         <activity
             android:name=".activities.EditStudentActivity"
             android:label="@string/edit_profile"
             android:parentActivityName=".activities.StudentActivity" />
-
         <activity
             android:name=".activities.EditProfessorActivity"
             android:label="@string/edit_profile"
             android:parentActivityName=".activities.ProfessorActivity" />
-
         <activity
             android:name=".activities.ViewProfessorsActivity"
             android:label="@string/professors" />
-
         <activity
             android:name=".activities.ViewStudentsActivity"
             android:label="@string/students" />
-
         <activity
             android:name=".activities.ProjectActivity"
             android:label="@string/project" />
-
-        <activity
-            android:name=".activities.FragmentActivity"
-            android:label="@string/my_projects"
-            android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:screenOrientation="portrait" />
-
         <activity android:name=".activities.BaseActivity" />
     </application>
 
