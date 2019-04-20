@@ -153,7 +153,9 @@
                 android:layout_height="50sp"
                 android:orientation="vertical"
                 android:gravity="center"
-                android:background="@color/colorPrimary">
+                android:layout_marginBottom="20dp"
+                android:background="@color/colorPrimary"
+                android:id="@+id/professors">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -161,18 +163,8 @@
                     android:textSize="25sp"
                     android:gravity="center"
                     android:text="@string/professors"
-                    style="@style/textContentWhiteLarge"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="200sp">
-
-                <android.support.v7.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/recycler_project_professors"/>
+                    style="@style/textContentWhiteLarge"
+                    android:id="@+id/professors_project"/>
 
             </LinearLayout>
 
@@ -181,6 +173,7 @@
                 android:layout_height="50sp"
                 android:orientation="vertical"
                 android:gravity="center"
+                android:layout_marginBottom="20dp"
                 android:background="@color/colorPrimary">
 
                 <TextView
@@ -189,20 +182,30 @@
                     android:textSize="25sp"
                     android:gravity="center"
                     android:text="@string/students"
-                    style="@style/textContentWhiteLarge"/>
+                    style="@style/textContentWhiteLarge"
+                    android:id="@+id/students_project"/>
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="350dp">
+                android:layout_height="50sp"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_marginBottom="20dp"
+                android:background="@color/colorPrimary">
 
-                <android.support.v7.widget.RecyclerView
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/recycler_project_students"/>
+                    android:textSize="25sp"
+                    android:gravity="center"
+                    android:text="@string/phases"
+                    style="@style/textContentWhiteLarge"
+                    android:id="@+id/phases_project"/>
 
             </LinearLayout>
+
 
         </LinearLayout>
 

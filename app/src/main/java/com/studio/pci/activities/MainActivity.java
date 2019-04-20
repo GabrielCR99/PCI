@@ -26,7 +26,11 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 import com.studio.pci.R;
 import com.studio.pci.models.Professor;
+import com.studio.pci.models.Project;
 import com.studio.pci.models.Upload;
+import com.studio.pci.providers.ProjectDAO;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -67,6 +71,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         uid = intent.getStringExtra("USERID");
 
         setNavInfo(type);
+
     }
 
     private void setProfileImage() {

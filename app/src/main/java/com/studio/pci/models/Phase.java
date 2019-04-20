@@ -1,27 +1,35 @@
 package com.studio.pci.models;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
 
 public class Phase implements Serializable {
 
     private String id;
-    private String idProject;
     private String title;
     private String description;
-    private Date startDate;
-    private Date endDate;
+    private String endDate;
+    private ArrayList<String> tasks;
     private boolean enable;
 
     public Phase(){}
 
-    public Phase(String id, String idProject, String title, String description, Date startDate, Date endDate, boolean enable) {
+    public Phase(String id, String title, String description,String endDate) {
         this.id = id;
-        this.idProject = idProject;
         this.title = title;
         this.description = description;
-        this.startDate = startDate;
         this.endDate = endDate;
+        this.tasks = new ArrayList<>();
+        this.enable = true;
+    }
+
+    public Phase(String id, String title, String description, String endDate, ArrayList<String> tasks, boolean enable) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.endDate = endDate;
+        this.tasks = tasks;
         this.enable = enable;
     }
 
@@ -30,19 +38,17 @@ public class Phase implements Serializable {
         if (this == o) return true;
         if (!(o instanceof Phase)) return false;
         Phase phase = (Phase) o;
-        return id == phase.id &&
-                idProject == phase.idProject &&
-                enable == phase.enable &&
-                Objects.equals(title, phase.title) &&
-                Objects.equals(description, phase.description) &&
-                Objects.equals(startDate, phase.startDate) &&
-                Objects.equals(endDate, phase.endDate);
+        return isEnable() == phase.isEnable() &&
+                Objects.equals(getId(), phase.getId()) &&
+                Objects.equals(getTitle(), phase.getTitle()) &&
+                Objects.equals(getDescription(), phase.getDescription()) &&
+                Objects.equals(getEndDate(), phase.getEndDate()) &&
+                Objects.equals(tasks, phase.tasks);
     }
 
     @Override
     public int hashCode() {
-
-        return Objects.hash(id, idProject, title, description, startDate, endDate, enable);
+        return Objects.hash(getId(), getTitle(), getDescription(), getEndDate(), tasks, isEnable());
     }
 
     public String getId() {
@@ -51,13 +57,6 @@ public class Phase implements Serializable {
 
     public void setId(String id) {
         this.id = id;
-    }
-    public String getIdProject() {
-        return idProject;
-    }
-
-    public void setIdProject(String idProject) {
-        this.idProject = idProject;
     }
 
     public String getTitle() {
@@ -76,20 +75,20 @@ public class Phase implements Serializable {
         this.description = description;
     }
 
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    public Date getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
+    }
+
+    public ArrayList<String> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(ArrayList<String> tasks) {
+        this.tasks = tasks;
     }
 
     public boolean isEnable() {

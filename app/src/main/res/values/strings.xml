@@ -82,4 +82,5 @@
     <string name="bio">Biografia</string>
     <string name="professor_info">PROFESSOR_INFO</string>
     <string name="upload_photo_fail">Falha ao dar upload em foto</string>
+    <string name="phases">Fases</string>
 </resources>

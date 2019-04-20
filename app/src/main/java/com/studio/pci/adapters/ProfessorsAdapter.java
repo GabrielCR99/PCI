@@ -4,15 +4,24 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 import com.studio.pci.R;
 import com.studio.pci.activities.MainActivity;
 import com.studio.pci.activities.ProfessorActivity;
 import com.studio.pci.models.Professor;
+import com.studio.pci.models.Upload;
 
 import java.net.ServerSocket;
 import java.util.List;
@@ -38,10 +47,25 @@ public class ProfessorsAdapter extends RecyclerView.Adapter<ProfessorsAdapter.Pr
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ProfessorViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull final ProfessorViewHolder viewHolder, int i) {
         final Professor professor = professors.get(i);
         viewHolder.nameTextView.setText(professor.getName());
-        viewHolder.infoTextView.setText(professor.getEmail());
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("profile_photo").child(professor.getId());
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()) {
+                    Upload upload = dataSnapshot.getValue(Upload.class);
+                    Picasso.get().load(upload.getPhoto()).placeholder(R.drawable.ic_launcher_background).into(viewHolder.imageView);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.e("BIND INFO ERROR",databaseError.getMessage());
+            }
+        });
+
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,11 +83,11 @@ public class ProfessorsAdapter extends RecyclerView.Adapter<ProfessorsAdapter.Pr
 
     static class ProfessorViewHolder extends RecyclerView.ViewHolder{
 
+        @BindView(R.id.card_photo)
+        ImageView imageView;
+
         @BindView(R.id.card_name)
         TextView nameTextView;
-
-        @BindView(R.id.card_info)
-        TextView infoTextView;
 
         ProfessorViewHolder(@NonNull View itemView) {
             super(itemView);

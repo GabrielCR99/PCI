@@ -44,7 +44,6 @@ public class FragmentActivity extends AppCompatActivity implements NavigationVie
     @BindView(R.id.add_project_button)
     FloatingActionButton fab;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

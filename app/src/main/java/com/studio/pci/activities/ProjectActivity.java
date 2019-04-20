@@ -27,6 +27,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 
 public class ProjectActivity extends AppCompatActivity {
@@ -46,16 +47,6 @@ public class ProjectActivity extends AppCompatActivity {
     @BindView(R.id.project_status)
     TextView statusTextView;
 
-    @BindView(R.id.recycler_project_professors)
-    RecyclerView professorRecyclerView;
-
-    @BindView(R.id.recycler_project_students)
-    RecyclerView studentsRecyclerView;
-
-    private StudentsAdapter studentsAdapter;
-    private ProfessorsAdapter professorsAdapter;
-    private List<Professor> professorList;
-    private List<Student> studentList;
     private String projectID;
     private Project project;
 
@@ -66,29 +57,15 @@ public class ProjectActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         Intent intent = getIntent();
         projectID = intent.getStringExtra("PROJECT_ID");
-        setMembers();
-        setRecyclers();
-
+        setInfo();
     }
 
-    private void setMembers() {
-        studentList = new ArrayList<>();
-        professorList = new ArrayList<>();
+    private void setInfo() {
         DatabaseReference db = FirebaseDatabase.getInstance().getReference();
         db.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 project = dataSnapshot.child("projects").child(projectID).getValue(Project.class);
-                studentList.clear();
-                for(String id : project.getStudents()){
-                    Student student = dataSnapshot.child("students").child(id).getValue(Student.class);
-                    studentList.add(student);
-                }
-                professorList.clear();
-                for(String id : project.getProfessors()){
-                    Professor professor = dataSnapshot.child("professors").child(id).getValue(Professor.class);
-                    professorList.add(professor);
-                }
 
                 if(project.getTitle().isEmpty()) titleTextView.setText(getString(R.string.null_info));
                 else titleTextView.setText(project.getTitle());
@@ -103,8 +80,6 @@ public class ProjectActivity extends AppCompatActivity {
                 else endTextView.setText(project.getEndDate());
 
                 statusTextView.setText(project.isFinished() ? getString(R.string.finished) : getString(R.string.in_progress));
-                studentsAdapter.notifyDataSetChanged();
-                professorsAdapter.notifyDataSetChanged();
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -113,16 +88,10 @@ public class ProjectActivity extends AppCompatActivity {
         });
     }
 
-    private void setRecyclers() {
-        RecyclerView.LayoutManager layoutStudent = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        RecyclerView.LayoutManager layoutProfessor = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        professorRecyclerView.setLayoutManager(layoutStudent);
-        studentsRecyclerView.setLayoutManager(layoutProfessor);
-
-        studentsAdapter = new StudentsAdapter(studentList,this);
-        studentsRecyclerView.setAdapter(studentsAdapter);
-
-        professorsAdapter = new ProfessorsAdapter(professorList,this);
-        professorRecyclerView.setAdapter(professorsAdapter);
+    @OnClick(R.id.students_project)
+    public void goToStudents(){
+        Intent intent = new Intent(ProjectActivity.this,ViewStudentsActivity.class);
+        intent.putExtra("PROJECT_ID",projectID);
+        startActivity(intent);
     }
 }

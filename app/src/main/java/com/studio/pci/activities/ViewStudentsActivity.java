@@ -1,9 +1,11 @@
 package com.studio.pci.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -16,6 +18,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.studio.pci.R;
 import com.studio.pci.adapters.StudentsAdapter;
+import com.studio.pci.models.Project;
 import com.studio.pci.models.Student;
 
 import java.util.ArrayList;
@@ -26,8 +29,10 @@ import butterknife.ButterKnife;
 
 public class ViewStudentsActivity extends AppCompatActivity {
 
+    private String projectID;
     private List<Student> students;
     private StudentsAdapter adapter;
+    private Project project;
 
     @BindView(R.id.recycler_students)
     RecyclerView recyclerView;
@@ -37,28 +42,31 @@ public class ViewStudentsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_students_view);
         ButterKnife.bind(this);
-        getStudents();
-        getRecyclerView();
+
+        Intent intent = getIntent();
+        projectID = intent.getStringExtra("PROJECT_ID");
+        setStudents();
+        setRecyclerView();
     }
 
-    private void getRecyclerView() {
-        RecyclerView.LayoutManager layout = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        recyclerView.setLayoutManager(layout);
+    private void setRecyclerView() {
+        recyclerView.setLayoutManager(new GridLayoutManager(this,3));
         adapter = new StudentsAdapter(students,this);
         recyclerView.setAdapter(adapter);
     }
 
-    private void getStudents() {
+    private void setStudents() {
         students = new ArrayList<>();
-        DatabaseReference db = FirebaseDatabase.getInstance().getReference("students");
-        final String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        DatabaseReference db = FirebaseDatabase.getInstance().getReference();
         db.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                project = dataSnapshot.child("projects").child(projectID).getValue(Project.class);
                 students.clear();
-                for(DataSnapshot ds : dataSnapshot.getChildren()){
-                    if(!userID.equals(ds.getValue(Student.class).getId()) && ds.getValue(Student.class).isEnable()){
-                        Student student = ds.getValue(Student.class);
+                for(String id : project.getStudents()){
+                    Student student = dataSnapshot.child("students").child(id).getValue(Student.class);
+                    Log.v("STUDENT_INFO",student.toString());
+                    if(student.isEnable()) {
                         students.add(student);
                         adapter.notifyDataSetChanged();
                     }
@@ -66,7 +74,7 @@ public class ViewStudentsActivity extends AppCompatActivity {
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.v("STUDENTS_FIREBASE",databaseError.getMessage());
+                Log.e("DATABASE_PROJECT_ERROR",databaseError.getMessage());
             }
         });
     }
