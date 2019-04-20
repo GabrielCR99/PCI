@@ -100,4 +100,8 @@
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="feed">Feed</string>
+    <string name="developers">Desenvolvedores</string>
+    <string name="plataform_in_progress">Plataforma em Desenvolvimento!</string>
+    <string name="project_management">Project Management is Life!</string>
 </resources>

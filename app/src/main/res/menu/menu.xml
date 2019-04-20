@@ -7,6 +7,10 @@
     <group android:checkableBehavior="single"
         android:id="@+id/grp1">
         <item
+            android:id="@+id/menu_feed"
+            android:icon="@drawable/ic_dashboard_black_24dp"
+            android:title="@string/feed" />
+        <item
             android:id="@+id/menu_profile"
             android:icon="@drawable/ic_account_circle_black_24dp"
             android:title="@string/profile" />
@@ -23,6 +27,13 @@
             android:id="@+id/menu_privacy_policy"
             android:title="@string/privacy_policy"
             android:icon="@drawable/ic_receipt_black_24dp">
+
+        </item>
+
+        <item
+            android:id="@+id/menu_creators"
+            android:title="@string/developers"
+            android:icon="@drawable/ic_developer_mode_black_24dp">
 
         </item>
 
