@@ -14,6 +14,7 @@ public class Project implements Serializable {
     private String endDate;
     private ArrayList<String> students;
     private ArrayList<String> professors;
+    private ArrayList<String> phases;
     private boolean finished;
     private boolean enable;
 
@@ -27,11 +28,12 @@ public class Project implements Serializable {
         this.endDate = "";
         students = new ArrayList<>();
         professors = new ArrayList<>();
+        phases = new ArrayList<>();
         this.finished = false;
         this.enable = true;
     }
 
-    public Project(String id, String title, String description, ArrayList<String> students, ArrayList<String> professors) {
+    public Project(String id, String title, String description, ArrayList<String> students, ArrayList<String> professors, ArrayList<String> phases) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -39,11 +41,12 @@ public class Project implements Serializable {
         this.endDate = "";
         this.students = students;
         this.professors = professors;
+        this.phases = phases;
         this.finished = false;
         this.enable = true;
     }
 
-    public Project(String id, String title, String description, String startDate, String endDate, ArrayList<String> students, ArrayList<String> professors, boolean finished, boolean enable) {
+    public Project(String id, String title, String description, String startDate, String endDate, ArrayList<String> students, ArrayList<String> professors, ArrayList<String> phases, boolean finished, boolean enable) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -51,6 +54,7 @@ public class Project implements Serializable {
         this.endDate = endDate;
         this.students = students;
         this.professors = professors;
+        this.phases = phases;
         this.finished = finished;
         this.enable = enable;
     }
@@ -67,13 +71,14 @@ public class Project implements Serializable {
                 Objects.equals(getDescription(), project.getDescription()) &&
                 Objects.equals(getStartDate(), project.getStartDate()) &&
                 Objects.equals(getEndDate(), project.getEndDate()) &&
-                Objects.equals(students, project.students) &&
-                Objects.equals(professors, project.professors);
+                Objects.equals(getStudents(), project.getStudents()) &&
+                Objects.equals(getProfessors(), project.getProfessors()) &&
+                Objects.equals(phases, project.phases);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getTitle(), getDescription(), getStartDate(), getEndDate(), students, professors, isFinished(), isEnable());
+        return Objects.hash(getId(), getTitle(), getDescription(), getStartDate(), getEndDate(), getStudents(), getProfessors(), phases, isFinished(), isEnable());
     }
 
     public String getId() {
@@ -146,5 +151,13 @@ public class Project implements Serializable {
 
     public void setProfessors(ArrayList<String> professors) {
         this.professors = professors;
+    }
+
+    public ArrayList<String> getPhases() {
+        return phases;
+    }
+
+    public void setPhases(ArrayList<String> phases) {
+        this.phases = phases;
     }
 }

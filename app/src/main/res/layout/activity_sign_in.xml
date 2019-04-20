@@ -91,8 +91,6 @@
             android:text="@string/no_account"
             android:textAlignment="center"
             tools:text="@string/sign_up_id" />
-            android:textColor="@color/colorWhite"
-            android:textStyle="bold"/>
 
     </LinearLayout>
 

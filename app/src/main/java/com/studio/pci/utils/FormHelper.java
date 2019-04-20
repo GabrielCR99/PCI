@@ -24,4 +24,5 @@ public class FormHelper {
     public static boolean isEmpty(String text) {
         return TextUtils.isEmpty(text);
     }
+
 }

@@ -34,16 +34,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "status": 2,
           "other_platform_oauth_client": [
             {
               "client_id": "610913910052-nq9put976h9nshqlde7qujog1jvpm0rs.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
-        },
-        "ads_service": {
-          "status": 2
         }
       }
     },

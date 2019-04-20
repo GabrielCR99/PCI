@@ -6,46 +6,30 @@ import java.util.Objects;
 public class Task implements Serializable {
 
     private String id;
-    private String idPhase;
     private String title;
     private String description;
-    private Date startDate;
-    private Date endDate;
+    private String endDate;
     private boolean done;
     private boolean enable;
 
     public Task(){}
 
-    public Task(String id, String idPhase, String title, String description, Date startDate, Date endDate, boolean done, boolean enable) {
+    public Task(String id, String title, String description, String endDate) {
         this.id = id;
-        this.idPhase = idPhase;
         this.title = title;
         this.description = description;
-        this.startDate = startDate;
+        this.endDate = endDate;
+        this.done = false;
+        this.enable = true;
+    }
+
+    public Task(String id, String title, String description, String endDate, boolean done, boolean enable) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
         this.endDate = endDate;
         this.done = done;
         this.enable = enable;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Task)) return false;
-        Task task = (Task) o;
-        return id == task.id &&
-                idPhase == task.idPhase &&
-                done == task.done &&
-                enable == task.enable &&
-                Objects.equals(title, task.title) &&
-                Objects.equals(description, task.description) &&
-                Objects.equals(startDate, task.startDate) &&
-                Objects.equals(endDate, task.endDate);
-    }
-
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(id, idPhase, title, description, startDate, endDate, done, enable);
     }
 
     public String getId() {
@@ -54,14 +38,6 @@ public class Task implements Serializable {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getIdPhase() {
-        return idPhase;
-    }
-
-    public void setIdPhase(String idPhase) {
-        this.idPhase = idPhase;
     }
 
     public String getTitle() {
@@ -80,19 +56,11 @@ public class Task implements Serializable {
         this.description = description;
     }
 
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    public Date getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 
