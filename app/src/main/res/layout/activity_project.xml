@@ -14,201 +14,168 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="vertical"
+           android:padding="20sp">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50sp"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:layout_marginTop="40sp"
-                android:background="@color/colorPrimary">
+           <TextView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:gravity="center"
+               android:text="@string/app_name"
+               android:layout_marginTop="20sp"
+               android:layout_marginBottom="20sp"
+               android:id="@+id/project_title"
+               android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="25sp"
-                    android:gravity="center"
-                    android:text="@string/app_name"
-                    android:id="@+id/project_title"
-                    style="@style/textContentWhiteLarge"/>
+           <TextView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_gravity="center_vertical|end"
+               android:textAppearance="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle"
+               android:text="@string/app_name"
+               android:id="@+id/project_description"
+               android:layout_marginBottom="20sp"/>
 
-            </LinearLayout>
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal"
+               android:layout_marginBottom="20sp">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="26dp">
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:layout_weight="0.5"
+                   android:orientation="vertical"
+                   android:gravity="center">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingBottom="30dp">
+                  <LinearLayout
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:orientation="horizontal">
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/description"
-                        style="@style/textContentBlack"
-                        android:layout_weight="0.3"/>
+                      <ImageView
+                          android:layout_width="32dp"
+                          android:layout_height="32dp"
+                          android:src="@drawable/ic_watch_later_black_24dp"
+                          android:contentDescription="@string/start_time"
+                          android:layout_marginEnd="5dp"/>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/app_name"
-                        android:layout_weight="0.1"
-                        style="@style/textContentBlack"
-                        android:id="@+id/project_description"/>
+                      <TextView
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:id="@+id/project_startDate"
+                          android:text="@string/app_name"
+                          android:layout_marginBottom="10sp"
+                          android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionMode.Subtitle"/>
 
-                </LinearLayout>
+                  </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:layout_marginBottom="30dp">
+                  <LinearLayout
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:orientation="horizontal">
 
-                    <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:src="@drawable/ic_watch_later_black_24dp"
-                        android:layout_weight="0.1"
-                        android:contentDescription="@string/start_time" />
+                      <ImageView
+                          android:layout_width="32dp"
+                          android:layout_height="32dp"
+                          android:src="@drawable/ic_watch_later_red_24dp"
+                          android:contentDescription="@string/end_time"
+                          android:layout_marginEnd="5dp"/>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/app_name"
-                        android:id="@+id/project_startDate"
-                        android:layout_weight="0.3"
-                        style="@style/textContentBlack"/>
+                      <TextView
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:id="@+id/project_endDate"
+                          android:text="@string/app_name"
+                          android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionMode.Subtitle"/>
 
-                    <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:src="@drawable/ic_watch_later_red_24dp"
-                        android:layout_weight="0.1"
-                        android:contentDescription="@string/end_time" />
+                  </LinearLayout>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/app_name"
-                        android:id="@+id/project_endDate"
-                        android:layout_weight="0.3"
-                        style="@style/textContentBlack"/>
+               </LinearLayout>
 
-                </LinearLayout>
+               <RelativeLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_weight="0.5"
+                   android:gravity="center">
 
+                   <ProgressBar
+                       android:id="@+id/project_phase_progress"
+                       style="?android:attr/progressBarStyleHorizontal"
+                       android:layout_width="100dp"
+                       android:layout_height="100dp"
+                       android:background="@drawable/circle_shape"
+                       android:layout_centerInParent="true"
+                       android:indeterminate="false"
+                       android:max="100"
+                       android:progress="100"
+                       android:progressDrawable="@drawable/circular_progress_bar" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/phase_progress"
-                    style="@style/textContentBlack"/>
+                   <TextView
+                       android:id="@+id/txtProgress"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_alignBottom="@+id/project_phase_progress"
+                       android:layout_centerInParent="true"
+                       android:text="@string/app_name"
+                       android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                <ProgressBar
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/project_phase_progress"
-                    style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
-                    android:progress="30"
-                    android:layout_marginBottom="20sp"/>
+               </RelativeLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingBottom="30dp">
+           </LinearLayout>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/status"
-                        android:layout_weight="0.3"
-                        style="@style/textContentBlack"/>
+           <TextView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:gravity="center"
+               android:text="@string/members"
+               android:layout_marginBottom="20sp"
+               android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionMode.Subtitle"/>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/app_name"
-                        android:layout_weight="0.1"
-                        android:id="@+id/project_status"
-                        style="@style/textContentBlack"/>
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal"
+               android:layout_marginBottom="30sp">
 
-                </LinearLayout>
+               <Button
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_weight="0.5"
+                   style="@style/buttonPattern"
+                   android:layout_marginEnd="10sp"
+                   android:text="@string/students"
+                   android:id="@+id/project_students"/>
 
+               <Button
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_weight="0.5"
+                   style="@style/buttonPattern"
+                   android:layout_marginStart="10sp"
+                   android:text="@string/professors"
+                   android:id="@+id/project_professors"/>
 
+           </LinearLayout>
 
-            </LinearLayout>
+           <TextView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:gravity="center"
+               android:text="@string/in_progress"
+               android:layout_marginBottom="20sp"
+               android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionMode.Subtitle"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50sp"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:layout_marginBottom="20dp"
-                android:background="@color/colorPrimary"
-                android:id="@+id/professors">
+           <android.support.v7.widget.RecyclerView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:id="@+id/recycler_phases"/>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="25sp"
-                    android:gravity="center"
-                    android:text="@string/professors"
-                    style="@style/textContentWhiteLarge"
-                    android:id="@+id/professors_project"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50sp"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:layout_marginBottom="20dp"
-                android:background="@color/colorPrimary">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="25sp"
-                    android:gravity="center"
-                    android:text="@string/students"
-                    style="@style/textContentWhiteLarge"
-                    android:id="@+id/students_project"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50sp"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:layout_marginBottom="20dp"
-                android:background="@color/colorPrimary">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="25sp"
-                    android:gravity="center"
-                    android:text="@string/phases"
-                    style="@style/textContentWhiteLarge"
-                    android:id="@+id/phases_project"/>
-
-            </LinearLayout>
-
-
-        </LinearLayout>
+       </LinearLayout>
 
     </ScrollView>
 

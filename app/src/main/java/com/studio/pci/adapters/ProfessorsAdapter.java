@@ -52,15 +52,6 @@ public class ProfessorsAdapter extends RecyclerView.Adapter<ProfessorsAdapter.Pr
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, StudentActivity.class);
-                intent.putExtra("UID",professor.getId());
-                context.startActivity(intent);
-            }
-        });
-
-        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
                 Intent intent = new Intent(context, ProfessorActivity.class);
                 intent.putExtra("UID",professor.getId());
                 context.startActivity(intent);

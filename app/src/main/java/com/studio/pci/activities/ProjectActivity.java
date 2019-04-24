@@ -44,9 +44,6 @@ public class ProjectActivity extends AppCompatActivity {
     @BindView(R.id.project_endDate)
     TextView endTextView;
 
-    @BindView(R.id.project_status)
-    TextView statusTextView;
-
     private String projectID;
     private Project project;
 
@@ -80,8 +77,6 @@ public class ProjectActivity extends AppCompatActivity {
 
                 if(project.getEndDate().isEmpty()) endTextView.setText(getString(R.string.null_info));
                 else endTextView.setText(project.getEndDate());
-
-                statusTextView.setText(project.isFinished() ? getString(R.string.finished) : getString(R.string.in_progress));
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -90,14 +85,14 @@ public class ProjectActivity extends AppCompatActivity {
         });
     }
 
-    @OnClick(R.id.students_project)
+    @OnClick(R.id.project_students)
     public void goToStudents(){
         Intent intent = new Intent(ProjectActivity.this,ViewStudentsActivity.class);
         intent.putExtra("PROJECT_ID",projectID);
         startActivity(intent);
     }
 
-    @OnClick(R.id.professors_project)
+    @OnClick(R.id.project_professors)
     public void goToProfessors(){
         Intent intent = new Intent(ProjectActivity.this,ViewProfessorsActivity.class);
         intent.putExtra("PROJECT_ID",projectID);

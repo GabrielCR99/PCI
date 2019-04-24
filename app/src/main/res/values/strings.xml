@@ -76,8 +76,8 @@
     <string name="status">Status</string>
     <string name="finished">Finalizado</string>
     <string name="student_info">STUDENT_INFO</string>
-    <string name="start_time">start time</string>
-    <string name="end_time">end time</string>
+    <string name="start_time">Início</string>
+    <string name="end_time">Fim</string>
     <string name="project">Projeto</string>
     <string name="bio">Biografia</string>
     <string name="professor_info">PROFESSOR_INFO</string>
@@ -104,4 +104,5 @@
     <string name="developers">Desenvolvedores</string>
     <string name="plataform_in_progress">Plataforma em Desenvolvimento!</string>
     <string name="project_management">Project Management is Life!</string>
+    <string name="members">Membros</string>
 </resources>

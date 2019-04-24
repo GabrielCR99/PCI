@@ -79,9 +79,7 @@ public class StudentActivity extends AppCompatActivity {
 
         getInfo();
 
-        if(currentUser.getUid().equals(userID)){
-            addButton();
-        }
+        if(currentUser.getUid().equals(userID)) addButton();
     }
 
     private void addButton() {
