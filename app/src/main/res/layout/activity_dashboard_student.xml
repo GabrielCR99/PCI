@@ -40,19 +40,21 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/complete_name" />
+                android:text="@string/complete_name"
+                style="@style/TextAppearance.MaterialComponents.Subtitle1"/>
 
             <TextView
                 android:id="@+id/student_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="25sp"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+                style="@style/textContentBlack" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/gender" />
+                android:text="@string/gender"
+                style="@style/TextAppearance.MaterialComponents.Subtitle1"/>
 
             <TextView
                 android:id="@+id/student_gender"
@@ -64,7 +66,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/birthDate" />
+                android:text="@string/birthDate"
+                style="@style/TextAppearance.MaterialComponents.Subtitle1"/>
 
             <TextView
                 android:id="@+id/student_birthDate"
@@ -76,7 +79,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/email" />
+                android:text="@string/email"
+                style="@style/TextAppearance.MaterialComponents.Subtitle1"/>
 
             <TextView
                 android:id="@+id/student_email"
@@ -88,26 +92,22 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:orientation="horizontal">
 
                 <ImageButton
                     android:id="@+id/student_face"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:layout_marginEnd="20dp"
-                    android:background="@color/colorWhite"
                     android:contentDescription="@string/facebook"
-                    android:src="@drawable/facebook_32" />
+                    android:src="@drawable/facebook_24" />
 
                 <ImageButton
                     android:id="@+id/student_skype"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_marginStart="20sp"
-                    android:background="@color/colorWhite"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:contentDescription="@string/skype"
-                    android:src="@drawable/skype_32" />
+                    android:src="@drawable/skype_24" />
 
             </LinearLayout>
 

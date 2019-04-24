@@ -84,7 +84,7 @@ public class ProfessorActivity extends AppCompatActivity {
 
         getInfo();
 
-        if(user.getUid().equals(userID)) addButton();
+        if(user != null && user.getUid().equals(userID)) addButton();
     }
 
     private void addButton() {
@@ -113,7 +113,7 @@ public class ProfessorActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()) {
                     Upload upload = dataSnapshot.getValue(Upload.class);
-                    Picasso.get().load(upload.getPhoto()).placeholder(R.drawable.ic_launcher_background).into(imageView);
+                    Picasso.get().load(upload != null ? upload.getPhoto() : null).placeholder(R.drawable.ic_launcher_background).into(imageView);
                 }
             }
             @Override

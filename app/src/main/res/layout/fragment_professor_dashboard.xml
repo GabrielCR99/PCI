@@ -1,29 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/toolbar_layout"/>
+        android:layout_height="wrap_content" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="160sp"
-        android:orientation="vertical"
         android:layout_gravity="center"
-        android:background="@color/colorPrimary">
+        android:background="@color/colorPrimary"
+        android:orientation="vertical">
 
         <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/student_photo"
             android:layout_width="128dp"
             android:layout_height="128dp"
             android:layout_gravity="center"
             android:layout_marginTop="28dp"
-            android:id="@+id/student_photo"
-            android:src="@mipmap/ic_launcher_round"/>
+            android:src="@mipmap/ic_launcher_round" />
 
     </LinearLayout>
 
@@ -38,82 +37,87 @@
             android:orientation="vertical">
 
             <TextView
+                style="@style/textContentBlackSubtitle1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/complete_name"/>
+                android:text="@string/complete_name" />
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:id="@+id/professor_name"
-                android:layout_marginBottom="25sp"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
-
-            <TextView
+                style="@style/textContentBlack"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/degree"/>
+                android:layout_marginBottom="25sp" />
 
             <TextView
+                style="@style/textContentBlackSubtitle1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="@string/degree" />
+
+            <TextView
                 android:id="@+id/professor_degree"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="25sp"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+               style="@style/textContentBlack"/>
 
             <TextView
+                style="@style/textContentBlackSubtitle1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/gender" />
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:id="@+id/professor_gender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="25sp"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+               style="@style/textContentBlack" />
 
             <TextView
+                style="@style/textContentBlackSubtitle1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/birthDate"/>
+                android:text="@string/birthDate" />
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:id="@+id/professor_birthDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="25sp"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+                style="@style/textContentBlack" />
 
             <TextView
+                style="@style/textContentBlackSubtitle1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/email"/>
+                android:text="@string/email" />
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:id="@+id/professor_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="25sp"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+                style="@style/textContentBlack" />
 
             <TextView
+                style="@style/textContentBlackSubtitle1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/bio"/>
+                android:text="@string/bio" />
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:id="@+id/professor_bio"
+                style="@style/textContentBlack"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="25sp"
-                android:lines="3"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+                android:lines="3" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:orientation="horizontal">
 
                 <ImageButton
@@ -121,35 +125,32 @@
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:layout_marginEnd="20dp"
-                    android:background="@color/colorWhite"
                     android:contentDescription="@string/facebook"
-                    android:src="@drawable/facebook_32" />
+                    android:src="@drawable/facebook_24" />
 
                 <ImageButton
                     android:id="@+id/professor_skype"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
-                    android:layout_marginStart="20sp"
-                    android:background="@color/colorWhite"
                     android:contentDescription="@string/skype"
-                    android:src="@drawable/skype_32" />
+                    android:src="@drawable/skype_24" />
 
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/professor_layout_button"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="20sp"
-                android:orientation="vertical"
-                android:id="@+id/professor_layout_button"/>
+                android:orientation="vertical" />
 
             <Button
                 android:id="@+id/professor_edit_button"
+                style="@style/buttonPattern"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/edit"
-                style="@style/buttonPattern"
-                android:layout_marginBottom="25sp"/>
+                android:layout_marginBottom="25sp"
+                android:text="@string/edit" />
 
         </LinearLayout>
 

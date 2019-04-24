@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/toolbar_layout"/>
+        android:layout_height="wrap_content" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -22,19 +21,19 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50sp"
-                android:orientation="vertical"
-                android:gravity="center"
                 android:layout_marginTop="40sp"
-                android:background="@color/colorPrimary">
+                android:background="@color/colorPrimary"
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/project_title"
+                    style="@style/textContentWhite"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="25sp"
                     android:gravity="center"
                     android:text="@string/app_name"
-                    android:id="@+id/project_title"
-                    style="@style/textContentWhiteLarge"/>
+                    android:textSize="25sp" />
 
             </LinearLayout>
 
@@ -51,76 +50,77 @@
                     android:paddingBottom="30dp">
 
                     <TextView
+                        style="@style/textContentBlack"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/description"
-                        style="@style/textContentBlack"
-                        android:layout_weight="0.3"/>
+                        android:layout_weight="0.3"
+                        android:text="@string/description" />
 
                     <TextView
+                        android:id="@+id/project_description"
+                        style="@style/textContentBlack"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/app_name"
                         android:layout_weight="0.1"
-                        style="@style/textContentBlack"
-                        android:id="@+id/project_description"/>
+                        android:text="@string/app_name" />
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:layout_gravity="center"
+                    android:layout_marginBottom="30dp"
                     android:gravity="center"
-                    android:layout_marginBottom="30dp">
+                    android:orientation="horizontal">
 
                     <ImageView
                         android:layout_width="32dp"
                         android:layout_height="32dp"
-                        android:src="@drawable/ic_watch_later_black_24dp"
                         android:layout_weight="0.1"
-                        android:contentDescription="@string/start_time" />
+                        android:contentDescription="@string/start_time"
+                        android:src="@drawable/ic_watch_later_black_24dp" />
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/app_name"
                         android:id="@+id/project_startDate"
+                        style="@style/textContentBlack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_weight="0.3"
-                        style="@style/textContentBlack"/>
+                        android:text="@string/app_name" />
 
                     <ImageView
                         android:layout_width="32dp"
                         android:layout_height="32dp"
-                        android:src="@drawable/ic_watch_later_red_24dp"
                         android:layout_weight="0.1"
-                        android:contentDescription="@string/end_time" />
+                        android:contentDescription="@string/end_time"
+                        android:src="@drawable/ic_watch_later_red_24dp" />
 
                     <TextView
+                        android:id="@+id/project_endDate"
+                        style="@style/textContentBlack"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/app_name"
-                        android:id="@+id/project_endDate"
                         android:layout_weight="0.3"
-                        style="@style/textContentBlack"/>
+                        android:text="@string/app_name" />
 
                 </LinearLayout>
 
 
                 <TextView
+                    style="@style/textContentBlack"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/phase_progress"
-                    style="@style/textContentBlack"/>
+                    />
 
                 <ProgressBar
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:id="@+id/project_phase_progress"
                     style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
-                    android:progress="30"
-                    android:layout_marginBottom="20sp"/>
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20sp"
+                    android:progress="30" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -129,81 +129,80 @@
                     android:paddingBottom="30dp">
 
                     <TextView
+                        style="@style/textContentBlack"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/status"
                         android:layout_weight="0.3"
-                        style="@style/textContentBlack"/>
+                        android:text="@string/status" />
 
                     <TextView
+                        android:id="@+id/project_status"
+                        style="@style/textContentBlack"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/app_name"
                         android:layout_weight="0.1"
-                        android:id="@+id/project_status"
-                        style="@style/textContentBlack"/>
+                        android:text="@string/app_name" />
 
                 </LinearLayout>
 
 
-
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/professors"
                 android:layout_width="match_parent"
                 android:layout_height="50sp"
-                android:orientation="vertical"
-                android:gravity="center"
                 android:layout_marginBottom="20dp"
                 android:background="@color/colorPrimary"
-                android:id="@+id/professors">
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/professors_project"
+                    style="@style/textContentWhite"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="25sp"
                     android:gravity="center"
                     android:text="@string/professors"
-                    style="@style/textContentWhiteLarge"
-                    android:id="@+id/professors_project"/>
+                    android:textSize="25sp" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50sp"
-                android:orientation="vertical"
-                android:gravity="center"
                 android:layout_marginBottom="20dp"
-                android:background="@color/colorPrimary">
+                android:background="@color/colorPrimary"
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/students_project"
+                    style="@style/textContentWhite"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="25sp"
                     android:gravity="center"
                     android:text="@string/students"
-                    style="@style/textContentWhiteLarge"
-                    android:id="@+id/students_project"/>
+                    android:textSize="25sp" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50sp"
-                android:orientation="vertical"
-                android:gravity="center"
                 android:layout_marginBottom="20dp"
-                android:background="@color/colorPrimary">
+                android:background="@color/colorPrimary"
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/phases_project"
+                    style="@style/textContentWhite"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="25sp"
                     android:gravity="center"
                     android:text="@string/phases"
-                    style="@style/textContentWhiteLarge"
-                    android:id="@+id/phases_project"/>
+                    android:textSize="25sp" />
 
             </LinearLayout>
 

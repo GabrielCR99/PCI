@@ -30,7 +30,6 @@ public class ProjectListFragment extends Fragment {
     FloatingActionButton fab;
 
     private Context context;
-    private View view;
 
     @Override
     public void onAttach(Context context) {
@@ -41,8 +40,8 @@ public class ProjectListFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_projects_list,container,false);
-        ButterKnife.bind(this,view);
+        View view = inflater.inflate(R.layout.fragment_projects_list, container, false);
+        ButterKnife.bind(this, view);
 
         Bundle b = getArguments();
         int type = b.getInt("TYPE");

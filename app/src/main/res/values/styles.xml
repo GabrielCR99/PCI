@@ -23,27 +23,30 @@
 
     <style name="textContentWhite">
         <item name="android:textColor">@color/colorWhite</item>
-        <item name="android:textStyle">bold</item>
         <item name="android:textSize">14sp</item>
+        <item name="android:typeface">serif</item>
     </style>
 
-    <style name="textContentWhiteLarge">
-        <item name="android:textColor">@color/colorWhite</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textAppearance">@style/Base.TextAppearance.AppCompat.Large</item>
-    </style>
 
     <style name="textContentBlack">
         <item name="android:textColor">@color/colorBlack</item>
-        <item name="android:textSize">12sp</item>
-        <item name="android:textAppearance">@style/Base.TextAppearance.AppCompat.Caption</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Subtitle2</item>
+
+    </style>
+
+    <style name="textContentBlackSubtitle1">
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Subtitle1</item>
+        <item name="android:fontFamily">sans-serif</item>
 
     </style>
 
     <style name="buttonPattern">
         <item name="android:textColor">@color/colorWhite</item>
         <item name="android:background">@color/buttonColor</item>
-        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">sans-serif</item>
     </style>
 
     <style name="inputLayout" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
@@ -59,13 +62,6 @@
         <item name="android:textColorPrimary">@color/colorBlack</item>
     </style>
 
-    <style name="editTextStyle">
-        <item name="android:backgroundTint">@color/colorWhite</item>
-        <item name="android:textColor">@color/colorWhite</item>
-        <item name="android:textColorHighlight">@color/colorWhite</item>
-        <item name="android:textColorLink">@color/colorWhite</item>
-        <item name="android:textColorHint">@color/colorWhite</item>
-    </style>
 
     <style name="editTextStyleBlack">
         <item name="android:backgroundTint">@color/colorBlack</item>
@@ -76,9 +72,6 @@
         <item name="android:colorAccent">@color/colorBlack</item>
     </style>
 
-    <style name="mySpinnerItemStyle" parent="@android:style/Widget.Holo.DropDownItem.Spinner">
-        <item name="android:textColor">@color/colorWhite</item>
-    </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 

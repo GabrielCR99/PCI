@@ -3,7 +3,6 @@ package com.studio.pci.activities;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -79,7 +78,8 @@ public class StudentActivity extends AppCompatActivity {
 
         getInfo();
 
-        if(currentUser.getUid().equals(userID)){
+        assert currentUser != null;
+        if (currentUser.getUid().equals(userID)) {
             addButton();
         }
     }
@@ -89,8 +89,8 @@ public class StudentActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(StudentActivity.this,EditStudentActivity.class);
-                intent.putExtra(getString(R.string.student_info),info);
+                Intent intent = new Intent(StudentActivity.this, EditStudentActivity.class);
+                intent.putExtra(getString(R.string.student_info), info);
                 startActivity(intent);
             }
         });
@@ -108,14 +108,16 @@ public class StudentActivity extends AppCompatActivity {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()) {
+                if (dataSnapshot.exists()) {
                     Upload upload = dataSnapshot.getValue(Upload.class);
+                    assert upload != null;
                     Picasso.get().load(upload.getPhoto()).placeholder(R.drawable.ic_launcher_background).into(imageView);
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(StudentActivity.this,databaseError.getMessage(),Toast.LENGTH_LONG).show();
+                Toast.makeText(StudentActivity.this, databaseError.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -125,33 +127,36 @@ public class StudentActivity extends AppCompatActivity {
         databaseReference.child(userID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
+                if (dataSnapshot.exists()) {
                     final Student student = dataSnapshot.getValue(Student.class);
-                    if(!student.getName().isEmpty()) name.setText(student.getName());
+                    assert student != null;
+                    if (!student.getName().isEmpty()) name.setText(student.getName());
                     else name.setText(getString(R.string.null_info));
 
-                    if(!student.getGender().isEmpty()) gender.setText(student.getGender());
+                    if (!student.getGender().isEmpty()) gender.setText(student.getGender());
                     else gender.setText(getString(R.string.null_info));
 
-                    if(!student.getBirthDate().isEmpty()) birthDate.setText(student.getBirthDate());
+                    if (!student.getBirthDate().isEmpty())
+                        birthDate.setText(student.getBirthDate());
                     else birthDate.setText(getString(R.string.null_info));
 
-                    if(!student.getEmail().isEmpty()) email.setText(student.getEmail());
+                    if (!student.getEmail().isEmpty()) email.setText(student.getEmail());
                     else email.setText(getString(R.string.null_info));
 
-                    if(!student.getFacebookUrl().isEmpty()) {
+                    if (!student.getFacebookUrl().isEmpty()) {
                         facebook.setEnabled(true);
                         facebook.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                Intent intent = getFBIntent(StudentActivity.this,student.getFacebookUrl());
-                                if(intent!=null) startActivity(intent);
+                                Intent intent = getFBIntent(StudentActivity.this, student.getFacebookUrl());
+                                if (intent != null) startActivity(intent);
                             }
                         });
+                    } else {
+                        facebook.setEnabled(false);
                     }
-                    else { facebook.setEnabled(false); }
 
-                    if(!student.getSkypeUrl().isEmpty()) {
+                    if (!student.getSkypeUrl().isEmpty()) {
                         skype.setEnabled(true);
                         skype.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -160,12 +165,12 @@ public class StudentActivity extends AppCompatActivity {
                                 startActivity(intent);
                             }
                         });
-                    }
-                    else skype.setEnabled(false);
+                    } else skype.setEnabled(false);
 
                     info = student.toArray();
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Log.v("USER_FIREBASE", databaseError.getMessage());
@@ -180,8 +185,7 @@ public class StudentActivity extends AppCompatActivity {
 
             String facebookScheme = "fb://profile/" + facebookId;
             return new Intent(Intent.ACTION_VIEW, Uri.parse(facebookScheme));
-        }
-        catch(Exception e) {
+        } catch (Exception e) {
             // Cache and Open a url in browser
             String facebookProfileUri = "https://www.facebook.com/" + facebookId;
             return new Intent(Intent.ACTION_VIEW, Uri.parse(facebookProfileUri));

@@ -26,7 +26,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/plataform_in_progress"
+            android:contentDescription="@string/platform_in_progress"
             android:src="@drawable/slider3"/>
 
     </ViewFlipper>
