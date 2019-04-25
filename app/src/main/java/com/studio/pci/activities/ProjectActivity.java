@@ -7,7 +7,10 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -32,6 +35,9 @@ import butterknife.OnClick;
 
 public class ProjectActivity extends AppCompatActivity {
 
+    @BindView(R.id.toolbar_layout)
+    Toolbar toolbar;
+
     @BindView(R.id.project_title)
     TextView titleTextView;
 
@@ -53,6 +59,7 @@ public class ProjectActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         ButterKnife.bind(this);
+
 
         Intent intent = getIntent();
         projectID = intent.getStringExtra("PROJECT_ID");
@@ -85,17 +92,27 @@ public class ProjectActivity extends AppCompatActivity {
         });
     }
 
-    @OnClick(R.id.project_students)
-    public void goToStudents(){
-        Intent intent = new Intent(ProjectActivity.this,ViewStudentsActivity.class);
-        intent.putExtra("PROJECT_ID",projectID);
-        startActivity(intent);
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.project, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
-    @OnClick(R.id.project_professors)
-    public void goToProfessors(){
-        Intent intent = new Intent(ProjectActivity.this,ViewProfessorsActivity.class);
-        intent.putExtra("PROJECT_ID",projectID);
-        startActivity(intent);
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent;
+        switch (item.getItemId()){
+            case R.id.project_professors:
+                intent = new Intent(ProjectActivity.this,ViewProfessorsActivity.class);
+                intent.putExtra("PROJECT_ID",projectID);
+                startActivity(intent);
+                break;
+            case R.id.project_students:
+                intent = new Intent(ProjectActivity.this,ViewStudentsActivity.class);
+                intent.putExtra("PROJECT_ID",projectID);
+                startActivity(intent);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

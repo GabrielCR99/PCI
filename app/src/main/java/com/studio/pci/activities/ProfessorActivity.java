@@ -73,7 +73,7 @@ public class ProfessorActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_professor_dashboard);
+        setContentView(R.layout.activity_dashboard_professor);
         ButterKnife.bind(this);
 
         databaseReference = FirebaseDatabase.getInstance().getReference("professors");
