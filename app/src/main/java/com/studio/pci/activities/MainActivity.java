@@ -13,7 +13,6 @@ import android.support.v4.widget.DrawerLayout;
 
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -51,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private String uid;
     private ImageView imageView;
     private View header;
+    private ProjectListFragment ProjectListFragment;
     private FeedsFragment feedsFragment;
 
     @Override
@@ -75,6 +75,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setNavInfo(type);
 
         feedsFragment = new FeedsFragment();
+        ProjectListFragment = new ProjectListFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,feedsFragment).commit();
     }
 
@@ -90,6 +91,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         switch (id){
+            case R.id.menu_feed:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,feedsFragment).commit();
+                break;
+
             case R.id.menu_profile:
                 Bundle arguments = new Bundle();
                 if(type==1){
@@ -106,11 +111,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
 
             case R.id.menu_project:
-                ProjectListFragment fragment = new ProjectListFragment();
                 Bundle args = new Bundle();
                 args.putInt("TYPE",type);
-                fragment.setArguments(args);
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,fragment).commit();
+                ProjectListFragment.setArguments(args);
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,ProjectListFragment).commit();
                 break;
 
             case R.id.menu_privacy_policy:
@@ -125,8 +129,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             default:
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setMessage("Tipo de usuário nulo.");
-                builder.setTitle("Erro de usuário");
+                builder.setMessage(getString(R.string.null_info));
+                builder.setTitle(getString(R.string.null_user));
                 builder.create().show();
                 break;
         }
@@ -153,24 +157,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void setNavInfo(int type) {
         final TextView nameTextView = header.findViewById(R.id.nav_name);
+        String path = "";
         TextView typeTextView = header.findViewById(R.id.nav_type);
         imageView = header.findViewById(R.id.user_photo);
         if(type==1) {
             typeTextView.setText(getString(R.string.student));
-            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("students");
-            reference.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    nameTextView.setText(dataSnapshot.child(uid).child("name").getValue(String.class));
-                }
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-                    Log.v("NAME DATABASE ERROR",databaseError.getMessage());
-                }
-            });
+            path = "students";
         }
-        else if(type==2) typeTextView.setText(getString(R.string.professor));
+        else if(type==2) {
+            typeTextView.setText(getString(R.string.professor));
+            path = "professors";
+        }
         else typeTextView.setText(getString(R.string.null_user));
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference(path);
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                nameTextView.setText(dataSnapshot.child(uid).child("name").getValue(String.class));
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.v("NAME DATABASE ERROR",databaseError.getMessage());
+            }
+        });
         setProfileImage();
     }
 }

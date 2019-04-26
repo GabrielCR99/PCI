@@ -46,21 +46,21 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:headerLayout="@layout/nav_header"
-        app:menu="@menu/menu"/>
+        app:menu="@menu/main"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <android.support.design.widget.FloatingActionButton
-            android:id="@+id/add_project_button"
+            android:id="@+id/fab_Add"
             android:src="@drawable/baseline_add_white_36"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
             android:layout_margin="16dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"/>
+            android:backgroundTint="@color/colorPrimary" />
 
     </RelativeLayout>
 

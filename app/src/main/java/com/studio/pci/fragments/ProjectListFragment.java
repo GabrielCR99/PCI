@@ -11,12 +11,16 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.studio.pci.R;
 import com.studio.pci.adapters.ViewPagerAdapter;
 
+import java.util.Objects;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class ProjectListFragment extends Fragment {
 
@@ -26,7 +30,7 @@ public class ProjectListFragment extends Fragment {
     @BindView(R.id.projects_view_pager)
     ViewPager viewPager;
 
-    @BindView(R.id.add_project_button)
+    @BindView(R.id.fab_Add)
     FloatingActionButton fab;
 
     private Context context;
@@ -38,14 +42,14 @@ public class ProjectListFragment extends Fragment {
         this.context = context;
     }
 
-    @Nullable
+    @NonNull
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @NonNull ViewGroup container, @NonNull Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_projects_list,container,false);
         ButterKnife.bind(this,view);
 
         Bundle b = getArguments();
-        int type = b.getInt("TYPE");
+        int type = Objects.requireNonNull(b).getInt("TYPE");
 
         if(type==1) fab.hide();
 
@@ -56,6 +60,14 @@ public class ProjectListFragment extends Fragment {
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
 
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "Adicionar", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         return view;
     }
 }
+

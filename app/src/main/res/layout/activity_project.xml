@@ -132,40 +132,6 @@
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:gravity="center"
-               android:text="@string/members"
-               android:layout_marginBottom="20sp"
-               android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionMode.Subtitle"/>
-
-           <LinearLayout
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:orientation="horizontal"
-               android:layout_marginBottom="30sp">
-
-               <Button
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:layout_weight="0.5"
-                   style="@style/buttonPattern"
-                   android:layout_marginEnd="10sp"
-                   android:text="@string/students"
-                   android:id="@+id/project_students"/>
-
-               <Button
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:layout_weight="0.5"
-                   style="@style/buttonPattern"
-                   android:layout_marginStart="10sp"
-                   android:text="@string/professors"
-                   android:id="@+id/project_professors"/>
-
-           </LinearLayout>
-
-           <TextView
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:gravity="center"
                android:text="@string/in_progress"
                android:layout_marginBottom="20sp"
                android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionMode.Subtitle"/>

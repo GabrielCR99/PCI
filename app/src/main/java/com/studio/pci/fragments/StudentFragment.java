@@ -83,14 +83,12 @@ public class StudentFragment extends Fragment {
         ButterKnife.bind(this,view);
 
         databaseReference = FirebaseDatabase.getInstance().getReference("students");
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
         Bundle arguments = getArguments();
         userID = arguments.getString("USERID");
 
         getInfo();
 
-        if(!currentUser.getUid().equals(userID)) button.setVisibility(View.INVISIBLE);
 
         return view;
     }

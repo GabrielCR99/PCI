@@ -85,6 +85,7 @@ public class EditProfessorActivity extends AppCompatActivity {
         degreeEditText.setText(info.get(5));
         faceEditText.setText(info.get(7));
         skypeEditText.setText(info.get(8));
+        bioEditText.setText(info.get(9));
 
         DatePickerDialogHelper.setDatePickerDialog(birthDateEditText,this,new SimpleDateFormat(getString(R.string.date_formatter), new Locale("pt", "BR")));
         setProfileImage();
