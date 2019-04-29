@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -47,7 +46,7 @@ public class SignInActivity extends BaseActivity {
 
     private FirebaseAuth auth;
     private FirebaseUser firebaseUser;
-    private int type=0;
+    private int type = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +66,7 @@ public class SignInActivity extends BaseActivity {
         if (FormHelper.isEmpty(email)) {
             emailLayout.setError(getString(R.string.error_email_empty));
             resultValidate = false;
-        } else if (!FormHelper.isEmailValid(email)) {
+        } else if (FormHelper.isEmailValid(email)) {
             emailLayout.setError(getString(R.string.error_email_invalid));
             resultValidate = false;
         }
@@ -75,7 +74,7 @@ public class SignInActivity extends BaseActivity {
         if (FormHelper.isEmpty(email)) {
             emailLayout.setError(getString(R.string.error_email_empty));
             resultValidate = false;
-        } else if (!FormHelper.isEmailValid(email)) {
+        } else if (FormHelper.isEmailValid(email)) {
             emailLayout.setError(getString(R.string.error_email_invalid));
             resultValidate = false;
         }
@@ -83,7 +82,7 @@ public class SignInActivity extends BaseActivity {
         if (FormHelper.isEmpty(password)) {
             passwordLayout.setError(getString(R.string.error_password_empty));
             resultValidate = false;
-        } else if (!FormHelper.isPasswordValid(password)) {
+        } else if (FormHelper.isPasswordValid(password)) {
             passwordLayout.setError(getString(R.string.error_password_invalid));
             resultValidate = false;
         }
@@ -99,17 +98,17 @@ public class SignInActivity extends BaseActivity {
         }
         showProgressDialog();
         auth.signInWithEmailAndPassword(email, password)
-        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    startMain();
-                } else {
-                    hideProgressDialog();
-                    showToast(getString(R.string.auth_failed));
-                }
-            }
-        });
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            startMain();
+                        } else {
+                            hideProgressDialog();
+                            showToast(getString(R.string.auth_failed));
+                        }
+                    }
+                });
     }
 
     private void startMain() {
@@ -119,23 +118,24 @@ public class SignInActivity extends BaseActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.child("users").child(firebaseUser.getUid()).getValue(User.class);
-                Intent intent = new Intent(SignInActivity.this,MainActivity.class);
-                if(user.getType().equals(getString(R.string.student))){
+                Intent intent = new Intent(SignInActivity.this, MainActivity.class);
+                if (user.getType().equals(getString(R.string.student))) {
                     type = 1;
                     Student student = dataSnapshot.child("students").child(firebaseUser.getUid()).getValue(Student.class);
-                    intent.putExtra("USERNAME",student.getName());
-                }else{
+                    intent.putExtra("USERNAME", student.getName());
+                } else {
                     type = 2;
                     Professor professor = dataSnapshot.child("professors").child(firebaseUser.getUid()).getValue(Professor.class);
-                    intent.putExtra("USERNAME",professor.getName());
+                    intent.putExtra("USERNAME", professor.getName());
                 }
-                intent.putExtra("USERTYPE",type);
-                intent.putExtra("USERID",firebaseUser.getUid());
+                intent.putExtra("USERTYPE", type);
+                intent.putExtra("USERID", firebaseUser.getUid());
                 startActivity(intent);
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.e("FIREBASE_ERROR","onCancelled Error = "+databaseError.getMessage());
+                Log.e("FIREBASE_ERROR", "onCancelled Error = " + databaseError.getMessage());
             }
         });
     }

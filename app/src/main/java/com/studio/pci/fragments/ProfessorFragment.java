@@ -75,7 +75,6 @@ public class ProfessorFragment extends Fragment {
     private ArrayList<String> info;
     private DatabaseReference databaseReference;
     private String userID;
-    private View view;
     private Context context;
 
     @Override
@@ -87,8 +86,8 @@ public class ProfessorFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_professor_dashboard,container,false);
-        ButterKnife.bind(this,view);
+        View view = inflater.inflate(R.layout.fragment_professor_dashboard, container, false);
+        ButterKnife.bind(this, view);
 
         databaseReference = FirebaseDatabase.getInstance().getReference("students");
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();

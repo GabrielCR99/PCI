@@ -35,55 +35,58 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/complete_name" />
+                android:text="@string/complete_name"
+                style="@style/textContentBlackBody"/>
 
             <TextView
                 android:id="@+id/student_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="25sp"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+                style="@style/textContentBlackSubtitle" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/gender" />
+                android:text="@string/gender"
+                style="@style/textContentBlackBody"/>
 
             <TextView
                 android:id="@+id/student_gender"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="25sp"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+                style="@style/textContentBlackSubtitle" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/birthDate" />
+                android:text="@string/birthDate"
+                style="@style/textContentBlackBody"/>
 
             <TextView
                 android:id="@+id/student_birthDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="25sp"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+                style="@style/textContentBlackSubtitle" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/email" />
+                android:text="@string/email"
+                style="@style/textContentBlackBody"/>
 
             <TextView
                 android:id="@+id/student_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20sp"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+                style="@style/textContentBlackSubtitle" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:orientation="horizontal">
 
                 <ImageButton
@@ -93,7 +96,7 @@
                     android:layout_marginEnd="20dp"
                     android:background="@color/colorWhite"
                     android:contentDescription="@string/facebook"
-                    android:src="@drawable/facebook_32" />
+                    android:src="@drawable/facebook_24" />
 
                 <ImageButton
                     android:id="@+id/student_skype"
@@ -102,7 +105,7 @@
                     android:layout_marginStart="20sp"
                     android:background="@color/colorWhite"
                     android:contentDescription="@string/skype"
-                    android:src="@drawable/skype_32" />
+                    android:src="@drawable/skype_24" />
 
             </LinearLayout>
 
@@ -118,7 +121,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/edit"
-                style="@style/buttonPattern"
+                style="@style/buttonTextAndBackground"
                 android:layout_marginBottom="25sp"/>
 
         </LinearLayout>

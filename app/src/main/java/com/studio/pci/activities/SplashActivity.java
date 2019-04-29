@@ -20,7 +20,7 @@ import com.studio.pci.models.User;
 public class SplashActivity extends AppCompatActivity implements Runnable {
 
     private static final int DELAY_MILLIS = 2000;
-    private static final String USER_NAME = "USERNAME";
+    private static final String USER_TYPE = "USERTYPE";
     private FirebaseUser currentUser;
     private int type;
 
@@ -55,7 +55,7 @@ public class SplashActivity extends AppCompatActivity implements Runnable {
                 Intent intent = new Intent(SplashActivity.this,MainActivity.class);
                 if(user.getType().equals(getString(R.string.student))) type = 1;
                 else type = 2;
-                intent.putExtra("USERTYPE",type);
+                intent.putExtra(USER_TYPE,type);
                 intent.putExtra("USERID",currentUser.getUid());
                 startActivity(intent);
                 finish();

@@ -7,6 +7,8 @@
         android:text="@string/finished_projects"
         android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        style="@style/textContentWhiteBody"
+        android:id="@+id/finished_projects"/>
 
 </LinearLayout>

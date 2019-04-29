@@ -13,7 +13,6 @@ import android.support.v4.widget.DrawerLayout;
 
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -52,6 +51,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ImageView imageView;
     private View header;
     private FeedsFragment feedsFragment;
+    private static final String USER_TYPE = "USERTYPE";
+    private static final String USER_ID = "USERID";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,8 +69,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
 
         Intent intent = getIntent();
-        type = intent.getIntExtra("USERTYPE",0);
-        uid = intent.getStringExtra("USERID");
+        type = intent.getIntExtra(USER_TYPE,0);
+        uid = intent.getStringExtra(USER_ID);
 
         navigationView.setNavigationItemSelectedListener(this);
         setNavInfo(type);
@@ -94,12 +95,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Bundle arguments = new Bundle();
                 if(type==1){
                     StudentFragment fragment = new StudentFragment();
-                    arguments.putString("USERID",uid);
+                    arguments.putString(USER_ID,uid);
                     fragment.setArguments(arguments);
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,fragment).commit();
                 }else{
                     ProfessorFragment fragment = new ProfessorFragment();
-                    arguments.putString("USERID",uid);
+                    arguments.putString(USER_ID,uid);
                     fragment.setArguments(arguments);
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,fragment).commit();
                 }
@@ -125,7 +126,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             default:
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setMessage("Tipo de usuário nulo.");
+                builder.setMessage(R.string.null_user);
                 builder.setTitle("Erro de usuário");
                 builder.create().show();
                 break;
@@ -141,7 +142,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()) {
                     Upload upload = dataSnapshot.getValue(Upload.class);
-                    Picasso.get().load(upload.getPhoto()).placeholder(R.drawable.ic_launcher_background).into(imageView);
+                    Picasso.get().load(upload != null ? upload.getPhoto() : null).placeholder(R.drawable.ic_launcher_background).into(imageView);
                 }
             }
             @Override

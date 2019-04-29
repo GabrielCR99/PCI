@@ -50,8 +50,8 @@ public class ViewStudentsActivity extends AppCompatActivity {
     }
 
     private void setRecyclerView() {
-        recyclerView.setLayoutManager(new GridLayoutManager(this,3));
-        adapter = new StudentsAdapter(students,uploads,this);
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
+        adapter = new StudentsAdapter(students, uploads, this);
         recyclerView.setAdapter(adapter);
     }
 
@@ -65,19 +65,21 @@ public class ViewStudentsActivity extends AppCompatActivity {
                 project = dataSnapshot.child("projects").child(projectID).getValue(Project.class);
                 students.clear();
                 uploads.clear();
-                for(String id : project.getStudents()){
+                for (String id : project.getStudents()) {
                     Student student = dataSnapshot.child("students").child(id).getValue(Student.class);
                     Upload upload;
-                    if(dataSnapshot.child("profile_photo").child(id).exists()) upload = dataSnapshot.child("profile_photo").child(id).getValue(Upload.class);
+                    if (dataSnapshot.child("profile_photo").child(id).exists())
+                        upload = dataSnapshot.child("profile_photo").child(id).getValue(Upload.class);
                     else upload = new Upload("null");
                     students.add(student);
                     uploads.add(upload);
                     adapter.notifyDataSetChanged();
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.e("DATABASE_PROJECT_ERROR",databaseError.getMessage());
+                Log.e("DATABASE_PROJECT_ERROR", databaseError.getMessage());
             }
         });
     }

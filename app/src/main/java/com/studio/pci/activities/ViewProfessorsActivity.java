@@ -59,26 +59,28 @@ public class ViewProfessorsActivity extends AppCompatActivity {
                 project = dataSnapshot.child("projects").child(projectID).getValue(Project.class);
                 professors.clear();
                 uploads.clear();
-                for(String id : project.getProfessors()){
+                for (String id : project.getProfessors()) {
                     Professor professor = dataSnapshot.child("professors").child(id).getValue(Professor.class);
                     Upload upload;
-                    if(dataSnapshot.child("profile_photo").child(id).exists()) upload = dataSnapshot.child("profile_photo").child(id).getValue(Upload.class);
+                    if (dataSnapshot.child("profile_photo").child(id).exists())
+                        upload = dataSnapshot.child("profile_photo").child(id).getValue(Upload.class);
                     else upload = new Upload("null");
                     professors.add(professor);
                     uploads.add(upload);
                     adapter.notifyDataSetChanged();
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.e("DATABASE_PROJECT_ERROR",databaseError.getMessage());
+                Log.e("DATABASE_PROJECT_ERROR", databaseError.getMessage());
             }
         });
     }
 
     private void setRecyclerView() {
-        recyclerView.setLayoutManager(new GridLayoutManager(this,3));
-        adapter = new ProfessorsAdapter(professors,uploads,this);
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
+        adapter = new ProfessorsAdapter(professors, uploads, this);
         recyclerView.setAdapter(adapter);
     }
 }

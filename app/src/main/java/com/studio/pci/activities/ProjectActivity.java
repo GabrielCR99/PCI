@@ -19,14 +19,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.studio.pci.R;
-import com.studio.pci.adapters.ProfessorsAdapter;
-import com.studio.pci.adapters.StudentsAdapter;
-import com.studio.pci.models.Professor;
 import com.studio.pci.models.Project;
-import com.studio.pci.models.Student;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

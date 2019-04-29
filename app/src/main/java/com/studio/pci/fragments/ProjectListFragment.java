@@ -29,25 +29,24 @@ public class ProjectListFragment extends Fragment {
     @BindView(R.id.add_project_button)
     FloatingActionButton fab;
 
-    private Context context;
-    private View view;
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        this.context = context;
+        Context context1 = context;
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_projects_list,container,false);
-        ButterKnife.bind(this,view);
+        View view = inflater.inflate(R.layout.fragment_projects_list, container, false);
+        ButterKnife.bind(this, view);
 
         Bundle b = getArguments();
         int type = b.getInt("TYPE");
 
         if(type==1) fab.hide();
+
+
 
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getFragmentManager());
         viewPagerAdapter.addFragment(new InProgressProjectFragment(), getString(R.string.projects_in_progress));
