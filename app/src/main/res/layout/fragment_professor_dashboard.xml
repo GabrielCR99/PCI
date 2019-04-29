@@ -37,20 +37,20 @@
             android:orientation="vertical">
 
             <TextView
-                style="@style/textContentBlackSubtitle1"
+                style="@style/textContentBlackBody"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/complete_name" />
 
             <TextView
                 android:id="@+id/professor_name"
-                style="@style/textContentBlack"
+                style="@style/textContentBlackSubtitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="25sp" />
 
             <TextView
-                style="@style/textContentBlackSubtitle1"
+                style="@style/textContentBlackBody"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/degree" />
@@ -60,10 +60,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="25sp"
-               style="@style/textContentBlack"/>
+               style="@style/textContentBlackSubtitle"/>
 
             <TextView
-                style="@style/textContentBlackSubtitle1"
+                style="@style/textContentBlackBody"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/gender" />
@@ -73,10 +73,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="25sp"
-               style="@style/textContentBlack" />
+               style="@style/textContentBlackSubtitle" />
 
             <TextView
-                style="@style/textContentBlackSubtitle1"
+                style="@style/textContentBlackBody"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/birthDate" />
@@ -86,10 +86,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="25sp"
-                style="@style/textContentBlack" />
+                style="@style/textContentBlackSubtitle" />
 
             <TextView
-                style="@style/textContentBlackSubtitle1"
+                style="@style/textContentBlackBody"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/email" />
@@ -99,17 +99,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="25sp"
-                style="@style/textContentBlack" />
+                style="@style/textContentBlackSubtitle" />
 
             <TextView
-                style="@style/textContentBlackSubtitle1"
+                style="@style/textContentBlackBody"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/bio" />
 
             <TextView
                 android:id="@+id/professor_bio"
-                style="@style/textContentBlack"
+                style="@style/textContentBlackSubtitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="25sp"
@@ -146,7 +146,7 @@
 
             <Button
                 android:id="@+id/professor_edit_button"
-                style="@style/buttonPattern"
+                style="@style/buttonTextAndBackground"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="25sp"

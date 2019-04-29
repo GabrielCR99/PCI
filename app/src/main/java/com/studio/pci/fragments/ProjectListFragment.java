@@ -29,12 +29,10 @@ public class ProjectListFragment extends Fragment {
     @BindView(R.id.add_project_button)
     FloatingActionButton fab;
 
-    private Context context;
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        this.context = context;
+        Context context1 = context;
     }
 
     @Nullable
@@ -47,6 +45,8 @@ public class ProjectListFragment extends Fragment {
         int type = b.getInt("TYPE");
 
         if(type==1) fab.hide();
+
+
 
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getFragmentManager());
         viewPagerAdapter.addFragment(new InProgressProjectFragment(), getString(R.string.projects_in_progress));

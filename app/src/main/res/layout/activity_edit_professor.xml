@@ -62,7 +62,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/gender"
                 android:textColor="@color/colorBlack"
-                android:textSize="18sp"/>
+                android:textSize="18sp"
+                style="@style/textContentBlackBody"/>
 
             <Spinner
                 android:id="@+id/spinner_professor_edit"
@@ -169,9 +170,8 @@
                     android:id="@+id/professor_edit_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#2C3E50"
                     android:text="@string/save"
-                    style="@style/buttonPattern"
+                    style="@style/buttonTextAndBackground"
                     android:layout_marginBottom="25sp"/>
 
             </LinearLayout>

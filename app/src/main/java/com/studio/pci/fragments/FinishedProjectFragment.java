@@ -17,7 +17,6 @@ import java.util.List;
 
 public class FinishedProjectFragment extends Fragment {
 
-    private View view;
     private List<Project> projects;
     private ProjectsAdapter adapter;
     private DatabaseReference db;
@@ -27,8 +26,7 @@ public class FinishedProjectFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_projects_finished, container, false);
-        return view;
+        return inflater.inflate(R.layout.fragment_projects_finished, container, false);
     }
 
 

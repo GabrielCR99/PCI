@@ -23,13 +23,13 @@
         android:layout_height="wrap_content"
         android:id="@+id/nav_name"
         android:text="@string/app_name"
-        style="@style/textContentWhite"/>
+        style="@style/textContentWhiteBody"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/nav_type"
         android:text="@string/app_name"
-        style="@style/textContentWhite"/>
+        style="@style/textContentWhiteBody"/>
 
 </LinearLayout>

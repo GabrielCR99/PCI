@@ -28,7 +28,7 @@
 
                 <TextView
                     android:id="@+id/project_title"
-                    style="@style/textContentWhite"
+                    style="@style/textContentWhiteSubtitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -50,7 +50,7 @@
                     android:paddingBottom="30dp">
 
                     <TextView
-                        style="@style/textContentBlack"
+                        style="@style/textContentBlackBody"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.3"
@@ -58,7 +58,7 @@
 
                     <TextView
                         android:id="@+id/project_description"
-                        style="@style/textContentBlack"
+                        style="@style/textContentBlackBody"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.1"
@@ -83,7 +83,7 @@
 
                     <TextView
                         android:id="@+id/project_startDate"
-                        style="@style/textContentBlack"
+                        style="@style/textContentBlackBody"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.3"
@@ -98,7 +98,7 @@
 
                     <TextView
                         android:id="@+id/project_endDate"
-                        style="@style/textContentBlack"
+                        style="@style/textContentBlackBody"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.3"
@@ -108,7 +108,7 @@
 
 
                 <TextView
-                    style="@style/textContentBlack"
+                    style="@style/textContentBlackBody"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/phase_progress"
@@ -129,7 +129,7 @@
                     android:paddingBottom="30dp">
 
                     <TextView
-                        style="@style/textContentBlack"
+                        style="@style/textContentBlackBody"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.3"
@@ -137,7 +137,7 @@
 
                     <TextView
                         android:id="@+id/project_status"
-                        style="@style/textContentBlack"
+                        style="@style/textContentBlackBody"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.1"
@@ -159,7 +159,7 @@
 
                 <TextView
                     android:id="@+id/professors_project"
-                    style="@style/textContentWhite"
+                    style="@style/textContentWhiteSubtitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -178,7 +178,7 @@
 
                 <TextView
                     android:id="@+id/students_project"
-                    style="@style/textContentWhite"
+                    style="@style/textContentWhiteBody"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -197,7 +197,7 @@
 
                 <TextView
                     android:id="@+id/phases_project"
-                    style="@style/textContentWhite"
+                    style="@style/textContentWhiteBody"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"

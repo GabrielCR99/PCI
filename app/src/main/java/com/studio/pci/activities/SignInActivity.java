@@ -66,7 +66,7 @@ public class SignInActivity extends BaseActivity {
         if (FormHelper.isEmpty(email)) {
             emailLayout.setError(getString(R.string.error_email_empty));
             resultValidate = false;
-        } else if (!FormHelper.isEmailValid(email)) {
+        } else if (FormHelper.isEmailValid(email)) {
             emailLayout.setError(getString(R.string.error_email_invalid));
             resultValidate = false;
         }
@@ -74,7 +74,7 @@ public class SignInActivity extends BaseActivity {
         if (FormHelper.isEmpty(email)) {
             emailLayout.setError(getString(R.string.error_email_empty));
             resultValidate = false;
-        } else if (!FormHelper.isEmailValid(email)) {
+        } else if (FormHelper.isEmailValid(email)) {
             emailLayout.setError(getString(R.string.error_email_invalid));
             resultValidate = false;
         }
@@ -82,7 +82,7 @@ public class SignInActivity extends BaseActivity {
         if (FormHelper.isEmpty(password)) {
             passwordLayout.setError(getString(R.string.error_password_empty));
             resultValidate = false;
-        } else if (!FormHelper.isPasswordValid(password)) {
+        } else if (FormHelper.isPasswordValid(password)) {
             passwordLayout.setError(getString(R.string.error_password_invalid));
             resultValidate = false;
         }

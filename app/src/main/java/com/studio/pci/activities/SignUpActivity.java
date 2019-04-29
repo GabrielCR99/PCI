@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -84,7 +83,7 @@ public class SignUpActivity extends BaseActivity {
         if (FormHelper.isEmpty(email)) {
             emailLayout.setError(getString(R.string.error_email_empty));
             resultValidate = false;
-        } else if (!FormHelper.isEmailValid(email)) {
+        } else if (FormHelper.isEmailValid(email)) {
             emailLayout.setError(getString(R.string.error_email_invalid));
             resultValidate = false;
         }
@@ -92,7 +91,7 @@ public class SignUpActivity extends BaseActivity {
         if (FormHelper.isEmpty(password)) {
             passwordLayout.setError(getString(R.string.error_password_empty));
             resultValidate = false;
-        } else if (!FormHelper.isPasswordValid(password)) {
+        } else if (FormHelper.isPasswordValid(password)) {
             passwordLayout.setError(getString(R.string.error_password_invalid));
             resultValidate = false;
         }

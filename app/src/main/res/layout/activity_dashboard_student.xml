@@ -41,20 +41,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/complete_name"
-                style="@style/TextAppearance.MaterialComponents.Subtitle1"/>
+                style="@style/textContentBlackBody"/>
 
             <TextView
                 android:id="@+id/student_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="25sp"
-                style="@style/textContentBlack" />
+                style="@style/textContentBlackSubtitle" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/gender"
-                style="@style/TextAppearance.MaterialComponents.Subtitle1"/>
+                style="@style/textContentBlackBody"/>
 
             <TextView
                 android:id="@+id/student_gender"
@@ -67,27 +67,27 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/birthDate"
-                style="@style/TextAppearance.MaterialComponents.Subtitle1"/>
+                style="@style/textContentBlackBody"/>
 
             <TextView
                 android:id="@+id/student_birthDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="25sp"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+                android:textAppearance="@style/textContentBlackSubtitle" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/email"
-                style="@style/TextAppearance.MaterialComponents.Subtitle1"/>
+                style="@style/textContentBlackBody"/>
 
             <TextView
                 android:id="@+id/student_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20sp"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+                android:textAppearance="@style/textContentBlackBody" />
 
             <LinearLayout
                 android:layout_width="match_parent"
