@@ -84,14 +84,16 @@ public class ViewStudentsActivity extends AppCompatActivity {
                 project = dataSnapshot.child("projects").child(projectID).getValue(Project.class);
                 students.clear();
                 uploads.clear();
-                for(String id : project.getStudents()){
-                    Student student = dataSnapshot.child("students").child(id).getValue(Student.class);
-                    Upload upload;
-                    if(dataSnapshot.child("profile_photo").child(id).exists()) upload = dataSnapshot.child("profile_photo").child(id).getValue(Upload.class);
-                    else upload = new Upload("null");
-                    students.add(student);
-                    uploads.add(upload);
-                    adapter.notifyDataSetChanged();
+                if(!project.getStudents().isEmpty()){
+                    for(String id : project.getStudents()){
+                        Student student = dataSnapshot.child("students").child(id).getValue(Student.class);
+                        Upload upload;
+                        if(dataSnapshot.child("profile_photo").child(id).exists()) upload = dataSnapshot.child("profile_photo").child(id).getValue(Upload.class);
+                        else upload = new Upload("null");
+                        students.add(student);
+                        uploads.add(upload);
+                        adapter.notifyDataSetChanged();
+                    }
                 }
             }
             @Override

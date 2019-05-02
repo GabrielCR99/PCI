@@ -72,14 +72,16 @@ public class ViewProfessorsActivity extends AppCompatActivity {
                 project = dataSnapshot.child("projects").child(projectID).getValue(Project.class);
                 professors.clear();
                 uploads.clear();
-                for(String id : project.getProfessors()){
-                    Professor professor = dataSnapshot.child("professors").child(id).getValue(Professor.class);
-                    Upload upload;
-                    if(dataSnapshot.child("profile_photo").child(id).exists()) upload = dataSnapshot.child("profile_photo").child(id).getValue(Upload.class);
-                    else upload = new Upload("null");
-                    professors.add(professor);
-                    uploads.add(upload);
-                    adapter.notifyDataSetChanged();
+                if(dataSnapshot.child("projects").child(projectID).child("professors").exists()){
+                    for(String id : project.getProfessors()){
+                        Professor professor = dataSnapshot.child("professors").child(id).getValue(Professor.class);
+                        Upload upload;
+                        if(dataSnapshot.child("profile_photo").child(id).exists()) upload = dataSnapshot.child("profile_photo").child(id).getValue(Upload.class);
+                        else upload = new Upload("null");
+                        professors.add(professor);
+                        uploads.add(upload);
+                        adapter.notifyDataSetChanged();
+                    }
                 }
             }
             @Override

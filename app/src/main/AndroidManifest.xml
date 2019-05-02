@@ -17,10 +17,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+
         <activity
             android:name=".activities.MainActivity"
             android:label="@string/home"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.PrivacyPolicyActivity"
             android:label="Privacy Policy" />
@@ -69,7 +70,10 @@
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:screenOrientation="portrait" />
+
         <activity android:name=".activities.BaseActivity" />
+
+        <activity android:name=".activities.CreateActivity" android:label="@string/create_project"/>
     </application>
 
 </manifest>

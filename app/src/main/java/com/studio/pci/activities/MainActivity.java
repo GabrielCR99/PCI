@@ -30,7 +30,14 @@ import com.studio.pci.fragments.FeedsFragment;
 import com.studio.pci.fragments.ProfessorFragment;
 import com.studio.pci.fragments.ProjectListFragment;
 import com.studio.pci.fragments.StudentFragment;
+import com.studio.pci.models.Project;
+import com.studio.pci.models.Student;
+import com.studio.pci.models.University;
 import com.studio.pci.models.Upload;
+import com.studio.pci.providers.ProjectDAO;
+import com.studio.pci.providers.UniversityDAO;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -77,6 +84,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         feedsFragment = new FeedsFragment();
         ProjectListFragment = new ProjectListFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,feedsFragment).commit();
+
+        //UNIVERSIDADES
+        /*UniversityDAO universityDAO = new UniversityDAO();
+        String id = universityDAO.newKey();
+        universityDAO.create(id, new University(id,"Fatec Americana","Fatec AM","Brazil","Sao Paulo","Desenvolvimento","",true));
+        id = universityDAO.newKey();
+        universityDAO.create(id,new University(id,"Florida International University","FIU","United States of America","South Florida","Desenvolvimento","",true));
+        id = universityDAO.newKey();
+        universityDAO.create(id,new University(id,"Universidade Teste PCI","TPCI","United States of Brazil","Sao Paulo","Desenvolvimento","",true));
+        */
+
+        //PROJETOS
+        /*ProjectDAO projectDAO = new ProjectDAO();
+        String id = projectDAO.newKey();
+        ArrayList<String> students = new ArrayList<>();
+        ArrayList<String> professors = new ArrayList<>();
+        students.add("0QbFsPvE86cKBlWhQv67pNk3kRu1");
+        students.add("8DZtXqwUt5WYtjuBSiNyfz9c4l22");
+        students.add("UZ8tCTjsICajS1YOcc0dBU7cGO03");
+        students.add("uGVfs6eLU7XCQxhOJnxsuw3QpjV2");
+        students.add("fWJszW1JFRc4YlqIjSQLSpVHBel1");
+        professors.add("LAHmqsNytPfpHMiQukGQZWSGyOD2");
+        professors.add("OE4J8YuGMlclfMU2e4X8vsKdULj1");
+        Project project = new Project(id,"Projeto Colaborativo Internacional","Projeto para teste de aplicação",students,professors,null);
+        projectDAO.create(id,project);*/
     }
 
     @Override
@@ -92,7 +124,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         switch (id){
             case R.id.menu_feed:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,feedsFragment).commit();
+                if (feedsFragment.isVisible()) drawer.closeDrawer(GravityCompat.START);
+                else getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,feedsFragment).commit();
                 break;
 
             case R.id.menu_profile:
@@ -145,7 +178,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()) {
                     Upload upload = dataSnapshot.getValue(Upload.class);
-                    Picasso.get().load(upload.getPhoto()).placeholder(R.drawable.ic_launcher_background).into(imageView);
+                    if(upload != null) Picasso.get().load(upload.getPhoto()).placeholder(R.drawable.ic_launcher_background).into(imageView);
                 }
             }
             @Override

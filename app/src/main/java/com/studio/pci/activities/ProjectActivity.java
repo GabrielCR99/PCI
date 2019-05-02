@@ -67,7 +67,7 @@ public class ProjectActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         projectID = intent.getStringExtra("PROJECT_ID");
-        uid = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+        uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         setInfo();
     }
 

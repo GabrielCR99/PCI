@@ -105,4 +105,6 @@
     <string name="plataform_in_progress">Plataforma em Desenvolvimento!</string>
     <string name="project_management">Project Management is Life!</string>
     <string name="members">Membros</string>
+    <string name="project_title">Título do Projeto</string>
+    <string name="create_project">Criar Projeto</string>
 </resources>
