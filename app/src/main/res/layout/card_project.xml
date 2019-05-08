@@ -10,27 +10,17 @@
     cardview:cardCornerRadius="5dp"
     android:focusable="true"
     cardview:cardBackgroundColor="@color/colorAccent"
-    cardview:contentPadding="1dp">
+    cardview:contentPadding="2dp">
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginStart="10sp"
-        android:layout_marginEnd="10sp"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_marginTop="7sp">
-
-        <TextView
-            android:id="@+id/card_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.1"
-            android:text="@string/app_name"
-            style="@style/textContentWhiteSubtitle"/>
+        android:layout_gravity="center">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="10dp">
 
@@ -51,7 +41,7 @@
                 android:text="@string/app_name"
                 android:textAlignment="center"
                 android:gravity="center"
-                style="@style/textContentBlack"
+                style="@style/textContentBlackBody"
                 android:textSize="12sp"/>
 
         </LinearLayout>
