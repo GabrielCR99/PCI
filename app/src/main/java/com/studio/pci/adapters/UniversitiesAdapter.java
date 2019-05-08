@@ -2,6 +2,7 @@ package com.studio.pci.adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
 
 public class UniversitiesAdapter extends RecyclerView.Adapter<UniversitiesAdapter.UniversityViewHolder> {
 
@@ -63,6 +65,7 @@ public class UniversitiesAdapter extends RecyclerView.Adapter<UniversitiesAdapte
             super(itemView);
             ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(this);
+
         }
 
         @Override

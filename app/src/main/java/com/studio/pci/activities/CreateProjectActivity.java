@@ -32,13 +32,18 @@ import butterknife.OnClick;
 
 import static com.studio.pci.R.drawable.ic_chevron_right_black_24dp;
 
-public class CreateActivity extends AppCompatActivity implements UniversitiesAdapter.RecyclerViewClickListener,SelectedUniversitiesAdapter.RecyclerViewClickListener{
+public class CreateProjectActivity extends AppCompatActivity
+        implements  UniversitiesAdapter.RecyclerViewClickListener,
+                    SelectedUniversitiesAdapter.RecyclerViewClickListener{
 
+    // LOAD UNIVERSITIES
     private List<University> universities;
     private UniversitiesAdapter adapter;
 
+    //FILTER SELECTED UNIVERSITIES
     private List<University> filteredUniversities;
     private SelectedUniversitiesAdapter filteredAdapter;
+
 
 
     @BindView(R.id.recycler_universities)
@@ -72,9 +77,9 @@ public class CreateActivity extends AppCompatActivity implements UniversitiesAda
 
        setUniversities();
        setRecyclerView();
-
     }
 
+    // PREVIOUS BUTTON
     @OnClick(R.id.fab_previous)
     public void previousView(){
         viewFlipper.setInAnimation(this,R.anim.slide_in_right);
@@ -83,6 +88,7 @@ public class CreateActivity extends AppCompatActivity implements UniversitiesAda
         checkCurrentView();
     }
 
+    // NEXT BUTTON
     @OnClick(R.id.fab_next)
     public void nextView(){
         viewFlipper.setInAnimation(this,R.anim.slide_in_right);
@@ -96,6 +102,7 @@ public class CreateActivity extends AppCompatActivity implements UniversitiesAda
         }
     }
 
+    // INFORMATION VIEW CONTROL
     public boolean checkCurrentView(){
         if(viewFlipper.getCurrentView().equals(linearLayout1)){
             fabPrevious.hide();
@@ -112,6 +119,7 @@ public class CreateActivity extends AppCompatActivity implements UniversitiesAda
         return true;
     }
 
+    //LOAD DATA
     private void setUniversities(){
         universities = new ArrayList<>();
         filteredUniversities = new ArrayList<>();
@@ -134,6 +142,7 @@ public class CreateActivity extends AppCompatActivity implements UniversitiesAda
         });
     }
 
+    // CONFIG RECYCLERS
     private void setRecyclerView() {
         recyclerUniversities.setLayoutManager(new LinearLayoutManager(this));
         adapter = new UniversitiesAdapter(universities,this,this);
@@ -144,15 +153,19 @@ public class CreateActivity extends AppCompatActivity implements UniversitiesAda
         recyclerSelected.setAdapter(filteredAdapter);
     }
 
+    // POPULATE SELECTED UNIVERSITY
     @Override
     public void recyclerViewListClicked(View v, int position) {
         filteredUniversities.add(universities.get(position));
         filteredAdapter.notifyDataSetChanged();
+        // TODO REMOVE SELECTED UNIVERSITY
     }
 
+    // REMOVE SELECTED UNIVERSITY
     @Override
     public void recyclerRoundItemClicked(View v, int position) {
         filteredUniversities.remove(position);
         filteredAdapter.notifyDataSetChanged();
+        // TODO ADD UNIVERSITY AGAIN
     }
 }

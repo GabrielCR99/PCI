@@ -17,6 +17,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
@@ -43,6 +44,7 @@ import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 import com.studio.pci.R;
 import com.studio.pci.models.Student;
+import com.studio.pci.models.University;
 import com.studio.pci.models.Upload;
 import com.studio.pci.providers.StudentDAO;
 import com.studio.pci.utils.DatePickerDialogHelper;
@@ -82,6 +84,8 @@ public class EditStudentActivity extends AppCompatActivity {
     @BindView(R.id.student_edit_button)
     Button confirmButton;
 
+    @BindView(R.id.student_university_edit)
+    EditText universityEditText;
 
     @BindView(R.id.student_photo)
     ImageView imageView;
@@ -90,6 +94,8 @@ public class EditStudentActivity extends AppCompatActivity {
     private StorageReference storageReference;
     private ArrayList<String> info;
     private Uri file;
+    public static String universityID;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -110,9 +116,34 @@ public class EditStudentActivity extends AppCompatActivity {
         birthDateEditText.setText(info.get(3));
         faceEditText.setText(info.get(6));
         skypeEditText.setText(info.get(7));
+        if(!info.get(8).isEmpty()) getUniversityName();
 
+        universityEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SelectUniversityActivity activity = new SelectUniversityActivity(universityEditText);
+                Intent newUniversity = new Intent(EditStudentActivity.this,SelectUniversityActivity.class);
+                startActivity(newUniversity);
+            }
+        });
         DatePickerDialogHelper.setDatePickerDialog(birthDateEditText,this,new SimpleDateFormat(getString(R.string.date_formatter), new Locale("pt", "BR")));
+
         setProfileImage();
+    }
+
+    private void getUniversityName() {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("universities").child(info.get(8));
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                University university = dataSnapshot.getValue(University.class);
+                universityEditText.setText(university.getName());
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.v("ERROR UNIVERSITY EDIT",databaseError.getMessage());
+            }
+        });
     }
 
     private void setProfileImage() {
@@ -157,7 +188,8 @@ public class EditStudentActivity extends AppCompatActivity {
         String birthDate = birthDateEditText.getText().toString();
         String facebook = faceEditText.getText().toString();
         String skype = skypeEditText.getText().toString();
-        final Student student = new Student(info.get(0),name,gender,birthDate,info.get(4),info.get(5),facebook,skype,true);
+        // TODO UNIVERSITY LIST FOR SELECTION
+        final Student student = new Student(info.get(0),name,gender,birthDate,info.get(4),info.get(5),facebook,skype,"",true);
         studentDAO.update(student.getId(),student);
         if(file != null){
             String path = file.getPath();

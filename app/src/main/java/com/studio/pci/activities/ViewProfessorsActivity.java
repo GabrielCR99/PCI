@@ -66,7 +66,7 @@ public class ViewProfessorsActivity extends AppCompatActivity {
         professors = new ArrayList<>();
         uploads = new ArrayList<>();
         DatabaseReference db = FirebaseDatabase.getInstance().getReference();
-        db.addValueEventListener(new ValueEventListener() {
+        db.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 project = dataSnapshot.child("projects").child(projectID).getValue(Project.class);

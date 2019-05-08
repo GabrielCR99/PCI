@@ -49,6 +49,9 @@ public class StudentActivity extends AppCompatActivity {
     @BindView(R.id.student_email)
     TextView email;
 
+    @BindView(R.id.student_university)
+    TextView university;
+
     @BindView(R.id.student_face)
     ImageButton facebook;
 
@@ -136,6 +139,9 @@ public class StudentActivity extends AppCompatActivity {
 
                     if(!student.getEmail().isEmpty()) email.setText(student.getEmail());
                     else email.setText(getString(R.string.null_info));
+
+                    if(!student.getUniversity().isEmpty()) university.setText(student.getUniversity());
+                    else university.setText(getString(R.string.null_info));
 
                     if(!student.getFacebookUrl().isEmpty()) {
                         facebook.setEnabled(true);

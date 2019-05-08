@@ -21,7 +21,7 @@ public class Project implements Serializable {
 
     public Project(){}
 
-    public Project(String id, String title, String description, String startDate, String endDate, ArrayList<String> universities, ArrayList<String> students, ArrayList<String> professors, ArrayList<String> phases, boolean finished, boolean enable) {
+    public Project(String id, String title, String description, String startDate, String endDate, ArrayList<String> universities, ArrayList<String> students, ArrayList<String> professors, ArrayList<String> phases, boolean finished) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -32,7 +32,7 @@ public class Project implements Serializable {
         this.professors = professors;
         this.phases = phases;
         this.finished = finished;
-        this.enable = enable;
+        this.enable = true;
     }
 
     public String getId() {

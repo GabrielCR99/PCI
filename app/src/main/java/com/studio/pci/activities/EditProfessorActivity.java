@@ -88,6 +88,7 @@ public class EditProfessorActivity extends AppCompatActivity {
         bioEditText.setText(info.get(9));
 
         DatePickerDialogHelper.setDatePickerDialog(birthDateEditText,this,new SimpleDateFormat(getString(R.string.date_formatter), new Locale("pt", "BR")));
+        // TODO ON UNIVERSITY EDITLAYOUT CLICK LISTENER GO TO SELECTION FRAGMENT
         setProfileImage();
     }
 

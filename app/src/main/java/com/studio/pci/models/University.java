@@ -1,5 +1,6 @@
 package com.studio.pci.models;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class University implements Serializable {
