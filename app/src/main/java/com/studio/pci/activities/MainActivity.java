@@ -30,14 +30,7 @@ import com.studio.pci.fragments.FeedsFragment;
 import com.studio.pci.fragments.ProfessorFragment;
 import com.studio.pci.fragments.ProjectListFragment;
 import com.studio.pci.fragments.StudentFragment;
-import com.studio.pci.models.Project;
-import com.studio.pci.models.Student;
-import com.studio.pci.models.University;
 import com.studio.pci.models.Upload;
-import com.studio.pci.providers.ProjectDAO;
-import com.studio.pci.providers.UniversityDAO;
-
-import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -57,7 +50,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private String uid;
     private ImageView imageView;
     private View header;
-    private ProjectListFragment ProjectListFragment;
     private FeedsFragment feedsFragment;
     private static final String USER_TYPE = "USERTYPE";
     private static final String USER_ID = "USERID";
@@ -84,33 +76,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setNavInfo(type);
 
         feedsFragment = new FeedsFragment();
-        ProjectListFragment = new ProjectListFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,feedsFragment).commit();
-
-        //UNIVERSIDADES
-        /*UniversityDAO universityDAO = new UniversityDAO();
-        String id = universityDAO.newKey();
-        universityDAO.create(id, new University(id,"Fatec Americana","Fatec AM","Brazil","Sao Paulo","Desenvolvimento","",true));
-        id = universityDAO.newKey();
-        universityDAO.create(id,new University(id,"Florida International University","FIU","United States of America","South Florida","Desenvolvimento","",true));
-        id = universityDAO.newKey();
-        universityDAO.create(id,new University(id,"Universidade Teste PCI","TPCI","United States of Brazil","Sao Paulo","Desenvolvimento","",true));
-        */
-
-        //PROJETOS
-        /*ProjectDAO projectDAO = new ProjectDAO();
-        String id = projectDAO.newKey();
-        ArrayList<String> students = new ArrayList<>();
-        ArrayList<String> professors = new ArrayList<>();
-        students.add("0QbFsPvE86cKBlWhQv67pNk3kRu1");
-        students.add("8DZtXqwUt5WYtjuBSiNyfz9c4l22");
-        students.add("UZ8tCTjsICajS1YOcc0dBU7cGO03");
-        students.add("uGVfs6eLU7XCQxhOJnxsuw3QpjV2");
-        students.add("fWJszW1JFRc4YlqIjSQLSpVHBel1");
-        professors.add("LAHmqsNytPfpHMiQukGQZWSGyOD2");
-        professors.add("OE4J8YuGMlclfMU2e4X8vsKdULj1");
-        Project project = new Project(id,"Projeto Colaborativo Internacional","Projeto para teste de aplicação",students,professors,null);
-        projectDAO.create(id,project);*/
     }
 
     @Override
@@ -125,11 +91,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         switch (id){
-            case R.id.menu_feed:
-                if (feedsFragment.isVisible()) drawer.closeDrawer(GravityCompat.START);
-                else getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,feedsFragment).commit();
-                break;
-
             case R.id.menu_profile:
                 Bundle arguments = new Bundle();
                 if(type==1){
@@ -146,10 +107,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
 
             case R.id.menu_project:
+                ProjectListFragment fragment = new ProjectListFragment();
                 Bundle args = new Bundle();
                 args.putInt("TYPE",type);
-                ProjectListFragment.setArguments(args);
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,ProjectListFragment).commit();
+                fragment.setArguments(args);
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,fragment).commit();
                 break;
 
             case R.id.menu_privacy_policy:
@@ -164,8 +126,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             default:
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setMessage(getString(R.string.null_info));
-                builder.setTitle(getString(R.string.null_user));
+                builder.setMessage(R.string.null_user);
+                builder.setTitle(R.string.user_error);
                 builder.create().show();
                 break;
         }
@@ -180,7 +142,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()) {
                     Upload upload = dataSnapshot.getValue(Upload.class);
-                    if(upload != null) Picasso.get().load(upload.getPhoto()).placeholder(R.drawable.ic_launcher_background).into(imageView);
+                    Picasso.get().load(upload != null ? upload.getPhoto() : null).placeholder(R.drawable.ic_launcher_background).into(imageView);
                 }
             }
             @Override
@@ -192,29 +154,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void setNavInfo(int type) {
         final TextView nameTextView = header.findViewById(R.id.nav_name);
-        String path = "";
         TextView typeTextView = header.findViewById(R.id.nav_type);
         imageView = header.findViewById(R.id.user_photo);
         if(type==1) {
             typeTextView.setText(getString(R.string.student));
-            path = "students";
+            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("students");
+            reference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    nameTextView.setText(dataSnapshot.child(uid).child("name").getValue(String.class));
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    Log.v("NAME DATABASE ERROR",databaseError.getMessage());
+                }
+            });
         }
-        else if(type==2) {
-            typeTextView.setText(getString(R.string.professor));
-            path = "professors";
-        }
+        else if(type==2) typeTextView.setText(getString(R.string.professor));
         else typeTextView.setText(getString(R.string.null_user));
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference(path);
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                nameTextView.setText(dataSnapshot.child(uid).child("name").getValue(String.class));
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.v("NAME DATABASE ERROR",databaseError.getMessage());
-            }
-        });
         setProfileImage();
     }
 }
