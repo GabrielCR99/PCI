@@ -15,12 +15,23 @@ public class Phase implements Serializable {
 
     public Phase(){}
 
+    public Phase(String id, String title, String description) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.tasks = new ArrayList<>();
+        this.tasks.add("");
+        endDate = "";
+        this.enable = true;
+    }
+
     public Phase(String id, String title, String description,String endDate) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.endDate = endDate;
         this.tasks = new ArrayList<>();
+        this.tasks.add("");
         this.enable = true;
     }
 

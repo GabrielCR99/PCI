@@ -18,9 +18,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,7 +25,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 import com.studio.pci.R;
-import com.studio.pci.activities.EditStudentActivity;
+import com.studio.pci.activities.EditProfessorActivity;
 import com.studio.pci.models.Professor;
 import com.studio.pci.models.Upload;
 
@@ -89,15 +86,12 @@ public class ProfessorFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_professor_dashboard, container, false);
         ButterKnife.bind(this, view);
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("students");
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        databaseReference = FirebaseDatabase.getInstance().getReference("professors");
 
         Bundle arguments = getArguments();
         userID = arguments.getString("USERID");
 
         getInfo();
-
-        if(!currentUser.getUid().equals(userID)) button.setVisibility(View.INVISIBLE);
 
         return view;
     }
@@ -172,7 +166,7 @@ public class ProfessorFragment extends Fragment {
                     button.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Intent intent = new Intent(context, EditStudentActivity.class);
+                            Intent intent = new Intent(context, EditProfessorActivity.class);
                             intent.putExtra(getString(R.string.professor_info),info);
                             startActivity(intent);
                         }

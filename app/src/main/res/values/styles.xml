@@ -36,8 +36,14 @@
 
     <style name="textContentBlackSubtitle" parent="TextAppearance.MaterialComponents.Subtitle1">
         <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textAppearance">@style/Base.TextAppearance.AppCompat.Caption</item>
+    </style>
 
-
+    <style name="textContentBlackLarge">
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAppearance">@style/Base.TextAppearance.AppCompat.Large</item>
     </style>
 
     <style name="buttonTextAndBackground" parent="TextAppearance.MaterialComponents.Button">

@@ -7,6 +7,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,6 +19,7 @@ import com.studio.pci.activities.StudentActivity;
 import com.studio.pci.models.Professor;
 import com.studio.pci.models.Upload;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -63,6 +66,7 @@ public class ProfessorsAdapter extends RecyclerView.Adapter<ProfessorsAdapter.Pr
     public int getItemCount() {
         return professors.size();
     }
+
 
     static class ProfessorViewHolder extends RecyclerView.ViewHolder{
 
