@@ -39,67 +39,73 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/complete_name"/>
+                android:text="@string/complete_name"
+                style="@style/textContentBlackBody"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/professor_name"
                 android:layout_marginBottom="25sp"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+                android:textAppearance="@style/textContentBlackSubtitle"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/degree"/>
+                android:text="@string/degree"
+                style="@style/textContentBlackBody"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/professor_degree"
                 android:layout_marginBottom="25sp"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+                android:textAppearance="@style/textContentBlackSubtitle"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/gender" />
+                android:text="@string/gender"
+                style="@style/textContentBlackBody"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/professor_gender"
                 android:layout_marginBottom="25sp"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+                android:textAppearance="@style/textContentBlackSubtitle"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/birthDate"/>
+                android:text="@string/birthDate"
+                style="@style/textContentBlackBody"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/professor_birthDate"
                 android:layout_marginBottom="25sp"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+                android:textAppearance="@style/textContentBlackSubtitle"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/email"/>
+                android:text="@string/email"
+                style="@style/textContentBlackBody"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/professor_email"
                 android:layout_marginBottom="25sp"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+                android:textAppearance="@style/textContentBlackSubtitle"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/bio"/>
+                android:text="@string/bio"
+                style="@style/textContentBlackBody"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -107,7 +113,7 @@
                 android:id="@+id/professor_bio"
                 android:layout_marginBottom="25sp"
                 android:lines="3"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+                android:textAppearance="@style/textContentBlackSubtitle"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -122,7 +128,7 @@
                     android:layout_marginEnd="20dp"
                     android:background="@color/colorWhite"
                     android:contentDescription="@string/facebook"
-                    android:src="@drawable/facebook_32" />
+                    android:src="@drawable/facebook_24" />
 
                 <ImageButton
                     android:id="@+id/professor_skype"
@@ -131,7 +137,7 @@
                     android:layout_marginStart="20sp"
                     android:background="@color/colorWhite"
                     android:contentDescription="@string/skype"
-                    android:src="@drawable/skype_32" />
+                    android:src="@drawable/skype_24" />
 
             </LinearLayout>
 

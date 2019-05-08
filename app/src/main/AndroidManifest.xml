@@ -23,7 +23,8 @@
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".activities.PrivacyPolicyActivity"
-            android:label="Privacy Policy" />
+            android:label="Privacy Policy"
+            android:parentActivityName=".activities.MainActivity"/>
         <activity
             android:name=".activities.SplashActivity"
             android:theme="@style/AppTheme.FullScreen">

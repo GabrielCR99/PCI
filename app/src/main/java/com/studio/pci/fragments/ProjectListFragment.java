@@ -32,7 +32,6 @@ public class ProjectListFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        Context context1 = context;
     }
 
     @Nullable
@@ -46,14 +45,14 @@ public class ProjectListFragment extends Fragment {
 
         if(type==1) fab.hide();
 
-
-
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getFragmentManager());
         viewPagerAdapter.addFragment(new InProgressProjectFragment(), getString(R.string.projects_in_progress));
         viewPagerAdapter.addFragment(new FinishedProjectFragment(), getString(R.string.finished));
 
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
+        tabLayout.setTabTextColors(getResources().getColor(R.color.colorWhite), getResources().getColor(R.color.colorWhite));
+        tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.colorWhite));
 
         return view;
     }

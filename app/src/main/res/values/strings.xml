@@ -69,12 +69,12 @@
     <string name="in_progress">Em andamento</string>
     <string name="reset_email_error">Favor inserir E-mail</string>
     <string name="email_sent">Email enviado!</string>
-    <string name="projects_in_progress">Projetos em andamento</string>
+    <string name="projects_in_progress">Em andamento</string>
     <string name="finished_projects">Projetos finalizados</string>
     <string name="description">Descrição</string>
     <string name="phase_progress">Progresso das Fases</string>
     <string name="status">Status</string>
-    <string name="finished">Finalizado</string>
+    <string name="finished">Finalizados</string>
     <string name="student_info">STUDENT_INFO</string>
     <string name="start_time">Início</string>
     <string name="end_time">Fim</string>
@@ -112,6 +112,6 @@
     <string name="developers">Desenvolvedores</string>
     <string name="platform_in_progress">Plataforma em Desenvolvimento!</string>
     <string name="project_management">Project Management is Life!</string>
-    <string name="members">Membros</string>
     <string name="todo">TODO</string>
+    <string name="members">Membros</string>
 </resources>
