@@ -28,6 +28,7 @@ import com.squareup.picasso.Picasso;
 import com.studio.pci.R;
 import com.studio.pci.activities.EditStudentActivity;
 import com.studio.pci.models.Student;
+import com.studio.pci.models.University;
 import com.studio.pci.models.Upload;
 
 import java.util.ArrayList;
@@ -48,6 +49,9 @@ public class StudentFragment extends Fragment {
 
     @BindView(R.id.student_email)
     TextView email;
+
+    @BindView(R.id.student_university)
+    TextView university;
 
     @BindView(R.id.student_face)
     ImageButton facebook;
@@ -78,14 +82,12 @@ public class StudentFragment extends Fragment {
         ButterKnife.bind(this, view);
 
         databaseReference = FirebaseDatabase.getInstance().getReference("students");
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
         Bundle arguments = getArguments();
         userID = arguments.getString("USERID");
 
         getInfo();
 
-        if(!currentUser.getUid().equals(userID)) button.setVisibility(View.INVISIBLE);
 
         return view;
     }
@@ -126,6 +128,9 @@ public class StudentFragment extends Fragment {
                     if(!student.getEmail().isEmpty()) email.setText(student.getEmail());
                     else email.setText(getString(R.string.null_info));
 
+                    if(!student.getUniversity().isEmpty()) getUniversityName();
+                    else university.setText(getString(R.string.null_info));
+
                     if(!student.getFacebookUrl().isEmpty()) {
                         facebook.setEnabled(true);
                         facebook.setOnClickListener(new View.OnClickListener() {
@@ -164,6 +169,21 @@ public class StudentFragment extends Fragment {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Log.v("USER_FIREBASE", databaseError.getMessage());
+            }
+        });
+    }
+
+    private void getUniversityName() {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("universities").child(info.get(8));
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                University un = dataSnapshot.getValue(University.class);
+                university.setText(un.getName());
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.v("ERROR UNIVERSITY EDIT",databaseError.getMessage());
             }
         });
     }

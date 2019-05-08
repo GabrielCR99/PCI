@@ -17,6 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+
         <activity
             android:name=".activities.MainActivity"
             android:label="@string/home"
@@ -71,6 +72,14 @@
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".activities.BaseActivity" />
+
+        <activity
+            android:name=".activities.CreateProjectActivity"
+            android:label="@string/create_project" />
+
+        <activity
+            android:name=".activities.SelectUniversityActivity"
+            android:label="@string/universities"/>
     </application>
 
 </manifest>

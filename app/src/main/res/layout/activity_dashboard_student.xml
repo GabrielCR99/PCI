@@ -53,8 +53,19 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/gender"
-                style="@style/textContentBlackBody"/>
+                android:text="@string/university" />
+
+            <TextView
+                android:id="@+id/student_university"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="25sp"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/gender" />
 
             <TextView
                 android:id="@+id/student_gender"

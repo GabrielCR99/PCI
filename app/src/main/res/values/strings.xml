@@ -114,4 +114,7 @@
     <string name="project_management">Project Management is Life!</string>
     <string name="todo">TODO</string>
     <string name="members">Membros</string>
+    <string name="project_title">Título do Projeto</string>
+    <string name="create_project">Criar Projeto</string>
+    <string name="university">Universidade</string>
 </resources>

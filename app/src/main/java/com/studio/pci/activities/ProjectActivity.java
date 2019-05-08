@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -20,6 +21,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.studio.pci.R;
 import com.studio.pci.models.Project;
+import com.studio.pci.models.Student;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -45,6 +51,9 @@ public class ProjectActivity extends AppCompatActivity {
 
     private String projectID;
     private Project project;
+    private ArrayList<String> professors;
+    private String uid;
+    private Menu menu;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,18 +62,22 @@ public class ProjectActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-
         Intent intent = getIntent();
         projectID = intent.getStringExtra("PROJECT_ID");
+        uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         setInfo();
     }
 
     private void setInfo() {
         DatabaseReference db = FirebaseDatabase.getInstance().getReference();
+
+        professors = new ArrayList<>();
         db.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 project = dataSnapshot.child("projects").child(projectID).getValue(Project.class);
+
+                if(!project.getProfessors().isEmpty())professors = project.getProfessors();
 
                 if(project.getTitle().isEmpty()) titleTextView.setText(getString(R.string.null_info));
                 else titleTextView.setText(project.getTitle());
@@ -77,6 +90,14 @@ public class ProjectActivity extends AppCompatActivity {
 
                 if(project.getEndDate().isEmpty()) endTextView.setText(getString(R.string.null_info));
                 else endTextView.setText(project.getEndDate());
+
+                for(int i =0; i < professors.size();i++){
+                    if(professors.get(i).equals(uid)){
+                        MenuItem item = menu.findItem(R.id.project_edit);
+                        item.setVisible(true);
+                        break;
+                    }
+                }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -88,6 +109,7 @@ public class ProjectActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.project, menu);
+        this.menu = menu;
         return super.onCreateOptionsMenu(menu);
     }
 

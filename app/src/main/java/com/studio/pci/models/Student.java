@@ -1,4 +1,6 @@
 package com.studio.pci.models;
+import android.support.annotation.NonNull;
+
 import com.studio.pci.R;
 
 import java.io.Serializable;
@@ -16,12 +18,13 @@ public class Student implements Serializable {
     private String email;
     private String facebookUrl;
     private String skypeUrl;
+    private String university;
     private boolean enable;
 
     public Student(){
     }
 
-    public Student(String id, String name, String gender, String birthDate, String picture, String email, String facebookUrl, String skypeUrl, boolean enable) {
+    public Student(String id, String name, String gender, String birthDate, String picture, String email, String facebookUrl, String skypeUrl, String university, boolean enable) {
         this.id = id;
         this.name = name;
         this.gender = gender;
@@ -30,6 +33,7 @@ public class Student implements Serializable {
         this.email = email;
         this.facebookUrl = facebookUrl;
         this.skypeUrl = skypeUrl;
+        this.university = university;
         this.enable = enable;
     }
 
@@ -42,6 +46,7 @@ public class Student implements Serializable {
         this.email = email;
         facebookUrl = "";
         skypeUrl = "";
+        university = "";
         this.enable = enable;
     }
 
@@ -109,6 +114,14 @@ public class Student implements Serializable {
         this.skypeUrl = skypeUrl;
     }
 
+    public String getUniversity() {
+        return university;
+    }
+
+    public void setUniversity(String university) {
+        this.university = university;
+    }
+
     public boolean isEnable() {
         return enable;
     }
@@ -117,6 +130,7 @@ public class Student implements Serializable {
         this.enable = enable;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "Student{" +
@@ -128,6 +142,7 @@ public class Student implements Serializable {
                 ", email='" + email + '\'' +
                 ", facebookUrl='" + facebookUrl + '\'' +
                 ", skypeUrl='" + skypeUrl + '\'' +
+                ", university='" + university + '\'' +
                 ", enable=" + enable +
                 '}';
     }
@@ -142,6 +157,7 @@ public class Student implements Serializable {
         studentInfo.add(email);
         studentInfo.add(facebookUrl);
         studentInfo.add(skypeUrl);
+        studentInfo.add(university);
         studentInfo.add(enable ? "true" : "false");
         return studentInfo;
     }

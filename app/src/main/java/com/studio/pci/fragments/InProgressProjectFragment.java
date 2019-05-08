@@ -61,7 +61,7 @@ public class InProgressProjectFragment extends Fragment{
     private void setProjects() {
         projects = new ArrayList<>();
         DatabaseReference db = FirebaseDatabase.getInstance().getReference("projects");
-        db.addListenerForSingleValueEvent(new ValueEventListener() {
+        db.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 projects.clear();
