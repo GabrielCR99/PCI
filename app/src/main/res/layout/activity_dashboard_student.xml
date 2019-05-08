@@ -111,14 +111,14 @@
                     android:layout_height="24dp"
                     android:layout_marginEnd="20dp"
                     android:contentDescription="@string/facebook"
-                    android:src="@drawable/facebook_24" />
+                    android:src="@drawable/facebook_32" />
 
                 <ImageButton
                     android:id="@+id/student_skype"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:contentDescription="@string/skype"
-                    android:src="@drawable/skype_24" />
+                    android:src="@drawable/skype_32" />
 
             </LinearLayout>
 
