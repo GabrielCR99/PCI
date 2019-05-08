@@ -128,7 +128,7 @@ public class StudentFragment extends Fragment {
                     if(!student.getEmail().isEmpty()) email.setText(student.getEmail());
                     else email.setText(getString(R.string.null_info));
 
-                    if(!student.getUniversity().isEmpty()) getUniversityName();
+                    if(!student.getUniversity().isEmpty()) university.setText("Em Desenvolvimento");
                     else university.setText(getString(R.string.null_info));
 
                     if(!student.getFacebookUrl().isEmpty()) {

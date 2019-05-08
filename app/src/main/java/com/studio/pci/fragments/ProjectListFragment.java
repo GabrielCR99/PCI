@@ -37,6 +37,7 @@ public class ProjectListFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        this.context = context;
     }
 
     @NonNull
