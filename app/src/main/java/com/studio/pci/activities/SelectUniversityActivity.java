@@ -2,6 +2,7 @@ package com.studio.pci.activities;
 
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -25,6 +27,7 @@ import com.studio.pci.adapters.UniversitiesAdapter;
 import com.studio.pci.models.Student;
 import com.studio.pci.models.University;
 import com.studio.pci.models.Upload;
+import com.studio.pci.providers.StudentDAO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,19 +42,21 @@ public class SelectUniversityActivity extends AppCompatActivity implements
     private List<University> universities;
     private UniversitiesAdapter adapter;
     private University selectedUniversity;
-    private EditText view;
+    private String uid;
 
     @BindView(R.id.recycler_universities)
     RecyclerView recyclerView;
 
+    @BindView(R.id.selected_university_name)
+    TextView unNameTextView;
+
+    @BindView(R.id.selected_university_department)
+    TextView unDeptTextView;
+
     @OnClick(R.id.fab_confirm)
     public void onConfirmed(){
-        view.setText(selectedUniversity.getName());
+        // TODO ADD SELECTED UNIVERSITY TO STUDENT INFO
         finish();
-    }
-
-    public SelectUniversityActivity(EditText view) {
-        this.view = view;
     }
 
     @Override
@@ -59,6 +64,9 @@ public class SelectUniversityActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_university);
         ButterKnife.bind(this);
+
+        Intent intent = getIntent();
+        uid = intent.getStringExtra("UID");
 
         setUniversities();
         setRecyclerView();
@@ -93,6 +101,8 @@ public class SelectUniversityActivity extends AppCompatActivity implements
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.search,menu);
+
         SearchManager manager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
 
         SearchView search = (SearchView) menu.findItem(R.id.user_search).getActionView();
@@ -117,22 +127,24 @@ public class SelectUniversityActivity extends AppCompatActivity implements
         List<University> filteredUniversities = new ArrayList<>();
         for(University university : universities){
             // SEARCH BY INITIALS OR NAME
-            if(university.getName().toLowerCase().equals(s.toLowerCase()) || university.getInitials().toLowerCase().equals(s.toLowerCase())){
+            if(university.getName().toLowerCase().contains(s.toLowerCase()) || university.getInitials().toLowerCase().contains(s.toLowerCase())){
                 filteredUniversities.add(university);
             }
         }
-        UniversitiesAdapter filteredAdapter = new UniversitiesAdapter(filteredUniversities,this,null);
+        UniversitiesAdapter filteredAdapter = new UniversitiesAdapter(filteredUniversities,this,this);
         recyclerView.setAdapter(filteredAdapter);
     }
 
     @Override
     public void recyclerViewListClicked(View v, int position) {
         selectedUniversity = universities.get(position);
+        unNameTextView.setText(selectedUniversity.getName());
+        unDeptTextView.setText(selectedUniversity.getDepartment());
+        // TODO FIX THIS
     }
 
     @Override
     public void onBackPressed() {
         this.finish();
     }
-
 }

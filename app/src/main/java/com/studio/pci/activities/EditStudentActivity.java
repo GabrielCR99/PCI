@@ -108,13 +108,15 @@ public class EditStudentActivity extends AppCompatActivity {
         birthDateEditText.setText(info.get(3));
         faceEditText.setText(info.get(6));
         skypeEditText.setText(info.get(7));
+
         if(!info.get(8).isEmpty()) getUniversityName();
+        else universityEditText.setText(getString(R.string.null_info));
 
         universityEditText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SelectUniversityActivity activity = new SelectUniversityActivity(universityEditText);
                 Intent newUniversity = new Intent(EditStudentActivity.this,SelectUniversityActivity.class);
+                newUniversity.putExtra("UID",info.get(0));
                 startActivity(newUniversity);
             }
         });

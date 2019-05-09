@@ -51,7 +51,6 @@ public class ProjectActivity extends AppCompatActivity {
 
     private String projectID;
     private Project project;
-    private ArrayList<String> professors;
     private String uid;
     private Menu menu;
 
@@ -71,13 +70,10 @@ public class ProjectActivity extends AppCompatActivity {
     private void setInfo() {
         DatabaseReference db = FirebaseDatabase.getInstance().getReference();
 
-        professors = new ArrayList<>();
         db.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 project = dataSnapshot.child("projects").child(projectID).getValue(Project.class);
-
-                if(!project.getProfessors().isEmpty())professors = project.getProfessors();
 
                 if(project.getTitle().isEmpty()) titleTextView.setText(getString(R.string.null_info));
                 else titleTextView.setText(project.getTitle());
@@ -90,14 +86,6 @@ public class ProjectActivity extends AppCompatActivity {
 
                 if(project.getEndDate().isEmpty()) endTextView.setText(getString(R.string.null_info));
                 else endTextView.setText(project.getEndDate());
-
-                for(int i =0; i < professors.size();i++){
-                    if(professors.get(i).equals(uid)){
-                        MenuItem item = menu.findItem(R.id.project_edit);
-                        item.setVisible(true);
-                        break;
-                    }
-                }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -128,6 +116,6 @@ public class ProjectActivity extends AppCompatActivity {
                 startActivity(intent);
                 break;
         }
-        return super.onOptionsItemSelected(item);
+        return true;
     }
 }

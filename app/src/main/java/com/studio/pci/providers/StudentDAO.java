@@ -7,5 +7,4 @@ public class StudentDAO extends AbstractDAO<Student> {
     public StudentDAO() {
         super("students");
     }
-
 }
