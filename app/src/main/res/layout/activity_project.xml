@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:id="@+id/toolbar_layout"/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -20,36 +21,36 @@
             android:padding="20sp">
 
             <TextView
-                android:id="@+id/project_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20sp"
-                android:layout_marginBottom="20sp"
                 android:gravity="center"
                 android:text="@string/app_name"
-                style="@style/textContentBlackSubtitle" />
+                android:layout_marginTop="20sp"
+                android:layout_marginBottom="20sp"
+                android:id="@+id/project_title"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
 
             <TextView
-                android:id="@+id/project_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical|end"
-                android:layout_marginBottom="20sp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle"
                 android:text="@string/app_name"
-                style="@style/textContentBlackBody"/>
+                android:id="@+id/project_description"
+                android:layout_marginBottom="20sp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20sp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginBottom="20sp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="0.5"
-                    android:gravity="center"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:gravity="center">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -59,17 +60,17 @@
                         <ImageView
                             android:layout_width="32dp"
                             android:layout_height="32dp"
-                            android:layout_marginEnd="5dp"
+                            android:src="@drawable/ic_watch_later_black_24dp"
                             android:contentDescription="@string/start_time"
-                            android:src="@drawable/ic_watch_later_black_24dp" />
+                            android:layout_marginEnd="5dp"/>
 
                         <TextView
-                            android:id="@+id/project_startDate"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="10sp"
+                            android:id="@+id/project_startDate"
                             android:text="@string/app_name"
-                            style="@style/textContentBlackBody" />
+                            android:layout_marginBottom="10sp"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionMode.Subtitle"/>
 
                     </LinearLayout>
 
@@ -81,16 +82,16 @@
                         <ImageView
                             android:layout_width="32dp"
                             android:layout_height="32dp"
-                            android:layout_marginEnd="5dp"
+                            android:src="@drawable/ic_watch_later_red_24dp"
                             android:contentDescription="@string/end_time"
-                            android:src="@drawable/ic_watch_later_red_24dp" />
+                            android:layout_marginEnd="5dp"/>
 
                         <TextView
-                            android:id="@+id/project_endDate"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:id="@+id/project_endDate"
                             android:text="@string/app_name"
-                            style="@style/textContentBlackBody" />
+                            android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionMode.Subtitle"/>
 
                     </LinearLayout>
 
@@ -107,8 +108,8 @@
                         style="?android:attr/progressBarStyleHorizontal"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
-                        android:layout_centerInParent="true"
                         android:background="@drawable/circle_shape"
+                        android:layout_centerInParent="true"
                         android:indeterminate="false"
                         android:max="100"
                         android:progress="90"
@@ -121,7 +122,7 @@
                         android:layout_alignBottom="@+id/project_phase_progress"
                         android:layout_centerInParent="true"
                         android:text="@string/app_name"
-                        style="@style/textContentBlackBody" />
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 </RelativeLayout>
 
@@ -130,49 +131,25 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20sp"
                 android:gravity="center"
                 android:text="@string/members"
-                style="@style/textContentBlackBody" />
+                android:layout_marginBottom="20sp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionMode.Subtitle"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="30sp"
-                android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/project_students"
-                    style="@style/buttonTextAndBackground"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="10sp"
-                    android:layout_weight="0.5"
-                    android:text="@string/students" />
-
-                <Button
-                    android:id="@+id/project_professors"
-                    style="@style/buttonTextAndBackground"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10sp"
-                    android:layout_weight="0.5"
-                    android:text="@string/professors" />
-
-            </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20sp"
                 android:gravity="center"
                 android:text="@string/in_progress"
-                style="@style/textContentBlackBody" />
+                android:layout_marginBottom="20sp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionMode.Subtitle"/>
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/recycler_phases"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:id="@+id/recycler_phases"/>
 
         </LinearLayout>
 
