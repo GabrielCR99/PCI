@@ -118,4 +118,6 @@
     <string name="create_project">Criar Projeto</string>
     <string name="university">Universidade</string>
     <string name="select_university">Selecione uma universidade</string>
+    <string name="coordinator">Coordenador</string>
+    <string name="coordinators">coordinators</string>
 </resources>

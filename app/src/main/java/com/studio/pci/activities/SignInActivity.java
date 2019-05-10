@@ -19,6 +19,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.studio.pci.R;
+import com.studio.pci.models.Coordinator;
 import com.studio.pci.models.Professor;
 import com.studio.pci.models.Student;
 import com.studio.pci.models.User;
@@ -46,7 +47,7 @@ public class SignInActivity extends BaseActivity {
 
     private FirebaseAuth auth;
     private FirebaseUser firebaseUser;
-    private int type = 0;
+    private int type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +91,6 @@ public class SignInActivity extends BaseActivity {
         return resultValidate;
     }
 
-
     private void signIn(String email, String password) {
         if (!validateForm(email, password)) {
             Log.v(TAG, "validateForm error");
@@ -119,27 +119,32 @@ public class SignInActivity extends BaseActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.child("users").child(firebaseUser.getUid()).getValue(User.class);
                 Intent intent = new Intent(SignInActivity.this, MainActivity.class);
-                if (user.getType().equals(getString(R.string.student))) {
+                if(user.getType().equals(getString(R.string.student))) {
                     type = 1;
                     Student student = dataSnapshot.child("students").child(firebaseUser.getUid()).getValue(Student.class);
                     intent.putExtra("USERNAME", student.getName());
-                } else {
+                }
+                if(user.getType().equals(getString(R.string.professor))){
                     type = 2;
                     Professor professor = dataSnapshot.child("professors").child(firebaseUser.getUid()).getValue(Professor.class);
                     intent.putExtra("USERNAME", professor.getName());
+                }
+                if(user.getType().equals(getString(R.string.coordinator))){
+                    type = 3;
+                    Coordinator coordinator = dataSnapshot.child("coordinators").child(firebaseUser.getUid()).getValue(Coordinator.class);
+                    intent.putExtra("USERNAME", coordinator.getName());
+                    // TODO DOES NOT RECOGNIZE COORDINATOR LOGIN
                 }
                 intent.putExtra("USERTYPE", type);
                 intent.putExtra("USERID", firebaseUser.getUid());
                 startActivity(intent);
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Log.e("FIREBASE_ERROR", "onCancelled Error = " + databaseError.getMessage());
             }
         });
     }
-
 
     @OnClick(R.id.sign_in_button)
     public void signInOnClick(View view) {

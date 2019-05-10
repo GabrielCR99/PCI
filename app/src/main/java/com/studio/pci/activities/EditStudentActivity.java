@@ -89,7 +89,6 @@ public class EditStudentActivity extends AppCompatActivity{
     private Student student;
     private Uri file;
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -191,32 +190,33 @@ public class EditStudentActivity extends AppCompatActivity{
         studentDAO.update(student.getId(),student);
         if(file != null){
             String path = file.getPath();
-            assert path != null;
-            String ext = path.substring(path.lastIndexOf("."));
-            final StorageReference storage = storageReference.child(student.getId()+"."+ext);
-            storage.putFile(file)
-            .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    storage.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                        @Override
-                        public void onSuccess(Uri uri) {
-                            Upload upload = new Upload(uri.toString());
-                            databaseReference.child(student.getId()).setValue(upload);
-                            finish();
-                        }
-                    });
-                }
-            })
-            .addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(EditStudentActivity.this);
-                    builder.setTitle(getString(R.string.upload_photo_fail));
-                    builder.setMessage(e.getMessage());
-                    builder.create().show();
-                }
-            });
+            if(path != null){
+                String ext = path.substring(path.lastIndexOf("."));
+                final StorageReference storage = storageReference.child(student.getId()+"."+ext);
+                storage.putFile(file)
+                        .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                storage.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                    @Override
+                                    public void onSuccess(Uri uri) {
+                                        Upload upload = new Upload(uri.toString());
+                                        databaseReference.child(student.getId()).setValue(upload);
+                                        finish();
+                                    }
+                                });
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                AlertDialog.Builder builder = new AlertDialog.Builder(EditStudentActivity.this);
+                                builder.setTitle(getString(R.string.upload_photo_fail));
+                                builder.setMessage(e.getMessage());
+                                builder.create().show();
+                            }
+                        });
+            }
         }
         finish();
     }

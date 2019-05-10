@@ -15,9 +15,11 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.studio.pci.R;
+import com.studio.pci.models.Coordinator;
 import com.studio.pci.models.Professor;
 import com.studio.pci.models.Student;
 import com.studio.pci.models.User;
+import com.studio.pci.providers.CoordinatorDAO;
 import com.studio.pci.providers.ProfessorDAO;
 import com.studio.pci.providers.StudentDAO;
 import com.studio.pci.providers.UserDAO;
@@ -131,7 +133,7 @@ public class SignUpActivity extends BaseActivity {
                             Student student = new Student(id, nameField.getText().toString(), emailField.getText().toString(), true);
                             StudentDAO studentDAO = new StudentDAO();
                             studentDAO.create(id, student);
-                        } else {
+                        } else if(type.equals(getString(R.string.professor))){
                             Professor professor = new Professor(id, nameField.getText().toString(), emailField.getText().toString(),"", true);
                             ProfessorDAO professorDAO = new ProfessorDAO();
                             professorDAO.create(id, professor);

@@ -66,7 +66,7 @@ public class ProfessorActivity extends AppCompatActivity {
     @BindView(R.id.professor_photo)
     ImageView imageView;
 
-    private ArrayList<String> info;
+    private Professor professor;
     private DatabaseReference databaseReference;
     private String userID;
 
@@ -84,7 +84,7 @@ public class ProfessorActivity extends AppCompatActivity {
 
         getInfo();
 
-        if(user != null && user.getUid().equals(userID)) addButton();
+        if(user.getUid().equals(userID)) addButton();
     }
 
     private void addButton() {
@@ -93,7 +93,7 @@ public class ProfessorActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ProfessorActivity.this,EditProfessorActivity.class);
-                intent.putExtra(getString(R.string.professor_info),info);
+                intent.putExtra(getString(R.string.professor_info), professor );
                 startActivity(intent);
             }
         });
@@ -129,8 +129,7 @@ public class ProfessorActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
-                    final Professor professor = dataSnapshot.getValue(Professor.class);
-                    Log.v("USER_FIREBASE_UID", professor.getId());
+                    professor = dataSnapshot.getValue(Professor.class);
                     if(!professor.getName().isEmpty()) name.setText(professor.getName());
                     else name.setText(getString(R.string.null_info));
 
@@ -172,8 +171,6 @@ public class ProfessorActivity extends AppCompatActivity {
                         });
                     }
                     else skype.setEnabled(false);
-
-                    info = professor.toArray();
                 }
             }
             @Override

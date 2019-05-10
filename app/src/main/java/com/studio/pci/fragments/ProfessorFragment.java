@@ -69,7 +69,7 @@ public class ProfessorFragment extends Fragment {
     @BindView(R.id.professor_edit_button)
     Button button;
 
-    private ArrayList<String> info;
+    private Professor professor;
     private DatabaseReference databaseReference;
     private String userID;
     private Context context;
@@ -86,10 +86,11 @@ public class ProfessorFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_professor_dashboard, container, false);
         ButterKnife.bind(this, view);
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("professors");
-
         Bundle arguments = getArguments();
         userID = arguments.getString("USERID");
+        String path = arguments.getString("USERTYPE");
+
+        databaseReference = FirebaseDatabase.getInstance().getReference(path);
 
         getInfo();
 
@@ -119,7 +120,7 @@ public class ProfessorFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
-                    final Professor professor = dataSnapshot.getValue(Professor.class);
+                    professor = dataSnapshot.getValue(Professor.class);
                     if(!professor.getName().isEmpty()) name.setText(professor.getName());
                     else name.setText(getString(R.string.null_info));
 
@@ -162,12 +163,11 @@ public class ProfessorFragment extends Fragment {
                     }
                     else skype.setEnabled(false);
 
-                    info = professor.toArray();
                     button.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             Intent intent = new Intent(context, EditProfessorActivity.class);
-                            intent.putExtra(getString(R.string.professor_info),info);
+                            intent.putExtra(getString(R.string.professor_info),professor);
                             startActivity(intent);
                         }
                     });

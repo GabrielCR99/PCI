@@ -30,14 +30,7 @@ import com.studio.pci.fragments.FeedsFragment;
 import com.studio.pci.fragments.ProfessorFragment;
 import com.studio.pci.fragments.ProjectListFragment;
 import com.studio.pci.fragments.StudentFragment;
-import com.studio.pci.models.Project;
-import com.studio.pci.models.Student;
-import com.studio.pci.models.University;
 import com.studio.pci.models.Upload;
-import com.studio.pci.providers.ProjectDAO;
-import com.studio.pci.providers.UniversityDAO;
-
-import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -86,31 +79,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         feedsFragment = new FeedsFragment();
         ProjectListFragment = new ProjectListFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,feedsFragment).commit();
-
-        //UNIVERSIDADES
-        /*UniversityDAO universityDAO = new UniversityDAO();
-        String id = universityDAO.newKey();
-        universityDAO.create(id, new University(id,"Fatec Americana","Fatec AM","Brazil","Sao Paulo","Desenvolvimento","",true));
-        id = universityDAO.newKey();
-        universityDAO.create(id,new University(id,"Florida International University","FIU","United States of America","South Florida","Desenvolvimento","",true));
-        id = universityDAO.newKey();
-        universityDAO.create(id,new University(id,"Universidade Teste PCI","TPCI","United States of Brazil","Sao Paulo","Desenvolvimento","",true));
-        */
-
-        //PROJETOS
-        /*ProjectDAO projectDAO = new ProjectDAO();
-        String id = projectDAO.newKey();
-        ArrayList<String> students = new ArrayList<>();
-        ArrayList<String> professors = new ArrayList<>();
-        students.add("0QbFsPvE86cKBlWhQv67pNk3kRu1");
-        students.add("8DZtXqwUt5WYtjuBSiNyfz9c4l22");
-        students.add("UZ8tCTjsICajS1YOcc0dBU7cGO03");
-        students.add("uGVfs6eLU7XCQxhOJnxsuw3QpjV2");
-        students.add("fWJszW1JFRc4YlqIjSQLSpVHBel1");
-        professors.add("LAHmqsNytPfpHMiQukGQZWSGyOD2");
-        professors.add("OE4J8YuGMlclfMU2e4X8vsKdULj1");
-        Project project = new Project(id,"Projeto Colaborativo Internacional","Projeto para teste de aplicação",students,professors,null);
-        projectDAO.create(id,project);*/
     }
 
     @Override
@@ -123,13 +91,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-
         switch (id){
             case R.id.menu_feed:
                 if (feedsFragment.isVisible()) drawer.closeDrawer(GravityCompat.START);
                 else getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,feedsFragment).commit();
                 break;
-
             case R.id.menu_profile:
                 Bundle arguments = new Bundle();
                 if(type==1){
@@ -140,28 +106,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }else{
                     ProfessorFragment fragment = new ProfessorFragment();
                     arguments.putString(USER_ID,uid);
+                    if(type == 2) arguments.putString(USER_TYPE,getString(R.string.professors));
+                    else arguments.putString(USER_TYPE,getString(R.string.coordinators));
                     fragment.setArguments(arguments);
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,fragment).commit();
                 }
                 break;
-
             case R.id.menu_project:
                 Bundle args = new Bundle();
                 args.putInt("TYPE",type);
                 ProjectListFragment.setArguments(args);
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,ProjectListFragment).commit();
                 break;
-
             case R.id.menu_privacy_policy:
                 startActivity(new Intent(this, PrivacyPolicyActivity.class));
                 break;
-
             case R.id.menu_logout:
                 FirebaseAuth.getInstance().signOut();
                 startActivity(new Intent(this, SignInActivity.class));
                 finish();
                 break;
-
             default:
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setMessage(getString(R.string.null_info));
@@ -192,18 +156,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void setNavInfo(int type) {
         final TextView nameTextView = header.findViewById(R.id.nav_name);
-        String path = "";
+        String path=null;
         TextView typeTextView = header.findViewById(R.id.nav_type);
         imageView = header.findViewById(R.id.user_photo);
         if(type==1) {
             typeTextView.setText(getString(R.string.student));
             path = "students";
         }
-        else if(type==2) {
+        if(type==2) {
             typeTextView.setText(getString(R.string.professor));
             path = "professors";
         }
-        else typeTextView.setText(getString(R.string.null_user));
+        if(type==3){
+            typeTextView.setText(getString(R.string.coordinator));
+            path = "coordinators";
+        }
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference(path);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
