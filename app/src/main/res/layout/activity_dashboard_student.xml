@@ -1,29 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/toolbar_layout"/>
+        android:layout_height="wrap_content" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="160sp"
-        android:orientation="vertical"
         android:layout_gravity="center"
-        android:background="@color/colorPrimary">
+        android:background="@color/colorPrimary"
+        android:orientation="vertical">
 
         <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/student_photo"
             android:layout_width="128dp"
             android:layout_height="128dp"
             android:layout_gravity="center"
             android:layout_marginTop="28dp"
-            android:id="@+id/student_photo"
-            android:src="@mipmap/ic_launcher_round"/>
+            android:src="@mipmap/ic_launcher_round" />
 
     </LinearLayout>
 
@@ -38,19 +37,20 @@
             android:orientation="vertical">
 
             <TextView
+                style="@style/textContentBlackBody"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/complete_name"
-                style="@style/textContentBlackBody"/>
+                android:text="@string/complete_name" />
 
             <TextView
                 android:id="@+id/student_name"
+                style="@style/textContentBlackSubtitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="25sp"
-                style="@style/textContentBlackSubtitle" />
+                android:layout_marginBottom="25sp" />
 
             <TextView
+                style="@style/textContentBlackBody"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/university"
@@ -58,10 +58,10 @@
 
             <TextView
                 android:id="@+id/student_university"
+                style="@style/textContentBlackSubtitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="25sp"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+                android:layout_marginBottom="25sp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -71,16 +71,16 @@
 
             <TextView
                 android:id="@+id/student_gender"
+                style="@style/textContentBlackSubtitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="25sp"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+                android:layout_marginBottom="25sp" />
 
             <TextView
+                style="@style/textContentBlackBody"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/birthDate"
-                style="@style/textContentBlackBody"/>
+                android:text="@string/birthDate" />
 
             <TextView
                 android:id="@+id/student_birthDate"
@@ -90,17 +90,17 @@
                 android:textAppearance="@style/textContentBlackSubtitle" />
 
             <TextView
+                style="@style/textContentBlackBody"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/email"
-                style="@style/textContentBlackBody"/>
+                android:text="@string/email" />
 
             <TextView
                 android:id="@+id/student_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20sp"
-                android:textAppearance="@style/textContentBlackBody" />
+                style="@style/textContentBlackSubtitle" />
 
             <LinearLayout
                 android:layout_width="match_parent"
