@@ -3,6 +3,7 @@ package com.studio.pci.activities;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -16,6 +17,7 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
@@ -53,7 +55,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class EditStudentActivity extends AppCompatActivity {
+public class EditStudentActivity extends AppCompatActivity{
 
     @BindView(R.id.student_name_edit)
     EditText nameEditText;
@@ -84,9 +86,8 @@ public class EditStudentActivity extends AppCompatActivity {
 
     private DatabaseReference databaseReference;
     private StorageReference storageReference;
-    private ArrayList<String> info;
+    private Student student;
     private Uri file;
-    public static String universityID;
 
 
     @Override
@@ -99,25 +100,29 @@ public class EditStudentActivity extends AppCompatActivity {
         databaseReference = FirebaseDatabase.getInstance().getReference("profile_photo");
 
         Intent intent = getIntent();
-        info = intent.getStringArrayListExtra(getString(R.string.student_info));
+        student = (Student) intent.getSerializableExtra(getString(R.string.student_info));
 
-        nameEditText.setText(info.get(1));
-        if(info.get(2).equals(getString(R.string.male))) genderSpinner.setSelection(0);
-        else if(info.get(2).equals(getString(R.string.female))) genderSpinner.setSelection(1);
+        nameEditText.setText(student.getName());
+        if(student.getGender().equals(getString(R.string.male))) genderSpinner.setSelection(0);
+        else if(student.getGender().equals(getString(R.string.female))) genderSpinner.setSelection(1);
         else genderSpinner.setSelection(2);
-        birthDateEditText.setText(info.get(3));
-        faceEditText.setText(info.get(6));
-        skypeEditText.setText(info.get(7));
+        birthDateEditText.setText(student.getBirthDate());
+        faceEditText.setText(student.getFacebookUrl());
+        skypeEditText.setText(student.getSkypeUrl());
 
-        if(!info.get(8).isEmpty()) getUniversityName();
+        if(!student.getUniversity().isEmpty()) getUniversityName(student.getUniversity());
         else universityEditText.setText(getString(R.string.null_info));
 
-        universityEditText.setOnClickListener(new View.OnClickListener() {
+        universityEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void onClick(View v) {
-                Intent newUniversity = new Intent(EditStudentActivity.this,SelectUniversityActivity.class);
-                newUniversity.putExtra("UID",info.get(0));
-                startActivity(newUniversity);
+            public void onFocusChange(View v, boolean hasFocus) {
+                hideKeyboard(universityEditText);
+                if(hasFocus) {
+                    Intent newUniversity = new Intent(EditStudentActivity.this,SelectUniversityActivity.class);
+                    newUniversity.putExtra("UID",student.getUniversity());
+                    universityEditText.clearFocus();
+                    startActivityForResult(newUniversity,123);
+                }
             }
         });
         DatePickerDialogHelper.setDatePickerDialog(birthDateEditText,this,new SimpleDateFormat(getString(R.string.date_formatter), new Locale("pt", "BR")));
@@ -125,8 +130,8 @@ public class EditStudentActivity extends AppCompatActivity {
         setProfileImage();
     }
 
-    private void getUniversityName() {
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("universities").child(info.get(8));
+    private void getUniversityName(String id) {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("universities").child(id);
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -141,7 +146,7 @@ public class EditStudentActivity extends AppCompatActivity {
     }
 
     private void setProfileImage() {
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("profile_photo").child(info.get(0));
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("profile_photo").child(student.getId());
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -178,13 +183,11 @@ public class EditStudentActivity extends AppCompatActivity {
 
     private void confirmEdit() {
         StudentDAO studentDAO = new StudentDAO();
-        String name = nameEditText.getText().toString();
-        String gender = genderSpinner.getSelectedItem().toString();
-        String birthDate = birthDateEditText.getText().toString();
-        String facebook = faceEditText.getText().toString();
-        String skype = skypeEditText.getText().toString();
-        // TODO UNIVERSITY LIST FOR SELECTION
-        final Student student = new Student(info.get(0),name,gender,birthDate,info.get(4),info.get(5),facebook,skype,"",true);
+        student.setName(nameEditText.getText().toString());
+        student.setGender(genderSpinner.getSelectedItem().toString());
+        student.setBirthDate(birthDateEditText.getText().toString());
+        student.setFacebookUrl(faceEditText.getText().toString());
+        student.setSkypeUrl(skypeEditText.getText().toString());
         studentDAO.update(student.getId(),student);
         if(file != null){
             String path = file.getPath();
@@ -216,6 +219,13 @@ public class EditStudentActivity extends AppCompatActivity {
             });
         }
         finish();
+    }
+
+    private void hideKeyboard(View view) {
+        final InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm != null) {
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 
     @OnClick(R.id.student_photo)
@@ -257,25 +267,32 @@ public class EditStudentActivity extends AppCompatActivity {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        //RESULT FROM SELECTED IMAGE
-        if (requestCode == CropImage.PICK_IMAGE_CHOOSER_REQUEST_CODE && resultCode == Activity.RESULT_OK
-            && data!=null && data.getData()!=null) {
-            Uri uri = CropImage.getPickImageResultUri(this, data);
-            cropRequest(uri);
-        }
-
-        //RESULT FROM CROPING ACTIVITY
-        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
-            CropImage.ActivityResult result = CropImage.getActivityResult(data);
-            if (resultCode == RESULT_OK) {
-                try {
-                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), result.getUri());
-                    ((ImageView)findViewById(R.id.student_photo)).setImageBitmap(bitmap);
-                    file = result.getUri();
-                } catch (IOException e) {
-                    e.printStackTrace();
+        switch (requestCode){
+            case CropImage.PICK_IMAGE_CHOOSER_REQUEST_CODE :
+                if(resultCode == Activity.RESULT_OK&& data!=null && data.getData()!=null){
+                    Uri uri = CropImage.getPickImageResultUri(this, data);
+                    cropRequest(uri);
                 }
-            }
+                break;
+            case CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE :
+                CropImage.ActivityResult result = CropImage.getActivityResult(data);
+                if (resultCode == RESULT_OK) {
+                    try {
+                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), result.getUri());
+                        ((ImageView)findViewById(R.id.student_photo)).setImageBitmap(bitmap);
+                        file = result.getUri();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                break;
+            case 123:
+                if(resultCode == RESULT_OK){
+                    University university = (University) data.getSerializableExtra("UNIVERSITY");
+                    universityEditText.setText(university.getName());
+                    student.setUniversity(university.getId());
+                }
+                break;
         }
     }
 }

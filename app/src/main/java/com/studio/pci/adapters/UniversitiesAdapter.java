@@ -66,7 +66,6 @@ public class UniversitiesAdapter extends RecyclerView.Adapter<UniversitiesAdapte
             ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(this);
         }
-
         @Override
         public void onClick(View v) {
             itemListener.recyclerViewListClicked(v, this.getAdapterPosition());

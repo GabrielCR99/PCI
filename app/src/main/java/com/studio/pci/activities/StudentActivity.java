@@ -27,6 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 import com.studio.pci.R;
 import com.studio.pci.models.Student;
+import com.studio.pci.models.University;
 import com.studio.pci.models.Upload;
 
 import java.util.ArrayList;
@@ -63,7 +64,7 @@ public class StudentActivity extends AppCompatActivity {
     @BindView(R.id.student_photo)
     ImageView imageView;
 
-    private ArrayList<String> info;
+    private Student student;
     private DatabaseReference databaseReference;
     private String userID;
 
@@ -90,7 +91,7 @@ public class StudentActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(StudentActivity.this, EditStudentActivity.class);
-                intent.putExtra(getString(R.string.student_info), info);
+                intent.putExtra(getString(R.string.student_info), student);
                 startActivity(intent);
             }
         });
@@ -128,7 +129,7 @@ public class StudentActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    final Student student = dataSnapshot.getValue(Student.class);
+                    student = dataSnapshot.getValue(Student.class);
                     assert student != null;
                     if (!student.getName().isEmpty()) name.setText(student.getName());
                     else name.setText(getString(R.string.null_info));
@@ -143,7 +144,7 @@ public class StudentActivity extends AppCompatActivity {
                     if (!student.getEmail().isEmpty()) email.setText(student.getEmail());
                     else email.setText(getString(R.string.null_info));
 
-                    if(!student.getUniversity().isEmpty()) university.setText(student.getUniversity());
+                    if(!student.getUniversity().isEmpty()) getUniversityName(student.getUniversity());
                     else university.setText(getString(R.string.null_info));
 
                     if(!student.getFacebookUrl().isEmpty()) {
@@ -158,7 +159,6 @@ public class StudentActivity extends AppCompatActivity {
                     } else {
                         facebook.setEnabled(false);
                     }
-
                     if (!student.getSkypeUrl().isEmpty()) {
                         skype.setEnabled(true);
                         skype.setOnClickListener(new View.OnClickListener() {
@@ -170,13 +170,27 @@ public class StudentActivity extends AppCompatActivity {
                         });
                     } else skype.setEnabled(false);
 
-                    info = student.toArray();
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Log.v("USER_FIREBASE", databaseError.getMessage());
+            }
+        });
+    }
+
+    private void getUniversityName(String id) {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("universities").child(id);
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                University un = dataSnapshot.getValue(University.class);
+                university.setText(un.getName());
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.v("ERROR UNIVERSITY EDIT",databaseError.getMessage());
             }
         });
     }

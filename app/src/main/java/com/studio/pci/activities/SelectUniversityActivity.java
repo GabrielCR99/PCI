@@ -1,5 +1,6 @@
 package com.studio.pci.activities;
 
+import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
@@ -37,7 +38,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class SelectUniversityActivity extends AppCompatActivity implements
-        UniversitiesAdapter.RecyclerViewClickListener{
+        UniversitiesAdapter.RecyclerViewClickListener {
 
     private List<University> universities;
     private UniversitiesAdapter adapter;
@@ -55,7 +56,9 @@ public class SelectUniversityActivity extends AppCompatActivity implements
 
     @OnClick(R.id.fab_confirm)
     public void onConfirmed(){
-        // TODO ADD SELECTED UNIVERSITY TO STUDENT INFO
+        Intent returnIntent = new Intent();
+        returnIntent.putExtra("UNIVERSITY",selectedUniversity);
+        setResult(Activity.RESULT_OK,returnIntent);
         finish();
     }
 
@@ -75,7 +78,7 @@ public class SelectUniversityActivity extends AppCompatActivity implements
 
     private void setRecyclerView(){
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new UniversitiesAdapter(universities,this,null);
+        adapter = new UniversitiesAdapter(universities,this,this);
         recyclerView.setAdapter(adapter);
     }
 
@@ -89,6 +92,10 @@ public class SelectUniversityActivity extends AppCompatActivity implements
                 for (DataSnapshot ds: dataSnapshot.getChildren()) {
                     University university = ds.getValue(University.class);
                     if(university.isEnable()) universities.add(university);
+                    if(university.getId().equals(uid)){
+                        unNameTextView.setText(selectedUniversity.getName());
+                        unDeptTextView.setText(selectedUniversity.getDepartment());
+                    }
                     adapter.notifyDataSetChanged();
                 }
             }
@@ -136,15 +143,14 @@ public class SelectUniversityActivity extends AppCompatActivity implements
     }
 
     @Override
+    public void onBackPressed() {
+        finish();
+    }
+
+    @Override
     public void recyclerViewListClicked(View v, int position) {
         selectedUniversity = universities.get(position);
         unNameTextView.setText(selectedUniversity.getName());
         unDeptTextView.setText(selectedUniversity.getDepartment());
-        // TODO FIX THIS
-    }
-
-    @Override
-    public void onBackPressed() {
-        this.finish();
     }
 }

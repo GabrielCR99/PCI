@@ -65,7 +65,7 @@ public class StudentFragment extends Fragment {
     @BindView(R.id.student_edit_button)
     Button button;
 
-    private ArrayList<String> info;
+    private Student student;
     private DatabaseReference databaseReference;
     private String userID;
     private Context context;
@@ -87,7 +87,6 @@ public class StudentFragment extends Fragment {
         userID = arguments.getString("USERID");
 
         getInfo();
-
 
         return view;
     }
@@ -115,7 +114,7 @@ public class StudentFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
-                    final Student student = dataSnapshot.getValue(Student.class);
+                    student = dataSnapshot.getValue(Student.class);
                     if(!student.getName().isEmpty()) name.setText(student.getName());
                     else name.setText(getString(R.string.null_info));
 
@@ -128,7 +127,7 @@ public class StudentFragment extends Fragment {
                     if(!student.getEmail().isEmpty()) email.setText(student.getEmail());
                     else email.setText(getString(R.string.null_info));
 
-                    if(!student.getUniversity().isEmpty()) university.setText("Em Desenvolvimento");
+                    if(!student.getUniversity().isEmpty()) getUniversityName(student.getUniversity());
                     else university.setText(getString(R.string.null_info));
 
                     if(!student.getFacebookUrl().isEmpty()) {
@@ -155,12 +154,11 @@ public class StudentFragment extends Fragment {
                     }
                     else skype.setEnabled(false);
 
-                    info = student.toArray();
                     button.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             Intent intent = new Intent(context,EditStudentActivity.class);
-                            intent.putExtra(getString(R.string.student_info),info);
+                            intent.putExtra(getString(R.string.student_info),student);
                             startActivity(intent);
                         }
                     });
@@ -173,8 +171,8 @@ public class StudentFragment extends Fragment {
         });
     }
 
-    private void getUniversityName() {
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("universities").child(info.get(8));
+    private void getUniversityName(String id) {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("universities").child(id);
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
