@@ -76,6 +76,16 @@ public class EditProfessorActivity extends AppCompatActivity {
         Intent intent = getIntent();
         info = intent.getStringArrayListExtra(getString(R.string.professor_info));
 
+        bindInfo();
+
+        DatePickerDialogHelper.setDatePickerDialog(birthDateEditText,this,new SimpleDateFormat(getString(R.string.date_formatter), new Locale("pt", "BR")));
+        // TODO ON UNIVERSITY EDITLAYOUT CLICK LISTENER GO TO SELECTION FRAGMENT
+        setProfileImage();
+    }
+
+    private void bindInfo() {
+        // TODO PASS PROFESSOR OBJECT, NOT ARRAY
+        // TODO GET UNIVERSITIES
         nameEditText.setText(info.get(1));
         if(info.get(2).equals(getString(R.string.male))) genderSpinner.setSelection(0);
         else if(info.get(2).equals(getString(R.string.female))) genderSpinner.setSelection(1);
@@ -85,10 +95,6 @@ public class EditProfessorActivity extends AppCompatActivity {
         faceEditText.setText(info.get(7));
         skypeEditText.setText(info.get(8));
         bioEditText.setText(info.get(9));
-
-        DatePickerDialogHelper.setDatePickerDialog(birthDateEditText,this,new SimpleDateFormat(getString(R.string.date_formatter), new Locale("pt", "BR")));
-        // TODO ON UNIVERSITY EDITLAYOUT CLICK LISTENER GO TO SELECTION FRAGMENT
-        setProfileImage();
     }
 
     private boolean validateForm(String name){

@@ -37,7 +37,6 @@ public class ResetPasswordActivity extends AppCompatActivity {
         setContentView(R.layout.activity_reset_password);
         ButterKnife.bind(this);
 
-
         firebaseAuth = FirebaseAuth.getInstance();
 
     }

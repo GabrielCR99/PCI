@@ -51,23 +51,19 @@ public class ProjectActivity extends AppCompatActivity {
 
     private String projectID;
     private Project project;
-    private String uid;
-    private Menu menu;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         setContentView(R.layout.activity_project);
         super.onCreate(savedInstanceState);
-
         ButterKnife.bind(this);
 
-        Intent intent = getIntent();
-        projectID = intent.getStringExtra("PROJECT_ID");
-        uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         setInfo();
     }
 
     private void setInfo() {
+        Intent intent = getIntent();
+        projectID = intent.getStringExtra("PROJECT_ID");
         DatabaseReference db = FirebaseDatabase.getInstance().getReference();
 
         db.addValueEventListener(new ValueEventListener() {
@@ -97,7 +93,7 @@ public class ProjectActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.project, menu);
-        this.menu = menu;
+        Menu menu1 = menu;
         return super.onCreateOptionsMenu(menu);
     }
 

@@ -47,8 +47,6 @@ public class ViewStudentsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_users_view);
         ButterKnife.bind(this);
 
-        Intent intent = getIntent();
-        projectID = intent.getStringExtra("PROJECT_ID");
         setStudents();
         setRecyclerView();
     }
@@ -77,6 +75,10 @@ public class ViewStudentsActivity extends AppCompatActivity {
     private void setStudents() {
         students = new ArrayList<>();
         uploads = new ArrayList<>();
+
+        Intent intent = getIntent();
+        projectID = intent.getStringExtra("PROJECT_ID");
+
         DatabaseReference db = FirebaseDatabase.getInstance().getReference();
         db.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
