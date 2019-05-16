@@ -66,7 +66,7 @@ public class ProfessorActivity extends AppCompatActivity {
     @BindView(R.id.professor_photo)
     ImageView imageView;
 
-    private ArrayList<String> info;
+    private Professor professor;
     private String userID;
 
     @Override
@@ -84,7 +84,7 @@ public class ProfessorActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ProfessorActivity.this,EditProfessorActivity.class);
-                intent.putExtra(getString(R.string.professor_info), professor );
+                intent.putExtra(getString(R.string.professor_info), professor);
                 startActivity(intent);
             }
         });

@@ -88,6 +88,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         switch (id){
+            case R.id.menu_feed:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,feedsFragment).commit();
+                break;
             case R.id.menu_profile:
                 Bundle arguments = new Bundle();
                 if(type==1){
