@@ -74,15 +74,7 @@ public class StudentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dashboard_student);
         ButterKnife.bind(this);
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("students");
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-
-        Intent intent = getIntent();
-        userID = intent.getStringExtra("UID");
-
         getInfo();
-
-        if(currentUser.getUid().equals(userID)) addButton();
     }
 
     private void addButton() {
@@ -123,6 +115,13 @@ public class StudentActivity extends AppCompatActivity {
     }
 
     private void getInfo() {
+        Intent intent = getIntent();
+        userID = intent.getStringExtra("UID");
+
+        databaseReference = FirebaseDatabase.getInstance().getReference("students");
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        if(currentUser.getUid().equals(userID)) addButton();
         setProfileImage();
         databaseReference.child(userID).addValueEventListener(new ValueEventListener() {
             @Override

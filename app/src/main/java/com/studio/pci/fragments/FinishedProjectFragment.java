@@ -29,5 +29,4 @@ public class FinishedProjectFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_projects_finished, container, false);
     }
 
-
 }

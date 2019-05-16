@@ -50,7 +50,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private String uid;
     private ImageView imageView;
     private View header;
-    private ProjectListFragment ProjectListFragment;
     private FeedsFragment feedsFragment;
     private static final String USER_TYPE = "USERTYPE";
     private static final String USER_ID = "USERID";
@@ -61,6 +60,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
+        configureDrawer();
+        setNavInfo();
+
+        feedsFragment = new FeedsFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,feedsFragment).commit();
+    }
+
+    private void configureDrawer() {
         setSupportActionBar(toolbar);
         header = navigationView.getHeaderView(0);
 
@@ -68,17 +75,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
-        Intent intent = getIntent();
-        type = intent.getIntExtra(USER_TYPE,0);
-        uid = intent.getStringExtra(USER_ID);
-
-        navigationView.setNavigationItemSelectedListener(this);
-        setNavInfo(type);
-
-        feedsFragment = new FeedsFragment();
-        ProjectListFragment = new ProjectListFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,feedsFragment).commit();
     }
 
     @Override
@@ -92,10 +88,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         switch (id){
-            case R.id.menu_feed:
-                if (feedsFragment.isVisible()) drawer.closeDrawer(GravityCompat.START);
-                else getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,feedsFragment).commit();
-                break;
             case R.id.menu_profile:
                 Bundle arguments = new Bundle();
                 if(type==1){
@@ -113,10 +105,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
                 break;
             case R.id.menu_project:
+                ProjectListFragment fragment = new ProjectListFragment();
                 Bundle args = new Bundle();
                 args.putInt("TYPE",type);
-                ProjectListFragment.setArguments(args);
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,ProjectListFragment).commit();
+                fragment.setArguments(args);
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,fragment).commit();
                 break;
             case R.id.menu_privacy_policy:
                 startActivity(new Intent(this, PrivacyPolicyActivity.class));
@@ -128,8 +121,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             default:
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setMessage(getString(R.string.null_info));
-                builder.setTitle(getString(R.string.null_user));
+                builder.setMessage(R.string.null_user);
+                builder.setTitle(R.string.user_error);
                 builder.create().show();
                 break;
         }
@@ -144,7 +137,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()) {
                     Upload upload = dataSnapshot.getValue(Upload.class);
-                    if(upload != null) Picasso.get().load(upload.getPhoto()).placeholder(R.drawable.ic_launcher_background).into(imageView);
+                    Picasso.get().load(upload != null ? upload.getPhoto() : null).placeholder(R.drawable.ic_launcher_background).into(imageView);
                 }
             }
             @Override
@@ -154,34 +147,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
     }
 
-    private void setNavInfo(int type) {
+    private void setNavInfo() {
+        Intent intent = getIntent();
+        type = intent.getIntExtra(USER_TYPE,0);
+        uid = intent.getStringExtra(USER_ID);
+
+        navigationView.setNavigationItemSelectedListener(this);
         final TextView nameTextView = header.findViewById(R.id.nav_name);
-        String path=null;
         TextView typeTextView = header.findViewById(R.id.nav_type);
         imageView = header.findViewById(R.id.user_photo);
         if(type==1) {
             typeTextView.setText(getString(R.string.student));
-            path = "students";
+            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("students");
+            reference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    nameTextView.setText(dataSnapshot.child(uid).child("name").getValue(String.class));
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    Log.v("NAME DATABASE ERROR",databaseError.getMessage());
+                }
+            });
         }
-        if(type==2) {
-            typeTextView.setText(getString(R.string.professor));
-            path = "professors";
-        }
-        if(type==3){
-            typeTextView.setText(getString(R.string.coordinator));
-            path = "coordinators";
-        }
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference(path);
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                nameTextView.setText(dataSnapshot.child(uid).child("name").getValue(String.class));
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.v("NAME DATABASE ERROR",databaseError.getMessage());
-            }
-        });
+        else if(type==2) typeTextView.setText(getString(R.string.professor));
+        else typeTextView.setText(getString(R.string.null_user));
         setProfileImage();
     }
 }

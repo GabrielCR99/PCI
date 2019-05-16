@@ -97,21 +97,25 @@ public class EditProfessorActivity extends AppCompatActivity {
         Intent intent = getIntent();
         professor = (Professor) intent.getSerializableExtra(getString(R.string.professor_info));
 
-        storageReference = FirebaseStorage.getInstance().getReference("profile_photo");
-        databaseReference = FirebaseDatabase.getInstance().getReference("profile_photo");
-
-        nameEditText.setText(professor.getName());
-        if(professor.getGender().equals(getString(R.string.male))) genderSpinner.setSelection(0);
-        else if(professor.getGender().equals(getString(R.string.female))) genderSpinner.setSelection(1);
-        else genderSpinner.setSelection(2);
-        birthDateEditText.setText(professor.getBirthDate());
-        degreeEditText.setText(professor.getDegree());
-        faceEditText.setText(professor.getFacebookUrl());
-        skypeEditText.setText(professor.getSkypeUrl());
-        bioEditText.setText(professor.getBio());
+        bindInfo();
 
         DatePickerDialogHelper.setDatePickerDialog(birthDateEditText,this,new SimpleDateFormat(getString(R.string.date_formatter), new Locale("pt", "BR")));
+        // TODO ON UNIVERSITY EDITLAYOUT CLICK LISTENER GO TO SELECTION FRAGMENT
         setProfileImage();
+    }
+
+    private void bindInfo() {
+        // TODO PASS PROFESSOR OBJECT, NOT ARRAY
+        // TODO GET UNIVERSITIES
+        nameEditText.setText(info.get(1));
+        if(info.get(2).equals(getString(R.string.male))) genderSpinner.setSelection(0);
+        else if(info.get(2).equals(getString(R.string.female))) genderSpinner.setSelection(1);
+        else genderSpinner.setSelection(2);
+        birthDateEditText.setText(info.get(3));
+        degreeEditText.setText(info.get(5));
+        faceEditText.setText(info.get(7));
+        skypeEditText.setText(info.get(8));
+        bioEditText.setText(info.get(9));
     }
 
     private boolean validateForm(String name){

@@ -15,6 +15,7 @@ import com.studio.pci.R;
 import com.studio.pci.activities.StudentActivity;
 import com.studio.pci.models.Student;
 import com.studio.pci.models.Upload;
+import com.studio.pci.utils.NameCutterHelper;
 
 import java.util.List;
 
@@ -44,9 +45,7 @@ public class StudentsAdapter extends RecyclerView.Adapter<StudentsAdapter.Studen
     public void onBindViewHolder(@NonNull final StudentViewHolder viewHolder, final int i) {
         Upload upload = uploads.get(i);
         final Student student = students.get(i);
-        String[] name = student.getName().split(" ");
-        String first = name[0];
-        viewHolder.nameTextView.setText(first);
+        viewHolder.nameTextView.setText(NameCutterHelper.cutName(student.getName(),0));
         if(!upload.getPhoto().equals("null")) Picasso.get().load(upload.getPhoto()).placeholder(R.drawable.ic_launcher_background).into(viewHolder.imageView);
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

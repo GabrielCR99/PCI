@@ -44,8 +44,6 @@ public class CreateProjectActivity extends AppCompatActivity
     private List<University> filteredUniversities;
     private SelectedUniversitiesAdapter filteredAdapter;
 
-
-
     @BindView(R.id.recycler_universities)
     RecyclerView recyclerUniversities;
 
@@ -82,17 +80,20 @@ public class CreateProjectActivity extends AppCompatActivity
     // PREVIOUS BUTTON
     @OnClick(R.id.fab_previous)
     public void previousView(){
-        viewFlipper.setInAnimation(this,R.anim.slide_in_right);
-        viewFlipper.setOutAnimation(this,R.anim.slide_out_left);
+        setViewFlipperAnimation();
         viewFlipper.showPrevious();
         checkCurrentView();
+    }
+
+    private void setViewFlipperAnimation() {
+        viewFlipper.setInAnimation(this, R.anim.slide_in_right);
+        viewFlipper.setOutAnimation(this, R.anim.slide_out_left);
     }
 
     // NEXT BUTTON
     @OnClick(R.id.fab_next)
     public void nextView(){
-        viewFlipper.setInAnimation(this,R.anim.slide_in_right);
-        viewFlipper.setOutAnimation(this,R.anim.slide_out_left);
+        setViewFlipperAnimation();
         checkCurrentView();
         if(checkCurrentView()){
             viewFlipper.showNext();

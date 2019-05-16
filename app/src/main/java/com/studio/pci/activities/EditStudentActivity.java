@@ -101,6 +101,14 @@ public class EditStudentActivity extends AppCompatActivity{
         Intent intent = getIntent();
         student = (Student) intent.getSerializableExtra(getString(R.string.student_info));
 
+        bindInfo();
+
+        DatePickerDialogHelper.setDatePickerDialog(birthDateEditText,this,new SimpleDateFormat(getString(R.string.date_formatter), new Locale("pt", "BR")));
+
+        setProfileImage();
+    }
+
+    private void bindInfo() {
         nameEditText.setText(student.getName());
         if(student.getGender().equals(getString(R.string.male))) genderSpinner.setSelection(0);
         else if(student.getGender().equals(getString(R.string.female))) genderSpinner.setSelection(1);
@@ -117,16 +125,13 @@ public class EditStudentActivity extends AppCompatActivity{
             public void onFocusChange(View v, boolean hasFocus) {
                 hideKeyboard(universityEditText);
                 if(hasFocus) {
-                    Intent newUniversity = new Intent(EditStudentActivity.this,SelectUniversityActivity.class);
+                    Intent newUniversity = new Intent(EditStudentActivity.this, SelectUniversityActivity.class);
                     newUniversity.putExtra("UID",student.getUniversity());
                     universityEditText.clearFocus();
                     startActivityForResult(newUniversity,123);
                 }
             }
         });
-        DatePickerDialogHelper.setDatePickerDialog(birthDateEditText,this,new SimpleDateFormat(getString(R.string.date_formatter), new Locale("pt", "BR")));
-
-        setProfileImage();
     }
 
     private void getUniversityName(String id) {

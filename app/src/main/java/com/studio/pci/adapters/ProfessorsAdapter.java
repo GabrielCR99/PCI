@@ -18,6 +18,7 @@ import com.studio.pci.activities.ProfessorActivity;
 import com.studio.pci.activities.StudentActivity;
 import com.studio.pci.models.Professor;
 import com.studio.pci.models.Upload;
+import com.studio.pci.utils.NameCutterHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,9 +49,7 @@ public class ProfessorsAdapter extends RecyclerView.Adapter<ProfessorsAdapter.Pr
     public void onBindViewHolder(@NonNull final ProfessorViewHolder viewHolder, int i) {
         Upload upload = uploads.get(i);
         final Professor professor = professors.get(i);
-        String[] name = professor.getName().split(" ");
-        String first = name[0];
-        viewHolder.nameTextView.setText(first);
+        viewHolder.nameTextView.setText(NameCutterHelper.cutName(professor.getName(),0));
         if(!upload.getPhoto().equals("null")) Picasso.get().load(upload.getPhoto()).placeholder(R.drawable.ic_launcher_background).into(viewHolder.imageView);
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,7 +65,6 @@ public class ProfessorsAdapter extends RecyclerView.Adapter<ProfessorsAdapter.Pr
     public int getItemCount() {
         return professors.size();
     }
-
 
     static class ProfessorViewHolder extends RecyclerView.ViewHolder{
 
