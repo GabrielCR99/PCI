@@ -127,18 +127,21 @@ public class SignUpActivity extends BaseActivity {
                         UserDAO userDAO = new UserDAO();
                         userDAO.create(id, user);
                         hideProgressDialog();
-                        Toast.makeText(getApplicationContext(), getString(R.string.acc_success), Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(getApplicationContext(), SignInActivity.class));
                         if (type.equals(getString(R.string.student))) {
-                            Student student = new Student(id, nameField.getText().toString(), emailField.getText().toString(), true);
+                            Student student = new Student(id, nameField.getText().toString(),
+                                    emailField.getText().toString(), true);
                             StudentDAO studentDAO = new StudentDAO();
                             studentDAO.create(id, student);
                         } else if(type.equals(getString(R.string.professor))){
-                            Professor professor = new Professor(id, nameField.getText().toString(), emailField.getText().toString(),"", true);
+                            Professor professor = new Professor(id, nameField.getText().toString(),
+                                    emailField.getText().toString(), true);
                             ProfessorDAO professorDAO = new ProfessorDAO();
                             professorDAO.create(id, professor);
                         }
                         hideProgressDialog();
+                        Toast.makeText(SignUpActivity.this, getString(R.string.acc_success),
+                                Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(SignUpActivity.this, SignInActivity.class));
                     } else {
                         showToast(getString(R.string.auth_failed));
                         hideProgressDialog();

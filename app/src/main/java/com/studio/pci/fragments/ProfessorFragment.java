@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,8 +29,6 @@ import com.studio.pci.R;
 import com.studio.pci.activities.EditProfessorActivity;
 import com.studio.pci.models.Professor;
 import com.studio.pci.models.Upload;
-
-import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -60,9 +59,6 @@ public class ProfessorFragment extends Fragment {
     @BindView(R.id.professor_bio)
     TextView bio;
 
-    @BindView(R.id.professor_layout_button)
-    LinearLayout linearLayout;
-
     @BindView(R.id.professor_photo)
     ImageView imageView;
 
@@ -88,8 +84,10 @@ public class ProfessorFragment extends Fragment {
 
         Bundle arguments = getArguments();
         userID = arguments.getString("USERID");
-        String path = arguments.getString("USERTYPE");
-
+        int type = arguments.getInt("USERTYPE",0);
+        String path;
+        if(type==2) path = "professors";
+        else path = "coordinators";
         databaseReference = FirebaseDatabase.getInstance().getReference(path);
 
         getInfo();

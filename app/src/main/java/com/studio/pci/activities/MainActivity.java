@@ -101,8 +101,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }else{
                     ProfessorFragment fragment = new ProfessorFragment();
                     arguments.putString(USER_ID,uid);
-                    if(type == 2) arguments.putString(USER_TYPE,getString(R.string.professors));
-                    else arguments.putString(USER_TYPE,getString(R.string.coordinators));
+                    arguments.putInt(USER_TYPE,type);
                     fragment.setArguments(arguments);
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,fragment).commit();
                 }
@@ -173,7 +172,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
             });
         }
-        else if(type==2) typeTextView.setText(getString(R.string.professor));
+        else if(type==2) {
+            typeTextView.setText(getString(R.string.professor));
+            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("professors");
+            reference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    nameTextView.setText(dataSnapshot.child(uid).child("name").getValue(String.class));
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    Log.v("NAME DATABASE ERROR",databaseError.getMessage());
+                }
+            });
+        }
         else typeTextView.setText(getString(R.string.null_user));
         setProfileImage();
     }

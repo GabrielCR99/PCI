@@ -25,5 +25,4 @@ public class FormHelper {
         return TextUtils.isEmpty(text);
     }
 
-
 }

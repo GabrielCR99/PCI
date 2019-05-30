@@ -14,4 +14,5 @@ public interface GenericDAO<T extends Serializable> {
     void delete(@NonNull String id);
 
     String newKey();
+
 }

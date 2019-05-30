@@ -7,6 +7,7 @@ import android.support.design.widget.TextInputLayout;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -119,31 +120,40 @@ public class SignInActivity extends BaseActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.child("users").child(firebaseUser.getUid()).getValue(User.class);
                 Intent intent = new Intent(SignInActivity.this, MainActivity.class);
-                if(user.getType().equals(getString(R.string.student))) {
-                    type = 1;
-                    Student student = dataSnapshot.child("students").child(firebaseUser.getUid()).getValue(Student.class);
-                    intent.putExtra("USERNAME", student.getName());
-                }
-                if(user.getType().equals(getString(R.string.professor))){
-                    type = 2;
-                    Professor professor = dataSnapshot.child("professors").child(firebaseUser.getUid()).getValue(Professor.class);
-                    intent.putExtra("USERNAME", professor.getName());
-                }
-                if(user.getType().equals(getString(R.string.coordinator))){
-                    type = 3;
-                    Coordinator coordinator = dataSnapshot.child("coordinators").child(firebaseUser.getUid()).getValue(Coordinator.class);
-                    intent.putExtra("USERNAME", coordinator.getName());
-                    // TODO DOES NOT RECOGNIZE COORDINATOR LOGIN
-                }
-                intent.putExtra("USERTYPE", type);
-                intent.putExtra("USERID", firebaseUser.getUid());
-                startActivity(intent);
+                putInfo(dataSnapshot, user, intent);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Log.e("FIREBASE_ERROR", "onCancelled Error = " + databaseError.getMessage());
             }
         });
+    }
+
+    private void putInfo(@NonNull DataSnapshot dataSnapshot, User user, Intent intent) {
+        if(user!=null){
+            if(user.getType().equals(getString(R.string.student))) {
+                type = 1;
+                Student student = dataSnapshot.child("students").child(firebaseUser.getUid()).getValue(Student.class);
+                intent.putExtra("USERNAME", student.getName());
+            }
+            if(user.getType().equals(getString(R.string.professor))){
+                type = 2;
+                Professor professor = dataSnapshot.child("professors").child(firebaseUser.getUid()).getValue(Professor.class);
+                intent.putExtra("USERNAME", professor.getName());
+            }
+            if(user.getType().equals(getString(R.string.coordinator))){
+                type = 3;
+                Coordinator coordinator = dataSnapshot.child("coordinators").child(firebaseUser.getUid()).getValue(Coordinator.class);
+                intent.putExtra("USERNAME", coordinator.getName());
+                // TODO DOES NOT RECOGNIZE COORDINATOR LOGIN
+            }
+            intent.putExtra("USERTYPE", type);
+            intent.putExtra("USERID", firebaseUser.getUid());
+            startActivity(intent);
+        } else {
+            hideProgressDialog();
+            Toast.makeText(this, "Falha ao autenticar usuário", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @OnClick(R.id.sign_in_button)

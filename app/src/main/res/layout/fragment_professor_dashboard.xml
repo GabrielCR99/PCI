@@ -1,29 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
+    <View
+        android:id="@+id/view"
         android:layout_width="match_parent"
-        android:layout_height="160sp"
-        android:layout_gravity="center"
+        android:layout_height="100sp"
         android:background="@color/colorPrimary"
-        android:orientation="vertical">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="128dp"
-            android:layout_height="128dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="28dp"
-            android:id="@+id/professor_photo"
-            android:src="@mipmap/ic_launcher_round"/>
-
-    </LinearLayout>
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/professor_photo"
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="8dp"
+        android:src="@mipmap/ic_launcher_round"
+        app:civ_border_width="3dp"
+        app:civ_border_color="@color/colorWhite"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view" />
 
     <ScrollView
+        android:id="@+id/scrollView4"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/professor_photo">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -52,10 +69,10 @@
 
             <TextView
                 android:id="@+id/professor_degree"
+                style="@style/textContentBlackSubtitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="25sp"
-               style="@style/textContentBlackSubtitle"/>
+                android:layout_marginBottom="25sp" />
 
             <TextView
                 style="@style/textContentBlackBody"
@@ -65,10 +82,10 @@
 
             <TextView
                 android:id="@+id/professor_gender"
+                style="@style/textContentBlackSubtitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="25sp"
-               style="@style/textContentBlackSubtitle" />
+                android:layout_marginBottom="25sp" />
 
             <TextView
                 style="@style/textContentBlackBody"
@@ -78,10 +95,10 @@
 
             <TextView
                 android:id="@+id/professor_birthDate"
+                style="@style/textContentBlackSubtitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="25sp"
-                style="@style/textContentBlackSubtitle" />
+                android:layout_marginBottom="25sp" />
 
             <TextView
                 style="@style/textContentBlackBody"
@@ -91,10 +108,10 @@
 
             <TextView
                 android:id="@+id/professor_email"
+                style="@style/textContentBlackSubtitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="25sp"
-                style="@style/textContentBlackSubtitle" />
+                android:layout_marginBottom="25sp" />
 
             <TextView
                 style="@style/textContentBlackBody"
@@ -113,7 +130,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginBottom="20dp">
 
                 <ImageButton
                     android:id="@+id/professor_face"
@@ -132,13 +150,6 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/professor_layout_button"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="20sp"
-                android:orientation="vertical" />
-
             <Button
                 android:id="@+id/professor_edit_button"
                 style="@style/buttonTextAndBackground"
@@ -151,4 +162,4 @@
 
     </ScrollView>
 
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>

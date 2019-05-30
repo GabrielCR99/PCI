@@ -1,34 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="160sp"
-        android:orientation="vertical"
+        android:layout_height="100dp"
         android:layout_gravity="center"
-        android:background="@color/colorPrimary">
+        android:background="@color/colorPrimary"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar2" />
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="128dp"
-            android:layout_height="128dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="28dp"
-            android:id="@+id/professor_photo"
-            android:src="@mipmap/ic_launcher_round"/>
-
-    </LinearLayout>
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/professor_photo"
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="8dp"
+        android:src="@mipmap/ic_launcher_round"
+        app:civ_border_color="@color/colorWhite"
+        app:civ_border_width="3dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout" />
 
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/professor_photo">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -37,83 +59,83 @@
             android:orientation="vertical">
 
             <TextView
+                style="@style/textContentBlackBody"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/complete_name"
-                style="@style/textContentBlackBody"/>
+                android:text="@string/complete_name" />
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:id="@+id/professor_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="25sp"
-                android:textAppearance="@style/textContentBlackSubtitle"/>
+                android:textAppearance="@style/textContentBlackSubtitle" />
 
             <TextView
+                style="@style/textContentBlackBody"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/degree"
-                style="@style/textContentBlackBody"/>
+                android:text="@string/degree" />
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:id="@+id/professor_degree"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="25sp"
-                android:textAppearance="@style/textContentBlackSubtitle"/>
+                android:textAppearance="@style/textContentBlackSubtitle" />
 
             <TextView
+                style="@style/textContentBlackBody"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/gender"
-                style="@style/textContentBlackBody"/>
+                android:text="@string/gender" />
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:id="@+id/professor_gender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="25sp"
-                android:textAppearance="@style/textContentBlackSubtitle"/>
+                android:textAppearance="@style/textContentBlackSubtitle" />
 
             <TextView
+                style="@style/textContentBlackBody"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/birthDate"
-                style="@style/textContentBlackBody"/>
+                android:text="@string/birthDate" />
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:id="@+id/professor_birthDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="25sp"
-                android:textAppearance="@style/textContentBlackSubtitle"/>
+                android:textAppearance="@style/textContentBlackSubtitle" />
 
             <TextView
+                style="@style/textContentBlackBody"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/email"
-                style="@style/textContentBlackBody"/>
+                android:text="@string/email" />
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:id="@+id/professor_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="25sp"
-                android:textAppearance="@style/textContentBlackSubtitle"/>
+                android:textAppearance="@style/textContentBlackSubtitle" />
 
             <TextView
+                style="@style/textContentBlackBody"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/bio"
-                style="@style/textContentBlackBody"/>
+                android:text="@string/bio" />
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:id="@+id/professor_bio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="25sp"
                 android:lines="3"
-                android:textAppearance="@style/textContentBlackSubtitle"/>
+                android:textAppearance="@style/textContentBlackSubtitle" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -142,14 +164,14 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/professor_layout_button"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="20sp"
-                android:orientation="vertical"
-                android:id="@+id/professor_layout_button"/>
+                android:orientation="vertical" />
 
         </LinearLayout>
 
     </ScrollView>
 
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>

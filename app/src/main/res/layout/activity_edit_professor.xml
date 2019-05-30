@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,41 +8,60 @@
     android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/splash_color"
-        android:id="@+id/toolbar_layout"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <RelativeLayout
+    <View
+        android:id="@+id/view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:gravity="center_horizontal"
-        android:background="@drawable/splash_color">
+        android:background="@drawable/splash_color"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_layout"/>
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/professor_photo"
-            android:layout_width="128dp"
-            android:layout_height="128dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:src="@mipmap/ic_launcher_round"/>
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/professor_photo"
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="8dp"
+        android:src="@mipmap/ic_launcher_round"
+        app:civ_border_color="@color/colorWhite"
+        app:civ_border_width="3dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view" />
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/student_edit"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_alignEnd="@id/professor_photo"
-            android:layout_alignBottom="@id/professor_photo"
-            android:src="@drawable/ic_edit_black_24dp"
-            app:civ_circle_background_color="@color/colorBlack"/>
-
-    </RelativeLayout>
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/professor_edit"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignEnd="@id/professor_photo"
+        android:layout_alignBottom="@id/professor_photo"
+        android:src="@drawable/ic_edit_black_24dp"
+        app:civ_border_width="3dp"
+        app:civ_border_color="@color/colorWhite"
+        app:civ_circle_background_color="@color/colorPrimaryDark"
+        app:layout_constraintBottom_toBottomOf="@+id/professor_photo"
+        app:layout_constraintEnd_toEndOf="@+id/professor_photo" />
 
     <ScrollView
+        android:id="@+id/scrollView_edit_student"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/scrollView_edit_student">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/professor_photo">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -59,31 +79,31 @@
 
                 <EditText
                     android:id="@+id/professor_name_edit"
+                    style="@style/editTextStyleBlack"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/complete_name"
-                    android:inputType="textCapWords"
-                    style="@style/editTextStyleBlack"/>
+                    android:inputType="textCapWords" />
 
             </android.support.design.widget.TextInputLayout>
 
             <TextView
+                style="@style/textContentBlackBody"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/gender"
                 android:textColor="@color/colorBlack"
-                android:textSize="18sp"
-                style="@style/textContentBlackBody"/>
+                android:textSize="18sp" />
 
             <Spinner
                 android:id="@+id/spinner_professor_edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:backgroundTint="@color/colorBlack"
                 android:entries="@array/array_gender"
                 android:foregroundTint="@color/colorBlack"
-                android:backgroundTint="@color/colorBlack"
-                android:popupBackground="@color/colorWhite"
-                android:layout_marginBottom="16dp"/>
+                android:popupBackground="@color/colorWhite" />
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/birthDateInputLayout"
@@ -94,11 +114,11 @@
 
                 <EditText
                     android:id="@+id/professor_birthDate_edit"
+                    style="@style/editTextStyleBlack"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/birthDate"
                     android:inputType="date"
-                    style="@style/editTextStyleBlack"
                     tools:ignore="Autofill" />
 
             </android.support.design.widget.TextInputLayout>
@@ -112,11 +132,11 @@
 
                 <EditText
                     android:id="@+id/professor_degree_edit"
+                    style="@style/editTextStyleBlack"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/degree"
                     android:inputType="text"
-                    style="@style/editTextStyleBlack"
                     tools:ignore="Autofill" />
 
             </android.support.design.widget.TextInputLayout>
@@ -130,11 +150,11 @@
 
                 <EditText
                     android:id="@+id/professor_face_edit"
+                    style="@style/editTextStyleBlack"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/facebook"
                     android:inputType="textUri"
-                    style="@style/editTextStyleBlack"
                     tools:ignore="Autofill" />
 
             </android.support.design.widget.TextInputLayout>
@@ -148,11 +168,11 @@
 
                 <EditText
                     android:id="@+id/professor_skype_edit"
+                    style="@style/editTextStyleBlack"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/skype"
                     android:inputType="textUri"
-                    style="@style/editTextStyleBlack"
                     tools:ignore="Autofill" />
 
             </android.support.design.widget.TextInputLayout>
@@ -168,26 +188,26 @@
                     android:id="@+id/professor_bio_edit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:lines="3"
+                    android:layout_marginBottom="30dp"
                     android:hint="@string/bio"
                     android:inputType="textMultiLine"
-                    android:layout_marginBottom="30dp"
+                    android:lines="3"
                     tools:ignore="Autofill" />
 
             </android.support.design.widget.TextInputLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="280dp"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <Button
                     android:id="@+id/professor_edit_button"
+                    style="@style/buttonTextAndBackground"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/save"
-                    style="@style/buttonTextAndBackground"
-                    android:layout_marginBottom="25sp"/>
+                    android:layout_marginBottom="25sp"
+                    android:text="@string/save" />
 
             </LinearLayout>
 
@@ -195,4 +215,4 @@
 
     </ScrollView>
 
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>

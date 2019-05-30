@@ -11,9 +11,9 @@
     <application
         android:allowBackup="true"
         android:fullBackupContent="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_launcher_pci"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_launcher_pci_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
@@ -24,14 +24,12 @@
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".activities.PrivacyPolicyActivity"
-            android:label="Privacy Policy"
-            android:parentActivityName=".activities.MainActivity"/>
+            android:label="Privacy Policy"/>
         <activity
             android:name=".activities.SplashActivity"
             android:theme="@style/AppTheme.FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

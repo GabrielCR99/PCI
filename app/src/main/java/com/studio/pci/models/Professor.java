@@ -18,7 +18,7 @@ public class Professor implements Serializable {
     private String bio;
     private boolean enable;
 
-    public Professor(String id, String name, String email,String bio, boolean enable) {
+    public Professor(String id, String name, String email, boolean enable) {
         this.id = id;
         this.name = name;
         gender = "";
@@ -70,22 +70,6 @@ public class Professor implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(getId(), getName(), getGender(), getBirthDate(), getPicture(), getDegree(), getEmail(), getFacebookUrl(), getSkypeUrl(), bio, isEnable());
-    }
-
-    public ArrayList<String> toArray(){
-        ArrayList<String> professorInfo = new ArrayList<>();
-        professorInfo.add(id);
-        professorInfo.add(name);
-        professorInfo.add(gender);
-        professorInfo.add(birthDate);
-        professorInfo.add(picture);
-        professorInfo.add(degree);
-        professorInfo.add(email);
-        professorInfo.add(facebookUrl);
-        professorInfo.add(skypeUrl);
-        professorInfo.add(bio);
-        professorInfo.add(enable ? "true" : "false");
-        return professorInfo;
     }
 
     public String getId() {

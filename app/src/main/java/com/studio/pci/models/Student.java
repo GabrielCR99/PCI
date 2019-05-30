@@ -146,19 +146,4 @@ public class Student implements Serializable {
                 ", enable=" + enable +
                 '}';
     }
-
-    public ArrayList<String> toArray(){
-        ArrayList<String> studentInfo = new ArrayList<>();
-        studentInfo.add(id);
-        studentInfo.add(name);
-        studentInfo.add(gender);
-        studentInfo.add(birthDate);
-        studentInfo.add(picture);
-        studentInfo.add(email);
-        studentInfo.add(facebookUrl);
-        studentInfo.add(skypeUrl);
-        studentInfo.add(university);
-        studentInfo.add(enable ? "true" : "false");
-        return studentInfo;
-    }
 }
