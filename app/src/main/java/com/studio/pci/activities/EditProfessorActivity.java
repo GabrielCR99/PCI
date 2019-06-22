@@ -94,9 +94,11 @@ public class EditProfessorActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_professor);
         ButterKnife.bind(this);
 
+        storageReference = FirebaseStorage.getInstance().getReference("profile_photo");
+        databaseReference = FirebaseDatabase.getInstance().getReference("profile_photo");
+
         Intent intent = getIntent();
         professor = (Professor) intent.getSerializableExtra(getString(R.string.professor_info));
-
         bindInfo();
 
         DatePickerDialogHelper.setDatePickerDialog(birthDateEditText,this,new SimpleDateFormat(getString(R.string.date_formatter), new Locale("pt", "BR")));
@@ -151,27 +153,16 @@ public class EditProfessorActivity extends AppCompatActivity {
                 String ext = path.substring(path.lastIndexOf("."));
                 final StorageReference storage = storageReference.child(professor.getId()+"."+ext);
                 storage.putFile(file)
-                        .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                            @Override
-                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                storage.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                    @Override
-                                    public void onSuccess(Uri uri) {
-                                        Upload upload = new Upload(uri.toString());
-                                        databaseReference.child(professor.getId()).setValue(upload);
-                                        finish();
-                                    }
-                                });
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                AlertDialog.Builder builder = new AlertDialog.Builder(EditProfessorActivity.this);
-                                builder.setTitle(getString(R.string.upload_photo_fail));
-                                builder.setMessage(e.getMessage());
-                                builder.create().show();
-                            }
+                        .addOnSuccessListener(taskSnapshot -> storage.getDownloadUrl().addOnSuccessListener(uri -> {
+                            Upload upload = new Upload(uri.toString());
+                            databaseReference.child(professor.getId()).setValue(upload);
+                            finish();
+                        }))
+                        .addOnFailureListener(e -> {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(EditProfessorActivity.this);
+                            builder.setTitle(getString(R.string.upload_photo_fail));
+                            builder.setMessage(e.getMessage());
+                            builder.create().show();
                         });
             }
 
@@ -247,7 +238,7 @@ public class EditProfessorActivity extends AppCompatActivity {
                 if (resultCode == RESULT_OK) {
                     try {
                         Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), result.getUri());
-                        ((ImageView)findViewById(R.id.student_photo)).setImageBitmap(bitmap);
+                        ((ImageView)findViewById(R.id.professor_photo)).setImageBitmap(bitmap);
                         file = result.getUri();
                     } catch (IOException e) {
                         e.printStackTrace();

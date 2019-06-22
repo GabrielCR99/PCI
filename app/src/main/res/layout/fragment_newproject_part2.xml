@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/linear_create_part2"
+    android:orientation="vertical"
+    android:layout_margin="20dp"
+    android:layout_gravity="center"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/universities"
+        style="@style/TextAppearance.AppCompat.Title"
+        android:layout_marginBottom="10dp"
+        android:textSize="24sp"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:id="@+id/recycler_selected_universities"
+        android:scrollbars="vertical"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/recycler_universities"
+        android:scrollbars="vertical"/>
+
+</LinearLayout>

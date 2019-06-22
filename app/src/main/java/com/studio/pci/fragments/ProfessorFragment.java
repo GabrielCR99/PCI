@@ -139,35 +139,26 @@ public class ProfessorFragment extends Fragment {
 
                     if(!professor.getFacebookUrl().isEmpty()) {
                         facebook.setEnabled(true);
-                        facebook.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                Intent intent = getFBIntent(context,professor.getFacebookUrl());
-                                if(intent!=null) startActivity(intent);
-                            }
+                        facebook.setOnClickListener(v -> {
+                            Intent intent = getFBIntent(context,professor.getFacebookUrl());
+                            if(intent!=null) startActivity(intent);
                         });
                     }
                     else { facebook.setEnabled(false); }
 
                     if(!professor.getSkypeUrl().isEmpty()) {
                         skype.setEnabled(true);
-                        skype.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                Intent intent = getSkypeIntent(professor.getSkypeUrl());
-                                if(intent!=null) startActivity(intent);
-                            }
+                        skype.setOnClickListener(v -> {
+                            Intent intent = getSkypeIntent(professor.getSkypeUrl());
+                            if(intent!=null) startActivity(intent);
                         });
                     }
                     else skype.setEnabled(false);
 
-                    button.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Intent intent = new Intent(context, EditProfessorActivity.class);
-                            intent.putExtra(getString(R.string.professor_info),professor);
-                            startActivity(intent);
-                        }
+                    button.setOnClickListener(v -> {
+                        Intent intent = new Intent(context, EditProfessorActivity.class);
+                        intent.putExtra(getString(R.string.professor_info),professor);
+                        startActivity(intent);
                     });
                 }
             }

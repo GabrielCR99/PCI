@@ -2,6 +2,7 @@ package com.studio.pci.models;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 public class Professor implements Serializable {
@@ -16,6 +17,7 @@ public class Professor implements Serializable {
     private String facebookUrl;
     private String skypeUrl;
     private String bio;
+    private List<University> universityList;
     private boolean enable;
 
     public Professor(String id, String name, String email, boolean enable) {
@@ -29,13 +31,17 @@ public class Professor implements Serializable {
         facebookUrl = "";
         skypeUrl = "";
         bio = "";
+        universityList = new ArrayList<>();
+        universityList.add(new University());
         this.enable = enable;
     }
 
     public Professor(){
     }
 
-    public Professor(String id, String name, String gender, String birthDate, String picture, String degree, String email, String facebookUrl, String skypeUrl, String bio, boolean enable) {
+    public Professor(String id, String name, String gender, String birthDate, String picture,
+                     String degree, String email, String facebookUrl, String skypeUrl, String bio,
+                     List<University> universityList, boolean enable) {
         this.id = id;
         this.name = name;
         this.gender = gender;
@@ -46,6 +52,7 @@ public class Professor implements Serializable {
         this.facebookUrl = facebookUrl;
         this.skypeUrl = skypeUrl;
         this.bio = bio;
+        this.universityList = universityList;
         this.enable = enable;
     }
 
@@ -64,12 +71,15 @@ public class Professor implements Serializable {
                 Objects.equals(getEmail(), professor.getEmail()) &&
                 Objects.equals(getFacebookUrl(), professor.getFacebookUrl()) &&
                 Objects.equals(getSkypeUrl(), professor.getSkypeUrl()) &&
-                Objects.equals(bio, professor.bio);
+                Objects.equals(getBio(), professor.getBio()) &&
+                Objects.equals(getUniversityList(), professor.getUniversityList());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName(), getGender(), getBirthDate(), getPicture(), getDegree(), getEmail(), getFacebookUrl(), getSkypeUrl(), bio, isEnable());
+        return Objects.hash(getId(), getName(), getGender(), getBirthDate(), getPicture(),
+                getDegree(), getEmail(), getFacebookUrl(), getSkypeUrl(), getBio(),
+                getUniversityList(), isEnable());
     }
 
     public String getId() {
@@ -150,6 +160,14 @@ public class Professor implements Serializable {
 
     public void setSkypeUrl(String skypeUrl) {
         this.skypeUrl = skypeUrl;
+    }
+
+    public List<University> getUniversityList() {
+        return universityList;
+    }
+
+    public void setUniversityList(List<University> universityList) {
+        this.universityList = universityList;
     }
 
     public boolean isEnable() {

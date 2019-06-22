@@ -1,38 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <View
-        android:id="@+id/view"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="100sp"
-        android:layout_gravity="center"
-        android:background="@color/colorPrimary"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        android:layout_height="wrap_content">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/student_photo"
-        android:layout_width="128dp"
-        android:layout_height="128dp"
-        android:layout_gravity="center"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="20dp"
-        android:src="@mipmap/ic_launcher_round"
-        app:civ_border_width="3dp"
-        app:civ_border_color="@color/colorWhite"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/view"/>
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="100sp"
+            android:layout_gravity="center"
+            android:background="@color/colorPrimary"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/student_photo"
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            android:layout_alignStart="@+id/view"
+            android:layout_alignEnd="@+id/view"
+            android:layout_gravity="center"
+            android:layout_marginStart="143dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="140dp"
+            android:src="@mipmap/ic_launcher_round"
+            app:civ_border_color="@color/colorWhite"
+            app:civ_border_width="3dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/view" />
+
+    </RelativeLayout>
 
     <ScrollView
         android:id="@+id/scrollView5"
@@ -44,114 +51,128 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/student_photo">
 
-        <LinearLayout
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="20sp"
-            android:orientation="vertical">
-
-            <TextView
-                style="@style/textContentBlackBody"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/complete_name" />
-
-            <TextView
-                android:id="@+id/student_name"
-                style="@style/textContentBlackSubtitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="25sp" />
-
-            <TextView
-                style="@style/textContentBlackBody"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/university" />
-
-            <TextView
-                android:id="@+id/student_university"
-                style="@style/textContentBlackSubtitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="25sp" />
-
-            <TextView
-                style="@style/textContentBlackBody"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/gender" />
-
-            <TextView
-                android:id="@+id/student_gender"
-                style="@style/textContentBlackSubtitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="25sp" />
-
-            <TextView
-                style="@style/textContentBlackBody"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/birthDate" />
-
-            <TextView
-                android:id="@+id/student_birthDate"
-                style="@style/textContentBlackSubtitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="25sp" />
-
-            <TextView
-                style="@style/textContentBlackBody"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/email" />
-
-            <TextView
-                android:id="@+id/student_email"
-                style="@style/textContentBlackSubtitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20sp" />
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:orientation="horizontal">
+                android:layout_margin="20sp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-                <ImageButton
-                    android:id="@+id/student_face"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_marginEnd="20dp"
-                    android:background="@color/colorWhite"
-                    android:contentDescription="@string/facebook"
-                    android:src="@drawable/facebook_32" />
+                <TextView
+                    style="@style/textContentBlackBody"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/complete_name" />
 
-                <ImageButton
-                    android:id="@+id/student_skype"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_marginStart="20sp"
-                    android:background="@color/colorWhite"
-                    android:contentDescription="@string/skype"
-                    android:src="@drawable/skype_32" />
+                <TextView
+                    android:id="@+id/student_name"
+                    style="@style/textContentBlackSubtitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="25sp" />
+
+                <TextView
+                    style="@style/textContentBlackBody"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/university" />
+
+                <TextView
+                    android:id="@+id/student_university"
+                    style="@style/textContentBlackSubtitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="25sp" />
+
+                <TextView
+                    style="@style/textContentBlackBody"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/gender" />
+
+                <TextView
+                    android:id="@+id/student_gender"
+                    style="@style/textContentBlackSubtitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="25sp" />
+
+                <TextView
+                    style="@style/textContentBlackBody"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/birthDate" />
+
+                <TextView
+                    android:id="@+id/student_birthDate"
+                    style="@style/textContentBlackSubtitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="25sp" />
+
+                <TextView
+                    style="@style/textContentBlackBody"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/email" />
+
+                <TextView
+                    android:id="@+id/student_email"
+                    style="@style/textContentBlackSubtitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:id="@+id/student_face"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_marginEnd="20dp"
+                        android:background="@color/colorWhite"
+                        android:contentDescription="@string/facebook"
+                        android:src="@drawable/facebook_32" />
+
+                    <ImageButton
+                        android:id="@+id/student_skype"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_marginStart="20sp"
+                        android:background="@color/colorWhite"
+                        android:contentDescription="@string/skype"
+                        android:src="@drawable/skype_32" />
+
+                </LinearLayout>
+
+
+                <Button
+                    android:id="@+id/student_edit_button"
+                    style="@style/buttonTextAndBackground"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="25sp"
+                    android:text="@string/edit" />
 
             </LinearLayout>
 
-
-            <Button
-                android:id="@+id/student_edit_button"
-                style="@style/buttonTextAndBackground"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="25sp"
-                android:text="@string/edit" />
-
-        </LinearLayout>
+        </android.support.constraint.ConstraintLayout>
 
     </ScrollView>
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>

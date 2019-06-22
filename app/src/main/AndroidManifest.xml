@@ -73,7 +73,8 @@
 
         <activity
             android:name=".activities.CreateProjectActivity"
-            android:label="@string/create_project" />
+            android:label="@string/create_project"
+            android:theme="@style/AppTheme.NoActionBar"/>
 
         <activity
             android:name=".activities.SelectUniversityActivity"

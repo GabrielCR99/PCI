@@ -99,15 +99,12 @@ public class SignInActivity extends BaseActivity {
         }
         showProgressDialog();
         auth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            startMain();
-                        } else {
-                            hideProgressDialog();
-                            showToast(getString(R.string.auth_failed));
-                        }
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        startMain();
+                    } else {
+                        hideProgressDialog();
+                        showToast(getString(R.string.auth_failed));
                     }
                 });
     }

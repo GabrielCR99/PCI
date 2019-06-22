@@ -1,36 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <View
-        android:id="@+id/view"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="100sp"
-        android:background="@color/colorPrimary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="wrap_content">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/professor_photo"
-        android:layout_width="128dp"
-        android:layout_height="128dp"
-        android:layout_gravity="center"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="8dp"
-        android:src="@mipmap/ic_launcher_round"
-        app:civ_border_width="3dp"
-        app:civ_border_color="@color/colorWhite"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/view" />
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="100sp"
+            android:background="@color/colorPrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/professor_photo"
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            android:layout_alignStart="@+id/view"
+            android:layout_alignEnd="@+id/view"
+            android:layout_gravity="center"
+            android:layout_marginStart="142dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="141dp"
+            android:src="@mipmap/ic_launcher_round"
+            app:civ_border_color="@color/colorWhite"
+            app:civ_border_width="3dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/view" />
+
+    </RelativeLayout>
 
     <ScrollView
         android:id="@+id/scrollView4"
@@ -162,4 +169,4 @@
 
     </ScrollView>
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>

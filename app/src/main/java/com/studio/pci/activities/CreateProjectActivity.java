@@ -1,172 +1,125 @@
 package com.studio.pci.activities;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.support.annotation.Nullable;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.Toast;
-import android.widget.ViewFlipper;
+import android.widget.ImageView;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.studio.pci.R;
-import com.studio.pci.adapters.SelectedUniversitiesAdapter;
-import com.studio.pci.adapters.UniversitiesAdapter;
-import com.studio.pci.models.University;
+import com.studio.pci.adapters.ProjectPagerAdapter;
+import com.studio.pci.fragments.projectFragments.CustomFragment;
+import com.studio.pci.fragments.projectFragments.FifthPartFragment;
+import com.studio.pci.fragments.projectFragments.FirstPartFragment;
+import com.studio.pci.fragments.projectFragments.FourthPartFragment;
+import com.studio.pci.fragments.projectFragments.SecondPartFragment;
+import com.studio.pci.fragments.projectFragments.ThirdPartFragment;
+import com.studio.pci.models.Project;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
+import github.chenupt.springindicator.SpringIndicator;
 
-import static com.studio.pci.R.drawable.ic_chevron_right_black_24dp;
+public class CreateProjectActivity extends AppCompatActivity implements CustomFragment.NewProjectListener {
 
-public class CreateProjectActivity extends AppCompatActivity
-        implements  UniversitiesAdapter.RecyclerViewClickListener,
-                    SelectedUniversitiesAdapter.RecyclerViewClickListener{
+    @BindView(R.id.spring_indicator)
+    SpringIndicator indicator;
 
-    // LOAD UNIVERSITIES
-    private List<University> universities;
-    private UniversitiesAdapter adapter;
-
-    //FILTER SELECTED UNIVERSITIES
-    private List<University> filteredUniversities;
-    private SelectedUniversitiesAdapter filteredAdapter;
-
-    @BindView(R.id.recycler_universities)
-    RecyclerView recyclerUniversities;
-
-    @BindView(R.id.recycler_selected_universities)
-    RecyclerView recyclerSelected;
-
-    @BindView(R.id.flipper_project)
-    ViewFlipper viewFlipper;
-
-    @BindView(R.id.linear_create_part1)
-    LinearLayout linearLayout1;
-
-    @BindView(R.id.linear_create_part5)
-    LinearLayout linearLayout5;
+    @BindView(R.id.newproject_view_pager)
+    ViewPager viewPager;
 
     @BindView(R.id.fab_next)
-    FloatingActionButton fabNext;
+    ImageView buttonNext;
 
     @BindView(R.id.fab_previous)
-    FloatingActionButton fabPrevious;
+    ImageView buttonPrevious;
+
+    @BindView(R.id.toolbar_project)
+    Toolbar toolbar;
+
+    private Project project;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-       super.onCreate(savedInstanceState);
-       setContentView(R.layout.activity_project_create);
-       ButterKnife.bind(this);
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_project_create);
+        ButterKnife.bind(this);
 
-       checkCurrentView();
-
-       setUniversities();
-       setRecyclerView();
+        setComponents();
+        setClicks();
     }
 
-    // PREVIOUS BUTTON
-    @OnClick(R.id.fab_previous)
-    public void previousView(){
-        setViewFlipperAnimation();
-        viewFlipper.showPrevious();
-        checkCurrentView();
-    }
-
-    private void setViewFlipperAnimation() {
-        viewFlipper.setInAnimation(this, R.anim.slide_in_right);
-        viewFlipper.setOutAnimation(this, R.anim.slide_out_left);
-    }
-
-    // NEXT BUTTON
-    @OnClick(R.id.fab_next)
-    public void nextView(){
-        setViewFlipperAnimation();
-        checkCurrentView();
-        if(checkCurrentView()){
-            viewFlipper.showNext();
-            checkCurrentView();
-        }else{
-            // TODO CREATE PROJECT
-        }
-    }
-
-    // INFORMATION VIEW CONTROL
-    public boolean checkCurrentView(){
-        if(viewFlipper.getCurrentView().equals(linearLayout1)){
-            fabPrevious.hide();
-            fabNext.setImageDrawable(getResources().getDrawable(ic_chevron_right_black_24dp));
-            return true;
-        }
-        if (viewFlipper.getCurrentView().equals(linearLayout5)){
-            fabPrevious.show();
-            fabNext.setImageDrawable(getResources().getDrawable(R.drawable.ic_send_black_24dp));
+    private void setClicks() {
+        buttonNext.setOnClickListener(v -> checkItemPosition(true));
+        buttonPrevious.setOnClickListener(v -> checkItemPosition(false));
+        indicator.setOnTabClickListener(position -> {
+            viewPager.setCurrentItem(position);
+            setButtonVisibility();
             return false;
-        }
-        fabPrevious.show();
-        fabNext.setImageDrawable(getResources().getDrawable(ic_chevron_right_black_24dp));
-        return true;
-    }
-
-    //LOAD DATA
-    private void setUniversities(){
-        universities = new ArrayList<>();
-        filteredUniversities = new ArrayList<>();
-
-        DatabaseReference db = FirebaseDatabase.getInstance().getReference("universities");
-        db.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                universities.clear();
-                for(DataSnapshot ds : dataSnapshot.getChildren()){
-                    University university = ds.getValue(University.class);
-                    universities.add(university);
-                    adapter.notifyDataSetChanged();
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.e("DATABASE_UNIVERSITY",databaseError.getMessage());
-            }
         });
     }
 
-    // CONFIG RECYCLERS
-    private void setRecyclerView() {
-        recyclerUniversities.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new UniversitiesAdapter(universities,this,this);
-        recyclerUniversities.setAdapter(adapter);
+    private void setComponents() {
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        toolbar.setNavigationOnClickListener(v -> finish());
 
-        recyclerSelected.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
-        filteredAdapter = new SelectedUniversitiesAdapter(filteredUniversities,this,this);
-        recyclerSelected.setAdapter(filteredAdapter);
+        project = new Project();
+        ProjectPagerAdapter adapter = new ProjectPagerAdapter(getSupportFragmentManager());
+
+        FirstPartFragment firstPartFragment = new FirstPartFragment(this, this);
+        SecondPartFragment secondPartFragment = new SecondPartFragment(this, this);
+        ThirdPartFragment thirdPartFragment = new ThirdPartFragment(this, this);
+        FourthPartFragment fourthPartFragment = new FourthPartFragment(this, this);
+        FifthPartFragment fifthPartFragment = new FifthPartFragment(this, this);
+
+        adapter.addFragment(firstPartFragment);
+        adapter.addFragment(secondPartFragment);
+        adapter.addFragment(thirdPartFragment);
+        adapter.addFragment(fourthPartFragment);
+        adapter.addFragment(fifthPartFragment);
+
+        viewPager.setAdapter(adapter);
+        indicator.setViewPager(viewPager);
+
+        for (int i = 0; i < 5; i++)
+            if (indicator.getTabs().get(i) != null)
+                indicator.getTabs().get(i).setText(String.valueOf(i + 1));
     }
 
-    // POPULATE SELECTED UNIVERSITY
-    @Override
-    public void recyclerViewListClicked(View v, int position) {
-        filteredUniversities.add(universities.get(position));
-        filteredAdapter.notifyDataSetChanged();
-        // TODO REMOVE SELECTED UNIVERSITY
+    private int getItem(int i) {
+        return viewPager.getCurrentItem() + i;
     }
 
-    // REMOVE SELECTED UNIVERSITY
+    private void checkItemPosition(boolean dir) {
+        if (viewPager.getCurrentItem() > 0 || viewPager.getCurrentItem() < 5) {
+            if (dir) viewPager.setCurrentItem(getItem(+1), true);
+            else viewPager.setCurrentItem(getItem(-1), true);
+            setButtonVisibility();
+        }
+    }
+
+    private void setButtonVisibility() {
+        if (viewPager.getCurrentItem() == 0) {
+            buttonPrevious.setVisibility(View.INVISIBLE);
+            buttonNext.setVisibility(View.VISIBLE);
+        } else if (viewPager.getCurrentItem() == 4) {
+            buttonNext.setVisibility(View.INVISIBLE);
+            buttonPrevious.setVisibility(View.VISIBLE);
+        } else {
+            buttonPrevious.setVisibility(View.VISIBLE);
+            buttonNext.setVisibility(View.VISIBLE);
+        }
+    }
+
     @Override
-    public void recyclerRoundItemClicked(View v, int position) {
-        filteredUniversities.remove(position);
-        filteredAdapter.notifyDataSetChanged();
-        // TODO ADD UNIVERSITY AGAIN
+    public void onPartFilled(int part, Bundle bundle) {
+
     }
 }

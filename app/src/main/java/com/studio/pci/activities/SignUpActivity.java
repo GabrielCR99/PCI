@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.view.View;
+import android.view.View.OnFocusChangeListener;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -72,10 +73,9 @@ public class SignUpActivity extends BaseActivity {
 
         boolean resultValidate = true;
 
-        nameLayout.setError(null);
-        emailLayout.setError(null);
-        passwordLayout.setError(null);
-        confirmPasswordLayout.setError(null);
+        configLayouts();
+
+        removeLayoutsErrors();
 
         if (FormHelper.isEmpty(name)) {
             nameLayout.setError(getString(R.string.error_name_empty));
@@ -109,6 +109,24 @@ public class SignUpActivity extends BaseActivity {
         return resultValidate;
     }
 
+    private void configLayouts() {
+        nameLayout.setErrorEnabled(true);
+        emailLayout.setErrorEnabled(true);
+        passwordLayout.setErrorEnabled(true);
+        nameLayout.setErrorEnabled(true);
+        confirmPasswordLayout.setError(null);
+        emailLayout.setError(null);
+        passwordLayout.setError(null);
+        confirmPasswordLayout.setError(null);
+    }
+
+    private void removeLayoutsErrors() {
+        removeError(nameLayout);
+        removeError(emailLayout);
+        removeError(passwordLayout);
+        removeError(confirmPasswordLayout);
+    }
+
     private void createAccount(final String email, String password) {
         if (!validateForm(nameField.getText().toString(), email, password,
                 confirmPasswordField.getText().toString())) {
@@ -116,40 +134,41 @@ public class SignUpActivity extends BaseActivity {
         }
         showProgressDialog();
         firebaseAuth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if (task.isSuccessful()) {
-                        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-                        String id = firebaseUser.getUid();
-                        String type = spinner.getSelectedItem().toString();
-                        User user = new User(id, type);
-                        UserDAO userDAO = new UserDAO();
-                        userDAO.create(id, user);
-                        hideProgressDialog();
-                        if (type.equals(getString(R.string.student))) {
-                            Student student = new Student(id, nameField.getText().toString(),
-                                    emailField.getText().toString(), true);
-                            StudentDAO studentDAO = new StudentDAO();
-                            studentDAO.create(id, student);
-                        } else if(type.equals(getString(R.string.professor))){
-                            Professor professor = new Professor(id, nameField.getText().toString(),
-                                    emailField.getText().toString(), true);
-                            ProfessorDAO professorDAO = new ProfessorDAO();
-                            professorDAO.create(id, professor);
-                        }
-                        hideProgressDialog();
-                        Toast.makeText(SignUpActivity.this, getString(R.string.acc_success),
-                                Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(SignUpActivity.this, SignInActivity.class));
-                    } else {
-                        showToast(getString(R.string.auth_failed));
-                        hideProgressDialog();
+            .addOnCompleteListener(this, task -> {
+                if (task.isSuccessful()) {
+                    FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+                    String id = firebaseUser.getUid();
+                    String type = spinner.getSelectedItem().toString();
+                    createUser(id, type);
+                    hideProgressDialog();
+                    if (type.equals(getString(R.string.student))) {
+                        Student student = new Student(id, nameField.getText().toString(),
+                                emailField.getText().toString(), true);
+                        StudentDAO studentDAO = new StudentDAO();
+                        studentDAO.create(id, student);
+                    } else if(type.equals(getString(R.string.professor))){
+                        Professor professor = new Professor(id, nameField.getText().toString(),
+                                emailField.getText().toString(), true);
+                        ProfessorDAO professorDAO = new ProfessorDAO();
+                        professorDAO.create(id, professor);
                     }
+                    hideProgressDialog();
+                    Toast.makeText(SignUpActivity.this, getString(R.string.acc_success),
+                            Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(SignUpActivity.this, SignInActivity.class));
+                } else {
+                    showToast(getString(R.string.auth_failed));
+                    hideProgressDialog();
                 }
             });}
 
-        @OnClick(R.id.sign_up_button)
+    private void createUser(String id, String type) {
+        User user = new User(id, type);
+        UserDAO userDAO = new UserDAO();
+        userDAO.create(id, user);
+    }
+
+    @OnClick(R.id.sign_up_button)
         public void signInOnClick (View view){
             String email = emailField.getText().toString();
             String password = passwordField.getText().toString();
@@ -160,4 +179,10 @@ public class SignUpActivity extends BaseActivity {
         public void goToSignIn (View view){
             finish();
         }
+
+    private void removeError(TextInputLayout inputLayout){
+        inputLayout.setOnFocusChangeListener((v, hasFocus) -> {
+            if(inputLayout.getError()!=null && hasFocus) inputLayout.setError(null);
+        });
+    }
 }

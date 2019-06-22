@@ -57,8 +57,12 @@ public class SelectUniversityActivity extends AppCompatActivity implements
     @OnClick(R.id.fab_confirm)
     public void onConfirmed(){
         Intent returnIntent = new Intent();
-        returnIntent.putExtra("UNIVERSITY",selectedUniversity);
-        setResult(Activity.RESULT_OK,returnIntent);
+        if(selectedUniversity.getId() != null){
+            returnIntent.putExtra("UNIVERSITY",selectedUniversity);
+            setResult(Activity.RESULT_OK,returnIntent);
+        }else {
+            setResult(Activity.RESULT_CANCELED,returnIntent);
+        }
         finish();
     }
 
@@ -140,12 +144,7 @@ public class SelectUniversityActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onBackPressed() {
-        finish();
-    }
-
-    @Override
-    public void recyclerViewListClicked(View v, int position) {
+    public void recyclerViewListClicked(View v, int position, String TAG) {
         selectedUniversity = universities.get(position);
         unNameTextView.setText(selectedUniversity.getName());
         unDeptTextView.setText(selectedUniversity.getDepartment());

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -14,42 +15,50 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <View
-        android:id="@+id/view"
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="100sp"
-        android:background="@drawable/splash_color"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_layout" />
+        android:layout_height="wrap_content"
+        android:gravity="center">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/student_photo"
-        android:layout_width="128dp"
-        android:layout_height="128dp"
-        android:layout_gravity="center"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="8dp"
-        android:src="@mipmap/ic_launcher_round"
-        app:civ_border_color="@color/colorWhite"
-        app:civ_border_width="3dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/view" />
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="100sp"
+            android:background="@color/colorPrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/student_photo"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/student_edit"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_alignEnd="@id/student_photo"
-        android:layout_alignBottom="@id/student_photo"
-        android:src="@drawable/ic_edit_black_24dp"
-        app:civ_border_width="3dp"
-        app:civ_border_color="@color/colorWhite"
-        app:civ_circle_background_color="@color/colorPrimaryDark"
-        app:layout_constraintBottom_toBottomOf="@+id/student_photo"
-        app:layout_constraintEnd_toEndOf="@+id/student_photo" />
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/student_photo"
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            android:layout_alignStart="@+id/view"
+            android:layout_alignEnd="@+id/view"
+            android:layout_gravity="center"
+            android:layout_marginTop="40dp"
+            android:src="@mipmap/ic_launcher_round"
+            app:civ_border_color="@color/colorWhite"
+            app:civ_border_width="3dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/view" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/student_edit"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignEnd="@id/student_photo"
+            android:layout_alignBottom="@id/student_photo"
+            android:src="@drawable/ic_edit_black_24dp"
+            app:civ_border_color="@color/colorWhite"
+            app:civ_border_width="3dp"
+            app:civ_circle_background_color="@color/colorPrimaryDark"
+            app:layout_constraintBottom_toBottomOf="@+id/student_photo"
+            app:layout_constraintEnd_toEndOf="@+id/student_photo" />
+
+    </android.support.constraint.ConstraintLayout>
 
         <ScrollView
             android:id="@+id/scrollView_edit_student"
@@ -60,21 +69,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/student_photo">
 
-            <android.support.constraint.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/constraint">
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="20sp"
                     android:layout_marginEnd="8dp"
-                    android:orientation="vertical"
-                    app:layout_constraintEnd_toEndOf="@id/constraint"
-                    app:layout_constraintStart_toStartOf="@+id/constraint"
-                    app:layout_constraintTop_toTopOf="@id/constraint"
-                    app:layout_constraintBottom_toBottomOf="@id/constraint">
+                    android:orientation="vertical">
 
                     <android.support.design.widget.TextInputLayout
                         android:id="@+id/nameInputLayout"
@@ -196,9 +196,6 @@
 
                 </LinearLayout>
 
-
-            </android.support.constraint.ConstraintLayout>
-
         </ScrollView>
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>

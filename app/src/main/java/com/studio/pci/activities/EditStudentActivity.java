@@ -18,15 +18,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,7 +31,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 import com.studio.pci.R;
 import com.studio.pci.models.Student;
@@ -48,7 +44,6 @@ import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Locale;
 
 import butterknife.BindView;
@@ -120,16 +115,13 @@ public class EditStudentActivity extends AppCompatActivity{
         if(!student.getUniversity().isEmpty()) getUniversityName(student.getUniversity());
         else universityEditText.setText(getString(R.string.null_info));
 
-        universityEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                hideKeyboard(universityEditText);
-                if(hasFocus) {
-                    Intent newUniversity = new Intent(EditStudentActivity.this, SelectUniversityActivity.class);
-                    newUniversity.putExtra("UID",student.getUniversity());
-                    universityEditText.clearFocus();
-                    startActivityForResult(newUniversity,123);
-                }
+        universityEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            hideKeyboard(universityEditText);
+            if(hasFocus) {
+                Intent newUniversity = new Intent(EditStudentActivity.this, SelectUniversityActivity.class);
+                newUniversity.putExtra("UID",student.getUniversity());
+                universityEditText.clearFocus();
+                startActivityForResult(newUniversity,123);
             }
         });
     }
@@ -199,27 +191,16 @@ public class EditStudentActivity extends AppCompatActivity{
                 String ext = path.substring(path.lastIndexOf("."));
                 final StorageReference storage = storageReference.child(student.getId()+"."+ext);
                 storage.putFile(file)
-                        .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                            @Override
-                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                storage.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                    @Override
-                                    public void onSuccess(Uri uri) {
-                                        Upload upload = new Upload(uri.toString());
-                                        databaseReference.child(student.getId()).setValue(upload);
-                                        finish();
-                                    }
-                                });
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                AlertDialog.Builder builder = new AlertDialog.Builder(EditStudentActivity.this);
-                                builder.setTitle(getString(R.string.upload_photo_fail));
-                                builder.setMessage(e.getMessage());
-                                builder.create().show();
-                            }
+                        .addOnSuccessListener(taskSnapshot -> storage.getDownloadUrl().addOnSuccessListener(uri -> {
+                            Upload upload = new Upload(uri.toString());
+                            databaseReference.child(student.getId()).setValue(upload);
+                            finish();
+                        }))
+                        .addOnFailureListener(e -> {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(EditStudentActivity.this);
+                            builder.setTitle(getString(R.string.upload_photo_fail));
+                            builder.setMessage(e.getMessage());
+                            builder.create().show();
                         });
             }
         }

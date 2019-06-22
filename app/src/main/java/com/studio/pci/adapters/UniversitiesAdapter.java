@@ -22,30 +22,46 @@ public class UniversitiesAdapter extends RecyclerView.Adapter<UniversitiesAdapte
 
     private List<University> universities;
     private Context context;
-    private static  RecyclerViewClickListener itemListener;
+    private RecyclerViewClickListener itemListener;
+    private String TAG;
 
     public interface RecyclerViewClickListener {
-        void recyclerViewListClicked(View v, int position);
+        void recyclerViewListClicked(View v, int position, String TAG);
     }
 
-    public UniversitiesAdapter(List<University> universities, Context context, RecyclerViewClickListener itemListener) {
+    public UniversitiesAdapter(List<University> universities,
+                               Context context, RecyclerViewClickListener itemListener) {
         this.universities = universities;
         this.context = context;
-        UniversitiesAdapter.itemListener = itemListener;
+        this.itemListener = itemListener;
+    }
+
+    public UniversitiesAdapter(List<University> universities,
+                               Context context, RecyclerViewClickListener itemListener, String TAG) {
+        this.universities = universities;
+        this.context = context;
+        this.itemListener = itemListener;
+        this.TAG = TAG;
     }
 
     @NonNull
     @Override
     public UniversityViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View itemView = LayoutInflater.from(context).inflate(R.layout.card_project, viewGroup, false);
+        View itemView;
+        if(!TAG.equals("FILTER"))itemView = LayoutInflater.from(context).inflate(R.layout.card_round, viewGroup, false);
+        else itemView = LayoutInflater.from(context).inflate(R.layout.card_project, viewGroup, false);
         return new UniversityViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull UniversityViewHolder viewHolder,int i) {
         final University university = universities.get(i);
-            viewHolder.nameTextView.setText(university.getName());
-            viewHolder.infoTextView.setText(university.getDepartment());
+            if(!TAG.equals("FILTER")) viewHolder.nameTextView.setText(university.getInitials());
+            else {
+                viewHolder.nameTextView.setText(university.getName());
+                viewHolder.infoTextView.setText(university.getDepartment());
+            }
+            viewHolder.itemView.setOnClickListener(v -> itemListener.recyclerViewListClicked(v, i,TAG));
     }
 
     @Override
@@ -53,7 +69,7 @@ public class UniversitiesAdapter extends RecyclerView.Adapter<UniversitiesAdapte
         return universities.size();
     }
 
-    static class UniversityViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    static class UniversityViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.card_title)
         TextView nameTextView;
@@ -64,11 +80,6 @@ public class UniversitiesAdapter extends RecyclerView.Adapter<UniversitiesAdapte
         UniversityViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-            itemView.setOnClickListener(this);
-        }
-        @Override
-        public void onClick(View v) {
-            itemListener.recyclerViewListClicked(v, this.getAdapterPosition());
         }
     }
 }
