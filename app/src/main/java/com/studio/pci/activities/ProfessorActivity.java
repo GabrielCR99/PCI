@@ -5,9 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -28,8 +28,6 @@ import com.squareup.picasso.Picasso;
 import com.studio.pci.R;
 import com.studio.pci.models.Professor;
 import com.studio.pci.models.Upload;
-
-import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -60,11 +58,11 @@ public class ProfessorActivity extends AppCompatActivity {
     @BindView(R.id.professor_bio)
     TextView bio;
 
-    @BindView(R.id.professor_layout_button)
-    LinearLayout linearLayout;
-
     @BindView(R.id.professor_photo)
     ImageView imageView;
+
+    @BindView(R.id.professor_edit_button)
+    Button button;
 
     private Professor professor;
     private String userID;
@@ -72,29 +70,9 @@ public class ProfessorActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dashboard_professor);
+        setContentView(R.layout.dashboard_professor);
         ButterKnife.bind(this);
-
         getInfo();
-    }
-
-    private void addButton() {
-        Button button = new Button(this);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ProfessorActivity.this,EditProfessorActivity.class);
-                intent.putExtra(getString(R.string.professor_info), professor);
-                startActivity(intent);
-            }
-        });
-        button.setText(getString(R.string.edit));
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        params.bottomMargin = 25;
-        button.setLayoutParams(params);
-        button.setBackground(getResources().getDrawable(R.color.buttonColor));
-        button.setTextColor(getResources().getColor(R.color.colorWhite));
-        linearLayout.addView(button);
     }
 
     private void setProfileImage() {
@@ -117,7 +95,7 @@ public class ProfessorActivity extends AppCompatActivity {
     private void getInfo() {
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("professors");
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if(user != null && user.getUid().equals(userID)) addButton();
+        if(user != null && user.getUid().equals(userID)) button.setVisibility(View.VISIBLE);
 
         Intent intent = getIntent();
         userID = intent.getStringExtra("UID");
@@ -148,24 +126,18 @@ public class ProfessorActivity extends AppCompatActivity {
 
                     if(!professor.getFacebookUrl().isEmpty()) {
                         facebook.setEnabled(true);
-                        facebook.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                Intent intent = getFBIntent(ProfessorActivity.this,professor.getFacebookUrl());
-                                if(intent!=null) startActivity(intent);
-                            }
+                        facebook.setOnClickListener(v -> {
+                            Intent intent1 = getFBIntent(ProfessorActivity.this,professor.getFacebookUrl());
+                            if(intent1 !=null) startActivity(intent1);
                         });
                     }
                     else { facebook.setEnabled(false); }
 
                     if(!professor.getSkypeUrl().isEmpty()) {
                         skype.setEnabled(true);
-                        skype.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                Intent intent = getSkypeIntent(professor.getSkypeUrl());
-                                if(intent!=null) startActivity(intent);
-                            }
+                        skype.setOnClickListener(v -> {
+                            Intent intent12 = getSkypeIntent(professor.getSkypeUrl());
+                            if(intent12 !=null) startActivity(intent12);
                         });
                     }
                     else skype.setEnabled(false);

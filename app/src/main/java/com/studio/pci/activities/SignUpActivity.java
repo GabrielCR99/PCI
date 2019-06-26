@@ -2,25 +2,19 @@ package com.studio.pci.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.TextInputLayout;
+
+import com.google.android.material.textfield.TextInputLayout;
 import android.view.View;
-import android.view.View.OnFocusChangeListener;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.studio.pci.R;
-import com.studio.pci.models.Coordinator;
 import com.studio.pci.models.Professor;
 import com.studio.pci.models.Student;
 import com.studio.pci.models.User;
-import com.studio.pci.providers.CoordinatorDAO;
 import com.studio.pci.providers.ProfessorDAO;
 import com.studio.pci.providers.StudentDAO;
 import com.studio.pci.providers.UserDAO;

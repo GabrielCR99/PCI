@@ -5,6 +5,7 @@
     <color name="colorAccent">#332C2C</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBlack">#000000</color>
+    <color name="colorRed">#A71818</color>
     <color name="buttonColor">#008577</color>
     <color name="editTextColor">#009688</color>
     <color name="appColor">#ecf0f1</color>

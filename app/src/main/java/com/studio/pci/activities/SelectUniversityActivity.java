@@ -4,18 +4,16 @@ import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.SearchView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -23,12 +21,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.studio.pci.R;
-import com.studio.pci.adapters.StudentsAdapter;
 import com.studio.pci.adapters.UniversitiesAdapter;
-import com.studio.pci.models.Student;
+import com.studio.pci.listeners.RecyclerViewClickListener;
 import com.studio.pci.models.University;
-import com.studio.pci.models.Upload;
-import com.studio.pci.providers.StudentDAO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +33,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class SelectUniversityActivity extends AppCompatActivity implements
-        UniversitiesAdapter.RecyclerViewClickListener {
+        RecyclerViewClickListener {
 
     private List<University> universities;
     private UniversitiesAdapter adapter;

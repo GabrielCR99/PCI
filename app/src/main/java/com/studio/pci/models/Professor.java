@@ -17,7 +17,7 @@ public class Professor implements Serializable {
     private String facebookUrl;
     private String skypeUrl;
     private String bio;
-    private List<University> universityList;
+    private List<String> universityList;
     private boolean enable;
 
     public Professor(String id, String name, String email, boolean enable) {
@@ -32,7 +32,7 @@ public class Professor implements Serializable {
         skypeUrl = "";
         bio = "";
         universityList = new ArrayList<>();
-        universityList.add(new University());
+        universityList.add(" ");
         this.enable = enable;
     }
 
@@ -41,7 +41,7 @@ public class Professor implements Serializable {
 
     public Professor(String id, String name, String gender, String birthDate, String picture,
                      String degree, String email, String facebookUrl, String skypeUrl, String bio,
-                     List<University> universityList, boolean enable) {
+                     List<String> universityList, boolean enable) {
         this.id = id;
         this.name = name;
         this.gender = gender;
@@ -162,11 +162,11 @@ public class Professor implements Serializable {
         this.skypeUrl = skypeUrl;
     }
 
-    public List<University> getUniversityList() {
+    public List<String> getUniversityList() {
         return universityList;
     }
 
-    public void setUniversityList(List<University> universityList) {
+    public void setUniversityList(List<String> universityList) {
         this.universityList = universityList;
     }
 

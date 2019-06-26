@@ -6,17 +6,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
             android:id="@+id/linearLayout2"
@@ -27,7 +19,7 @@
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbar_layout" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/student_photo"
@@ -128,7 +120,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_margin="20dp">
 
                 <ImageButton
                     android:id="@+id/student_face"
@@ -147,15 +140,16 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/student_layout_button"
+            <Button
+                android:id="@+id/student_edit_button"
+                style="@style/buttonTextAndBackground"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="20sp"
-                android:orientation="vertical" />
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="25sp"
+                android:text="@string/edit" />
 
         </LinearLayout>
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>

@@ -5,19 +5,20 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ExpandableListView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -27,8 +28,15 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 import com.studio.pci.R;
 import com.studio.pci.activities.EditProfessorActivity;
+import com.studio.pci.adapters.CustomExpandableListAdapter;
 import com.studio.pci.models.Professor;
+import com.studio.pci.models.University;
 import com.studio.pci.models.Upload;
+import com.studio.pci.utils.FirebaseHelper;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -65,6 +73,13 @@ public class ProfessorFragment extends Fragment {
     @BindView(R.id.professor_edit_button)
     Button button;
 
+    @BindView(R.id.list_universities)
+    ExpandableListView universitiesListView;
+
+    List<String> expandableListTitle;
+    HashMap<String, List<University>> expandableListDetail;
+    CustomExpandableListAdapter listAdapter;
+
     private Professor professor;
     private DatabaseReference databaseReference;
     private String userID;
@@ -79,20 +94,24 @@ public class ProfessorFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_professor_dashboard, container, false);
+        View view = inflater.inflate(R.layout.dashboard_professor, container, false);
         ButterKnife.bind(this, view);
+        setComponents();
+        getInfo();
+        return view;
+    }
 
+    private void setComponents() {
         Bundle arguments = getArguments();
         userID = arguments.getString("USERID");
-        int type = arguments.getInt("USERTYPE",0);
+        int type = arguments.getInt("USERTYPE", 0);
         String path;
-        if(type==2) path = "professors";
+        if (type == 2) path = "professors";
         else path = "coordinators";
         databaseReference = FirebaseDatabase.getInstance().getReference(path);
-
-        getInfo();
-
-        return view;
+        button.setVisibility(View.VISIBLE);
+        expandableListDetail = new HashMap<>();
+        expandableListTitle = new ArrayList<>();
     }
 
     private void setProfileImage() {
@@ -100,14 +119,15 @@ public class ProfessorFragment extends Fragment {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()) {
+                if (dataSnapshot.exists()) {
                     Upload upload = dataSnapshot.getValue(Upload.class);
                     Picasso.get().load(upload.getPhoto()).placeholder(R.drawable.ic_launcher_background).into(imageView);
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(context,databaseError.getMessage(),Toast.LENGTH_LONG).show();
+                Toast.makeText(context, databaseError.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -117,56 +137,94 @@ public class ProfessorFragment extends Fragment {
         databaseReference.child(userID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
+                if (dataSnapshot.exists()) {
                     professor = dataSnapshot.getValue(Professor.class);
-                    if(!professor.getName().isEmpty()) name.setText(professor.getName());
+                    if (!professor.getName().isEmpty()) name.setText(professor.getName());
                     else name.setText(getString(R.string.null_info));
 
-                    if(!professor.getGender().isEmpty()) gender.setText(professor.getGender());
+                    if (!professor.getGender().isEmpty()) gender.setText(professor.getGender());
                     else gender.setText(getString(R.string.null_info));
 
-                    if(!professor.getBirthDate().isEmpty()) birthDate.setText(professor.getBirthDate());
+                    if (!professor.getBirthDate().isEmpty())
+                        birthDate.setText(professor.getBirthDate());
                     else birthDate.setText(getString(R.string.null_info));
 
-                    if(!professor.getEmail().isEmpty()) email.setText(professor.getEmail());
+                    if (!professor.getEmail().isEmpty()) email.setText(professor.getEmail());
                     else email.setText(getString(R.string.null_info));
 
-                    if(!professor.getDegree().isEmpty()) degree.setText(professor.getDegree());
+                    if (!professor.getDegree().isEmpty()) degree.setText(professor.getDegree());
                     else degree.setText(getString(R.string.null_info));
 
-                    if(!professor.getBio().isEmpty()) bio.setText(professor.getBio());
+                    if (!professor.getBio().isEmpty()) bio.setText(professor.getBio());
                     else bio.setText(getString(R.string.null_info));
 
-                    if(!professor.getFacebookUrl().isEmpty()) {
+                    if (!professor.getFacebookUrl().isEmpty()) {
                         facebook.setEnabled(true);
                         facebook.setOnClickListener(v -> {
-                            Intent intent = getFBIntent(context,professor.getFacebookUrl());
-                            if(intent!=null) startActivity(intent);
+                            Intent intent = getFBIntent(context, professor.getFacebookUrl());
+                            if (intent != null) startActivity(intent);
                         });
+                    } else {
+                        facebook.setEnabled(false);
                     }
-                    else { facebook.setEnabled(false); }
 
-                    if(!professor.getSkypeUrl().isEmpty()) {
+                    if (!professor.getSkypeUrl().isEmpty()) {
                         skype.setEnabled(true);
                         skype.setOnClickListener(v -> {
                             Intent intent = getSkypeIntent(professor.getSkypeUrl());
-                            if(intent!=null) startActivity(intent);
+                            if (intent != null) startActivity(intent);
                         });
+                    } else skype.setEnabled(false);
+
+                    if (professor.getUniversityList().size() > 0) {
+                        expandableListDetail = getUniversities(professor.getUniversityList());
+                        expandableListTitle.add(getString(R.string.universities));
+                        listAdapter = new CustomExpandableListAdapter(context, expandableListTitle, expandableListDetail);
+                        universitiesListView.setAdapter(listAdapter);
                     }
-                    else skype.setEnabled(false);
 
                     button.setOnClickListener(v -> {
                         Intent intent = new Intent(context, EditProfessorActivity.class);
-                        intent.putExtra(getString(R.string.professor_info),professor);
+                        intent.putExtra(getString(R.string.professor_info), professor);
                         startActivity(intent);
                     });
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Log.v("USER_FIREBASE", databaseError.getMessage());
             }
         });
+    }
+
+    private HashMap<String, List<University>> getUniversities(List<String> universityIdList) {
+        HashMap<String, List<University>> hashMapUniversity = new HashMap<>();
+        List<University> universities = new ArrayList<>();
+
+        ValueEventListener valueEventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    University university = ds.getValue(University.class);
+                    if (universityIdList.contains(university.getId()))
+                        universities.add(university);
+
+                }
+                hashMapUniversity.put("Universidades", universities);
+                listAdapter.notifyDataSetChanged();
+                Log.v("UNIVERSITIES", universities.toString());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.e("UNIVERSITIES_PROF_ERROR", databaseError.getMessage());
+            }
+        };
+
+        FirebaseHelper.getUniversities(valueEventListener);
+
+        return hashMapUniversity;
     }
 
     public Intent getFBIntent(Context context, String facebookId) {
@@ -176,8 +234,7 @@ public class ProfessorFragment extends Fragment {
 
             String facebookScheme = "fb://profile/" + facebookId;
             return new Intent(Intent.ACTION_VIEW, Uri.parse(facebookScheme));
-        }
-        catch(Exception e) {
+        } catch (Exception e) {
             // Cache and Open a url in browser
             String facebookProfileUri = "https://www.facebook.com/" + facebookId;
             return new Intent(Intent.ACTION_VIEW, Uri.parse(facebookProfileUri));

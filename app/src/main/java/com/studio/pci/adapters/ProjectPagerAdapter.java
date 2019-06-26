@@ -1,8 +1,7 @@
 package com.studio.pci.adapters;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.studio.pci.fragments.projectFragments.CustomFragment;
 
@@ -17,7 +16,7 @@ public class ProjectPagerAdapter extends FragmentPagerAdapter {
     }
 
     @Override
-    public Fragment getItem(int position) { return fragmentList.get(position); }
+    public CustomFragment getItem(int position) { return fragmentList.get(position); }
 
     @Override
     public int getCount() {
@@ -27,4 +26,5 @@ public class ProjectPagerAdapter extends FragmentPagerAdapter {
     public void addFragment(CustomFragment fragment) {
         fragmentList.add(fragment);
     }
+
 }

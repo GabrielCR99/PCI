@@ -22,7 +22,7 @@
             android:text="@string/project"
             android:textSize="24sp"/>
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/titleInputLayout"
             style="@style/inputLayout"
             android:layout_width="match_parent"
@@ -30,16 +30,16 @@
             android:layout_marginBottom="16dp"
             android:textColorHint="@color/colorBlack">
 
-            <android.support.design.widget.TextInputEditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/project_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/project_title"
                 android:inputType="textCapWords" />
 
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/descInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -56,9 +56,9 @@
                 android:lines="3"
                 tools:ignore="Autofill" />
 
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/startDateInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -73,9 +73,9 @@
                 android:inputType="date"
                 tools:ignore="Autofill" />
 
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/endDateInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -90,7 +90,7 @@
                 android:inputType="date"
                 tools:ignore="Autofill" />
 
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
 
     </LinearLayout>

@@ -1,15 +1,16 @@
 package com.studio.pci.adapters;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.studio.pci.R;
+import com.studio.pci.listeners.RecyclerViewClickListener;
 import com.studio.pci.models.University;
 
 import java.util.List;
@@ -25,15 +26,12 @@ public class UniversitiesAdapter extends RecyclerView.Adapter<UniversitiesAdapte
     private RecyclerViewClickListener itemListener;
     private String TAG;
 
-    public interface RecyclerViewClickListener {
-        void recyclerViewListClicked(View v, int position, String TAG);
-    }
-
     public UniversitiesAdapter(List<University> universities,
                                Context context, RecyclerViewClickListener itemListener) {
         this.universities = universities;
         this.context = context;
         this.itemListener = itemListener;
+        TAG = "";
     }
 
     public UniversitiesAdapter(List<University> universities,
@@ -70,6 +68,9 @@ public class UniversitiesAdapter extends RecyclerView.Adapter<UniversitiesAdapte
     }
 
     static class UniversityViewHolder extends RecyclerView.ViewHolder {
+
+        @BindView(R.id.card_photo)
+        ImageView photoView;
 
         @BindView(R.id.card_title)
         TextView nameTextView;

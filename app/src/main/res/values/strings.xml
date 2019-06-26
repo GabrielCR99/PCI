@@ -121,4 +121,6 @@
     <string name="coordinators">coordinators</string>
     <string name="project_title">Título do projeto</string>
     <string name="create_project">Criar projeto</string>
+    <string name="fill_all_fields">Preencha todos os campos para prosseguir</string>
+    <string name="opcional">*Opcional</string>
 </resources>

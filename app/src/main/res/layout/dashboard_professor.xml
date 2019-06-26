@@ -1,22 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -27,7 +19,7 @@
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbar2" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/professor_photo"
@@ -84,6 +76,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="25sp"
                 android:textAppearance="@style/textContentBlackSubtitle" />
+
+            <ExpandableListView
+                android:id="@+id/list_universities"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="25sp"
+                android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"
+                android:divider="@android:color/darker_gray"
+                android:dividerHeight="0.5dp"/>
 
             <TextView
                 style="@style/textContentBlackBody"
@@ -142,7 +143,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_margin="20dp">
 
                 <ImageButton
                     android:id="@+id/professor_face"
@@ -164,15 +166,17 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/professor_layout_button"
+            <Button
+                android:id="@+id/professor_edit_button"
+                style="@style/buttonTextAndBackground"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="20sp"
-                android:orientation="vertical" />
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="25sp"
+                android:text="@string/edit"
+                android:visibility="invisible"/>
 
         </LinearLayout>
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>

@@ -2,9 +2,10 @@ package com.studio.pci.fragments.projectFragments;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.View;
 
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import android.view.View;
 
 public abstract class CustomFragment extends Fragment {
 
@@ -16,15 +17,31 @@ public abstract class CustomFragment extends Fragment {
     protected Bundle bundle;
     protected View view;
     protected Context context;
+    protected boolean filled;
 
-    public CustomFragment(NewProjectListener listener, Context context) {
+     CustomFragment(NewProjectListener listener, Context context) {
         this.listener = listener;
         this.context = context;
+        filled = false;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
     }
 
     public void setComponents(){
         bundle = new Bundle();
     }
 
-    public abstract boolean savePart();
+    public abstract void savePart();
+
+    public boolean isFilled() {
+        return filled;
+    }
+
+    public void setFilled(boolean filled) {
+        this.filled = filled;
+    }
 }

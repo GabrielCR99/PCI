@@ -1,12 +1,7 @@
 package com.studio.pci.models;
-import android.support.annotation.NonNull;
-
-import com.studio.pci.R;
+import androidx.annotation.NonNull;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Objects;
 
 public class Student implements Serializable {
 

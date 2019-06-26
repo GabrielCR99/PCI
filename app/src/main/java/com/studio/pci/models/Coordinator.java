@@ -13,7 +13,7 @@ public class Coordinator extends Professor{
 
     public Coordinator(String id, String name, String gender, String birthDate, String picture,
                        String degree, String email, String facebookUrl, String skypeUrl, String bio,
-                       List<University> universityList, boolean enable) {
+                       List<String> universityList, boolean enable) {
         super(id, name, gender, birthDate, picture, degree, email, facebookUrl, skypeUrl, bio, universityList, enable);
     }
 }

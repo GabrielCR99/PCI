@@ -5,9 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,8 +17,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,8 +28,6 @@ import com.studio.pci.activities.EditStudentActivity;
 import com.studio.pci.models.Student;
 import com.studio.pci.models.University;
 import com.studio.pci.models.Upload;
-
-import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -78,13 +74,14 @@ public class StudentFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_student_dashboard, container, false);
+        View view = inflater.inflate(R.layout.dashboard_student, container, false);
         ButterKnife.bind(this, view);
 
         databaseReference = FirebaseDatabase.getInstance().getReference("students");
 
         Bundle arguments = getArguments();
         userID = arguments.getString("USERID");
+        button.setVisibility(View.VISIBLE);
 
         getInfo();
 

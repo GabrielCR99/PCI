@@ -5,17 +5,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -29,8 +29,6 @@ import com.studio.pci.R;
 import com.studio.pci.models.Student;
 import com.studio.pci.models.University;
 import com.studio.pci.models.Upload;
-
-import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -58,42 +56,22 @@ public class StudentActivity extends AppCompatActivity {
     @BindView(R.id.student_skype)
     ImageButton skype;
 
-    @BindView(R.id.student_layout_button)
-    LinearLayout linearLayout;
-
     @BindView(R.id.student_photo)
     ImageView imageView;
 
+    @BindView(R.id.student_edit_button)
+    Button button;
+
     private Student student;
-    private DatabaseReference databaseReference;
     private String userID;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dashboard_student);
+        setContentView(R.layout.dashboard_student);
         ButterKnife.bind(this);
 
         getInfo();
-    }
-
-    private void addButton() {
-        Button button = new Button(this);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(StudentActivity.this, EditStudentActivity.class);
-                intent.putExtra(getString(R.string.student_info), student);
-                startActivity(intent);
-            }
-        });
-        button.setText(getString(R.string.edit));
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        params.bottomMargin = 25;
-        button.setLayoutParams(params);
-        button.setBackground(getResources().getDrawable(R.color.buttonColor));
-        button.setTextColor(getResources().getColor(R.color.colorWhite));
-        linearLayout.addView(button);
     }
 
     private void setProfileImage() {
@@ -118,10 +96,10 @@ public class StudentActivity extends AppCompatActivity {
         Intent intent = getIntent();
         userID = intent.getStringExtra("UID");
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("students");
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("students");
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
-        if(currentUser.getUid().equals(userID)) addButton();
+        if (currentUser.getUid().equals(userID)) button.setVisibility(View.VISIBLE);
         setProfileImage();
         databaseReference.child(userID).addValueEventListener(new ValueEventListener() {
             @Override
@@ -142,29 +120,24 @@ public class StudentActivity extends AppCompatActivity {
                     if (!student.getEmail().isEmpty()) email.setText(student.getEmail());
                     else email.setText(getString(R.string.null_info));
 
-                    if(!student.getUniversity().isEmpty()) getUniversityName(student.getUniversity());
+                    if (!student.getUniversity().isEmpty())
+                        getUniversityName(student.getUniversity());
                     else university.setText(getString(R.string.null_info));
 
-                    if(!student.getFacebookUrl().isEmpty()) {
+                    if (!student.getFacebookUrl().isEmpty()) {
                         facebook.setEnabled(true);
-                        facebook.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                Intent intent = getFBIntent(StudentActivity.this, student.getFacebookUrl());
-                                if (intent != null) startActivity(intent);
-                            }
+                        facebook.setOnClickListener(v -> {
+                            Intent intent1 = getFBIntent(StudentActivity.this, student.getFacebookUrl());
+                            if (intent1 != null) startActivity(intent1);
                         });
                     } else {
                         facebook.setEnabled(false);
                     }
                     if (!student.getSkypeUrl().isEmpty()) {
                         skype.setEnabled(true);
-                        skype.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                Intent intent = getSkypeIntent(student.getSkypeUrl());
-                                startActivity(intent);
-                            }
+                        skype.setOnClickListener(v -> {
+                            Intent intent12 = getSkypeIntent(student.getSkypeUrl());
+                            startActivity(intent12);
                         });
                     } else skype.setEnabled(false);
 
@@ -186,9 +159,10 @@ public class StudentActivity extends AppCompatActivity {
                 University un = dataSnapshot.getValue(University.class);
                 university.setText(un.getName());
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.v("ERROR UNIVERSITY EDIT",databaseError.getMessage());
+                Log.v("ERROR UNIVERSITY EDIT", databaseError.getMessage());
             }
         });
     }

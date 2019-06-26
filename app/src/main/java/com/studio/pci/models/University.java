@@ -1,4 +1,7 @@
 package com.studio.pci.models;
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -109,5 +112,19 @@ public class University implements Serializable {
 
     public void setEnable(boolean enable) {
         this.enable = enable;
+    }
+
+    @Override
+    public String toString() {
+        return "University{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", initials='" + initials + '\'' +
+                ", country='" + country + '\'' +
+                ", state='" + state + '\'' +
+                ", department='" + department + '\'' +
+                ", picture='" + picture + '\'' +
+                ", enable=" + enable +
+                '}';
     }
 }

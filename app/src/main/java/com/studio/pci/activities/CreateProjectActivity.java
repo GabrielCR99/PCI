@@ -1,12 +1,12 @@
 package com.studio.pci.activities;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.widget.ImageView;
+import android.util.Log;
+import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.studio.pci.R;
 import com.studio.pci.adapters.ProjectPagerAdapter;
@@ -17,9 +17,7 @@ import com.studio.pci.fragments.projectFragments.FourthPartFragment;
 import com.studio.pci.fragments.projectFragments.SecondPartFragment;
 import com.studio.pci.fragments.projectFragments.ThirdPartFragment;
 import com.studio.pci.models.Project;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.studio.pci.utils.CustomViewPager;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,18 +29,13 @@ public class CreateProjectActivity extends AppCompatActivity implements CustomFr
     SpringIndicator indicator;
 
     @BindView(R.id.newproject_view_pager)
-    ViewPager viewPager;
-
-    @BindView(R.id.fab_next)
-    ImageView buttonNext;
-
-    @BindView(R.id.fab_previous)
-    ImageView buttonPrevious;
+    CustomViewPager viewPager;
 
     @BindView(R.id.toolbar_project)
     Toolbar toolbar;
 
     private Project project;
+    private ProjectPagerAdapter adapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,15 +44,12 @@ public class CreateProjectActivity extends AppCompatActivity implements CustomFr
         ButterKnife.bind(this);
 
         setComponents();
-        setClicks();
+        setClick();
     }
 
-    private void setClicks() {
-        buttonNext.setOnClickListener(v -> checkItemPosition(true));
-        buttonPrevious.setOnClickListener(v -> checkItemPosition(false));
+    private void setClick() {
         indicator.setOnTabClickListener(position -> {
-            viewPager.setCurrentItem(position);
-            setButtonVisibility();
+            checkItemPosition(position > viewPager.getCurrentItem());
             return false;
         });
     }
@@ -71,7 +61,7 @@ public class CreateProjectActivity extends AppCompatActivity implements CustomFr
         toolbar.setNavigationOnClickListener(v -> finish());
 
         project = new Project();
-        ProjectPagerAdapter adapter = new ProjectPagerAdapter(getSupportFragmentManager());
+        adapter = new ProjectPagerAdapter(getSupportFragmentManager());
 
         FirstPartFragment firstPartFragment = new FirstPartFragment(this, this);
         SecondPartFragment secondPartFragment = new SecondPartFragment(this, this);
@@ -85,6 +75,7 @@ public class CreateProjectActivity extends AppCompatActivity implements CustomFr
         adapter.addFragment(fourthPartFragment);
         adapter.addFragment(fifthPartFragment);
 
+        viewPager.setPagingEnabled(false);
         viewPager.setAdapter(adapter);
         indicator.setViewPager(viewPager);
 
@@ -99,27 +90,47 @@ public class CreateProjectActivity extends AppCompatActivity implements CustomFr
 
     private void checkItemPosition(boolean dir) {
         if (viewPager.getCurrentItem() > 0 || viewPager.getCurrentItem() < 5) {
-            if (dir) viewPager.setCurrentItem(getItem(+1), true);
-            else viewPager.setCurrentItem(getItem(-1), true);
-            setButtonVisibility();
-        }
-    }
+            if (dir) {
+                if (viewPager.getCurrentItem() == 3) {
+                    viewPager.setCurrentItem(getItem(+1));
+                    return;
+                }
 
-    private void setButtonVisibility() {
-        if (viewPager.getCurrentItem() == 0) {
-            buttonPrevious.setVisibility(View.INVISIBLE);
-            buttonNext.setVisibility(View.VISIBLE);
-        } else if (viewPager.getCurrentItem() == 4) {
-            buttonNext.setVisibility(View.INVISIBLE);
-            buttonPrevious.setVisibility(View.VISIBLE);
-        } else {
-            buttonPrevious.setVisibility(View.VISIBLE);
-            buttonNext.setVisibility(View.VISIBLE);
+                if (adapter.getItem(getItem(0)).isFilled()) {
+                    viewPager.setCurrentItem(getItem(+1));
+                } else {
+                    Toast.makeText(this,
+                            getString(R.string.fill_all_fields), Toast.LENGTH_SHORT).show();
+                }
+            } else viewPager.setCurrentItem(getItem(-1), true);
         }
     }
 
     @Override
     public void onPartFilled(int part, Bundle bundle) {
+        switch (part) {
+            case 1:
+                project.setTitle(bundle.getString("TITLE"));
+                project.setDescription(bundle.getString("DESC"));
+                project.setStartDate(bundle.getString("START"));
+                project.setEndDate(bundle.getString("END"));
+                break;
+            case 2:
+                project.setUniversities(bundle.getStringArrayList("UNIVERSITIES"));
+                break;
+            case 3:
+                project.setProfessors(bundle.getStringArrayList("PROFESSORS"));
+                break;
+            case 4:
 
+                break;
+            case 5:
+
+                break;
+            default:
+                Log.e("ERROR_PART_FILLED", "PART INT DOESNT EXIST");
+                break;
+        }
     }
+
 }
